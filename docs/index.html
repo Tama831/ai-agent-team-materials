@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教材ライブラリ — AI Agent Team</title>
+  <style>
+    :root {
+      --bg: #f8f5ed;
+      --card: #ffffff;
+      --primary: #1b3a2d;
+      --accent: #d4a03c;
+      --accent2: #5ba88c;
+      --text: #1a1a2e;
+      --muted: #7a8e82;
+      --border: #e0ddd5;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+    header { text-align: center; margin-bottom: 3rem; }
+    header h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
+    header p { color: var(--muted); font-size: 1rem; }
+    .badge { display: inline-block; background: var(--accent); color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; margin-left: 8px; }
+    .session { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .session h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .session .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.75rem; }
+    .session .key-msg { background: #f0f7f4; border-left: 3px solid var(--accent2); padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; font-size: 0.9rem; }
+    .downloads { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .downloads a {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary); color: white; padding: 6px 14px;
+      border-radius: 8px; text-decoration: none; font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .downloads a:hover { background: var(--accent2); }
+    .downloads a.guide { background: var(--accent); }
+    footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>教材ライブラリ<span class="badge">v1.0.0</span></h1>
+      <p>研修医・スタッフ向け勉強会教材 — AI Agent Team が生成</p>
+    </header>
+
+    <div class="session">
+      <h2>デジタル時代のナラティブ・メディスン</h2>
+      <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Narrative Medicine</div>
+      <div class="key-msg">
+        ナラティブは「優しさ」ではなく科学的アプローチ。デジタルで「聴く」を拡張できる。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session">
+      <h2>AIが病院でどう働くか — マルチエージェントAI</h2>
+      <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
+      <div class="key-msg">
+        AIも「チーム」の方が強い。コスト65分の1、精度向上をMount Sinaiが実証。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session">
+      <h2>CBE/EPA改革 — 能力基盤型医学教育の再設計</h2>
+      <div class="meta">2026-03-24 | 指導医 30分 | Medical Education</div>
+      <div class="key-msg">
+        「何年目か」ではなく「何ができるか」で評価する時代へ。EPA 5段階で「任せられるか」を判断。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_slides_attendings.pptx">指導医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session">
+      <h2>家庭医 = オーケストレーター（AIメタファー x 国際エビデンス）</h2>
+      <div class="meta">2026-03-24 | 研修医 30分 | Family Medicine</div>
+      <div class="key-msg">
+        Google/MITが証明：「専門家の数」より「統合の質」が成果を決める。家庭医はシステムの専門医。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_slides.pptx">スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session">
+      <h2>医療AIの実態 — 数字で見る光と影（統合版）</h2>
+      <div class="meta">2026-03-24 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
+      <div class="key-msg">
+        AMA調査で医師のAI利用81%に。ECRI（米国医療安全研究機構）はAI診断リスクを#1に。「知る→疑う→補完→伝える」で安全に使いこなす。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>Generated by AI Agent Team — Learning Design Lab</p>
+      <p><a href="https://github.com/Tama831/ai-agent-team" style="color: var(--accent2);">GitHub Repository</a></p>
+    </footer>
+  </div>
+</body>
+</html>
