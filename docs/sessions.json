@@ -1,0 +1,161 @@
+[
+  {
+    "date": "2026-03-27",
+    "slug": "medical-fee-revision-2026",
+    "title": "診療報酬改定2026 — 総合診療・家庭医のための改定ポイント",
+    "meta": "研修医 15分 + 全スタッフ 10分 | Medical Fee Revision",
+    "key_msg": "外来・入院・救急・診療所-病院連携の4セッティング別に改定をチェック。生活習慣病管理料の包括化と地域包括診療料の要件緩和が目玉。",
+    "search_keywords": "2026-03-27 診療報酬改定2026 総合診療 家庭医 外来 入院 救急 医療費 Medical Fee Revision 研修医 スタッフ",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/2026-03-27_medical-fee-revision-2026/medical-fee-revision-2026_slides_residents.pptx", "audience": "residents"},
+      {"label": "スタッフ PPTX", "path": "output/education/2026-03-27_medical-fee-revision-2026/medical-fee-revision-2026_slides_allstaff.pptx", "audience": "allstaff"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-27_medical-fee-revision-2026/medical-fee-revision-2026_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-27",
+    "slug": "ethics-guideline-revision",
+    "title": "研究倫理指針の改正 — ミニ研究計画書ワークショップ付き",
+    "meta": "研修医・指導医 15分 | Research Ethics",
+    "key_msg": "2025年改正の3大変更（多機関共同審査一本化・デジタル研究対応・同意プロセス柔軟化）を理解し、実際に研究計画書の倫理パートを書いてみる。",
+    "search_keywords": "2026-03-27 研究倫理指針 改正 研究計画書 ワークショップ IRB 同意 Research Ethics 研修医 指導医",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/2026-03-27_ethics-guideline-revision/ethics-guideline-revision_slides_residents.pptx", "audience": "residents"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-27_ethics-guideline-revision/ethics-guideline-revision_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-27",
+    "slug": "family-medicine-board-revision",
+    "title": "新・家庭医療専門医制度の改訂 — ポートフォリオ2割削減とかかりつけ医機能報告制度",
+    "meta": "研修医・専攻医 15分 | Family Medicine Board",
+    "key_msg": "20→16領域の削減は「楽になった」のではなく、1事例の深さ・多面性がより問われる方向へ。かかりつけ医機能報告制度との接点も解説。",
+    "search_keywords": "2026-03-27 家庭医療専門医 制度改訂 ポートフォリオ かかりつけ医 機能報告 Family Medicine Board 研修医 専攻医",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/2026-03-27_family-medicine-board-revision/family-medicine-board-revision_slides_residents.pptx", "audience": "residents"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-27_family-medicine-board-revision/family-medicine-board-revision_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-26",
+    "slug": "palliative-care-community",
+    "title": "緩和ケアと地域連携",
+    "meta": "全スタッフ 10分 | Palliative Care",
+    "key_msg": "地域包括ケアにおける緩和ケアの役割と多職種連携の実践ポイント。",
+    "search_keywords": "2026-03-26 緩和ケア 地域連携 地域包括ケア 多職種連携 Palliative Care スタッフ",
+    "slides": [
+      {"label": "スタッフ PPTX", "path": "output/education/2026-03-26_palliative-care-community/palliative-care-community_slides_allstaff.pptx", "audience": "allstaff"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-26_palliative-care-community/palliative-care-community_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-26",
+    "slug": "ai-medical-education-integrated",
+    "title": "AI × 医学教育 — 統合セッション",
+    "meta": "研修医 15分 + 全スタッフ 10分 | Medical Education × AI",
+    "key_msg": "AIが医学教育をどう変えるか。シミュレーション・フィードバック・評価の3軸で未来を描く。",
+    "search_keywords": "2026-03-26 AI 医学教育 シミュレーション フィードバック 評価 Medical Education 研修医 スタッフ",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_slides_residents.pptx", "audience": "residents"},
+      {"label": "スタッフ PPTX", "path": "output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_slides_allstaff.pptx", "audience": "allstaff"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-25",
+    "slug": "ai-clinical-reasoning",
+    "title": "AI臨床推論 — Clinical Reasoning with AI",
+    "meta": "研修医 15分 | AI × Clinical Reasoning",
+    "key_msg": "AI支援の臨床推論プロセスを体験し、人間の判断との補完関係を理解する。",
+    "search_keywords": "2026-03-25 AI 臨床推論 Clinical Reasoning 診断 研修医",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/archive/2026-03-25_ai-clinical-reasoning/ai-clinical-reasoning_slides_residents.pptx", "audience": "residents"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/archive/2026-03-25_ai-clinical-reasoning/ai-clinical-reasoning_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-24",
+    "slug": "medical-ai-reality-integrated",
+    "title": "医療AIの実態 — 数字で見る光と影（統合版）",
+    "meta": "研修医 30分 + 全スタッフ 15分 | Medical AI",
+    "key_msg": "AMA調査で医師のAI利用81%に。ECRI（米国医療安全研究機構）はAI診断リスクを#1に。「知る→疑う→補完→伝える」で安全に使いこなす。",
+    "search_keywords": "2026-03-24 医療AI 実態 AMA ECRI 安全 Medical AI 研修医 スタッフ",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/archive/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_residents.pptx", "audience": "residents"},
+      {"label": "スタッフ PPTX", "path": "output/education/archive/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_allstaff.pptx", "audience": "allstaff"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/archive/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-24",
+    "slug": "family-medicine-orchestrator",
+    "title": "家庭医 = オーケストレーター（AIメタファー x 国際エビデンス）",
+    "meta": "研修医 30分 | Family Medicine",
+    "key_msg": "Google/MITが証明：「専門家の数」より「統合の質」が成果を決める。家庭医はシステムの専門医。",
+    "search_keywords": "2026-03-24 家庭医 オーケストレーター AIメタファー Google MIT Family Medicine 研修医",
+    "slides": [
+      {"label": "スライド PPTX", "path": "output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_slides.pptx", "audience": "residents"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-24",
+    "slug": "cbme-epa-reform",
+    "title": "CBE/EPA改革 — 能力基盤型医学教育の再設計",
+    "meta": "指導医 30分 | Medical Education",
+    "key_msg": "「何年目か」ではなく「何ができるか」で評価する時代へ。EPA 5段階で「任せられるか」を判断。",
+    "search_keywords": "2026-03-24 CBE EPA 能力基盤型 医学教育 CBME Medical Education 指導医",
+    "slides": [
+      {"label": "指導医 PPTX", "path": "output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_slides_attendings.pptx", "audience": "attendings"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-21",
+    "slug": "multi-agent-ai-healthcare",
+    "title": "AIが病院でどう働くか — マルチエージェントAI",
+    "meta": "研修医 30分 + 全スタッフ 15分 | Medical AI",
+    "key_msg": "AIも「チーム」の方が強い。コスト65分の1、精度向上をMount Sinaiが実証。",
+    "search_keywords": "2026-03-21 マルチエージェント AI 病院 Mount Sinai Medical AI 研修医 スタッフ",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_residents.pptx", "audience": "residents"},
+      {"label": "スタッフ PPTX", "path": "output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_allstaff.pptx", "audience": "allstaff"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_guide_facilitator.docx", "audience": "guide"}
+    ]
+  },
+  {
+    "date": "2026-03-21",
+    "slug": "narrative-medicine-integrated",
+    "title": "デジタル時代のナラティブ・メディスン",
+    "meta": "研修医 30分 + 全スタッフ 15分 | Narrative Medicine",
+    "key_msg": "ナラティブは「優しさ」ではなく科学的アプローチ。デジタルで「聴く」を拡張できる。",
+    "search_keywords": "2026-03-21 ナラティブ・メディスン デジタル 物語 Narrative Medicine 研修医 スタッフ",
+    "slides": [
+      {"label": "研修医 PPTX", "path": "output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_residents.pptx", "audience": "residents"},
+      {"label": "スタッフ PPTX", "path": "output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_allstaff.pptx", "audience": "allstaff"}
+    ],
+    "guides": [
+      {"label": "ファシリテーターガイド DOCX", "path": "output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_guide_facilitator.docx", "audience": "guide"}
+    ]
+  }
+]
