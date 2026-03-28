@@ -21,11 +21,52 @@
       background: var(--bg); color: var(--text); line-height: 1.6;
     }
     .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
-    header { text-align: center; margin-bottom: 3rem; }
+    header { text-align: center; margin-bottom: 2rem; }
     header h1 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
     header p { color: var(--muted); font-size: 1rem; }
+    .search-box {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 0.7rem 1rem 0.7rem 2.5rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: var(--card);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box input:focus { border-color: var(--accent2); }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-box .search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .search-stats {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .search-stats .count { font-weight: 600; color: var(--accent2); }
+    .no-results {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+      display: none;
+    }
     .badge { display: inline-block; background: var(--accent); color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; margin-left: 8px; }
-    .session { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .session { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; transition: opacity 0.2s; }
+    .session.hidden { display: none; }
     .session h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 0.5rem; }
     .session .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.75rem; }
     .session .key-msg { background: #f0f7f4; border-left: 3px solid var(--accent2); padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; font-size: 0.9rem; }
@@ -44,135 +85,24 @@
 <body>
   <div class="container">
     <header>
-      <h1>教材ライブラリ<span class="badge">v1.0.0</span></h1>
+      <h1>教材ライブラリ<span class="badge">v1.1</span></h1>
       <p>研修医・スタッフ向け勉強会教材 — AI Agent Team が生成</p>
     </header>
 
-    <div class="session">
-      <h2>デジタル時代のナラティブ・メディスン</h2>
-      <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Narrative Medicine</div>
-      <div class="key-msg">
-        ナラティブは「優しさ」ではなく科学的アプローチ。デジタルで「聴く」を拡張できる。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_residents.pptx">研修医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_allstaff.pptx">スタッフスライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
+    <div class="search-box">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" id="searchInput" placeholder="教材を検索（タイトル・日付・キーワード）">
+    </div>
+    <div class="search-stats" id="searchStats">
+      全 <span class="count" id="totalCount">0</span> 件の教材
+    </div>
+    <div class="no-results" id="noResults">
+      該当する教材が見つかりません
     </div>
 
-    <div class="session">
-      <h2>AIが病院でどう働くか — マルチエージェントAI</h2>
-      <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
-      <div class="key-msg">
-        AIも「チーム」の方が強い。コスト65分の1、精度向上をMount Sinaiが実証。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_residents.pptx">研修医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_allstaff.pptx">スタッフスライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
+    <!-- === 2026-03-27 === -->
 
-    <div class="session">
-      <h2>CBE/EPA改革 — 能力基盤型医学教育の再設計</h2>
-      <div class="meta">2026-03-24 | 指導医 30分 | Medical Education</div>
-      <div class="key-msg">
-        「何年目か」ではなく「何ができるか」で評価する時代へ。EPA 5段階で「任せられるか」を判断。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_slides_attendings.pptx">指導医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
-      <h2>家庭医 = オーケストレーター（AIメタファー x 国際エビデンス）</h2>
-      <div class="meta">2026-03-24 | 研修医 30分 | Family Medicine</div>
-      <div class="key-msg">
-        Google/MITが証明：「専門家の数」より「統合の質」が成果を決める。家庭医はシステムの専門医。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_slides.pptx">スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
-      <h2>医療AIの実態 — 数字で見る光と影（統合版）</h2>
-      <div class="meta">2026-03-24 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
-      <div class="key-msg">
-        AMA調査で医師のAI利用81%に。ECRI（米国医療安全研究機構）はAI診断リスクを#1に。「知る→疑う→補完→伝える」で安全に使いこなす。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_residents.pptx">研修医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_allstaff.pptx">スタッフスライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
-      <h2>AI臨床推論 — Clinical Reasoning with AI</h2>
-      <div class="meta">2026-03-25 | 研修医 15分 | AI × Clinical Reasoning</div>
-      <div class="key-msg">
-        AI支援の臨床推論プロセスを体験し、人間の判断との補完関係を理解する。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/archive/2026-03-25_ai-clinical-reasoning/ai-clinical-reasoning_slides_residents.pptx">研修医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/archive/2026-03-25_ai-clinical-reasoning/ai-clinical-reasoning_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
-      <h2>AI × 医学教育 — 統合セッション</h2>
-      <div class="meta">2026-03-26 | 研修医 15分 + 全スタッフ 10分 | Medical Education × AI</div>
-      <div class="key-msg">
-        AIが医学教育をどう変えるか。シミュレーション・フィードバック・評価の3軸で未来を描く。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_slides_residents.pptx">研修医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_slides_allstaff.pptx">スタッフスライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
-      <h2>緩和ケアと地域連携</h2>
-      <div class="meta">2026-03-26 | 全スタッフ 10分 | Palliative Care</div>
-      <div class="key-msg">
-        地域包括ケアにおける緩和ケアの役割と多職種連携の実践ポイント。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_palliative-care-community/palliative-care-community_slides_allstaff.pptx">スタッフスライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_palliative-care-community/palliative-care-community_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
-      <h2>新・家庭医療専門医制度の改訂 — ポートフォリオ2割削減とかかりつけ医機能報告制度</h2>
-      <div class="meta">2026-03-27 | 研修医・専攻医 15分 | Family Medicine Board</div>
-      <div class="key-msg">
-        20→16領域の削減は「楽になった」のではなく、1事例の深さ・多面性がより問われる方向へ。かかりつけ医機能報告制度との接点も解説。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_family-medicine-board-revision/family-medicine-board-revision_slides_residents.pptx">研修医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_family-medicine-board-revision/family-medicine-board-revision_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
-      <h2>研究倫理指針の改正 — ミニ研究計画書ワークショップ付き</h2>
-      <div class="meta">2026-03-27 | 研修医・指導医 15分 | Research Ethics</div>
-      <div class="key-msg">
-        2025年改正の3大変更（多機関共同審査一本化・デジタル研究対応・同意プロセス柔軟化）を理解し、実際に研究計画書の倫理パートを書いてみる。
-      </div>
-      <div class="downloads">
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_ethics-guideline-revision/ethics-guideline-revision_slides_residents.pptx">研修医スライド</a>
-        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_ethics-guideline-revision/ethics-guideline-revision_guide_facilitator.docx" class="guide">ガイド</a>
-      </div>
-    </div>
-
-    <div class="session">
+    <div class="session" data-search="2026-03-27 診療報酬改定2026 総合診療 家庭医 外来 入院 救急 医療費 Medical Fee Revision 研修医 スタッフ">
       <h2>診療報酬改定2026 — 総合診療・家庭医のための改定ポイント</h2>
       <div class="meta">2026-03-27 | 研修医 15分 + 全スタッフ 10分 | Medical Fee Revision</div>
       <div class="key-msg">
@@ -185,10 +115,182 @@
       </div>
     </div>
 
+    <div class="session" data-search="2026-03-27 研究倫理指針 改正 研究計画書 ワークショップ IRB 同意 Research Ethics 研修医 指導医">
+      <h2>研究倫理指針の改正 — ミニ研究計画書ワークショップ付き</h2>
+      <div class="meta">2026-03-27 | 研修医・指導医 15分 | Research Ethics</div>
+      <div class="key-msg">
+        2025年改正の3大変更（多機関共同審査一本化・デジタル研究対応・同意プロセス柔軟化）を理解し、実際に研究計画書の倫理パートを書いてみる。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_ethics-guideline-revision/ethics-guideline-revision_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_ethics-guideline-revision/ethics-guideline-revision_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session" data-search="2026-03-27 家庭医療専門医 制度改訂 ポートフォリオ かかりつけ医 機能報告 Family Medicine Board 研修医 専攻医">
+      <h2>新・家庭医療専門医制度の改訂 — ポートフォリオ2割削減とかかりつけ医機能報告制度</h2>
+      <div class="meta">2026-03-27 | 研修医・専攻医 15分 | Family Medicine Board</div>
+      <div class="key-msg">
+        20→16領域の削減は「楽になった」のではなく、1事例の深さ・多面性がより問われる方向へ。かかりつけ医機能報告制度との接点も解説。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_family-medicine-board-revision/family-medicine-board-revision_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-27_family-medicine-board-revision/family-medicine-board-revision_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <!-- === 2026-03-26 === -->
+
+    <div class="session" data-search="2026-03-26 緩和ケア 地域連携 地域包括ケア 多職種連携 Palliative Care スタッフ">
+      <h2>緩和ケアと地域連携</h2>
+      <div class="meta">2026-03-26 | 全スタッフ 10分 | Palliative Care</div>
+      <div class="key-msg">
+        地域包括ケアにおける緩和ケアの役割と多職種連携の実践ポイント。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_palliative-care-community/palliative-care-community_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_palliative-care-community/palliative-care-community_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session" data-search="2026-03-26 AI 医学教育 シミュレーション フィードバック 評価 Medical Education 研修医 スタッフ">
+      <h2>AI × 医学教育 — 統合セッション</h2>
+      <div class="meta">2026-03-26 | 研修医 15分 + 全スタッフ 10分 | Medical Education × AI</div>
+      <div class="key-msg">
+        AIが医学教育をどう変えるか。シミュレーション・フィードバック・評価の3軸で未来を描く。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-26_ai-medical-education-integrated/ai-medical-education-integrated_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <!-- === 2026-03-25 === -->
+
+    <div class="session" data-search="2026-03-25 AI 臨床推論 Clinical Reasoning 診断 研修医">
+      <h2>AI臨床推論 — Clinical Reasoning with AI</h2>
+      <div class="meta">2026-03-25 | 研修医 15分 | AI × Clinical Reasoning</div>
+      <div class="key-msg">
+        AI支援の臨床推論プロセスを体験し、人間の判断との補完関係を理解する。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/archive/2026-03-25_ai-clinical-reasoning/ai-clinical-reasoning_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/archive/2026-03-25_ai-clinical-reasoning/ai-clinical-reasoning_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <!-- === 2026-03-24 === -->
+
+    <div class="session" data-search="2026-03-24 医療AI 実態 AMA ECRI 安全 Medical AI 研修医 スタッフ">
+      <h2>医療AIの実態 — 数字で見る光と影（統合版）</h2>
+      <div class="meta">2026-03-24 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
+      <div class="key-msg">
+        AMA調査で医師のAI利用81%に。ECRI（米国医療安全研究機構）はAI診断リスクを#1に。「知る→疑う→補完→伝える」で安全に使いこなす。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_medical-ai-reality-integrated/medical-ai-reality-integrated_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session" data-search="2026-03-24 家庭医 オーケストレーター AIメタファー Google MIT Family Medicine 研修医">
+      <h2>家庭医 = オーケストレーター（AIメタファー x 国際エビデンス）</h2>
+      <div class="meta">2026-03-24 | 研修医 30分 | Family Medicine</div>
+      <div class="key-msg">
+        Google/MITが証明：「専門家の数」より「統合の質」が成果を決める。家庭医はシステムの専門医。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_slides.pptx">スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_family-medicine-orchestrator/family-medicine-orchestrator_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session" data-search="2026-03-24 CBE EPA 能力基盤型 医学教育 CBME Medical Education 指導医">
+      <h2>CBE/EPA改革 — 能力基盤型医学教育の再設計</h2>
+      <div class="meta">2026-03-24 | 指導医 30分 | Medical Education</div>
+      <div class="key-msg">
+        「何年目か」ではなく「何ができるか」で評価する時代へ。EPA 5段階で「任せられるか」を判断。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_slides_attendings.pptx">指導医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-24_cbme-epa-reform/cbme-epa-reform_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <!-- === 2026-03-21 === -->
+
+    <div class="session" data-search="2026-03-21 マルチエージェント AI 病院 Mount Sinai Medical AI 研修医 スタッフ">
+      <h2>AIが病院でどう働くか — マルチエージェントAI</h2>
+      <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
+      <div class="key-msg">
+        AIも「チーム」の方が強い。コスト65分の1、精度向上をMount Sinaiが実証。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_multi-agent-ai-healthcare/multi-agent-ai_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
+    <div class="session" data-search="2026-03-21 ナラティブ・メディスン デジタル 物語 Narrative Medicine 研修医 スタッフ">
+      <h2>デジタル時代のナラティブ・メディスン</h2>
+      <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Narrative Medicine</div>
+      <div class="key-msg">
+        ナラティブは「優しさ」ではなく科学的アプローチ。デジタルで「聴く」を拡張できる。
+      </div>
+      <div class="downloads">
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_residents.pptx">研修医スライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_slides_allstaff.pptx">スタッフスライド</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-21_narrative-medicine-integrated/narrative-medicine_guide_facilitator.docx" class="guide">ガイド</a>
+      </div>
+    </div>
+
     <footer>
       <p>Generated by AI Agent Team — Learning Design Lab</p>
       <p><a href="https://github.com/Tama831/ai-agent-team-materials" style="color: var(--accent2);">GitHub Repository</a></p>
     </footer>
   </div>
+
+  <script>
+    const input = document.getElementById('searchInput');
+    const sessions = document.querySelectorAll('.session');
+    const totalCount = document.getElementById('totalCount');
+    const searchStats = document.getElementById('searchStats');
+    const noResults = document.getElementById('noResults');
+
+    totalCount.textContent = sessions.length;
+
+    input.addEventListener('input', function () {
+      const query = this.value.trim().toLowerCase();
+      let visible = 0;
+
+      sessions.forEach(function (card) {
+        const haystack = (
+          card.getAttribute('data-search') + ' ' +
+          card.querySelector('h2').textContent + ' ' +
+          card.querySelector('.key-msg').textContent
+        ).toLowerCase();
+
+        const terms = query.split(/\s+/).filter(Boolean);
+        const match = terms.length === 0 || terms.every(function (t) { return haystack.indexOf(t) !== -1; });
+
+        if (match) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (query) {
+        searchStats.innerHTML = '<span class="count">' + visible + '</span> / ' + sessions.length + ' 件がヒット';
+      } else {
+        searchStats.innerHTML = '全 <span class="count">' + sessions.length + '</span> 件の教材';
+      }
+      noResults.style.display = visible === 0 && query ? 'block' : 'none';
+    });
+  </script>
 </body>
 </html>
