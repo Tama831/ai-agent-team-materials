@@ -1,6 +1,35 @@
 [
   {
     "date": "2026-03-29",
+    "slug": "japan-sweden-longevity",
+    "title": "日本の長寿優位は介護受給者の低死亡率が主因 -- 日瑞比較研究",
+    "meta": "研修医 15分 + 全スタッフ 10分 | Longevity & Care",
+    "key_msg": "日瑞比較で判明: 健康寿命はほぼ同等。日本の長寿優位は介護受給者の低死亡率、すなわち「ケアの力」が支えている。在宅医療・多職種連携の日々の実践が国際データで証明された。",
+    "search_keywords": "2026-03-29 日本 スウェーデン 長寿 介護 死亡率 在宅医療 BMC Medicine カロリンスカ Longevity Care 研修医 スタッフ",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-03-29_japan-sweden-longevity/japan-sweden-longevity_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-03-29_japan-sweden-longevity/japan-sweden-longevity_slides_residents.pdf"
+      },
+      {
+        "label": "スタッフ PPTX",
+        "path": "output/education/2026-03-29_japan-sweden-longevity/japan-sweden-longevity_slides_allstaff.pptx",
+        "audience": "allstaff",
+        "pdf_path": "output/education/2026-03-29_japan-sweden-longevity/japan-sweden-longevity_slides_allstaff.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-03-29_japan-sweden-longevity/japan-sweden-longevity_guide_facilitator.docx",
+        "audience": "guide"
+      }
+    ]
+  },
+  {
+    "date": "2026-03-29",
     "slug": "availability-bias",
     "title": "利用可能性バイアスと診断推論",
     "meta": "研修医15分 + 全スタッフ10分 | 認知バイアス | ガニェの9教授事象",

@@ -1,0 +1,25 @@
+{
+  "slug": "japan-sweden-longevity",
+  "date": "2026-03-29",
+  "title": "日本の長寿優位は介護受給者の低死亡率が主因 -- 日瑞比較研究",
+  "status": "published",
+  "pipeline_stage": "published",
+  "generated_at": "2026-03-29T21:16:02.323796+09:00",
+  "published_at": "2026-03-29T21:16:47.895058+09:00",
+  "files": {
+    "slides": [
+      "japan-sweden-longevity_slides_residents.pptx",
+      "japan-sweden-longevity_slides_allstaff.pptx"
+    ],
+    "guides": [
+      "japan-sweden-longevity_guide_facilitator.docx"
+    ],
+    "source_md": [
+      "japan-sweden-longevity_slides_residents.md",
+      "japan-sweden-longevity_slides_allstaff.md",
+      "japan-sweden-longevity_facilitator-guide.md"
+    ]
+  },
+  "review_notes": null,
+  "skip_review": true
+}
