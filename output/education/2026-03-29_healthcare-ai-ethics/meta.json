@@ -1,0 +1,29 @@
+{
+  "slug": "healthcare-ai-ethics",
+  "date": "2026-03-29",
+  "title": "医療AIの倫理的懸念と実装戦略",
+  "status": "published",
+  "pipeline_stage": "published",
+  "generated_at": "2026-03-29T21:14:12.947730+09:00",
+  "published_at": "2026-03-29T21:14:52.389595+09:00",
+  "files": {
+    "slides": [
+      "healthcare-ai-ethics_slides_residents.pptx",
+      "healthcare-ai-ethics_slides_allstaff.pptx"
+    ],
+    "pdfs": [
+      "healthcare-ai-ethics_slides_residents.pdf",
+      "healthcare-ai-ethics_slides_allstaff.pdf"
+    ],
+    "guides": [
+      "healthcare-ai-ethics_guide_facilitator.docx"
+    ],
+    "source_md": [
+      "healthcare-ai-ethics_slides_residents.md",
+      "healthcare-ai-ethics_slides_allstaff.md",
+      "healthcare-ai-ethics_facilitator-guide.md"
+    ]
+  },
+  "review_notes": null,
+  "skip_review": false
+}

@@ -1,5 +1,58 @@
 [
   {
+    "date": "2026-03-29",
+    "slug": "availability-bias",
+    "title": "利用可能性バイアスと診断推論",
+    "meta": "研修医15分 + 全スタッフ10分 | 認知バイアス | ガニェの9教授事象",
+    "key_msg": "直近の臨床経験が誤診率を有意に上昇させる。経験年数ではなく「構造化されたフィードバック」がバイアス軽減の鍵。",
+    "search_keywords": "2026-03-29 利用可能性バイアス availability bias 認知バイアス cognitive bias 診断エラー diagnostic error 臨床推論 clinical reasoning System1 System2 研修医 全スタッフ",
+    "slides": [
+      {
+        "file": "availability-bias_slides_residents.pptx",
+        "audience": "residents"
+      },
+      {
+        "file": "availability-bias_slides_allstaff.pptx",
+        "audience": "allstaff"
+      }
+    ],
+    "guides": [
+      {
+        "file": "availability-bias_guide_facilitator.docx",
+        "audience": "guide"
+      }
+    ]
+  },
+  {
+    "date": "2026-03-29",
+    "slug": "healthcare-ai-ethics",
+    "title": "医療AIの倫理的懸念と実装戦略",
+    "meta": "研修医 15分 + 全スタッフ 10分 | Healthcare AI Ethics",
+    "key_msg": "22件の実証研究から抽出された6つの倫理的懸念カテゴリ（透明性・バイアス・プライバシー・説明責任・倫理/道徳・規制）と4つの実装戦略提言。バイアスの3層構造と責任の三角形で臨床現場への影響を具体化。",
+    "search_keywords": "2026-03-29 医療AI 倫理 バイアス 透明性 説明責任 XAI EU AI法 Healthcare AI Ethics 研修医 スタッフ",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_residents.pdf"
+      },
+      {
+        "label": "スタッフ PPTX",
+        "path": "output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_allstaff.pptx",
+        "audience": "allstaff",
+        "pdf_path": "output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_allstaff.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_guide_facilitator.docx",
+        "audience": "guide"
+      }
+    ]
+  },
+  {
     "date": "2026-03-28",
     "slug": "medical-fee-revision-2026",
     "title": "2026年度 診療報酬改定 — 管理者・指導医のための完全ガイド",
