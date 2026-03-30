@@ -1,6 +1,35 @@
 [
   {
     "date": "2026-03-30",
+    "slug": "cognitive-bias-diagnostic-reasoning",
+    "title": "認知バイアスが診断推論を歪める -- 行動経済学からの処方箋",
+    "meta": "研修医 20分 + 全スタッフ 20分 | 認知バイアス x 診断推論 x 行動経済学",
+    "key_msg": "二重過程理論に基づく4バイアス（確認・アンカリング・利用可能性・過信）の統合フレーム。診断エラーの36-77%にバイアスが寄与。除偏介入3種（診断タイムアウト・プレモーテム・構造化振り返り）。AI x バイアスの双方向リスク。「予測可能なシステムエラー」としての再フレーミング。",
+    "search_keywords": "2026-03-30 認知バイアス 確認バイアス アンカリング 利用可能性 過信 診断推論 二重過程理論 System1 System2 行動経済学 デバイアス 診断タイムアウト プレモーテム メタ認知 研修医 スタッフ",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-03-30_cognitive-bias-diagnostic-reasoning/cognitive-bias_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-03-30_cognitive-bias-diagnostic-reasoning/cognitive-bias_slides_residents.pdf"
+      },
+      {
+        "label": "スタッフ PPTX",
+        "path": "output/education/2026-03-30_cognitive-bias-diagnostic-reasoning/cognitive-bias_slides_allstaff.pptx",
+        "audience": "allstaff",
+        "pdf_path": "output/education/2026-03-30_cognitive-bias-diagnostic-reasoning/cognitive-bias_slides_allstaff.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-03-30_cognitive-bias-diagnostic-reasoning/cognitive-bias_guide_facilitator.docx",
+        "audience": "guide"
+      }
+    ]
+  },
+  {
+    "date": "2026-03-30",
     "slug": "palliative-home-death-concordance",
     "title": "在宅看取り場所一致率 -- 緩和ケア病棟からの在宅退院後の遺族調査",
     "meta": "研修医 20分 + 全スタッフ 20分 | Palliative Care & ACP",
