@@ -1,0 +1,28 @@
+{
+  "slug": "cognitive-bias-diagnostic-reasoning",
+  "title": "認知バイアスと診断推論 — 行動経済学からの処方箋",
+  "date": "2026-03-30",
+  "source_item": "item-009",
+  "deep_dive": "data/deep-dives/2026-03-30_cognitive-bias-behavioral-economics.md",
+  "id_model": "gagne",
+  "duration_min": 20,
+  "audiences": ["residents", "allstaff"],
+  "bloom_residents": ["understand", "analyze", "create"],
+  "bloom_allstaff": ["understand", "apply", "evaluate"],
+  "palette_residents": "MIDNIGHT_EXEC",
+  "palette_allstaff": "TERRACOTTA_SAND",
+  "differentiation": "3/29教材=利用可能性バイアス単体 → 本教材=4バイアス統合+行動経済学フレーム",
+  "files": {
+    "slides_residents_md": "slides-residents.md",
+    "slides_allstaff_md": "slides-allstaff.md",
+    "facilitator_guide_md": "facilitator-guide.md",
+    "slides_residents_pptx": "cognitive-bias-diagnostic-reasoning_slides_residents.pptx",
+    "slides_allstaff_pptx": "cognitive-bias-diagnostic-reasoning_slides_allstaff.pptx",
+    "facilitator_guide_docx": "cognitive-bias-diagnostic-reasoning_guide_facilitator.docx",
+    "slides_residents_pdf": "cognitive-bias-diagnostic-reasoning_slides_residents.pdf",
+    "slides_allstaff_pdf": "cognitive-bias-diagnostic-reasoning_slides_allstaff.pdf"
+  },
+  "status": "review_pending",
+  "generated_by": "Scribe + Publisher Agent",
+  "generated_at": "2026-03-30T05:30:00+09:00"
+}

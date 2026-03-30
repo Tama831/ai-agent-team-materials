@@ -1,0 +1,27 @@
+{
+  "slug": "palliative-home-death-concordance",
+  "title": "在宅看取り場所一致率 — 緩和ケア病棟からの在宅退院後の看取り場所一致率",
+  "date": "2026-03-30",
+  "source_item": "item-008",
+  "deep_dive": "data/deep-dives/2026-03-30_palliative-home-death-concordance.md",
+  "id_model": "gagne",
+  "duration_min": 20,
+  "audiences": ["residents", "allstaff"],
+  "bloom_residents": ["understand", "analyze", "create"],
+  "bloom_allstaff": ["understand", "apply", "evaluate"],
+  "palette_residents": "DEEP_TEAL_AMBER",
+  "palette_allstaff": "WARM_SAGE_AMBER",
+  "files": {
+    "slides_residents_md": "slides-residents.md",
+    "slides_allstaff_md": "slides-allstaff.md",
+    "facilitator_guide_md": "facilitator-guide.md",
+    "slides_residents_pptx": "palliative-home-death-concordance_slides_residents.pptx",
+    "slides_allstaff_pptx": "palliative-home-death-concordance_slides_allstaff.pptx",
+    "facilitator_guide_docx": "palliative-home-death-concordance_guide_facilitator.docx",
+    "slides_residents_pdf": "palliative-home-death-concordance_slides_residents.pdf",
+    "slides_allstaff_pdf": "palliative-home-death-concordance_slides_allstaff.pdf"
+  },
+  "status": "review_pending",
+  "generated_by": "Scribe + Publisher Agent",
+  "generated_at": "2026-03-30T05:30:00+09:00"
+}
