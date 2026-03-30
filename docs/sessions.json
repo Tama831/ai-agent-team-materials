@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-03-30",
+    "slug": "palliative-home-death-concordance",
+    "title": "在宅看取り場所一致率 -- 緩和ケア病棟からの在宅退院後の遺族調査",
+    "meta": "研修医 20分 + 全スタッフ 20分 | Palliative Care & ACP",
+    "key_msg": "遺族調査359名: 自宅死亡80%、緩和ケア病棟死亡82%が看取り方針と一致。国際統合値51%と比較し上位。不一致要因は医師偏在・痛み管理格差・教育格差の3層構造。ACPは「紙」ではなく「プロセスとしての繰り返し対話」が鍵。",
+    "search_keywords": "2026-03-30 在宅看取り 看取り場所 一致率 緩和ケア ACP アドバンスケアプランニング 遺族調査 トランジション 多職種連携 Palliative Care Research 研修医 スタッフ",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-03-30_palliative-home-death-concordance/palliative-home-death-concordance_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-03-30_palliative-home-death-concordance/palliative-home-death-concordance_slides_residents.pdf"
+      },
+      {
+        "label": "スタッフ PPTX",
+        "path": "output/education/2026-03-30_palliative-home-death-concordance/palliative-home-death-concordance_slides_allstaff.pptx",
+        "audience": "allstaff",
+        "pdf_path": "output/education/2026-03-30_palliative-home-death-concordance/palliative-home-death-concordance_slides_allstaff.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-03-30_palliative-home-death-concordance/palliative-home-death-concordance_guide_facilitator.docx",
+        "audience": "guide"
+      }
+    ]
+  },
+  {
     "date": "2026-03-29",
     "slug": "japan-sweden-longevity",
     "title": "日本の長寿優位は介護受給者の低死亡率が主因 -- 日瑞比較研究",
