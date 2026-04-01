@@ -1,0 +1,25 @@
+{
+  "slug": "systems-thinking-health-workforce",
+  "date": "2026-04-01",
+  "title": "複雑性を抱擁する：保健人材強化のためのシステム思考",
+  "status": "review_pending",
+  "pipeline_stage": "generated",
+  "generated_at": "2026-04-01T12:00:00+09:00",
+  "published_at": null,
+  "files": {
+    "slides": [
+      "systems-thinking-health-workforce_slides_residents.pptx",
+      "systems-thinking-health-workforce_slides_allstaff.pptx"
+    ],
+    "guides": [
+      "systems-thinking-health-workforce_guide_facilitator.docx"
+    ],
+    "source_md": [
+      "slides-residents.md",
+      "slides-allstaff.md",
+      "facilitator-guide.md"
+    ]
+  },
+  "review_notes": null,
+  "skip_review": false
+}
