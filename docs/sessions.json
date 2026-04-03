@@ -10,12 +10,14 @@
       {
         "label": "研修医 PPTX",
         "path": "output/education/2026-04-01_systems-thinking-health-workforce/systems-thinking-health-workforce_slides_residents.pptx",
-        "audience": "residents"
+        "audience": "residents",
+        "pdf_path": "output/education/2026-04-01_systems-thinking-health-workforce/systems-thinking-health-workforce_slides_residents.pdf"
       },
       {
         "label": "スタッフ PPTX",
         "path": "output/education/2026-04-01_systems-thinking-health-workforce/systems-thinking-health-workforce_slides_allstaff.pptx",
-        "audience": "allstaff"
+        "audience": "allstaff",
+        "pdf_path": "output/education/2026-04-01_systems-thinking-health-workforce/systems-thinking-health-workforce_slides_allstaff.pdf"
       }
     ],
     "guides": [
