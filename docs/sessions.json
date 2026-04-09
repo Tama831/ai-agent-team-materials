@@ -1,5 +1,59 @@
 [
   {
+    "date": "2026-04-09",
+    "slug": "who-systems-thinking-residents",
+    "title": "WHOシステム思考を、明日の外来でどう使うか",
+    "meta": "研修医(初期〜専攻医) 20分 | Systems Thinking × Family Medicine",
+    "key_msg": "WHO/NHS 2026の3つのフレーム転換(部品→繋がり/処方→学習/測定→文脈)を、糖尿病外来の1症例から始めて、半径を広げる1本の物語で研修医に届ける。明日の外来で1問試せるレベルまで具体化。",
+    "search_keywords": "2026-04-09 WHO システム思考 研修医 部品 繋がり 処方 学習 文脈 家庭医療 専攻医 外来 糖尿病 ナラティブ Systems Thinking residents Family Medicine WHO NHS",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-04-09_who-systems-thinking-residents/who-systems-thinking-residents_slides_residents.pptx",
+        "audience": "residents"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-04-09_who-systems-thinking-residents/who-systems-thinking-residents_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "外来チートシート (A4印刷用 MD)",
+        "path": "output/education/2026-04-09_who-systems-thinking-residents/cheatsheet.md",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-04-09",
+    "slug": "behavioral-economics-mental-health-residents",
+    "title": "行動経済学で支えるメンタルヘルス診療 — ナッジ・インセンティブ・コミットメントデバイス",
+    "meta": "研修医(初期〜専攻医) 20分 | Behavioral Economics × Mental Health",
+    "key_msg": "「分かっていてもやめられない」を報酬処理の連続体(transdiagnostic)として捉え、ナッジ/インセンティブ/コミットメントデバイスを使い分けるデシジョンツリー。説教モードから設計モードへの言い換えで、明日の外来から実装可能。Penn Nudge Unit を最後に紹介。",
+    "search_keywords": "2026-04-09 行動経済学 ナッジ メンタルヘルス うつ病 依存症 不安症 報酬処理 transdiagnostic コミットメントデバイス インセンティブ Nudge Unit 研修医 専攻医 外来導線 設計 PMC11904746 RDoC",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-04-09_behavioral-economics-mental-health-residents/behavioral-economics-mental-health-residents_slides_residents.pptx",
+        "audience": "residents"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-04-09_behavioral-economics-mental-health-residents/behavioral-economics-mental-health-residents_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "外来チートシート (A4印刷用 MD)",
+        "path": "output/education/2026-04-09_behavioral-economics-mental-health-residents/cheatsheet.md",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
     "date": "2026-04-01",
     "slug": "systems-thinking-health-workforce",
     "title": "複雑性を抱擁する：保健人材強化のためのシステム思考",

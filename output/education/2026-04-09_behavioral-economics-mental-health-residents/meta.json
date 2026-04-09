@@ -1,0 +1,33 @@
+{
+  "slug": "behavioral-economics-mental-health-residents",
+  "date": "2026-04-09",
+  "title": "行動経済学で支えるメンタルヘルス診療 — ナッジ・インセンティブ・コミットメントデバイス",
+  "target": "研修医(初期〜専攻医)",
+  "duration_min": 20,
+  "id_model": "ガニェの9教授事象",
+  "status": "published",
+  "pipeline_stage": "published",
+  "generated_at": "2026-04-09T09:00:00+09:00",
+  "source_briefing": "data/briefings/2026-04-08.json",
+  "source_item_id": "item-003",
+  "primary_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11904746/",
+  "secondary_source": "https://chti.upenn.edu/nudge-unit",
+  "design_principle": "初期研修医→専攻医を分断ラベルなしに繋ぐ。視野の半径(個人→外来導線→組織→世界)が滑らかに広がる1本の物語。「説教ではなく設計」を共通言語に。",
+  "files": {
+    "source_md": [
+      "slides-residents.md",
+      "facilitator-guide.md",
+      "cheatsheet.md"
+    ],
+    "slides": [
+      "behavioral-economics-mental-health-residents_slides_residents.pptx"
+    ],
+    "guides": [
+      "behavioral-economics-mental-health-residents_guide_facilitator.docx"
+    ]
+  },
+  "review_notes": null,
+  "skip_review": false,
+  "ethics_notes": "ナッジ・インセンティブ・コミットメントデバイスは患者自律性との緊張関係あり。リバタリアン・パターナリズムの原則(選択の自由を奪わない)と『怠惰ではなく報酬処理』が患者責任回避と誤解されないよう注意。",
+  "published_at": "2026-04-09T10:30:00+09:00"
+}
