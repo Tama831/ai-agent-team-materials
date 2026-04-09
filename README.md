@@ -1,27 +1,36 @@
 # 教材ライブラリ — AI Agent Team
 
-研修医・スタッフ向け勉強会教材です。
+家庭医「藪医者の学び」勉強会教材のリポジトリです。
+研修医・指導医・全スタッフ向けスライド (PPTX) と
+ファシリテーターガイド (DOCX) を配布しています。
 
-## 教材一覧
+## 教材を見る・ダウンロードする
 
-| セッション | 対象 | 時間 | フォルダ |
-|-----------|------|------|---------|
-| デジタル時代のナラティブ・メディスン | 研修医 + 全スタッフ | 30分/15分 | `2026-03-21_narrative-medicine-integrated/` |
-| AIが病院でどう働くか | 研修医 + 全スタッフ | 30分/15分 | `2026-03-21_multi-agent-ai-healthcare/` |
-| CBE/EPA改革 | 指導医 | 30分 | `2026-03-24_cbme-epa-reform/` |
-| 家庭医 = オーケストレーター | 研修医 | 30分 | `2026-03-24_family-medicine-orchestrator/` |
-| 医療AIの実態（統合版） | 研修医 + 全スタッフ | 30分/15分 | `2026-03-24_medical-ai-reality-integrated/` |
+➡️ **[教材ライブラリ (GitHub Pages)](https://tama831.github.io/ai-agent-team-materials/)**
 
-## ダウンロード方法
+ブラウザでサムネイル一覧・対象別フィルタ・ワンクリックダウンロードができます。
+個別ファイルが欲しい場合は `output/education/` を直接辿ってください。
 
-1. 上のフォルダをクリック
-2. ファイル名をクリック
-3. 「Download raw file」ボタンをクリック
+## 統計
 
-または [教材配布サイト](https://tama831.github.io/ai-agent-team-materials/) からワンクリックでダウンロード！
+- 公開教材セッション数: **19** 本
+- 最終更新: **2026-04-09** （WHOシステム思考を、明日の外来でどう使うか）
 
 ## 各教材の構成
 
-- **`*_slides_residents.pptx`** — 研修医向けスライド（30分）
-- **`*_slides_allstaff.pptx`** — 全スタッフ向けスライド（15分）
-- **`*_guide_facilitator.docx`** — ファシリテーターガイド（チートシート + 略語集 + QRコード付き）
+- `*_slides_residents.pptx` — 研修医向けスライド（30分）
+- `*_slides_allstaff.pptx` — 全スタッフ向けスライド（15分）
+- `*_slides_attendings.pptx` — 指導医向けスライド（30分、該当教材のみ）
+- `*_guide_facilitator.docx` — ファシリテーターガイド（QRコード付き参考文献）
+- `*_cheatsheet_a4.docx` — 外来チートシート（A4 1ページ、該当教材のみ）
+
+## ライセンス・運用
+
+教材の作成は AI Agent Team (Claude Code) が担当し、家庭医たまさんが
+最終確認しています。臨床判断の根拠は必ず一次資料・ガイドラインを
+当たってください。
+
+---
+
+このREADMEは `scripts/gen_index_html.py` により `sessions.json` から自動生成されています。
+手で編集しないでください。
