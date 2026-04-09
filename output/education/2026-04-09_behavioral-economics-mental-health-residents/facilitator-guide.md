@@ -91,8 +91,11 @@ source_briefing: data/briefings/2026-04-08.json#item-003
 
 ### 背景文献
 - ダニエル・カーネマン『ファスト&スロー — あなたの意思はどのように決まるか?』早川書房
+  <https://www.amazon.co.jp/s?k=ファスト%26スロー+カーネマン+早川書房>
 - リチャード・セイラー&キャス・サンスティーン『NUDGE — 実践 行動経済学』日経BP
+  <https://www.amazon.co.jp/s?k=NUDGE+実践+行動経済学+セイラー+日経BP>
 - NIMH RDoC Initiative: Positive Valence Systems (報酬処理関連の研究領域分類)
+  <https://www.nimh.nih.gov/research/research-funded-by-nimh/rdoc/constructs/positive-valence-systems>
 
 ### 関連メモ
 - 本教材はブリーフィング `data/briefings/2026-04-08.json` item-003 を起点に作成

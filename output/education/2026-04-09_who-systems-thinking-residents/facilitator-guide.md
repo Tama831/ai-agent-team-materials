@@ -88,8 +88,11 @@ source_briefing: data/briefings/2026-04-08.json#item-001
 
 ### 背景文献
 - ドネラ・H・メドウズ『世界はシステムで動く — いま起きていることの本質をつかむ考え方』英治出版
+  <https://www.amazon.co.jp/s?k=世界はシステムで動く+メドウズ+英治出版>
 - ピーター・M・センゲ『学習する組織 — システム思考で未来を創造する』英治出版
+  <https://www.amazon.co.jp/s?k=学習する組織+センゲ+英治出版>
 - *Friday Night at the ER* (システム思考教育用シミュレーションゲーム)
+  <https://www.amazon.co.jp/s?k=Friday+Night+at+the+ER+game>
 
 ### 関連する既存教材
 - `output/education/2026-04-01_systems-thinking-health-workforce/` — 全職員向け版(本教材は研修医個人の臨床判断起点で再構成)
