@@ -10,7 +10,8 @@
       {
         "label": "研修医 PPTX",
         "path": "output/education/2026-04-09_who-systems-thinking-residents/who-systems-thinking-residents_slides_residents.pptx",
-        "audience": "residents"
+        "audience": "residents",
+        "pdf_path": "output/education/2026-04-09_who-systems-thinking-residents/who-systems-thinking-residents_slides_residents.pdf"
       }
     ],
     "guides": [
@@ -37,7 +38,8 @@
       {
         "label": "研修医 PPTX",
         "path": "output/education/2026-04-09_behavioral-economics-mental-health-residents/behavioral-economics-mental-health-residents_slides_residents.pptx",
-        "audience": "residents"
+        "audience": "residents",
+        "pdf_path": "output/education/2026-04-09_behavioral-economics-mental-health-residents/behavioral-economics-mental-health-residents_slides_residents.pdf"
       }
     ],
     "guides": [
