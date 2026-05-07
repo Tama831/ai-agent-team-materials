@@ -144,130 +144,48 @@
       </div>
     </section>
 
-    <!-- 🎯 トリガー × 反応マップ -->
+    <!-- 🎯 私のアクション → 何が起きるか -->
     <section class="mb-12">
       <div class="flex items-baseline gap-3 mb-2">
-        <h2 class="text-3xl font-bold">🎯 トリガー × 反応マップ</h2>
+        <h2 class="text-3xl font-bold">🎯 私のアクション → 何が起きるか</h2>
       </div>
-      <p class="text-stone-600 mb-7">「私が <strong>X</strong> したら → 誰が動いて → 何が生まれるか」。アクションごとにシステム全体の反応を追える地図。</p>
+      <p class="text-stone-600 mb-7">途中の工程はチームに任せて、私は<strong>何をすると → 何が手元に届くか</strong>だけ見ればいい。</p>
 
-      <div class="card rounded-2xl p-6 md:p-8 overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b-2 border-stone-300 text-left">
-              <th class="pb-3 pr-4 font-bold">私のアクション (トリガー)</th>
-              <th class="pb-3 pr-4 font-bold">即座に動くもの</th>
-              <th class="pb-3 font-bold">生まれるもの</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-stone-200">
-            <tr>
-              <td class="py-3 pr-4"><strong>何もしない (毎朝)</strong><br><span class="text-stone-500 text-xs">04:30 cron 自動</span></td>
-              <td class="py-3 pr-4">Conductor → Scout×並列 → Verifier → Analyst → Recall Engine</td>
-              <td class="py-3"><code>data/briefings/YYYY-MM-DD.md</code> + dashboard 8-10件</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>何もしない (毎朝続)</strong><br><span class="text-stone-500 text-xs">05:15 cron 自動</span></td>
-              <td class="py-3 pr-4">Broadcaster (script 3.1Flash → TTS → fallback)</td>
-              <td class="py-3"><code>data/broadcasts/episode-*.mp3</code> + Spotify private 配信</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>何もしない (毎正午)</strong><br><span class="text-stone-500 text-xs">12:00 cron 自動</span></td>
-              <td class="py-3 pr-4">morning_health_check.sh (自動回復5層)</td>
-              <td class="py-3">欠落あれば自動再実行 / dashboard に「🙏遅れてます」</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>何もしない (週1)</strong><br><span class="text-stone-500 text-xs">日21:00 launchd / 月05:30 cron</span></td>
-              <td class="py-3 pr-4">Pentest スキャン → parse → push (Mac → Hetzner → Sentinel)</td>
-              <td class="py-3"><code>data/pentest/reports/YYYY-MM-DD.json</code> + HANDOFF サマリ</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>briefing で ❤️ を押す</strong></td>
-              <td class="py-3 pr-4">engagement.jsonl 記録 → interest-map Elo更新 → deep-dive-requests.jsonl pending 1行 (Phase A)</td>
-              <td class="py-3">蓄積中 (Phase B 未実装、後で Curator 課が消化)</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>briefing で 🎓 を押す</strong></td>
-              <td class="py-3 pr-4">モーダル → 対象者選択 → education-requests.jsonl pending 1行 (Phase B v1)</td>
-              <td class="py-3">手動「キュー処理」打つまで待機</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>briefing で 📖 / ⏭ を押す</strong></td>
-              <td class="py-3 pr-4">engagement.jsonl 記録 + Elo更新 (📖=既読 / ⏭=skip)</td>
-              <td class="py-3">interest-map に反映、recall_selector の選定に影響</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>Whisper❤️ を押す</strong></td>
-              <td class="py-3 pr-4">whisper-queue.jsonl に追記 (Curator 担当)</td>
-              <td class="py-3">蓄積中 (出口は3つのいいね統合で決定予定)</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「キュー処理」と打つ</strong></td>
-              <td class="py-3 pr-4">process-queue skill → Foreman 統括 → Scribe→Designer→Reviewer→Drive</td>
-              <td class="py-3"><code>output/education/&lt;slug&gt;/</code> + Drive 📝作業中</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「OK！」 + <code>/publish &lt;slug&gt;</code></strong></td>
-              <td class="py-3 pr-4">Publisher → materials repo push + Drive ✅公開済 へ移動</td>
-              <td class="py-3">GitHub Pages 公開 + Drive 整理</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「{topic}を深掘り」</strong></td>
-              <td class="py-3 pr-4">Analyst skill 起動 (Curator 担当)</td>
-              <td class="py-3"><code>data/deep-dives/&lt;slug&gt;.md</code> + 30秒 tldr 音声</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「ラジオ生成」</strong></td>
-              <td class="py-3 pr-4">Broadcaster (手動)</td>
-              <td class="py-3">mp3 + script.json + radio_search.db</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「教材作成: {topic}」</strong></td>
-              <td class="py-3 pr-4">Scribe → Designer → Reviewer → Publisher (B案ゲート)</td>
-              <td class="py-3">output/education + Drive 📝作業中</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「これ、どう?」「やってみない?」</strong></td>
-              <td class="py-3 pr-4">番頭代理 (アイデア受け取りプロトコル) → 分類 → 課長視点で評価 → decision-ready化</td>
-              <td class="py-3">「やる/保留/降ろす」の3択提示 (200-400字、急かさない)</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「番頭」「全体まとめて」</strong></td>
-              <td class="py-3 pr-4">COO skill → 7課 status.md 集約 → 経営ダッシュボード生成</td>
-              <td class="py-3"><code>data/coo/dashboards/YYYY-MM-DD.md</code> (300-500字、A4 1枚相当)</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「週次整理」(月曜)</strong></td>
-              <td class="py-3 pr-4">Secretary skill → IDEAS/HANDOFF/BLOCKERS 整理 → 🛏️マーカー</td>
-              <td class="py-3"><code>data/secretary/weekly_views/YYYY-Www.md</code></td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「ブレスト: {topic}」</strong></td>
-              <td class="py-3 pr-4">brainstorm skill (Question Burst → KJ → 構造化 → 探究 → まとめ)</td>
-              <td class="py-3">5フェーズの対話成果物</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「{topic}を図解」</strong></td>
-              <td class="py-3 pr-4">diagram skill</td>
-              <td class="py-3">Excalidraw / mermaid / drawio</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「成長分析」「戦略提案」</strong></td>
-              <td class="py-3 pr-4">Marketer skill (Producer 課担当、現在ほぼ未稼働)</td>
-              <td class="py-3">成長サマリ + 提案 (出力先未確立)</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>「最近働きすぎてない?」</strong></td>
-              <td class="py-3 pr-4">Yumori skill (養生課課長、2026-04-28〜)</td>
-              <td class="py-3">他課のペース過多警告 + 養生コンテンツ提案</td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><strong>明確な「今日はここまで」</strong></td>
-              <td class="py-3 pr-4">handoff skill</td>
-              <td class="py-3">HANDOFF.md 更新, IDEAS.md に未着手項目振り分け</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card rounded-2xl p-6 md:p-8">
+        <h3 class="font-bold mb-3 text-stone-700">🌅 自動 (寝てる間 / 何もしないでいい)</h3>
+        <ul class="space-y-2 text-sm mb-6">
+          <li>• 朝起きると <strong>dashboard に 8 件</strong> 並んでる + <strong>Spotify に 30 分のラジオ</strong></li>
+          <li>• 正午までに何か壊れたら自動回復、ダメなら「🙏遅れてます」表示</li>
+          <li>• 月曜朝には先週の <strong>pentest レポート</strong> + Secretary 「今週の景色」</li>
+        </ul>
+
+        <h3 class="font-bold mb-3 text-stone-700">📱 朝のトリアージ (2-3 分)</h3>
+        <ul class="space-y-2 text-sm mb-6">
+          <li>• <strong>❤️ 押す</strong> → 興味記録 (将来 Deep Dive 音声が届くキューへ)</li>
+          <li>• <strong>🎓 押す</strong> → 教材化キューへ (「キュー処理」打つと教材ができる)</li>
+          <li>• <strong>📖 / ⏭ 押す</strong> → 既読 / skip 記録、関心マップに反映</li>
+        </ul>
+
+        <h3 class="font-bold mb-3 text-stone-700">🛠 手動でやる時 (任意)</h3>
+        <ul class="space-y-2 text-sm mb-6">
+          <li>• <strong>「キュー処理」</strong> → 約 2 時間で <strong>Drive に教材完成品</strong> が届く</li>
+          <li>• <strong>「OK！」 + <code>/publish &lt;slug&gt;</code></strong> → <strong>GitHub Pages で公開</strong></li>
+          <li>• <strong>「{topic} 深掘り」</strong> → <strong>Deep Dive md + 30 秒音声</strong></li>
+          <li>• <strong>「ラジオ生成」</strong> → <strong>mp3 + Spotify 配信</strong></li>
+          <li>• <strong>「教材作成: {topic}」</strong> → 上の 🎓 と同じパイプ</li>
+          <li>• <strong>「{topic} 図解」</strong> → <strong>Excalidraw / mermaid 図</strong></li>
+          <li>• <strong>「ブレスト: {topic}」</strong> → 5 フェーズの対話成果物</li>
+        </ul>
+
+        <h3 class="font-bold mb-3 text-stone-700">💬 雑に投げる (経営層が受ける)</h3>
+        <ul class="space-y-2 text-sm">
+          <li>• <strong>「これ、どう?」「やってみない?」</strong> → 番頭代理が <strong>「やる/保留/降ろす」3 択</strong> で返す</li>
+          <li>• <strong>「番頭」「全体まとめて」</strong> → <strong>経営ダッシュボード 1 枚</strong> (300-500 字)</li>
+          <li>• <strong>「砥師」「批評して」</strong> → 立場 5 段階 + 改善案で <strong>批評レスポンス</strong></li>
+          <li>• <strong>「週次整理」「今週の景色」</strong> (月曜) → <strong>「今週はこれだけ集中」</strong> 300 字</li>
+          <li>• <strong>「最近働きすぎてない?」</strong> → 湯守がペース警告 + 養生提案</li>
+          <li>• <strong>「今日はここまで」</strong> → handoff、HANDOFF.md 更新</li>
+        </ul>
       </div>
 
       <!-- これから (発展中の体験) -->
