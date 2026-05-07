@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="家庭医によるバイブコーディング・ポートフォリオ。AIエージェントと一緒に作った学びのプロダクト棚。">
+  <title>たまさんのプロダクト棚 — Vibe Coding Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #faf6ee;
+      --paper-deep: #f3ebd9;
+      --ink: #2d2a26;
+      --ink-soft: #5b554c;
+      --accent: #2c5d77;
+      --accent-warm: #b8743a;
+      --accent-soft: #e8d5b7;
+      --grid: #d6c9a8;
+    }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(180, 160, 110, 0.10) 1px, transparent 0);
+      background-size: 22px 22px;
+    }
+    .handwritten { font-family: 'Caveat', cursive; }
+    .card {
+      background: #fffcf5;
+      border: 1px solid var(--grid);
+      box-shadow: 0 1px 0 rgba(160, 140, 90, 0.06), 0 4px 12px rgba(160, 140, 90, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 0 rgba(160, 140, 90, 0.08), 0 8px 20px rgba(160, 140, 90, 0.10);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .badge-done { background: #dceee0; color: #2c6e3f; }
+    .badge-running { background: #e8d5b7; color: #8a5a1f; }
+    .badge-wip { background: #ebd8d5; color: #8a3a35; }
+    .badge-idea { background: #e0e6ee; color: #34527a; }
+    .vibe-note {
+      background: linear-gradient(180deg, #fdf4dc, #f9eccd);
+      border-left: 3px solid var(--accent-warm);
+    }
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--grid) 20%, var(--grid) 80%, transparent);
+      margin: 3rem 0 2rem;
+    }
+    .accent-link {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--accent);
+    }
+    .accent-link:hover { border-bottom-style: solid; }
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3em;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: var(--paper-deep);
+      color: var(--ink-soft);
+      text-decoration: none;
+      border: 1px solid var(--grid);
+    }
+    .pill-link:hover { background: var(--accent-soft); color: var(--ink); }
+    .stamp {
+      font-family: 'Caveat', cursive;
+      transform: rotate(-3deg);
+      color: var(--accent-warm);
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <main class="max-w-5xl mx-auto px-5 py-12 md:py-16">
+
+    <!-- Header -->
+    <header class="mb-12">
+      <p class="handwritten text-2xl text-amber-700 mb-2">— a vibe-coded portfolio —</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-3">たまさんのプロダクト棚</h1>
+      <p class="text-lg text-stone-600 leading-relaxed">
+        家庭医 (総合診療医) が、AIエージェントと一緒に作ってきた学びのプロダクトたち。<br>
+        コードの専門家ではないけれど、「学び方をデザインする」を合言葉に、思いついたものを Claude や ChatGPT に相談しながら形にしてきました。
+      </p>
+      <div class="mt-6 flex gap-3 flex-wrap text-sm">
+        <span class="pill-link">🩺 家庭医・総合診療</span>
+        <span class="pill-link">🧠 学び方のデザイン</span>
+        <span class="pill-link">🤖 AIエージェント運営</span>
+        <span class="pill-link">🍞 パン・多肉・ゲーム音楽</span>
+      </div>
+    </header>
+
+    <!-- Intro: Vibe Coding って何 -->
+    <section class="card rounded-2xl p-7 md:p-9 mb-12">
+      <h2 class="text-2xl font-bold mb-3">🎙 バイブコーディングって何?</h2>
+      <p class="leading-relaxed text-stone-700 mb-4">
+        プログラマーじゃない私が、<strong>「こんなのが欲しいんだけど」と AI に相談して、雰囲気で (= vibe で) コードを書いてもらう</strong>スタイルのこと。仕様書を完璧に書く前に、まず動かしてみる。動いたら触ってみて、「もっとこうしたい」を AI に伝えて改善する。
+      </p>
+      <p class="leading-relaxed text-stone-700 mb-4">
+        私は Claude Code (Anthropic 社の AI コーディング相棒) をメインに使っています。完成形を最初から描かず、<strong>毎日のセッションで少しずつ育てる</strong>のが性に合ってる。療養期からの復帰中なので、無理せず・好奇心の赴くままに作っています。
+      </p>
+      <div class="vibe-note p-4 rounded-md text-sm">
+        <strong class="text-amber-900">🌱 設計原理:</strong> 「好奇心は完了で満たされる」(Closure-as-a-Service)。 思いついたものをやりっぱなしにせず、エージェントが最後まで消化する仕組みを作っています。
+      </div>
+    </section>
+
+    <!-- ✅ 完成稼働中 -->
+    <section>
+      <div class="flex items-baseline gap-3 mb-2">
+        <h2 class="text-2xl font-bold">✅ 完成・稼働中</h2>
+        <span class="text-stone-500 text-sm">毎日 / 毎週 自動で動いているもの</span>
+      </div>
+      <p class="text-stone-600 mb-6 text-sm">朝起きたら勝手に何かが届いている、そんな状態をつくりました。</p>
+
+      <div class="grid md:grid-cols-2 gap-5">
+
+        <!-- 1. AI Agent Team -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🏢 AI Agent Team</h3>
+            <span class="badge badge-done">✅ 稼働中</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">12+ のAIエージェントが部署のように分かれて、毎朝のブリーフィング・教材作り・深掘り分析・ラジオ配信を分業で回す自社チーム。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 最初は1人のエージェントから。「Scout (情報収集) と Analyst (分析) を分けたら良さそう」と感じた瞬間に Claude に相談して分割。今は Conductor が指揮、Secretary が降ろし、最近 COO「番頭」が束ねるようになった。組織図は雰囲気で書いた。
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <a href="https://github.com/Tama831/ai-agent-team" class="pill-link">📦 GitHub</a>
+          </div>
+        </article>
+
+        <!-- 2. 朝のブリーフィング -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🌅 朝のブリーフィング</h3>
+            <span class="badge badge-done">✅ 04:30 JST 自動</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">医療・テック・学び・ライフ系の最新情報を毎朝04:30に並列リサーチ → 8〜10件にまとめて dashboard に届ける。被り防止と自動回復5層付き。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 朝に医療ニュースが多すぎて消化できない悩みから始まった。「家庭医向けの朝の briefing」と相談 → Scout/Verifier/Analyst の3エージェント並列構造に。途中でサイレントハングする事故があり、5層の自動回復を継ぎ足しながら育てた。
+          </div>
+        </article>
+
+        <!-- 3. 教材自動生成 -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">📚 教材自動生成パイプライン</h3>
+            <span class="badge badge-done">✅ 20件公開中</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">briefingで「🎓これ勉強会したい」を押すと、Scribe→Designer→Reviewer→Publisher の流れで PPTX/DOCX/A4チートシート/ファシリテーターガイド を自動生成。Drive で承認ゲート → GitHub Pages 公開。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 最初は「医療職向けの勉強会資料を雛形で作って」と頼んだだけ。「字が小さい」「規格バラバラ」と毎回フィードバックして、本文18pt・QR必須・A4チートシート規格に統一。今はインテイク3問 (デザイン/構成/その他) で雰囲気を伝えるだけで生成される。
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <a href="https://tama831.github.io/ai-agent-team-materials/" class="pill-link">🌐 公開ページ</a>
+            <a href="https://github.com/Tama831/ai-agent-team-materials" class="pill-link">📦 GitHub</a>
+          </div>
+        </article>
+
+        <!-- 4. ラジオ局 Broadcaster -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🎙 ラジオ局 Broadcaster</h3>
+            <span class="badge badge-done">✅ 毎朝05:15</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">ゆる言語学ラジオ風のAI対談形式で、その日のbriefingを30分のpodcastにする。Gemini 3.1 Flash TTS + 自動 fallback。Spotify private で配信。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 文字より声で消化したいタイプなので、briefingを耳で聴ける形にした。Analyst役が "Charon" 声、Scout役が違う声、対話で進む。TTSが落ちる日があったので fallback 自動切替を後付けで足した。
+          </div>
+        </article>
+
+        <!-- 5. Whisper Spirits -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🦊🦝 Whisper Spirits</h3>
+            <span class="badge badge-done">✅ Mac常駐</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">Mac の片隅に常駐する小さな精霊「こん🦊」と「ぽん🦝」。日常の文脈から好奇心を拾って、後で消化できる形でキューに溜める。Hammerspoon ベース。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> ペット感覚で常駐エージェントが欲しかった。狐と狸の人格にしたら愛着が湧いた。アイデアの種を逃さず拾うが、消化しきれなくても咎めない優しい設計。
+          </div>
+        </article>
+
+        <!-- 6. Recall Engine -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🔄 Recall Engine v1「再会の小窓」</h3>
+            <span class="badge badge-done">✅ briefing統合済</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">過去のbriefing項目・教材・engagement履歴から3件を毎朝のbriefingに再登場させる仕組み。記憶定着のために、忘れた頃にまた会わせる。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 教材を作っても1ヶ月後には忘れる。「忘却曲線に逆らうのではなく、忘れる前にまた会えばいい」と思ってこの仕組みに。serendipity (偶然性) の枠も入れて、固定化を防ぐ。
+          </div>
+        </article>
+
+        <!-- 7. Pentest -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🛡 Pentest 週次ループ</h3>
+            <span class="badge badge-done">✅ 日21:00 自動</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">staging server を毎週日曜夜に自動攻撃 (nmap/nuclei/trivy/lynis/ffuf)。月曜朝にレポート生成。Defender's mindsetで自分のサーバーの守りを試す。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 半田病院ランサムウェア事件以降、医療系IT セキュリティに興味があった。Kali Linux Docker を Mac に置いて、tailscale ACL で staging だけ叩ける構成にした。地方電子カルテ向け転用テンプレ化を構想中。
+          </div>
+        </article>
+
+        <!-- 8. 自動回復5層 -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🩹 Briefing 自動回復5層</h3>
+            <span class="badge badge-done">✅ 4/26〜稼働</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">briefing/ラジオ生成が落ちても自動回復する5層の防御 (B/E/A/C/D)。fallback model / resume mode / モデル実在確認 / 遅延文言 / 正午ヘルスチェック。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> ある朝、briefingが届かなかった。原因は架空のモデル名+TZズレの複合。「壊れたら気づく」だけじゃなく「壊れても自分で回復する」レイヤーを5枚重ねた。dashboard に「🙏遅れてます」「😷風邪引いた」の文言で出す遊びも入れた。
+          </div>
+        </article>
+
+        <!-- 9. 中間管理職構造 -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">👔 番頭 + 6課長構造</h3>
+            <span class="badge badge-done">✅ 2026-04-28〜</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">12+ エージェントの上に「番頭 (COO)」と6人の課長を置いた。たまさんは経営ダッシュボード1枚と判断待ち4件だけ見れば全体が分かる状態に。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 「全体を見通せなくなってきた」と感じたその日に、Claude と一緒に組織図を引き直した。課長は実装責任、番頭は俯瞰責任、Secretary は降ろす責任、私はCEOで yes/no だけ。closure-as-a-service の最終形。
+          </div>
+        </article>
+
+        <!-- 10. 3D Modeling -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🧊 3Dモデリング (OpenSCAD)</h3>
+            <span class="badge badge-done">✅ 自然言語→STL</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">「こういう形のものが欲しい」と Claude に伝えるだけで、OpenSCAD コード→STL→PNG プレビュー まで自動生成。3Dプリンタ用のオブジェクトを vibe で作る。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> CAD は触ったことなかったけど、コードで形を書けることを知って試したら楽しかった。日常のちょっとした不便 (ケーブルホルダー、観葉植物の鉢) を vibe で形にできる。
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 🔄 実戦運用中 -->
+    <section>
+      <div class="flex items-baseline gap-3 mb-2">
+        <h2 class="text-2xl font-bold">🔄 実戦運用中・部分実装</h2>
+        <span class="text-stone-500 text-sm">動くけどまだ慣らし中、または手動トリガー段階</span>
+      </div>
+      <p class="text-stone-600 mb-6 text-sm">「コードは書いたから、あとは使ってみて育てる」というやつ。</p>
+
+      <div class="grid md:grid-cols-2 gap-5">
+
+        <!-- 11. Deep Dive Library -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🔬 Deep Dive ライブラリ</h3>
+            <span class="badge badge-running">🔄 21件蓄積中</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">briefingで気になった話題を Analyst が深掘り→ markdown + 30秒 tldr 音声で提供。Drive 「🔬未聴」「✅聴取済」フォルダで聴取進捗を管理。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 全部読まなくていい状態を作るための装置。30秒で結論だけ聴いて、興味あればmd 開く。次は ❤️ボタンで自動キュー化する Phase B が控えている。
+          </div>
+        </article>
+
+        <!-- 12. ❤️/🎓 button system -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">❤️🎓 いいね・教材化ボタン</h3>
+            <span class="badge badge-running">🔄 Phase B v1</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">briefing dashboard で ❤️ 押すと Deep Dive キューへ、🎓 押すと教材化キューへ。手動「キュー処理」で直列消化。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 興味の信号を後で消化できる形で蓄える。今は3 pending待機中。3つのいいね信号 (briefing❤️ / Whisper❤️ / ラジオ❤️) を統合する設計を検討中。
+          </div>
+        </article>
+
+        <!-- 13. Drive Layer 2 -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">📁 Google Drive 承認ゲート</h3>
+            <span class="badge badge-running">🔄 4/18〜運用中</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">教材生成 → Drive「📝作業中」自動upload → Mac で確認 / Google Slides編集 → `/publish` で公開 → Drive「✅公開済」へ移動。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 自動公開は怖いので、Drive で人間ゲートを挟む。rclone OAuth で sync。Mac から触れる場が増えたので、確認のテンションが下がらない。
+          </div>
+        </article>
+
+        <!-- 14. Paperpile + Notion -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">📖 Paperpile + Notion 知識統合</h3>
+            <span class="badge badge-running">🔄 Phase 1 着手中</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">Mac の 740 PDF を Paperpile (論文 ≈440本) と Notion資料DB (実務 ≈200本) に分離移行。briefing🎓 → 論文深読み、再会の小窓で双方向連携。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 散らばった資料に再会する仕組みが欲しかった。BibTeX parser を自作したら 237件誤判定を出して、bibtexparser ライブラリに置き換える事件もあった。 (自分のスクリプトを疑え、の教訓)
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 🛠 着手予定 -->
+    <section>
+      <div class="flex items-baseline gap-3 mb-2">
+        <h2 class="text-2xl font-bold">🛠 設計済・着手予定</h2>
+        <span class="text-stone-500 text-sm">プランは書いたけど、まだ手を付けていない</span>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🎨 3つのいいね統合</h3>
+            <span class="badge badge-wip">🛠 設計中</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">briefing❤️ / Whisper❤️ / ラジオ❤️ の3つのいいね信号を1本の Deep Dive キューに合流させる。closure-as-a-service への効きが最大の領域。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed">
+            <strong>🎙 vibe note:</strong> 入口が3つ、出口がバラバラ。「全部 Deep Dive で耳から消化」に統一する案を検討中。
+          </div>
+        </article>
+
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🦊🦝 Fox & Raccoondog Dashboard</h3>
+            <span class="badge badge-wip">🛠 設計済</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">Apple ネイティブ (SwiftUI) のMac朝の儀式アプリ。こん🦊/ぽん🦝 が朝の briefing をパーソナルに届ける。Whisper Spirits と人格共有。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed">
+            <strong>🎙 vibe note:</strong> Web dashboard より「アプリ感」のある体験が欲しくて。Apple Dev Program は Phase 3 まで不要。
+          </div>
+        </article>
+
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🛡 Pentest 高度化 C→B→A</h3>
+            <span class="badge badge-wip">🛠 順序設計済</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">脅威モデリング (STRIDE) → SIEM (Wazuh) → Adversary Emulation (Atomic Red Team) の Defender's mindset 3層を順に積む。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed">
+            <strong>🎙 vibe note:</strong> 「攻撃して終わり」ではなく「監視を作って攻撃で確かめる」サイクル。地方電子カルテ向け汎用テンプレートにもしたい。
+          </div>
+        </article>
+
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🎓 教材化Phase B v2 (cron化)</h3>
+            <span class="badge badge-wip">🛠 v1運用後</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">🎓ボタン → キュー → 夜間 cron で直列消化 → 朝にDriveに完成教材が届く、というフルオート化。今はv1 (手動「キュー処理」) で慣らし中。</p>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed">
+            <strong>🎙 vibe note:</strong> いきなり cron 化すると暴走しそうなので、手動でしばらく試して安心したら昇格する段階設計。
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- 💡 構想段階 -->
+    <section>
+      <div class="flex items-baseline gap-3 mb-2">
+        <h2 class="text-2xl font-bold">💡 構想段階</h2>
+        <span class="text-stone-500 text-sm">アイデアはあるけど、まだ設計も書いていないやつ</span>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+
+        <article class="card rounded-xl p-5">
+          <h3 class="font-bold text-base mb-2">🎭 「藪医者の学舎」特番</h3>
+          <p class="text-xs text-stone-600 mb-2">月1のテーマ深掘り podcast。Angle Swarm (6エージェント並列で角度を変えて分析) を投入する特集回。</p>
+          <span class="badge badge-idea">💡 構想</span>
+        </article>
+
+        <article class="card rounded-xl p-5">
+          <h3 class="font-bold text-base mb-2">🌳 Recall Engine Phase 2</h3>
+          <p class="text-xs text-stone-600 mb-2">Living Library 化。過去の学びが時間とともに「育って」再登場する仕組み。Notion との双方向連携。</p>
+          <span class="badge badge-idea">💡 構想</span>
+        </article>
+
+        <article class="card rounded-xl p-5">
+          <h3 class="font-bold text-base mb-2">🏥 地方電子カルテ向けPentestテンプレ</h3>
+          <p class="text-xs text-stone-600 mb-2">Phase C/B/A の成果物を地方病院IT向けに転用。ランサム対策の最低ライン提案として。</p>
+          <span class="badge badge-idea">💡 構想</span>
+        </article>
+
+        <article class="card rounded-xl p-5">
+          <h3 class="font-bold text-base mb-2">🪞 Self-Healing Briefing</h3>
+          <p class="text-xs text-stone-600 mb-2">Scout/Verifier/Analystの skill 変更を検知したら fixture で再生テスト → 緑じゃなければ commit ブロック。</p>
+          <span class="badge badge-idea">💡 構想</span>
+        </article>
+
+        <article class="card rounded-xl p-5">
+          <h3 class="font-bold text-base mb-2">📻 ElevenLabs TTS統合</h3>
+          <p class="text-xs text-stone-600 mb-2">Gemini TTSで表現の限界を感じたら ElevenLabs に切替。起動条件3つ満たすまで Hold。</p>
+          <span class="badge badge-idea">💡 Hold</span>
+        </article>
+
+        <article class="card rounded-xl p-5">
+          <h3 class="font-bold text-base mb-2">📝 note発信パイプライン</h3>
+          <p class="text-xs text-stone-600 mb-2">Writer→Editor→CEO承認 のラインは設計済だが、起動するか降ろすか判断保留中。</p>
+          <span class="badge badge-idea">💡 判断待ち</span>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- バイブコーディング哲学 -->
+    <section class="card rounded-2xl p-7 md:p-9 mb-12">
+      <h2 class="text-2xl font-bold mb-4">🌱 私のバイブコーディング 5 原則</h2>
+      <ol class="space-y-3 text-stone-700 leading-relaxed list-decimal list-inside">
+        <li><strong>完成形を最初から描かない</strong> — 動かしながら育てる。「絵」は番頭エージェントが伴走してくれる。</li>
+        <li><strong>好奇心は完了で満たされる</strong> — 思いついたものをやりっぱなしにしない仕組みを必ず添える (Closure-as-a-Service)。</li>
+        <li><strong>聴く・観る優位</strong> — 私自身が文字を読むのが疲れるタイプなので、成果物は音声・耳で完結する形を優先。</li>
+        <li><strong>降ろす勇気</strong> — 全部やる必要はない。Secretaryエージェントが「今週はお休み中🛏️」と決めてくれる。</li>
+        <li><strong>自分のスクリプトを疑う</strong> — AI が書いたコードもバグる。報告する前に root cause を確認する。</li>
+      </ol>
+    </section>
+
+    <!-- フッター -->
+    <footer class="text-center text-stone-500 text-sm py-6">
+      <p class="handwritten text-xl text-amber-700 mb-2">— made with 🤖 + ☕ —</p>
+      <p>このページは <a href="https://github.com/Tama831/ai-agent-team" class="accent-link">ai-agent-team リポ</a> の <code>docs/portfolio.html</code> として管理されています。</p>
+      <p class="mt-1 text-xs">URL を知っている人だけがアクセスできるよう、検索エンジンには載せていません (noindex)。</p>
+      <p class="mt-3 stamp text-xl">tama / 2026</p>
+    </footer>
+  </main>
+</body>
+</html>
