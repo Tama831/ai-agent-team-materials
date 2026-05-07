@@ -144,124 +144,142 @@
       </div>
     </section>
 
-    <!-- 📖 1日の体験ストーリー -->
+    <!-- 🎯 トリガー × 反応マップ -->
     <section class="mb-12">
       <div class="flex items-baseline gap-3 mb-2">
-        <h2 class="text-3xl font-bold">📖 1日の体験ストーリー</h2>
+        <h2 class="text-3xl font-bold">🎯 トリガー × 反応マップ</h2>
       </div>
-      <p class="text-stone-600 mb-7">「Claude Code のチームを使うってどういう感じ?」を時間軸で。寝てる間に8割が動いて、起きてからは2-3分のトリアージで終わる。</p>
+      <p class="text-stone-600 mb-7">「私が <strong>X</strong> したら → 誰が動いて → 何が生まれるか」。アクションごとにシステム全体の反応を追える地図。</p>
 
-      <div class="card rounded-2xl p-7 md:p-9">
-        <div class="timeline-item">
-          <div class="timeline-marker">🌙</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">04:30 JST — 寝てる間に</p>
-            <h3 class="font-bold mb-1">朝の briefing が裏で組み上がる</h3>
-            <p class="text-sm text-stone-600">Conductor が起動 → Scout 4-6 並列でWeb調査 → Verifier がURL存在確認 → Analyst が予測と教材視点を加える → 8-10件の briefing.md 完成。途中で何か落ちても自動回復5層が支える。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">🎙</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">05:15 JST</p>
-            <h3 class="font-bold mb-1">Broadcaster がラジオを録る</h3>
-            <p class="text-sm text-stone-600">briefing を元に、AI 2人 (Analyst役 + Scout役) のゆる対談脚本を生成 → Gemini TTS で音声合成 → Spotify private に配信。ここまで全部 cron で自動。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">☕</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">06:00 — 起床</p>
-            <h3 class="font-bold mb-1">朝食準備しながらラジオを聴く</h3>
-            <p class="text-sm text-stone-600">Spotify を開いて、その日のラジオを再生。30分、耳で受け取る。読まなくていい。tldr 30秒音声で結論だけ拾うこともできる。<strong>聴く・観る優位</strong>の私には合ってる。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">📱</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">06:30</p>
-            <h3 class="font-bold mb-1">dashboard で 2-3 分のトリアージ</h3>
-            <p class="text-sm text-stone-600">Mac で dashboard を開く。8-10件のカードが並んでる。<strong>❤️</strong> = もっと知りたい / <strong>🎓</strong> = 勉強会で扱いたい / <strong>⏭</strong> = スキップ。これだけで終わり。Recall Engine が過去の3件も再登場させてくる。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">🩺</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">09:00-12:00</p>
-            <h3 class="font-bold mb-1">朝の診療 (人間モード)</h3>
-            <p class="text-sm text-stone-600">エージェントは黙って待機。Whisper Spirits 🦊🦝 が Mac の画面操作からそっと好奇心の種を拾う (邪魔しない)。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">🍙</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">12:00 (自動)</p>
-            <h3 class="font-bold mb-1">健全性チェック</h3>
-            <p class="text-sm text-stone-600">morning_health_check.sh が走り、当日のbriefing/ラジオが揃ってるか確認。欠けてたら自動再実行。たまさんが知ることなく回復する。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">🌆</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">18:00以降 — 自由時間</p>
-            <h3 class="font-bold mb-1">気が向いたら教材化 / 深掘り</h3>
-            <p class="text-sm text-stone-600">Claude Code セッションを開いて<strong>「キュー処理」</strong>と打つだけ → 朝に🎓を押した3トピックが直列で Scribe→Designer→Reviewer→Drive 📝作業中 まで進む (約2時間)。「これ深掘り」と打てば Analyst が30分で深掘りを書いてくれる。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">🦊</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">夜 (任意)</p>
-            <h3 class="font-bold mb-1">Whisper❤️ で日中の種を振り返り</h3>
-            <p class="text-sm text-stone-600">こん🦊/ぽん🦝 が「今日こんなの拾いました」と見せてくる。気になるのに ❤️ つけて Deep Dive キュー or 教材キューへ。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">🛡</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">日曜 21:00 (週1)</p>
-            <h3 class="font-bold mb-1">Pentest 自動起動</h3>
-            <p class="text-sm text-stone-600">Mac launchd → Hetzner staging を起動 → Kali Docker でフルスキャン → 月曜朝にレポート push。「自分のサーバーは健康か」を毎週チェック。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">📋</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">月曜朝</p>
-            <h3 class="font-bold mb-1">Secretary「今週の景色」</h3>
-            <p class="text-sm text-stone-600">先週溜まった IDEAS/HANDOFF/BLOCKERS を Secretary が整理 → 「今週はこれだけ集中、他は私が見守ってます」を 300字でくれる。降ろす権限を持っている。</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-marker">👔</div>
-          <div>
-            <p class="text-xs text-stone-500 mb-1">日曜夜 (2026-04-28〜)</p>
-            <h3 class="font-bold mb-1">番頭の経営ダッシュボード</h3>
-            <p class="text-sm text-stone-600">6課の課長たちが status.md を更新したのを番頭が束ねる → 経営ダッシュボード1枚 + 判断待ち4件 (decision-ready) を提示。たまさんは yes/no だけで進む。</p>
-          </div>
-        </div>
+      <div class="card rounded-2xl p-6 md:p-8 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b-2 border-stone-300 text-left">
+              <th class="pb-3 pr-4 font-bold">私のアクション (トリガー)</th>
+              <th class="pb-3 pr-4 font-bold">即座に動くもの</th>
+              <th class="pb-3 font-bold">生まれるもの</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-200">
+            <tr>
+              <td class="py-3 pr-4"><strong>何もしない (毎朝)</strong><br><span class="text-stone-500 text-xs">04:30 cron 自動</span></td>
+              <td class="py-3 pr-4">Conductor → Scout×並列 → Verifier → Analyst → Recall Engine</td>
+              <td class="py-3"><code>data/briefings/YYYY-MM-DD.md</code> + dashboard 8-10件</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>何もしない (毎朝続)</strong><br><span class="text-stone-500 text-xs">05:15 cron 自動</span></td>
+              <td class="py-3 pr-4">Broadcaster (script 3.1Flash → TTS → fallback)</td>
+              <td class="py-3"><code>data/broadcasts/episode-*.mp3</code> + Spotify private 配信</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>何もしない (毎正午)</strong><br><span class="text-stone-500 text-xs">12:00 cron 自動</span></td>
+              <td class="py-3 pr-4">morning_health_check.sh (自動回復5層)</td>
+              <td class="py-3">欠落あれば自動再実行 / dashboard に「🙏遅れてます」</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>何もしない (週1)</strong><br><span class="text-stone-500 text-xs">日21:00 launchd / 月05:30 cron</span></td>
+              <td class="py-3 pr-4">Pentest スキャン → parse → push (Mac → Hetzner → Sentinel)</td>
+              <td class="py-3"><code>data/pentest/reports/YYYY-MM-DD.json</code> + HANDOFF サマリ</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>briefing で ❤️ を押す</strong></td>
+              <td class="py-3 pr-4">engagement.jsonl 記録 → interest-map Elo更新 → deep-dive-requests.jsonl pending 1行 (Phase A)</td>
+              <td class="py-3">蓄積中 (Phase B 未実装、後で Curator 課が消化)</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>briefing で 🎓 を押す</strong></td>
+              <td class="py-3 pr-4">モーダル → 対象者選択 → education-requests.jsonl pending 1行 (Phase B v1)</td>
+              <td class="py-3">手動「キュー処理」打つまで待機</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>briefing で 📖 / ⏭ を押す</strong></td>
+              <td class="py-3 pr-4">engagement.jsonl 記録 + Elo更新 (📖=既読 / ⏭=skip)</td>
+              <td class="py-3">interest-map に反映、recall_selector の選定に影響</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>Whisper❤️ を押す</strong></td>
+              <td class="py-3 pr-4">whisper-queue.jsonl に追記 (Curator 担当)</td>
+              <td class="py-3">蓄積中 (出口は3つのいいね統合で決定予定)</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「キュー処理」と打つ</strong></td>
+              <td class="py-3 pr-4">process-queue skill → Foreman 統括 → Scribe→Designer→Reviewer→Drive</td>
+              <td class="py-3"><code>output/education/&lt;slug&gt;/</code> + Drive 📝作業中</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「OK！」 + <code>/publish &lt;slug&gt;</code></strong></td>
+              <td class="py-3 pr-4">Publisher → materials repo push + Drive ✅公開済 へ移動</td>
+              <td class="py-3">GitHub Pages 公開 + Drive 整理</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「{topic}を深掘り」</strong></td>
+              <td class="py-3 pr-4">Analyst skill 起動 (Curator 担当)</td>
+              <td class="py-3"><code>data/deep-dives/&lt;slug&gt;.md</code> + 30秒 tldr 音声</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「ラジオ生成」</strong></td>
+              <td class="py-3 pr-4">Broadcaster (手動)</td>
+              <td class="py-3">mp3 + script.json + radio_search.db</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「教材作成: {topic}」</strong></td>
+              <td class="py-3 pr-4">Scribe → Designer → Reviewer → Publisher (B案ゲート)</td>
+              <td class="py-3">output/education + Drive 📝作業中</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「これ、どう?」「やってみない?」</strong></td>
+              <td class="py-3 pr-4">番頭代理 (アイデア受け取りプロトコル) → 分類 → 課長視点で評価 → decision-ready化</td>
+              <td class="py-3">「やる/保留/降ろす」の3択提示 (200-400字、急かさない)</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「番頭」「全体まとめて」</strong></td>
+              <td class="py-3 pr-4">COO skill → 7課 status.md 集約 → 経営ダッシュボード生成</td>
+              <td class="py-3"><code>data/coo/dashboards/YYYY-MM-DD.md</code> (300-500字、A4 1枚相当)</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「週次整理」(月曜)</strong></td>
+              <td class="py-3 pr-4">Secretary skill → IDEAS/HANDOFF/BLOCKERS 整理 → 🛏️マーカー</td>
+              <td class="py-3"><code>data/secretary/weekly_views/YYYY-Www.md</code></td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「ブレスト: {topic}」</strong></td>
+              <td class="py-3 pr-4">brainstorm skill (Question Burst → KJ → 構造化 → 探究 → まとめ)</td>
+              <td class="py-3">5フェーズの対話成果物</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「{topic}を図解」</strong></td>
+              <td class="py-3 pr-4">diagram skill</td>
+              <td class="py-3">Excalidraw / mermaid / drawio</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「成長分析」「戦略提案」</strong></td>
+              <td class="py-3 pr-4">Marketer skill (Producer 課担当、現在ほぼ未稼働)</td>
+              <td class="py-3">成長サマリ + 提案 (出力先未確立)</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>「最近働きすぎてない?」</strong></td>
+              <td class="py-3 pr-4">Yumori skill (養生課課長、2026-04-28〜)</td>
+              <td class="py-3">他課のペース過多警告 + 養生コンテンツ提案</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><strong>明確な「今日はここまで」</strong></td>
+              <td class="py-3 pr-4">handoff skill</td>
+              <td class="py-3">HANDOFF.md 更新, IDEAS.md に未着手項目振り分け</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- これからどう発展するか -->
+      <!-- これから (発展中の体験) -->
       <div class="mt-8 card rounded-2xl p-7">
-        <h3 class="text-xl font-bold mb-4">🌅 これから (発展中の体験)</h3>
+        <h3 class="text-xl font-bold mb-4">🌅 これから増える「トリガー → 反応」</h3>
         <ul class="space-y-3 text-sm text-stone-700 leading-relaxed">
-          <li><strong>3 つのいいね統合</strong>が来ると → ❤️ briefing / Whisper❤️ / ラジオ❤️ が 1 本の Deep Dive キューに合流。出口が「聴く」に統一される。</li>
-          <li><strong>Phase B v2 (cron 化)</strong>が来ると → 🎓 を押すだけで翌朝に教材完成品が Drive に届いてる。「キュー処理」と打たなくていい。</li>
-          <li><strong>Fox & Raccoondog Dashboard</strong>が来ると → Web の dashboard じゃなくて、Mac ネイティブアプリで朝の儀式。こん/ぽん がアプリ内で語りかけてくる。</li>
-          <li><strong>Pentest 高度化 (Wazuh)</strong>が来ると → 「昨夜 staging に SSH probe 1,247 回」みたいな daily reality check が朝の dashboard に。</li>
-          <li><strong>「藪医者の学舎」特番</strong>が来ると → 月1で1テーマを6エージェントが角度を変えて分析した30分 podcast。</li>
-          <li><strong>Recall Engine Phase 2</strong>が来ると → 過去の学びが「育って」再登場。Notion との双方向連携で、忘れていた知識が偶然戻ってくる。</li>
+          <li><strong>3 つのいいね統合</strong>が来ると: ❤️ briefing / Whisper❤️ / ラジオ❤️ → <strong>同じ Deep Dive キュー</strong> → 全部「あとで聴く」になる</li>
+          <li><strong>Phase B v2 (cron 化)</strong>が来ると: 🎓 を押すだけで → <strong>夜間自動消化</strong> → 翌朝 Drive に教材ができてる</li>
+          <li><strong>Fox & Raccoondog Dashboard</strong>が来ると: Mac 起動 → <strong>こん🦊/ぽん🦝 が話しかけてくる</strong> → アプリ内で朝の儀式</li>
+          <li><strong>Pentest 高度化 (Wazuh)</strong>が来ると: 攻撃検知 → <strong>「昨夜 SSH probe 1247回」</strong>と dashboard に</li>
+          <li><strong>「藪医者の学舎」特番</strong>が来ると: ❤️ 高Eloトピック → <strong>月1の30分特集 podcast</strong></li>
+          <li><strong>Recall Engine Phase 2</strong>が来ると: 過去の学びが <strong>「育って」</strong>再登場 → Notion 双方向連携</li>
         </ul>
       </div>
     </section>
@@ -702,14 +720,14 @@
               <span class="text-stone-500 text-xs">8週間 deferred を片付ける。降ろせば IDEAS.md が一気に軽くなる。</span></div>
           </li>
           <li class="flex items-start gap-3">
-            <span class="closure-stars whitespace-nowrap">❤️</span>
-            <div><strong>engagement-api.js writableEnded ガード追加</strong> (3行修正)<br>
-              <span class="text-stone-500 text-xs">理論的バグ。コード書いて commit するだけ。</span></div>
+            <span class="badge badge-done whitespace-nowrap">✅ 完了</span>
+            <div><strong>engagement-api.js writableEnded ガード追加</strong> (4ハンドラに 1 行ずつ)<br>
+              <span class="text-stone-500 text-xs">2026-04-28 完了 — 4 つの req.on('end') に <code>if (res.writableEnded) return;</code> を追加。</span></div>
           </li>
           <li class="flex items-start gap-3">
-            <span class="closure-stars whitespace-nowrap">❤️</span>
-            <div><strong>nowJST 共通化</strong> (lib/time.js に抽出)<br>
-              <span class="text-stone-500 text-xs">3箇所差し替え。</span></div>
+            <span class="badge badge-done whitespace-nowrap">✅ 完了</span>
+            <div><strong>nowJST 共通化</strong> (server/lib/time.js に抽出)<br>
+              <span class="text-stone-500 text-xs">2026-04-28 完了 — engagement-api.js の旧式 TZ-offset 実装を削除し Intl.DateTimeFormat 版を共通モジュール化。</span></div>
           </li>
         </ul>
       </div>
@@ -720,14 +738,29 @@
         <p class="text-sm text-stone-600 mb-4">少し集中できる夜やゆとりある朝に。</p>
         <ul class="space-y-3 text-sm">
           <li class="flex items-start gap-3">
+            <span class="badge badge-done whitespace-nowrap">✅ 完了</span>
+            <div><strong>養生課 (Yumori 湯守) 立ち上げ</strong><br>
+              <span class="text-stone-500 text-xs">2026-04-28 完了 — 7 課目として瞑想パイプ + ペース番人を担当。Phase B 2C 採用。</span></div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="badge badge-done whitespace-nowrap">✅ 完了</span>
+            <div><strong>リポ整理 Phase A</strong> (60ファイル archive 移動)<br>
+              <span class="text-stone-500 text-xs">2026-04-28 完了 — data/直下 ~80→30、scripts/直下 .py 46→40。</span></div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="badge badge-done whitespace-nowrap">✅ 完了</span>
+            <div><strong>Secretary 月次 IDEAS.md 圧縮ルール追加</strong><br>
+              <span class="text-stone-500 text-xs">2026-04-28 完了 — Phase B 5A 採用。次回月曜 (5/4) で 775→300 行を実施予定。</span></div>
+          </li>
+          <li class="flex items-start gap-3">
             <span class="closure-stars whitespace-nowrap">❤️❤️</span>
-            <div><strong>BLOCKERS#10 staging sanitize</strong> (Hetzner Console 30分)<br>
+            <div><strong>BLOCKERS#10 staging sanitize</strong> (Hetzner Console 30分、たまさん手作業必須)<br>
               <span class="text-stone-500 text-xs">prod 痕跡を staging から消す。次回 pentest 起動のついでに。</span></div>
           </li>
           <li class="flex items-start gap-3">
             <span class="closure-stars whitespace-nowrap">❤️❤️</span>
             <div><strong>Pentest 86件 LOW のノイズフィルタ改善</strong><br>
-              <span class="text-stone-500 text-xs">同じ lynis 所見の再掲ルール追加で signal-to-noise を上げる。</span></div>
+              <span class="text-stone-500 text-xs">同じ lynis 所見の再掲ルール追加で signal-to-noise を上げる (次セッション着手候補)。</span></div>
           </li>
           <li class="flex items-start gap-3">
             <span class="closure-stars whitespace-nowrap">❤️❤️❤️</span>
