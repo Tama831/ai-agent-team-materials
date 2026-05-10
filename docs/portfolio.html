@@ -370,6 +370,39 @@
             <strong>🎙 vibe note:</strong> CAD は触ったことなかったけど、コードで形を書けることを知って試したら楽しかった。日常のちょっとした不便を vibe で形にできる。
           </div>
         </article>
+
+        <!-- 11. Pocket Channel -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">📱 Pocket Channel v0.1</h3>
+            <span class="badge badge-done">✅ 5/9 稼働開始</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">iPhone から Claude (read-only) に話せる薄い PWA ブリッジ。診療の合間や移動中に思いついたことを、Mac を開かず投げて返事をもらえる。Tailscale 内のみ公開、Web Push 対応。</p>
+          <div class="ux-note p-3 rounded text-xs leading-relaxed mb-2">
+            <strong class="text-sky-800">✨ 使う体験:</strong> iPhone の Safari からホーム画面に追加した PWA を開く → iMessage 風 UI で Claude に話しかける → ai-agent-team の文脈フルロードで返事が来る。Mac 起動不要。
+          </div>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 「明後日に動くといい」が即日着工で動いた。Claude Agent SDK が `claude` CLI を spawn する仕組みのおかげで、Max プラン定額枠で動いて追加課金ゼロ。tailscale serve 案は捨てて、既存 nginx 443 に薄く生やした。
+          </div>
+        </article>
+
+        <!-- 12. Discord Interpreter Bot -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🌐 Discord Interpreter Bot</h3>
+            <span class="badge badge-done">✅ 5/8 公開</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">Discord ボイスチャンネルで日本語↔英語のリアルタイム同時通訳をする bot。海外勢と話す時の言語の壁を、bot を入れるだけで溶かす。Public Bot OFF + allowlist の二重防御。</p>
+          <div class="ux-note p-3 rounded text-xs leading-relaxed mb-2">
+            <strong class="text-sky-800">✨ 使う体験:</strong> bot を VC に招待 → 日本語で話すと英語で読み上げ、英語で話すと日本語で読み上げ。設定なしで一緒のチャンネルにいる人と言語が違っても会話が成立。
+          </div>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> ai-agent-team の中で生まれて、外向きの単独 OSS として独立 public repo に切り出した最初のプロダクト。「内向きで作った道具を、形を整えて世に出す」流れが回り始めた。
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <a href="https://github.com/Tama831/discord-interpreter" class="pill-link">📦 GitHub</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -388,7 +421,7 @@
         <article class="card rounded-xl p-6">
           <div class="flex justify-between items-start mb-2">
             <h3 class="font-bold text-lg">🔬 Deep Dive ライブラリ</h3>
-            <span class="badge badge-running">🔄 21件蓄積中</span>
+            <span class="badge badge-running">🔄 23件蓄積中</span>
           </div>
           <p class="text-sm text-stone-600 mb-3">briefingで気になった話題を Analyst が深掘り→ markdown + 30秒 tldr 音声で提供。Drive 「🔬未聴」「✅聴取済」フォルダで聴取進捗を管理。</p>
           <div class="ux-note p-3 rounded text-xs leading-relaxed mb-2">
@@ -538,6 +571,26 @@
           <div class="progress-bar mb-2"><div class="progress-fill" style="width: 10%"></div></div>
           <div class="vibe-note p-3 rounded text-xs leading-relaxed">
             <strong>🎙 vibe note:</strong> 「攻撃して終わり」ではなく「監視を作って攻撃で確かめる」サイクル。地方電子カルテ向け汎用テンプレートにもしたい。
+          </div>
+        </article>
+
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">📝 Research Writer (論文作成支援)</h3>
+            <span class="badge badge-wip">🛠 設計確定 (5/9)</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">「治療学 × 治療史 × 未来展望 × グローバル分配」の野望を、宿題化させずに**1論文ずつ完了**させる経路。Editorial / Scoping Review / Narrative の3種に絞り、Editorial 1本目 (脳卒中の治療史) を MVP として実物で構造を逆算する。</p>
+          <div class="ux-note p-3 rounded text-xs leading-relaxed mb-2">
+            <strong class="text-sky-800">✨ 使う体験 (完成後):</strong> Pocket Channel で「○○について書きたい」と投げる → PICO 変換 + 新規性スコアが30秒音声で返る → 承認したらアウトライン生成 → セクション単位で執筆伴走。完成原稿だけが届く。
+          </div>
+          <div class="next-step p-3 rounded text-xs leading-relaxed mb-2">
+            <strong class="text-amber-900">🎯 次の1歩:</strong> 6 フェーズ + 2 承認ゲートのフロー実装。Phase 1 (PICO + 新規性スコア) から着手。
+            <span class="effort effort-day ml-1">🌳 1-2日 (MVP)</span>
+            <span class="closure-stars ml-1">❤️❤️❤️❤️</span>
+          </div>
+          <div class="progress-bar mb-2"><div class="progress-fill" style="width: 20%"></div></div>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed">
+            <strong>🎙 vibe note:</strong> 「論文を書きたい気持ち」が手放せず宿題化していた領域。"C案: 実例で構造を逆算" を採用、まず Editorial 1本通して必要なものと要らないものを実物で確定させる。介入研究や症例報告は将来の拡張領域。
           </div>
         </article>
 
@@ -694,6 +747,16 @@
         <p class="text-sm text-stone-600 mb-4">休みの日や、診療がない午後に。closure 効果が高めのものが多い。</p>
         <ul class="space-y-3 text-sm">
           <li class="flex items-start gap-3">
+            <span class="badge badge-done whitespace-nowrap">✅ 完了</span>
+            <div><strong>📱 Pocket Channel v0.1 実装 + iPhone 初回セットアップ</strong><br>
+              <span class="text-stone-500 text-xs">2026-05-09 完了 — 設計→実装→稼働確認まで即日。BLOCKERS#13 (iPhone 初回 PWA インストール) も同日 Resolved。</span></div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="badge badge-done whitespace-nowrap">✅ 完了</span>
+            <div><strong>🌐 Discord Interpreter Bot 公開 (ja↔en VC translator)</strong><br>
+              <span class="text-stone-500 text-xs">2026-05-08 完了 — ai-agent-team から独立 public repo に切り出し。BLOCKERS#14/#15 (招待 + Public Bot OFF) も 5/9 までに Resolved。</span></div>
+          </li>
+          <li class="flex items-start gap-3">
             <span class="closure-stars whitespace-nowrap">❤️❤️❤️</span>
             <div><strong>🎓 Phase B v1 の3 pending 実戦消化</strong> (実行は 2h 自動)<br>
               <span class="text-stone-500 text-xs">「キュー処理」と打つ → 自動で進む → Drive で確認。</span></div>
@@ -801,6 +864,7 @@
       <p class="handwritten text-xl text-amber-700 mb-2">— made with 🤖 + ☕ —</p>
       <p>このページは <a href="https://github.com/Tama831/ai-agent-team" class="accent-link">ai-agent-team リポ</a> の <code>docs/portfolio.html</code> として管理されています。</p>
       <p class="mt-1 text-xs">URL を知っている人だけがアクセスできるよう、検索エンジンには載せていません (noindex)。</p>
+      <p class="mt-1 text-xs text-stone-400">最終更新: 2026-05-10 — Pocket Channel v0.1 / Discord Interpreter Bot / Research Writer 設計を反映</p>
       <p class="mt-3 stamp text-xl">tama / 2026</p>
     </footer>
   </main>
