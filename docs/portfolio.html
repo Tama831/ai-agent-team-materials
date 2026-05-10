@@ -403,6 +403,24 @@
             <a href="https://github.com/Tama831/discord-interpreter" class="pill-link">📦 GitHub</a>
           </div>
         </article>
+
+        <!-- 13. wiki-gap -->
+        <article class="card rounded-xl p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-bold text-lg">🌏 wiki-gap (Wikipedia 日英ギャップ検出)</h3>
+            <span class="badge badge-done">✅ 5/10 MVP 稼働</span>
+          </div>
+          <p class="text-sm text-stone-600 mb-3">英語版と日本語版 Wikipedia の医学系記事の<strong>情報量ギャップを検出</strong>するツール。日本語版が薄い疾患記事を一覧化して、医師の加筆・翻訳の起点を提供する。<strong>記事の自動生成・自動投稿はしない</strong> (Wikimedia エチケット最優先設計)。</p>
+          <div class="ux-note p-3 rounded text-xs leading-relaxed mb-2">
+            <strong class="text-sky-800">✨ 使う体験:</strong> Tailscale 経由で FastAPI ダッシュボードを開く → 日英記事サイズ差・参考文献数・pageviews が並んでる → 気になった記事の「📄 投稿先」ボタンで Wikipedia の編集ページへ直行。30秒で「今週の加筆候補」が決まる。
+          </div>
+          <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
+            <strong>🎙 vibe note:</strong> 「日本語 Wikipedia の医学情報が弱い」と長年感じていた。LLM で記事を勝手に書くのは Wikipedia コミュニティの規範に反するので、<strong>検出だけして人間 (医師) の編集を支援する</strong>に倒した。User-Agent 明記 + maxlag=5 + 1.5 req/sec + exponential backoff で礼儀を守る。
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <a href="https://github.com/Tama831/wiki-gap" class="pill-link">📦 GitHub</a>
+          </div>
+        </article>
       </div>
     </section>
 
