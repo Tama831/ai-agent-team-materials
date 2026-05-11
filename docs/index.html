@@ -140,18 +140,110 @@
       padding-top: 1rem;
       border-top: 1px solid var(--border);
     }
+    footer a { color: var(--accent2); text-decoration: none; margin: 0 0.4rem; }
+    footer a:hover { text-decoration: underline; }
+    /* ── Featured Tools section ── */
+    .tools-section {
+      margin-bottom: 2.2rem;
+    }
+    .tools-section .section-title {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      text-align: center;
+    }
+    .tool-card {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: linear-gradient(135deg, #ffffff 0%, #fdf6e6 100%);
+      border: 1.5px solid var(--accent);
+      border-radius: 14px;
+      padding: 1rem 1.3rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(212, 160, 60, 0.10);
+    }
+    .tool-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 160, 60, 0.18);
+    }
+    .tool-card .tool-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .tool-card .tool-body { flex: 1; }
+    .tool-card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 0.3rem; }
+    .tool-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .tool-card .tool-arrow { color: var(--accent); font-size: 1.3rem; flex-shrink: 0; }
+    /* ── Topic filter chips ── */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.12s;
+    }
+    .chip:hover { color: var(--primary); border-color: var(--accent2); }
+    .chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+    /* ── Section heading divider between tools and library ── */
+    .library-heading {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>教材ライブラリ</h1>
-      <p>研修医・スタッフ向け勉強会教材 — AI Agent Team が生成</p>
+      <p>研修医・スタッフ向け勉強会教材 + 体験ツール — AI Agent Team が生成</p>
     </header>
+
+    <!-- ─── Featured Tools (interactive) ─── -->
+    <div class="tools-section">
+      <div class="section-title">🎮 体験できるツール</div>
+      <a href="games/yabui-escape/" class="tool-card">
+        <span class="tool-icon">🗝</span>
+        <div class="tool-body">
+          <h3>家庭医の四つの部屋 — 藪医者の脱出室</h3>
+          <p>外来・訪問・施設・地域の <strong>16シナリオ × 5問 = 80問</strong> の判断と関係性を試す脱出ゲーム。訪問診療には在宅の超複雑怪奇症例 (難問4本) も。1シナリオ 10-30分。</p>
+        </div>
+        <span class="tool-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="library-heading">📚 勉強会教材ライブラリ</div>
 
     <div class="search-box">
       <span class="search-icon">&#128269;</span>
       <input type="text" id="searchInput" placeholder="教材を検索（タイトル・日付・キーワード）">
+    </div>
+    <div class="chip-row">
+      <button class="chip active" data-cat="all">すべて</button>
+      <button class="chip" data-cat="diag">🧠 診断推論・バイアス</button>
+      <button class="chip" data-cat="ai">🤖 医療AI</button>
+      <button class="chip" data-cat="sys">🌐 システム思考・複雑系</button>
+      <button class="chip" data-cat="home">🏠 緩和ケア・在宅・看取り</button>
+      <button class="chip" data-cat="fm">🩺 家庭医療・制度・教育</button>
+      <button class="chip" data-cat="human">📚 行動・物語・倫理</button>
     </div>
     <div class="legend">
       <span class="legend-item"><span class="legend-dot" style="background:#2A8FBD"></span> 研修医・専攻医</span>
@@ -167,7 +259,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-04-09 WHO システム思考 研修医 部品 繋がり 処方 学習 文脈 家庭医療 専攻医 外来 糖尿病 ナラティブ Systems Thinking residents Family Medicine WHO NHS">
+    <div class="session" data-search="2026-04-09 WHO システム思考 研修医 部品 繋がり 処方 学習 文脈 家庭医療 専攻医 外来 糖尿病 ナラティブ Systems Thinking residents Family Medicine WHO NHS" data-categories="sys fm human">
       <h2>WHOシステム思考を、明日の外来でどう使うか</h2>
       <div class="meta">2026-04-09 | 研修医(初期〜専攻医) 20分 | Systems Thinking × Family Medicine</div>
       <div class="key-msg">
@@ -190,7 +282,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-04-09 行動経済学 ナッジ メンタルヘルス うつ病 依存症 不安症 報酬処理 transdiagnostic コミットメントデバイス インセンティブ Nudge Unit 研修医 専攻医 外来導線 設計 PMC11904746 RDoC">
+    <div class="session" data-search="2026-04-09 行動経済学 ナッジ メンタルヘルス うつ病 依存症 不安症 報酬処理 transdiagnostic コミットメントデバイス インセンティブ Nudge Unit 研修医 専攻医 外来導線 設計 PMC11904746 RDoC" data-categories="human">
       <h2>行動経済学で支えるメンタルヘルス診療 — ナッジ・インセンティブ・コミットメントデバイス</h2>
       <div class="meta">2026-04-09 | 研修医(初期〜専攻医) 20分 | Behavioral Economics × Mental Health</div>
       <div class="key-msg">
@@ -213,7 +305,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-04-01 システム思考 保健人材 複雑系 WHO フィードバックループ レバレッジポイント 創発 多職種連携 因果ループ図 Systems Thinking Health Workforce 研修医 スタッフ">
+    <div class="session" data-search="2026-04-01 システム思考 保健人材 複雑系 WHO フィードバックループ レバレッジポイント 創発 多職種連携 因果ループ図 Systems Thinking Health Workforce 研修医 スタッフ" data-categories="sys">
       <h2>複雑性を抱擁する：保健人材強化のためのシステム思考</h2>
       <div class="meta">2026-04-01 | 研修医 15分 + 全スタッフ 10分 | Systems Thinking × Health Workforce</div>
       <div class="key-msg">
@@ -237,7 +329,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-30 在宅看取り 看取り場所 一致率 緩和ケア ACP アドバンスケアプランニング 遺族調査 トランジション 多職種連携 Palliative Care Research 研修医 スタッフ">
+    <div class="session" data-search="2026-03-30 在宅看取り 看取り場所 一致率 緩和ケア ACP アドバンスケアプランニング 遺族調査 トランジション 多職種連携 Palliative Care Research 研修医 スタッフ" data-categories="home">
       <h2>在宅看取り場所一致率 -- 緩和ケア病棟からの在宅退院後の遺族調査</h2>
       <div class="meta">2026-03-30 | 研修医 20分 + 全スタッフ 20分 | Palliative Care &amp; ACP</div>
       <div class="key-msg">
@@ -261,7 +353,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-30 認知バイアス 確認バイアス アンカリング 利用可能性 過信 診断推論 二重過程理論 System1 System2 行動経済学 デバイアス 診断タイムアウト プレモーテム メタ認知 研修医 スタッフ">
+    <div class="session" data-search="2026-03-30 認知バイアス 確認バイアス アンカリング 利用可能性 過信 診断推論 二重過程理論 System1 System2 行動経済学 デバイアス 診断タイムアウト プレモーテム メタ認知 研修医 スタッフ" data-categories="diag human">
       <h2>認知バイアスが診断推論を歪める -- 行動経済学からの処方箋</h2>
       <div class="meta">2026-03-30 | 研修医 20分 + 全スタッフ 20分 | 認知バイアス x 診断推論 x 行動経済学</div>
       <div class="key-msg">
@@ -285,7 +377,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-29 日本 スウェーデン 長寿 介護 死亡率 在宅医療 BMC Medicine カロリンスカ Longevity Care 研修医 スタッフ">
+    <div class="session" data-search="2026-03-29 日本 スウェーデン 長寿 介護 死亡率 在宅医療 BMC Medicine カロリンスカ Longevity Care 研修医 スタッフ" data-categories="home human">
       <h2>日本の長寿優位は介護受給者の低死亡率が主因 -- 日瑞比較研究</h2>
       <div class="meta">2026-03-29 | 研修医 15分 + 全スタッフ 10分 | Longevity &amp; Care</div>
       <div class="key-msg">
@@ -309,7 +401,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-29 医療AI 倫理 バイアス 透明性 説明責任 XAI EU AI法 Healthcare AI Ethics 研修医 スタッフ">
+    <div class="session" data-search="2026-03-29 医療AI 倫理 バイアス 透明性 説明責任 XAI EU AI法 Healthcare AI Ethics 研修医 スタッフ" data-categories="ai human">
       <h2>医療AIの倫理的懸念と実装戦略</h2>
       <div class="meta">2026-03-29 | 研修医 15分 + 全スタッフ 10分 | Healthcare AI Ethics</div>
       <div class="key-msg">
@@ -333,7 +425,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-29 利用可能性バイアス availability bias 認知バイアス cognitive bias 診断エラー diagnostic error 臨床推論 clinical reasoning System1 System2 研修医 全スタッフ">
+    <div class="session" data-search="2026-03-29 利用可能性バイアス availability bias 認知バイアス cognitive bias 診断エラー diagnostic error 臨床推論 clinical reasoning System1 System2 研修医 全スタッフ" data-categories="diag">
       <h2>利用可能性バイアスと診断推論</h2>
       <div class="meta">2026-03-29 | 研修医15分 + 全スタッフ10分 | 認知バイアス | ガニェの9教授事象</div>
       <div class="key-msg">
@@ -357,7 +449,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-28 診療報酬改定2026 管理職 指導医 外来 入院 DX BCP 経営 Medical Fee Revision">
+    <div class="session" data-search="2026-03-28 診療報酬改定2026 管理職 指導医 外来 入院 DX BCP 経営 Medical Fee Revision" data-categories="fm">
       <h2>2026年度 診療報酬改定 — 管理者・指導医のための完全ガイド</h2>
       <div class="meta">2026-03-28 | 指導医・管理職 30枚 | Medical Fee Revision</div>
       <div class="key-msg">
@@ -379,7 +471,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-27 家庭医療専門医 制度改訂 ポートフォリオ かかりつけ医 機能報告 Family Medicine Board 研修医 専攻医">
+    <div class="session" data-search="2026-03-27 家庭医療専門医 制度改訂 ポートフォリオ かかりつけ医 機能報告 Family Medicine Board 研修医 専攻医" data-categories="fm">
       <h2>新・家庭医療専門医制度の改訂 — ポートフォリオ2割削減とかかりつけ医機能報告制度</h2>
       <div class="meta">2026-03-27 | 研修医・専攻医 15分 | Family Medicine Board</div>
       <div class="key-msg">
@@ -401,7 +493,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-27 研究倫理指針 改正 研究計画書 ワークショップ IRB 同意 Research Ethics 研修医 指導医">
+    <div class="session" data-search="2026-03-27 研究倫理指針 改正 研究計画書 ワークショップ IRB 同意 Research Ethics 研修医 指導医" data-categories="human">
       <h2>研究倫理指針の改正 — ミニ研究計画書ワークショップ付き</h2>
       <div class="meta">2026-03-27 | 研修医・指導医 15分 | Research Ethics</div>
       <div class="key-msg">
@@ -423,7 +515,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-26 緩和ケア 地域連携 地域包括ケア 多職種連携 Palliative Care スタッフ">
+    <div class="session" data-search="2026-03-26 緩和ケア 地域連携 地域包括ケア 多職種連携 Palliative Care スタッフ" data-categories="home">
       <h2>緩和ケアと地域連携</h2>
       <div class="meta">2026-03-26 | 全スタッフ 10分 | Palliative Care</div>
       <div class="key-msg">
@@ -445,7 +537,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-26 AI 医学教育 シミュレーション フィードバック 評価 Medical Education 研修医 スタッフ">
+    <div class="session" data-search="2026-03-26 AI 医学教育 シミュレーション フィードバック 評価 Medical Education 研修医 スタッフ" data-categories="ai">
       <h2>AI × 医学教育 — 統合セッション</h2>
       <div class="meta">2026-03-26 | 研修医 15分 + 全スタッフ 10分 | Medical Education × AI</div>
       <div class="key-msg">
@@ -469,7 +561,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-25 AI 臨床推論 Clinical Reasoning 診断 研修医">
+    <div class="session" data-search="2026-03-25 AI 臨床推論 Clinical Reasoning 診断 研修医" data-categories="diag ai">
       <h2>AI臨床推論 — Clinical Reasoning with AI</h2>
       <div class="meta">2026-03-25 | 研修医 15分 | AI × Clinical Reasoning</div>
       <div class="key-msg">
@@ -491,7 +583,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-24 医療AI 実態 AMA ECRI 安全 Medical AI 研修医 スタッフ">
+    <div class="session" data-search="2026-03-24 医療AI 実態 AMA ECRI 安全 Medical AI 研修医 スタッフ" data-categories="ai">
       <h2>医療AIの実態 — 数字で見る光と影（統合版）</h2>
       <div class="meta">2026-03-24 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
       <div class="key-msg">
@@ -515,7 +607,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-24 家庭医 オーケストレーター AIメタファー Google MIT Family Medicine 研修医">
+    <div class="session" data-search="2026-03-24 家庭医 オーケストレーター AIメタファー Google MIT Family Medicine 研修医" data-categories="fm">
       <h2>家庭医 = オーケストレーター（AIメタファー x 国際エビデンス）</h2>
       <div class="meta">2026-03-24 | 研修医 30分 | Family Medicine</div>
       <div class="key-msg">
@@ -537,7 +629,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-24 CBE EPA 能力基盤型 医学教育 CBME Medical Education 指導医">
+    <div class="session" data-search="2026-03-24 CBE EPA 能力基盤型 医学教育 CBME Medical Education 指導医" data-categories="fm">
       <h2>CBE/EPA改革 — 能力基盤型医学教育の再設計</h2>
       <div class="meta">2026-03-24 | 指導医 30分 | Medical Education</div>
       <div class="key-msg">
@@ -559,7 +651,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-21 ナラティブ・メディスン デジタル 物語 Narrative Medicine 研修医 スタッフ">
+    <div class="session" data-search="2026-03-21 ナラティブ・メディスン デジタル 物語 Narrative Medicine 研修医 スタッフ" data-categories="human">
       <h2>デジタル時代のナラティブ・メディスン</h2>
       <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Narrative Medicine</div>
       <div class="key-msg">
@@ -583,7 +675,7 @@
     </div>
 
 
-    <div class="session" data-search="2026-03-21 マルチエージェント AI 病院 Mount Sinai Medical AI 研修医 スタッフ">
+    <div class="session" data-search="2026-03-21 マルチエージェント AI 病院 Mount Sinai Medical AI 研修医 スタッフ" data-categories="ai">
       <h2>AIが病院でどう働くか — マルチエージェントAI</h2>
       <div class="meta">2026-03-21 | 研修医 30分 + 全スタッフ 15分 | Medical AI</div>
       <div class="key-msg">
@@ -606,7 +698,11 @@
 
     <footer>
       <p>Generated by AI Agent Team — Learning Design Lab</p>
-      <p><a href="https://github.com/Tama831/ai-agent-team-materials" style="color: var(--accent2);">GitHub Repository</a></p>
+      <p>
+        <a href="games/yabui-escape/">🗝 脱出ゲーム</a>
+        <a href="portfolio.html">📋 ポートフォリオ</a>
+        <a href="https://github.com/Tama831/ai-agent-team-materials">📦 GitHub</a>
+      </p>
     </footer>
   </div>
 
@@ -616,11 +712,13 @@
     var totalCount = document.getElementById('totalCount');
     var searchStats = document.getElementById('searchStats');
     var noResults = document.getElementById('noResults');
+    var chips = document.querySelectorAll('.chip');
+    var activeCategory = 'all';
 
     totalCount.textContent = sessions.length;
 
-    input.addEventListener('input', function () {
-      var query = this.value.trim().toLowerCase();
+    function applyFilters() {
+      var query = input.value.trim().toLowerCase();
       var visible = 0;
 
       sessions.forEach(function (card) {
@@ -629,11 +727,13 @@
           card.querySelector('h2').textContent + ' ' +
           card.querySelector('.key-msg').textContent
         ).toLowerCase();
+        var cardCats = (card.getAttribute('data-categories') || '').split(' ');
 
         var terms = query.split(/\s+/).filter(Boolean);
-        var match = terms.length === 0 || terms.every(function (t) { return haystack.indexOf(t) !== -1; });
+        var queryMatch = terms.length === 0 || terms.every(function (t) { return haystack.indexOf(t) !== -1; });
+        var catMatch = activeCategory === 'all' || cardCats.indexOf(activeCategory) !== -1;
 
-        if (match) {
+        if (queryMatch && catMatch) {
           card.classList.remove('hidden');
           visible++;
         } else {
@@ -641,12 +741,23 @@
         }
       });
 
-      if (query) {
+      var hasFilter = query || activeCategory !== 'all';
+      if (hasFilter) {
         searchStats.innerHTML = '<span class="count">' + visible + '</span> / ' + sessions.length + ' 件がヒット';
       } else {
         searchStats.innerHTML = '全 <span class="count">' + sessions.length + '</span> 件の教材';
       }
-      noResults.style.display = visible === 0 && query ? 'block' : 'none';
+      noResults.style.display = visible === 0 && hasFilter ? 'block' : 'none';
+    }
+
+    input.addEventListener('input', applyFilters);
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        activeCategory = chip.getAttribute('data-cat');
+        applyFilters();
+      });
     });
   </script>
 </body>
