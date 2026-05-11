@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>家庭医の四つの部屋 — 藪医者の脱出室</title>
-<meta name="description" content="家庭医の現場 (外来・訪問・施設・地域) を題材にした、判断と関係性を試す脱出ゲーム。">
+<meta name="description" content="家庭医の現場 (外来・訪問・施設・地域) を題材にした、判断と関係性を試す脱出ゲーム。各部屋に A/B/C 3シナリオ、計60問。">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='80'%3E%F0%9F%97%9D%3C/text%3E%3C/svg%3E">
 <style>
   :root {
@@ -36,7 +36,7 @@
       radial-gradient(at 10% 10%, rgba(212, 160, 60, 0.06) 0, transparent 50%),
       radial-gradient(at 90% 80%, rgba(91, 168, 140, 0.06) 0, transparent 50%);
   }
-  .container { max-width: 760px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  .container { max-width: 780px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
 
   /* ===== Title screen ===== */
   .title-screen { padding-top: 2rem; }
@@ -98,37 +98,29 @@
     box-shadow: var(--shadow-lg);
     border-color: var(--accent2);
   }
-  .room-card .room-icon {
-    font-size: 1.8rem;
-    margin-bottom: 0.4rem;
-  }
-  .room-card h3 {
-    color: var(--primary);
-    font-size: 1.05rem;
-    margin-bottom: 0.3rem;
-  }
-  .room-card .room-tagline {
-    color: var(--muted);
-    font-size: 0.82rem;
-  }
+  .room-card .room-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .room-card h3 { color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem; }
+  .room-card .room-tagline { color: var(--muted); font-size: 0.82rem; }
   .room-card .room-status {
     position: absolute;
     top: 0.7rem;
     right: 0.7rem;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--accent2);
     font-weight: 600;
+    background: rgba(91, 168, 140, 0.1);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
   }
-  .room-card.cleared { border-color: var(--accent2); background: linear-gradient(135deg, #ffffff 0%, #f0f7f4 100%); }
-  .room-card.cleared::before {
-    content: "✓";
+  .room-card.complete { border-color: var(--accent2); background: linear-gradient(135deg, #ffffff 0%, #f0f7f4 100%); }
+  .room-card.complete::before {
+    content: "🏅";
     position: absolute;
-    top: 0.7rem;
-    right: 0.9rem;
-    color: var(--accent2);
-    font-weight: bold;
-    font-size: 1.1rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.4rem;
   }
+  .room-card.complete .room-status { display: none; }
 
   .play-btn {
     display: block;
@@ -147,11 +139,7 @@
   .play-btn:hover { background: var(--primary-soft); }
   .play-btn:disabled { background: var(--muted); cursor: not-allowed; }
 
-  .small-actions {
-    text-align: center;
-    margin-top: 1.5rem;
-    font-size: 0.85rem;
-  }
+  .small-actions { text-align: center; margin-top: 1.5rem; font-size: 0.85rem; }
   .small-actions a, .small-actions button {
     color: var(--muted);
     background: none;
@@ -163,6 +151,75 @@
     margin: 0 0.5rem;
   }
   .small-actions a:hover, .small-actions button:hover { color: var(--primary); }
+
+  /* ===== Picker screen ===== */
+  .picker-screen { display: none; }
+  .picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .picker-screen h2 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin: 1rem 0 0.3rem;
+  }
+  .picker-screen .picker-sub {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .scenario-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.3rem 1.4rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .scenario-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent2);
+  }
+  .scenario-card .sc-key {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background: var(--bg2);
+    color: var(--primary);
+    border-radius: 50%;
+    font-weight: 700;
+    margin-right: 0.7rem;
+    font-size: 0.85rem;
+  }
+  .scenario-card.cleared .sc-key { background: var(--accent2); color: white; }
+  .scenario-card h3 {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 1.02rem;
+    vertical-align: middle;
+  }
+  .scenario-card .sc-tagline {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    padding-left: calc(28px + 0.7rem);
+  }
+  .scenario-card .sc-meta {
+    color: var(--accent2);
+    font-size: 0.78rem;
+    margin-top: 0.4rem;
+    padding-left: calc(28px + 0.7rem);
+    font-weight: 600;
+  }
 
   /* ===== Room screen ===== */
   .room-screen { display: none; }
@@ -200,6 +257,26 @@
     width: 0%;
   }
 
+  .case-header {
+    background: linear-gradient(135deg, #fdf6e6 0%, #f8eed3 100%);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 0.95rem 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+    color: var(--primary);
+    line-height: 1.75;
+  }
+  .case-header .label {
+    display: block;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.35rem;
+  }
+  .case-header strong { color: var(--primary); }
+
   .scene {
     background: var(--bg2);
     border-left: 3px solid var(--accent);
@@ -208,9 +285,10 @@
     margin-bottom: 1.2rem;
     font-size: 0.95rem;
     color: var(--primary-soft);
-    line-height: 1.8;
+    line-height: 1.85;
   }
   .scene strong { color: var(--primary); }
+  .scene em { font-style: italic; color: var(--primary); }
 
   .puzzle {
     background: var(--card);
@@ -234,9 +312,10 @@
     font-size: 1rem;
     color: var(--text);
     margin-bottom: 1rem;
-    line-height: 1.7;
+    line-height: 1.75;
   }
   .puzzle .prompt strong { color: var(--primary); }
+  .puzzle .prompt em { color: var(--primary-soft); font-style: italic; }
 
   .options { display: flex; flex-direction: column; gap: 0.5rem; }
   .option {
@@ -250,32 +329,19 @@
     text-align: left;
     transition: all 0.12s;
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.65;
   }
-  .option:hover:not(:disabled) {
-    border-color: var(--accent2);
-    background: var(--card);
-  }
-  .option.selected {
-    background: var(--card);
-    border-color: var(--accent2);
-  }
-  .option.correct {
-    background: #ecf5ef;
-    border-color: var(--correct);
-    color: var(--primary);
-  }
-  .option.wrong {
-    background: #fbeee5;
-    border-color: var(--wrong);
-    color: var(--text);
-  }
+  .option:hover:not(:disabled) { border-color: var(--accent2); background: var(--card); }
+  .option.selected { background: var(--card); border-color: var(--accent2); }
+  .option.correct { background: #ecf5ef; border-color: var(--correct); color: var(--primary); }
+  .option.wrong { background: #fbeee5; border-color: var(--wrong); color: var(--text); }
   .option:disabled { cursor: default; }
   .option .opt-key {
     font-weight: 600;
     color: var(--primary);
     margin-right: 0.5rem;
   }
+  .option strong { color: var(--primary); }
 
   .puzzle-actions {
     display: flex;
@@ -316,17 +382,16 @@
     border-radius: 0 10px 10px 0;
     font-size: 0.92rem;
     color: var(--primary);
-    line-height: 1.7;
+    line-height: 1.75;
   }
   .insight-box .label {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: var(--accent2);
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     display: block;
     margin-bottom: 0.3rem;
   }
-
   .multi-hint {
     font-size: 0.82rem;
     color: var(--muted);
@@ -344,19 +409,15 @@
     box-shadow: var(--shadow-lg);
   }
   .room-end .exit-icon { font-size: 2.5rem; margin-bottom: 0.7rem; }
-  .room-end h2 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.4rem; }
+  .room-end h2 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.3rem; }
   .room-end .exit-line {
     color: var(--primary-soft);
     font-style: italic;
     margin-bottom: 1.2rem;
     font-size: 0.95rem;
-    line-height: 1.8;
+    line-height: 1.85;
   }
-  .room-end .meta-line {
-    color: var(--muted);
-    font-size: 0.85rem;
-    margin-bottom: 1.5rem;
-  }
+  .room-end .meta-line { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
   .room-end .key-insight {
     background: linear-gradient(135deg, #fdf6e6 0%, #faeed0 100%);
     border: 1px solid var(--accent);
@@ -370,11 +431,12 @@
   .room-end .key-insight .label {
     display: block;
     color: var(--accent);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.15em;
     font-weight: 600;
     margin-bottom: 0.4rem;
   }
+  .end-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
 
   /* ===== Final screen ===== */
   .final-screen { display: none; padding-top: 1rem; }
@@ -390,16 +452,8 @@
       radial-gradient(at 80% 80%, rgba(91, 168, 140, 0.08) 0, transparent 40%);
   }
   .certificate .stamp { font-size: 3rem; margin-bottom: 0.5rem; }
-  .certificate h2 {
-    color: var(--primary);
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
-  }
-  .certificate .for-line {
-    color: var(--muted);
-    font-size: 0.85rem;
-    margin-bottom: 1.2rem;
-  }
+  .certificate h2 { color: var(--primary); font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .certificate .for-line { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.2rem; }
   .certificate .verse {
     color: var(--primary-soft);
     font-style: italic;
@@ -408,18 +462,11 @@
     margin: 1.2rem auto;
     max-width: 480px;
   }
-  .certificate .reflect {
-    margin-top: 1.5rem;
-    text-align: left;
-  }
-  .certificate .reflect h4 {
-    color: var(--primary);
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-  }
+  .certificate .reflect { margin-top: 1.5rem; text-align: left; }
+  .certificate .reflect h4 { color: var(--primary); font-size: 0.95rem; margin-bottom: 0.5rem; }
   .certificate textarea {
     width: 100%;
-    min-height: 90px;
+    min-height: 100px;
     padding: 0.8rem;
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -436,11 +483,7 @@
     gap: 0.7rem;
     margin: 1.2rem 0;
   }
-  .stat {
-    background: var(--bg2);
-    border-radius: 10px;
-    padding: 0.8rem;
-  }
+  .stat { background: var(--bg2); border-radius: 10px; padding: 0.8rem; }
   .stat .val { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
   .stat .lbl { font-size: 0.75rem; color: var(--muted); }
 
@@ -470,16 +513,16 @@
   <div id="title-screen" class="title-screen">
     <div class="eyebrow">A YABUI ESCAPE</div>
     <h1>家庭医の四つの部屋</h1>
-    <p class="subtitle">外来・訪問・施設・地域 — 判断と関係性を試す脱出ゲーム</p>
+    <p class="subtitle">外来・訪問・施設・地域 — 判断と関係性を試す脱出ゲーム (v2)</p>
 
     <div class="intro-card">
       <p class="narrator">
         ある月の四日間、診療所の家庭医として、四つの部屋を抜けねばならぬのだ。
-        各部屋には、五つの問いがある。命と関係性の両方を見ながら、出口を探すのだった。
+        各部屋に <strong>A/B/C の3シナリオ</strong>、それぞれ1人の患者を巡る5問。合計60問。
+        知識を問うのではない、<strong>判断と関係性</strong>を問うのだった。
       </p>
       <p>
-        知識を問うのではない。<strong>その場でどう判断するか</strong>を問うのだ。正解がひとつだけとは限らぬ。
-        わからぬときはヒントを開いてよい。終わったら振り返るがよい。
+        わからぬときはヒントを開いてよい。出口の後の「鍵の一言」が、その日のお守りになる。
       </p>
     </div>
 
@@ -493,13 +536,28 @@
     </div>
   </div>
 
+  <!-- ===== Scenario Picker Screen ===== -->
+  <div id="picker-screen" class="picker-screen">
+    <div class="picker-header">
+      <button class="back-btn" id="picker-back-btn">← 部屋一覧</button>
+      <div class="room-title-bar" id="picker-room-title"></div>
+    </div>
+    <h2 id="picker-h2"></h2>
+    <p class="picker-sub" id="picker-sub"></p>
+    <div id="picker-cards"></div>
+  </div>
+
   <!-- ===== Room Screen ===== -->
   <div id="room-screen" class="room-screen">
     <div class="room-header">
-      <button class="back-btn" id="back-btn">← 部屋一覧</button>
+      <button class="back-btn" id="back-btn">← パターン選択</button>
       <div class="room-title-bar" id="room-title-bar"></div>
     </div>
     <div class="progress-bar"><div class="fill" id="progress-fill"></div></div>
+    <div class="case-header" id="case-header">
+      <span class="label">📋 ケース</span>
+      <div id="case-header-body"></div>
+    </div>
     <div class="scene" id="scene"></div>
     <div id="puzzle-area"></div>
   </div>
@@ -509,7 +567,7 @@
     <div class="certificate">
       <div class="stamp">🗝</div>
       <h2>四つの部屋を抜けた</h2>
-      <p class="for-line">— 藪医者の証 —</p>
+      <p class="for-line">— 藪医者の証 (12シナリオ完走) —</p>
 
       <p class="verse">
         外来で命の優先を見、訪問で家の間取りを読み、<br>
@@ -520,7 +578,7 @@
       <div class="stats-grid">
         <div class="stat">
           <div class="val" id="final-correct">—</div>
-          <div class="lbl">正答数 / 20問</div>
+          <div class="lbl">正答数 / 60問</div>
         </div>
         <div class="stat">
           <div class="val" id="final-hints">—</div>
@@ -530,7 +588,7 @@
 
       <div class="reflect">
         <h4>📝 振り返り (任意)</h4>
-        <textarea id="reflect-text" placeholder="どの部屋が自分の診療に近かった? どこが一番難しかった? — 自由に書いて、ブラウザに保存できます"></textarea>
+        <textarea id="reflect-text" placeholder="どのシナリオが自分の診療に近かった? どこが一番難しかった? — 自由に書いて、ブラウザに保存できます"></textarea>
       </div>
 
       <button class="play-btn" id="reset-final">もう一度はじめから</button>
@@ -543,318 +601,30 @@
   </div>
 
   <footer>
-    <p>家庭医の四つの部屋 v1 — Built by <a href="https://tama831.github.io/ai-agent-team-materials/">AI Agent Team</a>. 教育目的の創作で、特定の症例ではないのだ。</p>
+    <p>家庭医の四つの部屋 v2 — Built by <a href="https://tama831.github.io/ai-agent-team-materials/">AI Agent Team</a>. 教育目的の創作で、特定の症例ではないのだ。</p>
   </footer>
 </div>
 
+<script src="scenarios.js"></script>
 <script>
-// ========== Content ==========
-const ROOMS = [
-  {
-    id: "outpatient",
-    icon: "🏥",
-    title: "月曜午前の外来",
-    tagline: "判断の渋滞を、家庭医として捌くのだ",
-    scene: "<strong>月曜朝9時15分。</strong>診療所の外来。待合室には8人。受付の田島さんが小走りで近づいてくる:<br><br>「先生、3番診察室の佐々木さん、診察が終わったのに帰る気配がなくて…ご家族と連絡がつきません。あと、新患の女性が38.5℃で、別の男性が胸の痛みって…」",
-    puzzles: [
-      {
-        prompt: "下記4名のうち、<strong>最も急ぎ呼ぶべき</strong>はどなたか?",
-        options: [
-          "38.5℃発熱の45歳女性、3日前から続く咳。前医の抗菌薬が効いていない様子",
-          "53歳男性、1時間前からの胸の圧迫感。冷や汗あり、来院時SpO2 96%",
-          "帰宅に難渋している佐々木さん (82歳・軽度認知症)",
-          "定期受診の高血圧コントロール、72歳男性"
-        ],
-        answer: 1,
-        hint: "「冷や汗」と「胸の圧迫感」の組合せは、時間との勝負の合図なのだ。",
-        insight: "外来トリアージは「待たせて良い患者」と「待たせてはいけない患者」を一瞬で分ける作業。冷や汗+胸部症状はACSを除外できるまでは最優先。"
-      },
-      {
-        prompt: "53歳男性Bを診察室に呼んだ。診療所の限られた資源の中で、<strong>最初の5分</strong>に何を最優先する?",
-        options: [
-          "症状だけ聞いてすぐ救急車を要請する",
-          "まず12誘導ECGを取り、同時に病歴を聞きながら評価する",
-          "採血してトロポニン結果を待つ",
-          "落ち着いてもらうため、ゆっくり問診を続ける"
-        ],
-        answer: 1,
-        hint: "搬送するにしても、ECG所見があるかないかで搬送先と緊急度が変わるのだ。",
-        insight: "家庭医の救急初動は『搬送 vs 自院対応』の二択ではなく、『搬送するための情報を最短で揃える』作業。ECG ≤ 10分は世界共通の目標。"
-      },
-      {
-        prompt: "看護師「佐々木さんの娘さんから電話、もうすぐ来られるそうです」。一方、発熱の女性が「もう1時間待ってます」とイライラ。声かけは?",
-        options: [
-          "「もう少しお待ちください」と簡潔に伝える",
-          "待合室に出て、現在の状況と診察順を全員に説明する",
-          "看護師に問診票の再確認をさせる",
-          "別の医師の応援を呼ぶ"
-        ],
-        answer: 1,
-        hint: "待ち時間の不満は「待つ時間の長さ」より「見えなさ」から来るのだ。",
-        insight: "外来の不満の8割は『何が起きているか分からない』こと。透明性のある一言で、同じ60分でも体験は変わる。"
-      },
-      {
-        prompt: "胸痛のBさん、ECGで明らかなST変化なし。トロポニン陰性。だが症状は持続。次の一手は?",
-        options: [
-          "経過観察として午後再診を予約する",
-          "高次医療機関へ紹介して急性冠症候群の除外を依頼する",
-          "PPI処方で帰宅、消化器症状として様子見",
-          "心エコーを翌日予約して帰宅"
-        ],
-        answer: 1,
-        hint: "1回のトロポニン陰性で急性冠症候群は除外できないのだ。",
-        insight: "Single-troponin negativeはルールアウトに不十分 (発症3-6時間以内では特に)。家庭医の役割は『安心して帰せる根拠を集める』こと。集まらないなら送る。"
-      },
-      {
-        prompt: "佐々木さんの娘さん到着。今後の通院体制をどう設計する?",
-        options: [
-          "次回からは家族同伴を必須とする",
-          "ケアマネジャーと連携して通院サポート体制を整える",
-          "訪問診療への切り替えを検討する",
-          "上記A〜Cのいずれも状況に応じて妥当 — 家族・本人と相談して決める"
-        ],
-        answer: 3,
-        hint: "唯一の正解より、選択肢を本人と家族に提示する姿勢が家庭医の仕事なのだ。",
-        insight: "認知症患者の通院困難は『単一の解』ではなく『選択肢の提示』。家庭医の決断は患者・家族とのSDM (shared decision making)に置き換わっていく。"
-      }
-    ],
-    exit_icon: "🍱",
-    exit_line: "お昼休みのチャイム。机にお弁当。明日の予約簿を確認しながら、ふっと息をつく。",
-    key_insight: "外来は救命と関係性の同時進行。家庭医の眼は『次の来院』まで届いている。"
-  },
-
-  {
-    id: "visit",
-    icon: "🏡",
-    title: "火曜午後の訪問診療",
-    tagline: "家は語る — 玄関から30秒の観察",
-    scene: "<strong>火曜午後2時。</strong>一人暮らしの田中ハナさん (85歳) 宅。先週から元気がないとケアマネから連絡。玄関に着くと、<strong>鍵がかかっていない</strong>。チャイムを2度鳴らしたが返事がない。",
-    puzzles: [
-      {
-        prompt: "玄関から最初の30秒、どこを観察するか? <strong>(複数選択可)</strong>",
-        options: [
-          "郵便受けの溜まり具合",
-          "玄関の段差と手すり",
-          "履物の数と向き",
-          "室内の匂い",
-          "居間からのテレビ音声"
-        ],
-        answer: [0, 1, 2, 3],
-        multi: true,
-        hint: "音はまだ届かない。匂い・物・空間の手がかりを先に拾うのだ。",
-        insight: "訪問診療の最初の30秒は『家が語る情報』を浴びる時間。郵便物=社会的孤立, 履物=同居者の動線, 匂い=セルフケア・失禁・腐敗。家に入る前に8割が見えている。"
-      },
-      {
-        prompt: "お薬カレンダー(4週間分)を見ると、火曜・木曜の朝の枠が半分くらい残っている。シールは『白い丸』と『白い四角』。カレンダー横のラベルには『降圧薬・骨粗鬆症薬・睡眠薬』とだけ。残っているのは何の薬?",
-        options: [
-          "降圧薬",
-          "骨粗鬆症薬",
-          "睡眠薬",
-          "現時点では確定できない — 家族・薬剤師・お薬手帳と突き合わせる"
-        ],
-        answer: 3,
-        hint: "目の前の物証だけで『これだ』と言うと、見立てを誤るのだ。",
-        insight: "お薬カレンダーは確証ではなく『仮説の入口』。色・形だけで断定せず、薬剤師・家族・お薬手帳と必ず三角検証する。"
-      },
-      {
-        prompt: "居間に通されると、田中さんが椅子に座っている。床にラグのめくれ。テーブルに昨日の新聞。冷蔵庫を見たら、賞味期限切れの牛乳と未開封の介護食弁当が3つ。<strong>疑うべきことは?(複数)</strong>",
-        options: [
-          "転倒",
-          "食欲低下",
-          "認知機能の変化",
-          "うつ",
-          "経済的困窮"
-        ],
-        answer: [0, 1, 2, 3],
-        multi: true,
-        hint: "現時点での『証拠あり』を選ぶ。経済的問題はまだ証拠が出ていないのだ。",
-        insight: "家の中の手がかりは、複数の仮説を同時に立てさせる。家庭医は『仮説の網』を粗く広く張ってから、絞り込む。"
-      },
-      {
-        prompt: "田中さんに「どうですか?」と聞いたら「いやぁ、別に…」とだけ。<strong>もう一歩踏み込む</strong>には?",
-        options: [
-          "「最近、ご飯食べてますか?」(closedで具体)",
-          "「先週からあまり元気がないって聞いたんですが、何か変わったことありました?」(openかつ共有情報を添える)",
-          "「眠れてますか? 食欲は? 排便は?」(系統的にスクリーニング)",
-          "あえて沈黙して、田中さんの言葉を待つ"
-        ],
-        answer: 1,
-        hint: "「私はあなたを既に少し知っている」という共有情報を添えて、開いて訊くのだ。",
-        insight: "open question + shared informationは『私はあなたを知っている』というメッセージから始まる。Dの沈黙も状況によって正解。"
-      },
-      {
-        prompt: "帰り際、田中さんが小声で「最近、夜が長くてね…」とぽつり。返しは?",
-        options: [
-          "「不眠ですね、お薬出しましょうか?」",
-          "「夜が長い…どんな夜ですか?」",
-          "「テレビでも見て気を紛らわしてください」",
-          "「ケアマネさんに伝えておきますね」"
-        ],
-        answer: 1,
-        hint: "言葉を医療用語に翻訳する前に、患者の言葉のまま掘るのだ。",
-        insight: "『夜が長い』の中に、その人の今が全部入っている。家庭医の聴き方は、症状を翻訳する前にもう一段、本人の言葉を返す。"
-      }
-    ],
-    exit_icon: "🚗",
-    exit_line: "玄関を出て、車に乗る前にケアマネに電話。次回訪問は1週間後ではなく、3日後に。",
-    key_insight: "訪問診療は『間取り』を読む医療。患者は症状を語るが、家は人生を語る。"
-  },
-
-  {
-    id: "facility",
-    icon: "🏛",
-    title: "水曜朝の施設回診",
-    tagline: "多職種のリズムに、家庭医の指揮を重ねるのだ",
-    scene: "<strong>水曜朝9時。</strong>老健施設の朝礼後。看護師長から無線:<br><br>「先生、102号室の矢部さん、いつもの朝の調子と違います。声かけても反応が薄くて…」",
-    puzzles: [
-      {
-        prompt: "夜勤記録: 「23時 巡視: いつも通り入眠 / 2時 巡視: いびきあり / 5時 トイレ自立で2回 / 7時 朝食前、いつもと違う様子。声かけに反応するが、目線が合わない。BP 102/64, HR 96, SpO2 95%, BT 37.2℃」<br><br>このログから<strong>最も疑うべき</strong>は?",
-        options: [
-          "脱水",
-          "感染症の始まり",
-          "低血糖",
-          "脳血管イベント"
-        ],
-        answer: 1,
-        hint: "微熱+心拍数の軽い上昇+意識の『違和感』。バイタルの「差分」を読むのだ。",
-        insight: "老健の朝はバイタルの絶対値より『差分』が物を言う。普段のBPが130/80なら102/64は相対的低下、HR 96も普段60なら有意。本人をよく知る看護師の『いつもと違う』は最重要所見。"
-      },
-      {
-        prompt: "102号室で再検: BP 96/58, HR 104, SpO2 94%, BT 37.6℃, 呼吸数22, JCS I-2。<strong>方針は?</strong>",
-        options: [
-          "迷わず救急要請、急性期病院搬送",
-          "採血・尿検査をオーダーして施設内で点滴開始、フォロー体制を組む",
-          "経過観察、夕方再評価",
-          "家族に電話してから判断する"
-        ],
-        answer: 1,
-        hint: "ただし、これはACPの内容次第。本問題のキモは『可逆性が高い感染症初期に、施設内対応も選択肢に入れる判断』。",
-        insight: "qSOFA該当 (BP低下+意識+呼吸数) の初期敗血症の可能性。家庭医の判断は『搬送一択』ではなく、ACP・施設機能・家族の意向を統合した最適化。"
-      },
-      {
-        prompt: "ACPと家族意向を確認したい。<strong>確認する順序</strong>として最も妥当なのは?",
-        options: [
-          "看護記録 → ACP文書 → 家族連絡先",
-          "ACP文書 → 主治医意見書 → 看護記録",
-          "家族連絡先 → ACP文書 → 看護記録",
-          "介護記録 → 看護記録 → ACP文書"
-        ],
-        answer: 1,
-        hint: "本人の意思 → 医療的判断 → 直近経過 の順序なのだ。",
-        insight: "急変時に最初に開くのは『本人の意思』。家族の希望はその次。順序を逆にすると、家族のその場の動揺が本人の意思を上書きしてしまう。"
-      },
-      {
-        prompt: "ACPには「肺炎などの可逆性疾患は抗菌薬治療を希望する」と記載。娘さんに電話したら「先生、母を病院に入れたくないんです。施設で看てもらえますか?」と言う。<strong>返答は?</strong>",
-        options: [
-          "「ACPでご本人が希望されていますので、原則通り対応します」",
-          "「お母様のご希望と娘さんの想いをすり合わせる時間を少しください。今の状態を共有させてください」",
-          "「では施設で点滴で対応します」",
-          "「家族としての想いも大事です。一緒に決めましょう」"
-        ],
-        answer: 1,
-        hint: "ACPは『過去の本人』と『今の家族』の対話。家庭医はその橋渡しの言葉を持つのだ。",
-        insight: "ACPは『過去の本人の意思』を医師が代弁する道具。家族のその場の不安と擦り合わせる時間を作るのが、家庭医の腕の見せどころ。"
-      },
-      {
-        prompt: "多職種チームを動かす。看護(バイタル)・介護(食事移動)・栄養(食形態)・リハ(離床)・相談員(家族窓口)。<strong>急性期の招集順序</strong>は?",
-        options: [
-          "看護 → 介護 → 相談員 → リハ → 栄養",
-          "相談員 → 看護 → 介護 → 栄養 → リハ",
-          "看護 → リハ → 栄養 → 介護 → 相談員",
-          "順序は問わず、全員に同時連絡で構わない"
-        ],
-        answer: 0,
-        hint: "急性期の流れは『医療対応 → 日常ケア調整 → 家族窓口 → リハ調整 → 栄養』なのだ。",
-        insight: "施設は『チームの呼吸』で動く。同時連絡が悪いわけではないが、各職種が動ける順序を整理することで現場は混乱しない。"
-      }
-    ],
-    exit_icon: "🗝",
-    exit_line: "カンファ室に向かう足音が、廊下に重なっていく。",
-    key_insight: "施設は『チームの呼吸』で動く。家庭医は指揮者ではなく、リズムの提案者。"
-  },
-
-  {
-    id: "community",
-    icon: "🏘",
-    title: "木曜夜の地域懇談会",
-    tagline: "診察室の外にも、外来はあるのだ",
-    scene: "<strong>木曜の夜7時。</strong>公民館の和室。地域健診結果報告会。住民24人、お茶とおせんべい。70代が多いが、子育て世代も3組。区長が「先生、よろしくお願いします」とマイクを渡してくる。",
-    puzzles: [
-      {
-        prompt: "開始15分。血圧基準値の話をしたら、後ろの席の60代男性が手を挙げて「先生、血圧の基準が下がったのは<strong>製薬会社の陰謀じゃないの?</strong>薬売りたいから基準下げるんでしょ?」<br><br>返答は?",
-        options: [
-          "「いえ、そんなことはありません。学会が決めているんですよ」",
-          "「いい質問ですね。実は私もそう思った時期があります。一緒に基準が変わった経緯を整理しましょうか?」",
-          "「データを見れば分かります、ちょっとお見せしますね」",
-          "「先生方を信頼してください」"
-        ],
-        answer: 1,
-        hint: "正面から否定すると、その人だけでなく頷いている他の住民まで遠ざかるのだ。",
-        insight: "住民懇談会の医師は『正しさ』より『一緒に考える姿勢』。共感の入口を作ってからエビデンスを置く順序を間違えない。"
-      },
-      {
-        prompt: "リスクを示すグラフ。<strong>用意した4種類のうち、どれを使う?</strong>",
-        options: [
-          "縦軸を切り詰めて差を視覚的に強調した棒グラフ",
-          "1000人の絵で『何人に何が起きるか』を示した自然頻度の図",
-          "相対リスク削減率(%)だけを示した円グラフ",
-          "学会ガイドラインの該当ページのスクリーンショット"
-        ],
-        answer: 1,
-        hint: "%表現はリスクを大きく見せたり小さく見せたりできる。住民懇談会では絶対数のほうが誤解が少ないのだ。",
-        insight: "リスク提示は『恐怖』ではなく『判断材料』として。natural frequencies (自然頻度) はGigerenzer以来推奨されてきた、最も誤解を生まない提示法。"
-      },
-      {
-        prompt: "30分過ぎ、1人の女性が「うちの夫が酒を飲み過ぎてて…」と話し始め、止まらない。他の参加者が下を向く。<strong>介入は?</strong>",
-        options: [
-          "「すみません、その話は個別相談にしましょう」と区切る",
-          "「お辛い状況ですね。少しだけ伺って、後ほど個別で詳しくお話しできますか?」",
-          "そのまま聞き続ける (共感優先)",
-          "話を区長に振って場の進行を任せる"
-        ],
-        answer: 1,
-        hint: "場の温度と個の温度、両方を切らないのだ。",
-        insight: "ファシリテーションは『場の温度』と『個の温度』の両立。一刀両断に切ると個が傷つき、流すと場が冷える。"
-      },
-      {
-        prompt: "終了後のアンケート自由記述: ① 40代「先生の話、難しかった」② 70代男性「もっとお薬の話を聞きたかった」③ 60代女性「家族の介護の話もしてほしい」④ 30代男性「次回は土曜の昼にしてほしい」<br><br><strong>来月の企画</strong>として最適なのは?",
-        options: [
-          "「薬の正しい飲み方」講演会、土曜昼に開催",
-          "「家族の介護と健康」を中心に、優しい言葉で、土曜の昼",
-          "「最新の医学研究」セミナー、平日夜",
-          "アンケート結果を持ち寄って、住民代表3名と次回テーマを相談する"
-        ],
-        answer: 3,
-        hint: "企画を医師が決めるのは外来。地域では、住民と決めるのだ。",
-        insight: "地域は『診察室の外』にある外来。企画を医師が一人で決める瞬間、それは住民への一方向の発信になってしまう。"
-      },
-      {
-        prompt: "帰り道、車のエンジンをかけながら、今日の自分への一言は?",
-        options: [
-          "「もっとデータを準備すべきだった」",
-          "「住民の声を聞けた。次に活かそう」",
-          "「次回は時間配分を変えよう」",
-          "どの振り返りも妥当。今日の自分に必要な一言を、自分で選ぶ"
-        ],
-        answer: 3,
-        hint: "正解は外にはないのだ。",
-        insight: "振り返りは『改善点を探す行為』というより『今日の自分に立ち会う行為』。家庭医の自己ケアは、診療日誌の一行から始まる。"
-      }
-    ],
-    exit_icon: "🚗",
-    exit_line: "車のヘッドライトに田んぼが浮かぶ。明日の外来カルテを思い出しながら、ハンドルを握る。",
-    key_insight: "地域は『診察室の外』にある外来。家庭医はその両方に呼吸する。"
-  }
+// ========== Room metadata ==========
+const ROOMS_META = [
+  { id: "outpatient", icon: "🏥", title: "外来", tagline: "判断の渋滞を、家庭医として捌くのだ" },
+  { id: "visit",      icon: "🏡", title: "訪問診療", tagline: "家は語る — 玄関から30秒の観察" },
+  { id: "facility",   icon: "🏛", title: "施設回診", tagline: "多職種のリズムに、家庭医の指揮を重ねるのだ" },
+  { id: "community",  icon: "🏘", title: "地域懇談会", tagline: "診察室の外にも、外来はあるのだ" }
 ];
+const SCENARIO_KEYS = ["A", "B", "C"];
 
 // ========== State ==========
-const STORAGE_KEY = "yabui-escape/state";
+const STORAGE_KEY = "yabui-escape/v2";
 let state = {
-  cleared: {},        // {roomId: {correct: int, hintsUsed: int}}
+  cleared: {},
   currentRoom: null,
+  currentScenario: null,
   currentPuzzleIdx: 0,
-  hintsThisRoom: 0,
-  correctThisRoom: 0,
+  hintsThisScenario: 0,
+  correctThisScenario: 0,
   reflection: ""
 };
 
@@ -877,67 +647,120 @@ function saveState() {
   } catch (e) { /* ignore */ }
 }
 
+function clearedCountInRoom(roomId) {
+  return SCENARIO_KEYS.filter(k => state.cleared[`${roomId}/${k}`]).length;
+}
+function isScenarioCleared(roomId, sc) {
+  return !!state.cleared[`${roomId}/${sc}`];
+}
+function allRoomsComplete() {
+  return ROOMS_META.every(r => clearedCountInRoom(r.id) === 3);
+}
+
 // ========== UI: Title ==========
 function renderTitle() {
   const grid = document.getElementById("rooms-grid");
   grid.innerHTML = "";
-  ROOMS.forEach((room, idx) => {
-    const cleared = state.cleared[room.id];
+  ROOMS_META.forEach((room) => {
+    const n = clearedCountInRoom(room.id);
+    const complete = n === 3;
     const card = document.createElement("div");
-    card.className = "room-card" + (cleared ? " cleared" : "");
+    card.className = "room-card" + (complete ? " complete" : "");
     card.innerHTML = `
       <div class="room-icon">${room.icon}</div>
       <h3>${room.title}</h3>
       <div class="room-tagline">${room.tagline}</div>
-      ${cleared ? `<div class="room-status">クリア済 (${cleared.correct}/5)</div>` : ""}
+      ${n > 0 && !complete ? `<div class="room-status">${n}/3 クリア</div>` : ""}
     `;
-    card.addEventListener("click", () => enterRoom(idx));
+    card.addEventListener("click", () => enterPicker(room.id));
     grid.appendChild(card);
   });
 
-  const allCleared = ROOMS.every(r => state.cleared[r.id]);
   const startBtn = document.getElementById("start-btn");
-  if (allCleared) {
+  if (allRoomsComplete()) {
     startBtn.textContent = "修了証を見る →";
     startBtn.onclick = showFinal;
   } else {
-    const nextIdx = ROOMS.findIndex(r => !state.cleared[r.id]);
-    startBtn.textContent = nextIdx === 0 ? "入室する →" : `${ROOMS[nextIdx].title}へ →`;
-    startBtn.onclick = () => enterRoom(nextIdx);
+    const next = ROOMS_META.find(r => clearedCountInRoom(r.id) < 3);
+    startBtn.textContent = `${next.icon} ${next.title}へ →`;
+    startBtn.onclick = () => enterPicker(next.id);
   }
 }
 
 function showTitle() {
   document.getElementById("title-screen").style.display = "block";
+  document.getElementById("picker-screen").style.display = "none";
   document.getElementById("room-screen").style.display = "none";
   document.getElementById("final-screen").style.display = "none";
   renderTitle();
   window.scrollTo(0, 0);
 }
 
-// ========== UI: Room ==========
-function enterRoom(idx) {
-  state.currentRoom = idx;
-  state.currentPuzzleIdx = 0;
-  state.hintsThisRoom = 0;
-  state.correctThisRoom = 0;
+// ========== UI: Picker ==========
+function enterPicker(roomId) {
+  state.currentRoom = roomId;
   document.getElementById("title-screen").style.display = "none";
+  document.getElementById("picker-screen").style.display = "block";
+  document.getElementById("room-screen").style.display = "none";
   document.getElementById("final-screen").style.display = "none";
-  document.getElementById("room-screen").style.display = "block";
 
-  const room = ROOMS[idx];
-  document.getElementById("room-title-bar").textContent = `${room.icon} ${room.title}`;
-  document.getElementById("scene").innerHTML = room.scene;
+  const room = ROOMS_META.find(r => r.id === roomId);
+  document.getElementById("picker-room-title").textContent = `${room.icon} ${room.title}`;
+  document.getElementById("picker-h2").textContent = `${room.title} — シナリオを選ぶ`;
+  document.getElementById("picker-sub").textContent = "3つのパターンから、今日試したい場面を選んでください。クリア済のパターンも何度でも入れます。";
+
+  const cards = document.getElementById("picker-cards");
+  cards.innerHTML = "";
+  SCENARIO_KEYS.forEach(scKey => {
+    const sc = SCENARIOS[roomId][scKey];
+    const cleared = isScenarioCleared(roomId, scKey);
+    const clearedData = state.cleared[`${roomId}/${scKey}`];
+    const card = document.createElement("div");
+    card.className = "scenario-card fade-in" + (cleared ? " cleared" : "");
+    card.innerHTML = `
+      <span class="sc-key">${scKey}</span>
+      <h3>${sc.title}</h3>
+      <div class="sc-tagline">${sc.tagline}</div>
+      ${cleared ? `<div class="sc-meta">✓ クリア済 (正答 ${clearedData.correct}/5・ヒント ${clearedData.hintsUsed})</div>` : ""}
+    `;
+    card.addEventListener("click", () => enterScenario(roomId, scKey));
+    cards.appendChild(card);
+  });
+
+  window.scrollTo(0, 0);
+}
+
+// ========== UI: Scenario ==========
+function enterScenario(roomId, scKey) {
+  state.currentRoom = roomId;
+  state.currentScenario = scKey;
+  state.currentPuzzleIdx = 0;
+  state.hintsThisScenario = 0;
+  state.correctThisScenario = 0;
+
+  document.getElementById("title-screen").style.display = "none";
+  document.getElementById("picker-screen").style.display = "none";
+  document.getElementById("room-screen").style.display = "block";
+  document.getElementById("final-screen").style.display = "none";
+
+  const room = ROOMS_META.find(r => r.id === roomId);
+  const sc = SCENARIOS[roomId][scKey];
+  document.getElementById("room-title-bar").textContent = `${room.icon} ${room.title} · パターン${scKey}`;
+  document.getElementById("case-header-body").innerHTML = sc.case_header;
+  document.getElementById("scene").innerHTML = sc.scene;
   renderPuzzle();
   window.scrollTo(0, 0);
 }
 
+function getCurrentScenario() {
+  return SCENARIOS[state.currentRoom][state.currentScenario];
+}
+
 function renderPuzzle() {
-  const room = ROOMS[state.currentRoom];
-  const puzzle = room.puzzles[state.currentPuzzleIdx];
-  const total = room.puzzles.length;
-  const progress = ((state.currentPuzzleIdx) / total) * 100;
-  document.getElementById("progress-fill").style.width = progress + "%";
+  const sc = getCurrentScenario();
+  const puzzle = sc.puzzles[state.currentPuzzleIdx];
+  const total = sc.puzzles.length;
+  document.getElementById("progress-fill").style.width = `${(state.currentPuzzleIdx / total) * 100}%`;
 
   const area = document.getElementById("puzzle-area");
   area.innerHTML = `
@@ -961,7 +784,7 @@ function renderPuzzle() {
     const btn = document.createElement("button");
     btn.className = "option";
     btn.dataset.idx = i;
-    const keys = ["A", "B", "C", "D", "E", "F"];
+    const keys = ["A", "B", "C", "D", "E", "F", "G"];
     btn.innerHTML = `<span class="opt-key">${keys[i]}</span>${opt}`;
     btn.addEventListener("click", () => {
       if (puzzle.multi) {
@@ -983,32 +806,29 @@ function renderPuzzle() {
     const slot = document.getElementById("hint-slot");
     if (slot.innerHTML) return;
     slot.innerHTML = `<div class="hint-box">${puzzle.hint}</div>`;
-    state.hintsThisRoom++;
+    state.hintsThisScenario++;
     document.getElementById("hint-btn").disabled = true;
     document.getElementById("hint-btn").style.opacity = 0.5;
   });
 }
 
 function answerSingle(chosenIdx) {
-  const room = ROOMS[state.currentRoom];
-  const puzzle = room.puzzles[state.currentPuzzleIdx];
+  const puzzle = getCurrentScenario().puzzles[state.currentPuzzleIdx];
   const correct = chosenIdx === puzzle.answer;
-  if (correct) state.correctThisRoom++;
+  if (correct) state.correctThisScenario++;
   revealResult(correct, [chosenIdx], puzzle);
 }
 
 function answerMulti(chosen) {
-  const room = ROOMS[state.currentRoom];
-  const puzzle = room.puzzles[state.currentPuzzleIdx];
+  const puzzle = getCurrentScenario().puzzles[state.currentPuzzleIdx];
   const ans = puzzle.answer.slice().sort();
   const got = chosen.slice().sort();
   const correct = ans.length === got.length && ans.every((v, i) => v === got[i]);
-  if (correct) state.correctThisRoom++;
+  if (correct) state.correctThisScenario++;
   revealResult(correct, chosen, puzzle);
 }
 
 function revealResult(correct, chosenIdxs, puzzle) {
-  // Mark options
   const opts = document.querySelectorAll("#options .option");
   const answerSet = new Set(puzzle.multi ? puzzle.answer : [puzzle.answer]);
   opts.forEach((btn, i) => {
@@ -1016,9 +836,11 @@ function revealResult(correct, chosenIdxs, puzzle) {
     if (answerSet.has(i)) btn.classList.add("correct");
     else if (chosenIdxs.includes(i)) btn.classList.add("wrong");
   });
-  document.getElementById("submit-btn").style.display = "none";
+  const sb = document.getElementById("submit-btn");
+  if (sb) sb.style.display = "none";
   document.getElementById("hint-btn").style.display = "none";
 
+  const isLast = state.currentPuzzleIdx + 1 >= getCurrentScenario().puzzles.length;
   const slot = document.getElementById("result-slot");
   slot.innerHTML = `
     <div class="insight-box fade-in">
@@ -1026,60 +848,68 @@ function revealResult(correct, chosenIdxs, puzzle) {
       ${puzzle.insight}
     </div>
     <div class="puzzle-actions" style="margin-top: 1rem;">
-      <button class="btn btn-primary" id="next-btn">${state.currentPuzzleIdx + 1 < ROOMS[state.currentRoom].puzzles.length ? '次へ →' : '部屋を抜ける →'}</button>
+      <button class="btn btn-primary" id="next-btn">${isLast ? '部屋を抜ける →' : '次へ →'}</button>
     </div>
   `;
   document.getElementById("next-btn").addEventListener("click", advancePuzzle);
 }
 
 function advancePuzzle() {
-  const room = ROOMS[state.currentRoom];
+  const sc = getCurrentScenario();
   state.currentPuzzleIdx++;
-  if (state.currentPuzzleIdx >= room.puzzles.length) {
-    finishRoom();
+  if (state.currentPuzzleIdx >= sc.puzzles.length) {
+    finishScenario();
   } else {
     renderPuzzle();
     window.scrollTo({top: 0, behavior: "smooth"});
   }
 }
 
-function finishRoom() {
-  const room = ROOMS[state.currentRoom];
-  state.cleared[room.id] = {
-    correct: state.correctThisRoom,
-    hintsUsed: state.hintsThisRoom
+function finishScenario() {
+  const sc = getCurrentScenario();
+  const key = `${state.currentRoom}/${state.currentScenario}`;
+  state.cleared[key] = {
+    correct: state.correctThisScenario,
+    hintsUsed: state.hintsThisScenario
   };
   saveState();
   document.getElementById("progress-fill").style.width = "100%";
 
+  const roomComplete = clearedCountInRoom(state.currentRoom) === 3;
+  const allComplete = allRoomsComplete();
+
   const area = document.getElementById("puzzle-area");
   area.innerHTML = `
     <div class="room-end fade-in">
-      <div class="exit-icon">${room.exit_icon}</div>
-      <h2>${room.title} — 出口</h2>
-      <p class="exit-line">${room.exit_line}</p>
-      <p class="meta-line">正答 ${state.correctThisRoom}/${room.puzzles.length} ・ ヒント ${state.hintsThisRoom} 回</p>
-
+      <div class="exit-icon">${sc.exit_icon}</div>
+      <h2>${sc.title} — 出口</h2>
+      <p class="exit-line">${sc.exit_line}</p>
+      <p class="meta-line">正答 ${state.correctThisScenario}/${sc.puzzles.length} ・ ヒント ${state.hintsThisScenario} 回${roomComplete ? ' · 🏅 この部屋3パターン制覇' : ''}</p>
       <div class="key-insight">
         <span class="label">この部屋の鍵</span>
-        ${room.key_insight}
+        ${sc.key_insight}
       </div>
-
-      <button class="btn btn-primary" id="end-back-btn">部屋一覧に戻る →</button>
+      <div class="end-actions">
+        ${allComplete
+          ? '<button class="btn btn-primary" id="final-btn">修了証へ →</button>'
+          : '<button class="btn btn-primary" id="picker-back-btn-2">別のパターンへ →</button>'}
+        <button class="btn btn-ghost" id="title-back-btn-2">部屋一覧へ →</button>
+      </div>
     </div>
   `;
-  document.getElementById("end-back-btn").addEventListener("click", () => {
-    // If all cleared, jump to final
-    const allCleared = ROOMS.every(r => state.cleared[r.id]);
-    if (allCleared) showFinal();
-    else showTitle();
-  });
+  const fb = document.getElementById("final-btn");
+  if (fb) fb.addEventListener("click", showFinal);
+  const pb = document.getElementById("picker-back-btn-2");
+  if (pb) pb.addEventListener("click", () => enterPicker(state.currentRoom));
+  document.getElementById("title-back-btn-2").addEventListener("click", showTitle);
+
   window.scrollTo({top: 0, behavior: "smooth"});
 }
 
 // ========== UI: Final ==========
 function showFinal() {
   document.getElementById("title-screen").style.display = "none";
+  document.getElementById("picker-screen").style.display = "none";
   document.getElementById("room-screen").style.display = "none";
   document.getElementById("final-screen").style.display = "block";
 
@@ -1090,10 +920,7 @@ function showFinal() {
 
   const ta = document.getElementById("reflect-text");
   ta.value = state.reflection || "";
-  ta.oninput = () => {
-    state.reflection = ta.value;
-    saveState();
-  };
+  ta.oninput = () => { state.reflection = ta.value; saveState(); };
 
   document.getElementById("reset-final").onclick = () => {
     if (confirm("進行をリセットして最初から始める?")) {
@@ -1107,9 +934,10 @@ function showFinal() {
 }
 
 // ========== Init ==========
-document.getElementById("back-btn").addEventListener("click", showTitle);
+document.getElementById("picker-back-btn").addEventListener("click", showTitle);
+document.getElementById("back-btn").addEventListener("click", () => enterPicker(state.currentRoom));
 document.getElementById("reset-btn").addEventListener("click", () => {
-  if (confirm("進行をリセット (4部屋の記録を消す)?")) {
+  if (confirm("進行をリセット (12シナリオの記録を消す)?")) {
     state.cleared = {};
     state.reflection = "";
     saveState();
