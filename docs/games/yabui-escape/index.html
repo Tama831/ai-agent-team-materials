@@ -373,6 +373,9 @@
     margin-right: 0.5rem;
   }
   .option strong { color: var(--primary); }
+  /* .key markers in option text: invisible until the option is revealed as correct */
+  .option .key { font-weight: inherit; color: inherit; background: none; }
+  .option.correct .key { font-weight: 700; color: var(--primary); background: rgba(91, 168, 140, 0.18); border-radius: 3px; padding: 0 2px; }
 
   .puzzle-actions {
     display: flex;
