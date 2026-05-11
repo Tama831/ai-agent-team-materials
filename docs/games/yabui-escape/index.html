@@ -220,6 +220,37 @@
     padding-left: calc(28px + 0.7rem);
     font-weight: 600;
   }
+  .scenario-card.hard {
+    border-left: 4px solid var(--warm);
+    background: linear-gradient(180deg, #ffffff 0%, #fbf3eb 100%);
+  }
+  .scenario-card.hard .sc-key { background: var(--warm); color: white; }
+  .scenario-card.hard.cleared .sc-key { background: var(--accent2); color: white; }
+  .section-heading {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    margin: 1.2rem 0 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-heading .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+  }
+  .section-heading.hard {
+    color: var(--warm);
+    text-transform: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+  .section-heading.hard .sub { color: var(--muted); font-weight: 400; font-size: 0.78rem; }
+  .section-heading:first-child { margin-top: 0; }
 
   /* ===== Room screen ===== */
   .room-screen { display: none; }
@@ -518,17 +549,17 @@
     <div class="intro-card">
       <p class="narrator">
         ある月の四日間、診療所の家庭医として、四つの部屋を抜けねばならぬのだ。
-        各部屋に <strong>A/B/C の3シナリオ</strong>、それぞれ1人の患者を巡る5問。合計60問。
+        各部屋に <strong>A/B/C の標準シナリオ</strong>、それぞれ1人の患者を巡る5問。
+        訪問診療には <strong>🔥 D-G の難問パターン</strong>(超複雑怪奇症例) も控えている。合計 80問。
         知識を問うのではない、<strong>判断と関係性</strong>を問うのだった。
       </p>
       <p>
-        わからぬときはヒントを開いてよい。出口の後の「鍵の一言」が、その日のお守りになる。
+        わからぬときはヒントを開いてよい。出口の後の「鍵の一言」が、その日のお守りになる。<br>
+        <strong>部屋カードを直接タップ</strong>して、入りたい場面を選ぶがよい。
       </p>
     </div>
 
     <div class="rooms-grid" id="rooms-grid"></div>
-
-    <button class="play-btn" id="start-btn">入室する →</button>
 
     <div class="small-actions">
       <button id="reset-btn">進行をリセット</button>
@@ -567,7 +598,7 @@
     <div class="certificate">
       <div class="stamp">🗝</div>
       <h2>四つの部屋を抜けた</h2>
-      <p class="for-line">— 藪医者の証 (12シナリオ完走) —</p>
+      <p class="for-line">— 藪医者の証 (16シナリオ完走) —</p>
 
       <p class="verse">
         外来で命の優先を見、訪問で家の間取りを読み、<br>
@@ -578,7 +609,7 @@
       <div class="stats-grid">
         <div class="stat">
           <div class="val" id="final-correct">—</div>
-          <div class="lbl">正答数 / 60問</div>
+          <div class="lbl">正答数 / 80問</div>
         </div>
         <div class="stat">
           <div class="val" id="final-hints">—</div>
@@ -614,7 +645,8 @@ const ROOMS_META = [
   { id: "facility",   icon: "🏛", title: "施設回診", tagline: "多職種のリズムに、家庭医の指揮を重ねるのだ" },
   { id: "community",  icon: "🏘", title: "地域懇談会", tagline: "診察室の外にも、外来はあるのだ" }
 ];
-const SCENARIO_KEYS = ["A", "B", "C"];
+// Per-room scenario keys are derived from SCENARIOS data (some rooms have D-G as 難問)
+function scenarioKeysFor(roomId) { return Object.keys(SCENARIOS[roomId]); }
 
 // ========== State ==========
 const STORAGE_KEY = "yabui-escape/v2";
@@ -647,14 +679,15 @@ function saveState() {
   } catch (e) { /* ignore */ }
 }
 
+function totalScenariosInRoom(roomId) { return scenarioKeysFor(roomId).length; }
 function clearedCountInRoom(roomId) {
-  return SCENARIO_KEYS.filter(k => state.cleared[`${roomId}/${k}`]).length;
+  return scenarioKeysFor(roomId).filter(k => state.cleared[`${roomId}/${k}`]).length;
 }
 function isScenarioCleared(roomId, sc) {
   return !!state.cleared[`${roomId}/${sc}`];
 }
 function allRoomsComplete() {
-  return ROOMS_META.every(r => clearedCountInRoom(r.id) === 3);
+  return ROOMS_META.every(r => clearedCountInRoom(r.id) === totalScenariosInRoom(r.id));
 }
 
 // ========== UI: Title ==========
@@ -663,27 +696,33 @@ function renderTitle() {
   grid.innerHTML = "";
   ROOMS_META.forEach((room) => {
     const n = clearedCountInRoom(room.id);
-    const complete = n === 3;
+    const total = totalScenariosInRoom(room.id);
+    const complete = n === total;
     const card = document.createElement("div");
     card.className = "room-card" + (complete ? " complete" : "");
     card.innerHTML = `
       <div class="room-icon">${room.icon}</div>
       <h3>${room.title}</h3>
       <div class="room-tagline">${room.tagline}</div>
-      ${n > 0 && !complete ? `<div class="room-status">${n}/3 クリア</div>` : ""}
+      ${n > 0 && !complete ? `<div class="room-status">${n}/${total} クリア</div>` : ""}
     `;
     card.addEventListener("click", () => enterPicker(room.id));
     grid.appendChild(card);
   });
 
-  const startBtn = document.getElementById("start-btn");
+  // If all complete, show a one-line link to the certificate above the rooms-grid
+  let certLink = document.getElementById("cert-link");
   if (allRoomsComplete()) {
-    startBtn.textContent = "修了証を見る →";
-    startBtn.onclick = showFinal;
-  } else {
-    const next = ROOMS_META.find(r => clearedCountInRoom(r.id) < 3);
-    startBtn.textContent = `${next.icon} ${next.title}へ →`;
-    startBtn.onclick = () => enterPicker(next.id);
+    if (!certLink) {
+      certLink = document.createElement("button");
+      certLink.id = "cert-link";
+      certLink.className = "play-btn";
+      certLink.textContent = "🗝 修了証を見る →";
+      certLink.onclick = showFinal;
+      grid.parentNode.insertBefore(certLink, grid.nextSibling);
+    }
+  } else if (certLink) {
+    certLink.remove();
   }
 }
 
@@ -711,12 +750,16 @@ function enterPicker(roomId) {
 
   const cards = document.getElementById("picker-cards");
   cards.innerHTML = "";
-  SCENARIO_KEYS.forEach(scKey => {
+  const keys = scenarioKeysFor(roomId);
+  const standardKeys = keys.filter(k => !SCENARIOS[roomId][k].hard);
+  const hardKeys = keys.filter(k => SCENARIOS[roomId][k].hard);
+
+  function renderCard(scKey) {
     const sc = SCENARIOS[roomId][scKey];
     const cleared = isScenarioCleared(roomId, scKey);
     const clearedData = state.cleared[`${roomId}/${scKey}`];
     const card = document.createElement("div");
-    card.className = "scenario-card fade-in" + (cleared ? " cleared" : "");
+    card.className = "scenario-card fade-in" + (cleared ? " cleared" : "") + (sc.hard ? " hard" : "");
     card.innerHTML = `
       <span class="sc-key">${scKey}</span>
       <h3>${sc.title}</h3>
@@ -725,7 +768,22 @@ function enterPicker(roomId) {
     `;
     card.addEventListener("click", () => enterScenario(roomId, scKey));
     cards.appendChild(card);
-  });
+  }
+
+  if (standardKeys.length > 0) {
+    const h = document.createElement("div");
+    h.className = "section-heading";
+    h.innerHTML = `<span class="dot"></span>標準シナリオ`;
+    cards.appendChild(h);
+    standardKeys.forEach(renderCard);
+  }
+  if (hardKeys.length > 0) {
+    const h = document.createElement("div");
+    h.className = "section-heading hard";
+    h.innerHTML = `🔥 難問パターン <span class="sub">— 在宅の超複雑怪奇症例</span>`;
+    cards.appendChild(h);
+    hardKeys.forEach(renderCard);
+  }
 
   window.scrollTo(0, 0);
 }

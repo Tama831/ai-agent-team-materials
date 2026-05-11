@@ -445,14 +445,14 @@
         <article class="card rounded-xl p-6">
           <div class="flex justify-between items-start mb-2">
             <h3 class="font-bold text-lg">🗝 家庭医の四つの部屋 — 藪医者の脱出室</h3>
-            <span class="badge badge-done">✅ 5/11 v2 公開</span>
+            <span class="badge badge-done">✅ 5/11 v2.1 公開</span>
           </div>
-          <p class="text-sm text-stone-600 mb-3">家庭医の現場 (<strong>外来・訪問診療・施設回診・地域懇談会</strong>) を題材にした、判断と関係性を試す脱出ゲーム。各部屋に <strong>A/B/C の 3 シナリオ × 5問 = 合計 60 問</strong>。各シナリオは「1人の患者を巡る連続5問」で、問1の判断が問2以降に効いてくる設計。BMC Medical Education 2025 のゲーミフィケーション・スコーピングレビューを起点に実装。</p>
+          <p class="text-sm text-stone-600 mb-3">家庭医の現場 (<strong>外来・訪問診療・施設回診・地域懇談会</strong>) を題材にした、判断と関係性を試す脱出ゲーム。標準 A/B/C × 4部屋 + <strong>🔥 訪問診療には D-G の難問パターン</strong> (超複雑怪奇症例) を追加 = <strong>合計 16 シナリオ × 5問 = 80 問</strong>。各シナリオは「1人の患者 (家族) を巡る連続5問」で、問1の判断が問2以降に効いてくる設計。BMC Medical Education 2025 のゲーミフィケーション・スコーピングレビュー起点。</p>
           <div class="ux-note p-3 rounded text-xs leading-relaxed mb-2">
-            <strong class="text-sky-800">✨ 使う体験:</strong> URL を開く → 部屋を選ぶ → A/B/C からシナリオを選ぶ → ケース概要 (患者プロファイル) を読む → 問1→5 を順に判断 → 部屋を抜けると「鍵の一言」→ 12シナリオ全制覇で修了証 + 自由記述リフレクション (localStorage 保存)。1シナリオ 10-15分、フルプレイ 2時間程度。
+            <strong class="text-sky-800">✨ 使う体験:</strong> URL を開く → 部屋カードを直接タップ → 標準/難問からシナリオ選択 → ケース概要 (患者プロファイル) → 問1→5 を順に判断 → 部屋を抜けると「鍵の一言」→ 16シナリオ全制覇で修了証 + 自由記述リフレクション (localStorage 保存)。標準1本 10-15分、難問1本 20-30分。
           </div>
           <div class="vibe-note p-3 rounded text-xs leading-relaxed mb-3">
-            <strong>🎙 vibe note:</strong> v1 のたまさん指摘「問いの粒度が荒い、選択肢があれもこれも合っていそう」を受けて全60問を v2 で書き直した。<strong>『どれも妥当』のメタ正解を禁止</strong>、各誤答に具体的なハズレ理由 (薬剤量・診断基準・倫理上の理由など) を明示。患者名 (山田さん・佐藤さん・大野さん・田中さん・阿部さん・林さん・矢部さん・西田さん・伊藤さん…) を通し軸に置き、シナリオ内の連続性を担保。
+            <strong>🎙 vibe note:</strong> 🔥難問パターン4本 (沈黙の鏡像 / 八重結びの家 / 18匹の家 / <strong>八方塞がりの家</strong>) は<strong>たまさん監修のシナリオ</strong>。秘密の三角形・経済的虐待・ホーディング × グリーフ・カリフォルニアの娘症候群など、教科書に1行で書かれていない「在宅の超複雑怪奇症例」を扱う。研修医勉強会では難問1本に絞ってディスカッションするだけで90分使える。
           </div>
           <div class="flex gap-2 flex-wrap">
             <a href="https://tama831.github.io/ai-agent-team-materials/games/yabui-escape/" class="pill-link">🎮 Live</a>
@@ -920,7 +920,7 @@
       <p class="handwritten text-xl text-amber-700 mb-2">— made with 🤖 + ☕ —</p>
       <p>このページは <a href="https://github.com/Tama831/ai-agent-team-materials" class="accent-link">ai-agent-team-materials リポ</a> の <code>docs/portfolio.html</code> として管理されています。</p>
       <p class="mt-1 text-xs">URL を知っている人だけがアクセスできるよう、検索エンジンには載せていません (noindex)。</p>
-      <p class="mt-1 text-xs text-stone-400">最終更新: 2026-05-11 — 家庭医の四つの部屋 v2 公開 (12シナリオ × 5問 = 60問、連続ケース設計に改修)</p>
+      <p class="mt-1 text-xs text-stone-400">最終更新: 2026-05-11 — 家庭医の四つの部屋 v2.1 (在宅難問4パターン D-G 追加・16シナリオ80問)</p>
       <p class="mt-3 stamp text-xl">tama / 2026</p>
     </footer>
   </main>
