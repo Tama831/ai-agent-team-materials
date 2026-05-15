@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="22件の実証研究から抽出された6つの倫理的懸念カテゴリ（透明性・バイアス・プライバシー・説明責任・倫理/道徳・規制）と4つの実装戦略提言。バイアスの3層構造と責任の三角形で臨床現場への影響を具体化。">
+  <meta name="keywords" content="藪医者の学び, 勉強会, 教材, 家庭医, 2026-03-29, 医療AI, 倫理, バイアス, 透明性, 説明責任, XAI, EU, AI法, Healthcare, AI, Ethics, 研修医, スタッフ">
+  <link rel="canonical" href="https://tama831.github.io/ai-agent-team-materials/materials/2026-03-29_healthcare-ai-ethics/">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="藪医者の学び">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="藪医者の学び">
+  <meta property="og:title" content="医療AIの倫理的懸念と実装戦略 — 藪医者の学び">
+  <meta property="og:description" content="22件の実証研究から抽出された6つの倫理的懸念カテゴリ（透明性・バイアス・プライバシー・説明責任・倫理/道徳・規制）と4つの実装戦略提言。バイアスの3層構造と責任の三角形で臨床現場への影響を具体化。">
+  <meta property="og:url" content="https://tama831.github.io/ai-agent-team-materials/materials/2026-03-29_healthcare-ai-ethics/">
+  <meta property="og:image" content="https://tama831.github.io/ai-agent-team-materials/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="医療AIの倫理的懸念と実装戦略 — 藪医者の学び">
+  <meta name="twitter:description" content="22件の実証研究から抽出された6つの倫理的懸念カテゴリ（透明性・バイアス・プライバシー・説明責任・倫理/道徳・規制）と4つの実装戦略提言。バイアスの3層構造と責任の三角形で臨床現場への影響を具体化。">
+  <meta name="twitter:image" content="https://tama831.github.io/ai-agent-team-materials/og-image.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"医療AIの倫理的懸念と実装戦略","description":"22件の実証研究から抽出された6つの倫理的懸念カテゴリ（透明性・バイアス・プライバシー・説明責任・倫理/道徳・規制）と4つの実装戦略提言。バイアスの3層構造と責任の三角形で臨床現場への影響を具体化。","url":"https://tama831.github.io/ai-agent-team-materials/materials/2026-03-29_healthcare-ai-ethics/","datePublished":"2026-03-29","inLanguage":"ja","learningResourceType":"Presentation","isAccessibleForFree":true,"author":{"@type":"Organization","name":"藪医者の学び","url":"https://tama831.github.io/ai-agent-team-materials/"},"publisher":{"@type":"Organization","name":"藪医者の学び","url":"https://tama831.github.io/ai-agent-team-materials/"},"audience":{"@type":"EducationalAudience","educationalRole":"研修医 15分 + 全スタッフ 10分 | Healthcare AI Ethics"},"keywords":["2026-03-29","医療AI","倫理","バイアス","透明性","説明責任","XAI","EU","AI法","Healthcare","AI","Ethics","研修医","スタッフ"],"image":"https://tama831.github.io/ai-agent-team-materials/og-image.png"}</script>
+  <title>医療AIの倫理的懸念と実装戦略 — 藪医者の学び</title>
+  <style>
+    :root {
+      --bg: #f8f5ed; --card: #ffffff; --primary: #1b3a2d;
+      --accent: #d4a03c; --accent2: #5ba88c; --text: #1a1a2e;
+      --muted: #7a8e82; --border: #e0ddd5;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+           background: var(--bg); color: var(--text); line-height: 1.75; }
+    .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .back { display: inline-block; color: var(--accent2); text-decoration: none;
+            font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .back:hover { text-decoration: underline; }
+    h1 { font-size: 1.7rem; color: var(--primary); line-height: 1.45; margin-bottom: 0.6rem; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.25rem; }
+    .key-msg { background: #f0f7f4; border-left: 4px solid var(--accent2);
+                padding: 1rem 1.25rem; border-radius: 0 10px 10px 0;
+                margin: 1.5rem 0 2rem; font-size: 1rem; line-height: 1.85; }
+    h2 { font-size: 1.1rem; color: var(--primary); margin: 2.25rem 0 0.85rem;
+          padding-bottom: 0.4rem; border-bottom: 2px solid var(--border); }
+    .files { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    a.btn-residents, a.btn-attendings, a.btn-allstaff, a.btn-guide, a.btn-pdf {
+      display: inline-block; padding: 0.55rem 1rem; border-radius: 8px;
+      font-size: 0.88rem; text-decoration: none; font-weight: 600;
+    }
+    a.btn-residents { background: var(--accent2); color: white; }
+    a.btn-attendings { background: var(--primary); color: white; }
+    a.btn-allstaff { background: var(--accent); color: white; }
+    a.btn-guide { background: var(--border); color: var(--primary); }
+    a.btn-pdf { background: white; color: var(--primary); border: 1px solid var(--border); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { display: inline-block; background: var(--card); border: 1px solid var(--border);
+            padding: 0.22rem 0.65rem; border-radius: 14px;
+            font-size: 0.78rem; color: var(--muted); }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+              font-size: 0.85rem; color: var(--muted); text-align: center; }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="https://tama831.github.io/ai-agent-team-materials/">← 教材ライブラリに戻る</a>
+    <article>
+      <h1>医療AIの倫理的懸念と実装戦略</h1>
+      <div class="meta">2026-03-29 ・ 研修医 15分 + 全スタッフ 10分 | Healthcare AI Ethics</div>
+      <div class="key-msg">22件の実証研究から抽出された6つの倫理的懸念カテゴリ（透明性・バイアス・プライバシー・説明責任・倫理/道徳・規制）と4つの実装戦略提言。バイアスの3層構造と責任の三角形で臨床現場への影響を具体化。</div>
+      <h2>ダウンロード</h2>
+      <div class="files">
+        <a class="btn-residents" href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_residents.pptx">研修医 PPTX</a>
+        <a class="btn-pdf" href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_residents.pdf" target="_blank" rel="noopener">PDF</a>
+        <a class="btn-allstaff" href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_allstaff.pptx">スタッフ PPTX</a>
+        <a class="btn-pdf" href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_slides_allstaff.pdf" target="_blank" rel="noopener">PDF</a>
+        <a class="btn-guide" href="https://github.com/Tama831/ai-agent-team-materials/raw/main/output/education/2026-03-29_healthcare-ai-ethics/healthcare-ai-ethics_guide_facilitator.docx">ファシリテーターガイド DOCX</a>
+      </div>
+      <h2>キーワード</h2>
+      <div class="tags"><span class="tag">2026-03-29</span> <span class="tag">医療AI</span> <span class="tag">倫理</span> <span class="tag">バイアス</span> <span class="tag">透明性</span> <span class="tag">説明責任</span> <span class="tag">XAI</span> <span class="tag">EU</span> <span class="tag">AI法</span> <span class="tag">Healthcare</span> <span class="tag">AI</span> <span class="tag">Ethics</span> <span class="tag">研修医</span> <span class="tag">スタッフ</span></div>
+    </article>
+    <footer>
+      <p>藪医者の学び 勉強会教材ライブラリ</p>
+      <p><a href="https://tama831.github.io/ai-agent-team-materials/">tama831.github.io/ai-agent-team-materials</a></p>
+    </footer>
+  </div>
+</body>
+</html>
