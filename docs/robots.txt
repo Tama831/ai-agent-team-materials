@@ -1,5 +1,2 @@
 User-agent: *
-Allow: /
-Disallow: /portfolio.html
-
-Sitemap: https://tama831.github.io/ai-agent-team-materials/sitemap.xml
+Disallow: /
