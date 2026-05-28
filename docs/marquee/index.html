@@ -8,85 +8,71 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="電光">
-<meta name="description" content="電光掲示板 PWA — iPhone / Mac でメッセージを流す">
+<meta name="description" content="電光掲示板 PWA — 背景の明滅文字が電光メッセージを象る">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <title>電光 — Marquee</title>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;overflow:hidden;background:#000;color:#fff;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
   body{font-family:'DotGothic16','Press Start 2P',monospace;display:flex;flex-direction:column;height:100dvh;width:100vw}
 
-  /* === 電光掲示板ステージ === */
-  #stage{flex:1;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#020814 0%,#000 70%);cursor:pointer}
-  #stage::before,#stage::after{
-    content:"";position:absolute;left:0;right:0;height:24px;pointer-events:none;z-index:2;
-  }
-  #stage::before{top:0;background:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,0))}
-  #stage::after{bottom:0;background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,0))}
+  #stage{flex:1;position:relative;overflow:hidden;background:#000;cursor:pointer}
+  #rain{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
 
-  /* スキャンライン (LED の走査線感) */
+  /* スキャンライン (LED 走査線) */
   #stage>.scan{position:absolute;inset:0;pointer-events:none;z-index:3;
     background:repeating-linear-gradient(to bottom,
-      rgba(255,255,255,.04) 0px,
-      rgba(255,255,255,.04) 1px,
+      rgba(255,255,255,.05) 0px,
+      rgba(255,255,255,.05) 1px,
       transparent 1px,
       transparent 3px);
-    mix-blend-mode:overlay;opacity:.6}
+    mix-blend-mode:overlay;opacity:.55}
+  #stage>.vignette{position:absolute;inset:0;pointer-events:none;z-index:2;
+    background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.7) 100%)}
 
-  /* テキスト軌道 */
-  #track{position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;display:flex;align-items:center;will-change:transform}
+  /* === クラシック (CSS marquee) === */
+  #track{position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;display:flex;align-items:center;will-change:transform;z-index:2}
   #track .seg{padding-right:4em;display:inline-block}
-
-  /* 電光テキスト本体: 白コア + 青グロー多段 */
   .glow{
-    color:#ffffff;
-    font-size:var(--fs,22vh);
-    line-height:1;
-    letter-spacing:.02em;
+    color:#fff;font-size:var(--fs,22vh);line-height:1;letter-spacing:.02em;
     text-shadow:
-      0 0 2px #ffffff,
-      0 0 6px #ffffff,
-      0 0 14px var(--c1,#4cc9ff),
-      0 0 28px var(--c1,#4cc9ff),
-      0 0 48px var(--c2,#0a84ff),
-      0 0 72px var(--c2,#0a84ff),
+      0 0 2px #fff,0 0 6px #fff,
+      0 0 14px var(--c1,#4cc9ff),0 0 28px var(--c1,#4cc9ff),
+      0 0 48px var(--c2,#0a84ff),0 0 72px var(--c2,#0a84ff),
       0 0 110px var(--c3,#0033aa);
     animation:flicker 4.2s infinite;
   }
   @keyframes flicker{
     0%,18%,22%,25%,53%,57%,100%{filter:brightness(1)}
-    20%{filter:brightness(1.18)}
-    24%{filter:brightness(.92)}
-    55%{filter:brightness(1.08)}
+    20%{filter:brightness(1.18)}24%{filter:brightness(.92)}55%{filter:brightness(1.08)}
   }
-
-  /* スクロールアニメーション (JS で duration / direction 動的設定) */
   @keyframes scroll-left{from{transform:translate(0,-50%)}to{transform:translate(-50%,-50%)}}
   @keyframes scroll-right{from{transform:translate(-50%,-50%)}to{transform:translate(0,-50%)}}
-
-  /* 静止モード */
   #track.static{animation:none !important;left:50%;transform:translate(-50%,-50%) !important;text-align:center}
   #track.static .seg{padding-right:0;display:block;text-align:center}
   #track.static .seg+.seg{display:none}
+
+  body.mode-rain #track{display:none}
+  body.mode-classic #rain{display:none}
 
   /* === 設定パネル === */
   #panel{
     position:fixed;left:0;right:0;bottom:0;z-index:10;
     background:rgba(8,12,24,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
     border-top:1px solid rgba(76,201,255,.3);
-    padding:16px 18px calc(20px + env(safe-area-inset-bottom)) 18px;
+    padding:14px 18px calc(20px + env(safe-area-inset-bottom)) 18px;
     transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
     box-shadow:0 -8px 40px rgba(0,80,180,.25);
-    max-height:80vh;overflow-y:auto;
+    max-height:82vh;overflow-y:auto;
   }
   #panel.open{transform:translateY(0)}
   #panel h2{font-family:'DotGothic16',sans-serif;font-size:14px;color:#7cd3ff;letter-spacing:.15em;margin-bottom:10px;text-shadow:0 0 8px rgba(76,201,255,.6)}
-  #panel label{display:block;font-size:12px;color:#9bb;letter-spacing:.1em;margin:14px 0 6px}
+  #panel label{display:block;font-size:12px;color:#9bb;letter-spacing:.1em;margin:12px 0 6px}
   #panel input[type=text],#panel textarea{
     width:100%;background:#000;border:1px solid rgba(76,201,255,.35);color:#fff;
     font-family:'DotGothic16',sans-serif;font-size:18px;padding:10px 12px;border-radius:6px;
@@ -100,36 +86,34 @@
   .swatches{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
   .sw{width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer;transition:transform .15s,border-color .15s}
   .sw.active{border-color:#fff;transform:scale(1.12)}
-  .seg-btns{display:flex;gap:6px;margin-top:4px}
-  .seg-btn{flex:1;padding:8px;background:#000;border:1px solid rgba(76,201,255,.3);color:#9bb;border-radius:6px;font-family:'DotGothic16',sans-serif;font-size:13px;cursor:pointer;transition:all .15s}
-  .seg-btn.active{background:rgba(76,201,255,.15);border-color:#4cc9ff;color:#fff}
-  .actions{display:flex;gap:10px;margin-top:18px}
+  .seg-btns{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap}
+  .seg-btn{flex:1;min-width:80px;padding:8px;background:#000;border:1px solid rgba(76,201,255,.3);color:#9bb;border-radius:6px;font-family:'DotGothic16',sans-serif;font-size:13px;cursor:pointer;transition:all .15s}
+  .seg-btn.active{background:rgba(76,201,255,.18);border-color:#4cc9ff;color:#fff;box-shadow:0 0 12px rgba(76,201,255,.3)}
+  .actions{display:flex;gap:10px;margin-top:16px}
   .btn{flex:1;padding:12px;background:linear-gradient(135deg,#0a84ff,#4cc9ff);color:#fff;border:none;border-radius:8px;font-family:'DotGothic16',sans-serif;font-size:14px;letter-spacing:.1em;cursor:pointer;box-shadow:0 4px 16px rgba(10,132,255,.4)}
   .btn.ghost{background:transparent;border:1px solid rgba(76,201,255,.4);color:#7cd3ff;box-shadow:none}
 
-  /* 設定ボタン (ステージ右上) */
   #toggle{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:9;
     width:44px;height:44px;border-radius:50%;background:rgba(8,12,24,.7);border:1px solid rgba(76,201,255,.4);
     color:#7cd3ff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    transition:opacity .3s,transform .2s}
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity .3s,transform .2s}
   #toggle:active{transform:scale(.92)}
   #toggle.hidden{opacity:0;pointer-events:none}
 
-  /* ヒント */
-  #hint{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(124,211,255,.5);font-size:14px;letter-spacing:.2em;text-align:center;pointer-events:none;z-index:1;animation:fadeOut 4s forwards}
+  #hint{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(124,211,255,.4);font-size:14px;letter-spacing:.2em;text-align:center;pointer-events:none;z-index:4;animation:fadeOut 4s forwards}
   @keyframes fadeOut{0%,60%{opacity:1}100%{opacity:0}}
 
-  @media (max-width:600px){
-    #panel h2{font-size:13px}
-    .glow{font-size:var(--fs,18vh)}
-  }
+  .rain-only,.classic-only{display:none}
+  body.mode-rain .rain-only{display:block}
+  body.mode-classic .classic-only{display:block}
 </style>
 </head>
-<body>
+<body class="mode-rain">
 
 <div id="stage">
+  <canvas id="rain"></canvas>
   <div id="track"><span class="seg glow"></span><span class="seg glow"></span></div>
+  <div class="vignette"></div>
   <div class="scan"></div>
   <div id="hint">画面タップで設定</div>
 </div>
@@ -141,6 +125,12 @@
 
   <label for="msg">メッセージ</label>
   <textarea id="msg" rows="2" placeholder="流したい文字を入力" maxlength="200"></textarea>
+
+  <label>モード</label>
+  <div class="seg-btns">
+    <button class="seg-btn" data-mode="rain">◉ Glyph Rain</button>
+    <button class="seg-btn" data-mode="classic">○ クラシック</button>
+  </div>
 
   <div class="row">
     <div>
@@ -161,12 +151,18 @@
   </div>
 
   <label>電光カラー</label>
-  <div class="swatches" id="swatches">
-    <!-- JS で挿入 -->
-  </div>
+  <div class="swatches" id="swatches"></div>
 
   <label>グロー強度 <span id="glowVal">標準</span></label>
   <input type="range" id="glow" min="0" max="2" value="1" step="1">
+
+  <div class="rain-only">
+    <label>背景の文字種 <span id="charsetVal">カタカナ+数字</span></label>
+    <input type="range" id="charset" min="0" max="3" value="0" step="1">
+
+    <label>明滅の速さ <span id="flickVal">標準</span></label>
+    <input type="range" id="flick" min="0" max="3" value="2" step="1">
+  </div>
 
   <div class="actions">
     <button class="btn" id="closeBtn">閉じて全画面</button>
@@ -175,7 +171,9 @@
 </div>
 
 <script>
-// ---------- 設定 ----------
+// ============================================================
+// 設定
+// ============================================================
 const PALETTES = [
   {name:'電光青',  c1:'#4cc9ff', c2:'#0a84ff', c3:'#0033aa'},
   {name:'白氷',    c1:'#bfe9ff', c2:'#7cd3ff', c3:'#3a80c0'},
@@ -186,40 +184,63 @@ const PALETTES = [
   {name:'琥珀',    c1:'#ffd56b', c2:'#ff9d3a', c3:'#a05a00'},
   {name:'若葉',    c1:'#a8ff8b', c2:'#3ddc84', c3:'#0a5d34'},
 ];
-
 const GLOW_LEVELS = [
-  {name:'控えめ', val:`0 0 2px #fff,0 0 4px #fff,0 0 8px var(--c1),0 0 16px var(--c2)`},
-  {name:'標準',   val:`0 0 2px #fff,0 0 6px #fff,0 0 14px var(--c1),0 0 28px var(--c1),0 0 48px var(--c2),0 0 72px var(--c2),0 0 110px var(--c3)`},
-  {name:'眩しい', val:`0 0 4px #fff,0 0 10px #fff,0 0 22px var(--c1),0 0 44px var(--c1),0 0 70px var(--c2),0 0 110px var(--c2),0 0 160px var(--c3),0 0 220px var(--c3)`},
+  {name:'控えめ', css:`0 0 2px #fff,0 0 4px #fff,0 0 8px var(--c1),0 0 16px var(--c2)`,         canvas:[6,12]},
+  {name:'標準',   css:`0 0 2px #fff,0 0 6px #fff,0 0 14px var(--c1),0 0 28px var(--c1),0 0 48px var(--c2),0 0 72px var(--c2),0 0 110px var(--c3)`, canvas:[14,28]},
+  {name:'眩しい', css:`0 0 4px #fff,0 0 10px #fff,0 0 22px var(--c1),0 0 44px var(--c1),0 0 70px var(--c2),0 0 110px var(--c2),0 0 160px var(--c3)`, canvas:[28,56]},
+];
+const CHARSETS = [
+  {name:'カタカナ+数字', chars:'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789'},
+  {name:'英数字+記号',   chars:'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*+=<>?/[]{}'},
+  {name:'バイナリ',      chars:'01'},
+  {name:'藪医者の漢字',  chars:'藪医者学電光掲示板診断推論家庭医療緩和ケアシステム思考認知バイアス'},
+];
+const FLICK_LEVELS = [
+  {name:'静か',   chgMin:1200, chgMax:4000},
+  {name:'ゆるい', chgMin:600,  chgMax:2200},
+  {name:'標準',   chgMin:200,  chgMax:1400},
+  {name:'激しい', chgMin:60,   chgMax:500},
 ];
 
 const DEFAULTS = {
   text:'藪医者の学び ⚡ Tama Marquee',
-  speed:22, size:22, dir:'left', palette:0, glow:1
+  speed:22, size:22, dir:'left', palette:0, glow:1,
+  mode:'rain', charset:0, flick:2,
 };
-const KEY = 'marquee.v1';
+const KEY = 'marquee.v2';
 
-// ---------- 状態 ----------
-let state = loadState();
-
-function loadState(){
+let state = (function(){
   try{ return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(KEY)||'{}')); }
   catch{ return {...DEFAULTS}; }
-}
+})();
 function saveState(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{} }
 
-// ---------- DOM ----------
-const $ = id => document.getElementById(id);
+// ============================================================
+// DOM
+// ============================================================
+const $  = id => document.getElementById(id);
 const track = $('track');
 const segs  = track.querySelectorAll('.seg');
 const stage = $('stage');
 const panel = $('panel');
 const toggle = $('toggle');
 const swatchesEl = $('swatches');
+const canvas = $('rain');
+const ctx = canvas.getContext('2d', { alpha:false });
 
-// ---------- 初期化 ----------
+// オフスクリーン: メッセージマスク
+const mask = document.createElement('canvas');
+const mctx = mask.getContext('2d');
+// オフスクリーン: 前景セル (グロー描画用)
+const fg = document.createElement('canvas');
+const fctx = fg.getContext('2d');
+
+// ============================================================
+// クラシック / 共通スタイル適用
+// ============================================================
 function applyText(){
   segs.forEach(s => s.textContent = state.text || ' ');
+  rebuildMask();
 }
 function applyPalette(){
   const p = PALETTES[state.palette] || PALETTES[0];
@@ -229,27 +250,238 @@ function applyPalette(){
 }
 function applyGlow(){
   const g = GLOW_LEVELS[state.glow] || GLOW_LEVELS[1];
-  segs.forEach(s => s.style.textShadow = g.val);
+  segs.forEach(s => s.style.textShadow = g.css);
   $('glowVal').textContent = g.name;
 }
 function applySize(){
   document.documentElement.style.setProperty('--fs', state.size + 'vh');
   $('szVal').textContent = state.size;
+  rebuildMask();
 }
 function applyMotion(){
-  if(state.dir === 'static'){
-    track.classList.add('static');
-    track.style.animation = 'none';
-    return;
+  if(state.mode === 'classic'){
+    if(state.dir === 'static'){
+      track.classList.add('static');
+      track.style.animation = 'none';
+    } else {
+      track.classList.remove('static');
+      const dur = (65 - state.speed);
+      const dir = state.dir === 'right' ? 'scroll-right' : 'scroll-left';
+      track.style.animation = `${dir} ${dur}s linear infinite`;
+    }
   }
-  track.classList.remove('static');
-  // スピード: スライダーが大きいほど速い → duration を反比例
-  const dur = (65 - state.speed); // 5..60 → 60..5 秒
-  const dir = state.dir === 'right' ? 'scroll-right' : 'scroll-left';
-  track.style.animation = `${dir} ${dur}s linear infinite`;
   $('spdVal').textContent = state.speed < 15 ? 'ゆっくり' : state.speed < 30 ? '中' : state.speed < 45 ? '速い' : '爆速';
 }
+function applyMode(){
+  document.body.classList.toggle('mode-rain', state.mode === 'rain');
+  document.body.classList.toggle('mode-classic', state.mode === 'classic');
+  document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
+  if(state.mode === 'rain'){ resizeCanvas(); }
+  applyMotion();
+}
 
+// ============================================================
+// Glyph Rain — canvas レンダリング
+// ============================================================
+let cells = [];
+let cellW = 0, cellH = 0, cols = 0, rows = 0, dpr = 1;
+let scrollX = 0;
+let lastFrame = 0;
+let rafId = null;
+let stageW = 0, stageH = 0;
+let maskWidth = 0; // メッセージ1個分の幅 (繰り返し単位)
+
+function pickChar(){
+  const cs = CHARSETS[state.charset].chars;
+  return cs.charAt(Math.floor(Math.random() * cs.length));
+}
+
+function resizeCanvas(){
+  const rect = stage.getBoundingClientRect();
+  stageW = rect.width;
+  stageH = rect.height;
+  dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+
+  canvas.width  = Math.floor(stageW * dpr);
+  canvas.height = Math.floor(stageH * dpr);
+  canvas.style.width = stageW + 'px';
+  canvas.style.height = stageH + 'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  // セルサイズはサイズスライダーから派生 (大きさ大→セル大→粗く見える)
+  // 行数: 14〜42 行ぐらいの幅で。サイズ 8→42行、50→14行
+  const targetRows = Math.round(42 - (state.size - 8) * (28 / 42));
+  cellH = stageH / targetRows;
+  cellW = cellH * 0.62; // 縦長セル (ドットマトリクス感)
+  cols  = Math.ceil(stageW / cellW) + 4; // 横は少し余裕
+  rows  = Math.ceil(stageH / cellH);
+
+  // セル初期化
+  const now = performance.now();
+  cells = [];
+  for(let r = 0; r < rows; r++){
+    const row = [];
+    for(let c = 0; c < cols; c++){
+      row.push({ ch: pickChar(), next: now + 100 + Math.random() * 2000 });
+    }
+    cells.push(row);
+  }
+
+  rebuildMask();
+}
+
+function rebuildMask(){
+  if(!stageW) return;
+  const msg = (state.text || ' ').trim() || ' ';
+  // フォントサイズ: 行数の 0.7 を目安 (画面の縦に大きく)
+  const fs = Math.round(cellH * rows * 0.7);
+
+  // 一旦オフスクリーンに描いてメッセージ幅を測定
+  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  mctx.textBaseline = 'middle';
+  const metrics = mctx.measureText(msg);
+  const msgW = Math.ceil(metrics.width);
+  const gap  = Math.round(fs * 1.2); // メッセージ間スペース
+  maskWidth  = msgW + gap;
+
+  // マスク canvas は (maskWidth * 2) で seamless 用に同じメッセージを2回描く
+  mask.width  = Math.max(2, Math.floor(maskWidth * 2 * dpr));
+  mask.height = Math.max(2, Math.floor(stageH * dpr));
+  mctx.setTransform(dpr,0,0,dpr,0,0);
+  mctx.clearRect(0, 0, maskWidth * 2, stageH);
+  mctx.fillStyle = '#fff';
+  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  mctx.textBaseline = 'middle';
+  // 軽くぼかしてマスクを膨らませる (シャープなエッジより馴染む)
+  mctx.shadowColor = '#fff';
+  mctx.shadowBlur = Math.max(2, fs * 0.04);
+  mctx.fillText(msg, 0, stageH / 2);
+  mctx.fillText(msg, maskWidth, stageH / 2);
+  mctx.shadowBlur = 0;
+}
+
+function tick(now){
+  if(!lastFrame) lastFrame = now;
+  const dt = Math.min(60, now - lastFrame);
+  lastFrame = now;
+
+  // スクロール
+  if(state.dir !== 'static'){
+    const v = state.speed * 0.08; // px / ms 換算
+    scrollX += (state.dir === 'left' ? 1 : -1) * v * dt;
+  }
+  if(maskWidth){
+    scrollX = ((scrollX % maskWidth) + maskWidth) % maskWidth;
+  }
+
+  // 文字明滅
+  const flick = FLICK_LEVELS[state.flick];
+  for(let r = 0; r < rows; r++){
+    for(let c = 0; c < cols; c++){
+      const cell = cells[r][c];
+      if(now >= cell.next){
+        cell.ch = pickChar();
+        cell.next = now + flick.chgMin + Math.random() * (flick.chgMax - flick.chgMin);
+      }
+    }
+  }
+
+  // 黒で全消去 (背景)
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, stageW, stageH);
+
+  const p = PALETTES[state.palette];
+  const fontSize = cellH * 0.78;
+  ctx.font = `${fontSize}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'center';
+
+  // === Layer A: 背景セル (暗めの dim 文字) ===
+  ctx.fillStyle = `rgba(${hexR(p.c2)},${hexG(p.c2)},${hexB(p.c2)},0.18)`;
+  for(let r = 0; r < rows; r++){
+    const y = r * cellH + cellH / 2;
+    for(let c = 0; c < cols; c++){
+      const x = c * cellW + cellW / 2;
+      // 明滅で時々ピカッと明るく (確率)
+      const cell = cells[r][c];
+      const alphaScale = 0.7 + Math.sin((now + r * 137 + c * 53) * 0.001) * 0.3;
+      ctx.globalAlpha = 0.22 * alphaScale;
+      ctx.fillText(cell.ch, x, y);
+    }
+  }
+  ctx.globalAlpha = 1;
+
+  // === Layer B: メッセージ部分 (高輝度+グロー) ===
+  // 前景 canvas に描いてからメッセージマスクで切り抜く
+  fg.width = canvas.width;
+  fg.height = canvas.height;
+  fctx.setTransform(dpr,0,0,dpr,0,0);
+  fctx.clearRect(0, 0, stageW, stageH);
+  fctx.font = `bold ${fontSize}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  fctx.textBaseline = 'middle';
+  fctx.textAlign = 'center';
+
+  // グロー設定 (shadow を 2 段で)
+  const [b1, b2] = GLOW_LEVELS[state.glow].canvas;
+  // 1段目: 外側の青グロー
+  fctx.shadowColor = p.c2;
+  fctx.shadowBlur = b2;
+  fctx.fillStyle = p.c1;
+  for(let r = 0; r < rows; r++){
+    const y = r * cellH + cellH / 2;
+    for(let c = 0; c < cols; c++){
+      const x = c * cellW + cellW / 2;
+      const cell = cells[r][c];
+      fctx.fillText(cell.ch, x, y);
+    }
+  }
+  // 2段目: 内側の白コア
+  fctx.shadowColor = p.c1;
+  fctx.shadowBlur = b1;
+  fctx.fillStyle = '#ffffff';
+  for(let r = 0; r < rows; r++){
+    const y = r * cellH + cellH / 2;
+    for(let c = 0; c < cols; c++){
+      const x = c * cellW + cellW / 2;
+      fctx.fillText(cells[r][c].ch, x, y);
+    }
+  }
+  fctx.shadowBlur = 0;
+
+  // メッセージマスクで切り抜き
+  fctx.globalCompositeOperation = 'destination-in';
+  // mask を seamless に 2 回貼る (scrollX 分ずらして)
+  const sx = -scrollX;
+  fctx.drawImage(mask, sx, 0, maskWidth, stageH);
+  fctx.drawImage(mask, sx + maskWidth, 0, maskWidth, stageH);
+  fctx.drawImage(mask, sx - maskWidth, 0, maskWidth, stageH);
+  fctx.globalCompositeOperation = 'source-over';
+
+  // 前景を main に合成
+  ctx.drawImage(fg, 0, 0, stageW, stageH);
+
+  rafId = requestAnimationFrame(tick);
+}
+
+function startRain(){
+  if(rafId) return;
+  lastFrame = 0;
+  rafId = requestAnimationFrame(tick);
+}
+function stopRain(){
+  if(rafId){ cancelAnimationFrame(rafId); rafId = null; }
+}
+
+// ============================================================
+// Color util
+// ============================================================
+function hexR(h){return parseInt(h.slice(1,3),16)}
+function hexG(h){return parseInt(h.slice(3,5),16)}
+function hexB(h){return parseInt(h.slice(5,7),16)}
+
+// ============================================================
+// UI bind
+// ============================================================
 function renderSwatches(){
   swatchesEl.innerHTML = '';
   PALETTES.forEach((p, i) => {
@@ -264,11 +496,8 @@ function renderSwatches(){
     swatchesEl.appendChild(el);
   });
 }
-
 function renderDirBtns(){
-  document.querySelectorAll('.seg-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.dir === state.dir);
-  });
+  document.querySelectorAll('[data-dir]').forEach(b => b.classList.toggle('active', b.dataset.dir === state.dir));
 }
 
 function bind(){
@@ -276,58 +505,47 @@ function bind(){
   $('spd').value = state.speed;
   $('sz').value  = state.size;
   $('glow').value = state.glow;
+  $('charset').value = state.charset;
+  $('flick').value = state.flick;
+  $('charsetVal').textContent = CHARSETS[state.charset].name;
+  $('flickVal').textContent = FLICK_LEVELS[state.flick].name;
 
-  $('msg').addEventListener('input', e => {
-    state.text = e.target.value;
-    saveState(); applyText();
+  $('msg').addEventListener('input', e => { state.text = e.target.value; saveState(); applyText(); });
+  $('spd').addEventListener('input', e => { state.speed = +e.target.value; saveState(); applyMotion(); });
+  $('sz').addEventListener('input', e => { state.size = +e.target.value; saveState(); applySize(); if(state.mode==='rain') resizeCanvas(); });
+  $('glow').addEventListener('input', e => { state.glow = +e.target.value; saveState(); applyGlow(); });
+  $('charset').addEventListener('input', e => {
+    state.charset = +e.target.value; saveState();
+    $('charsetVal').textContent = CHARSETS[state.charset].name;
   });
-  $('spd').addEventListener('input', e => {
-    state.speed = +e.target.value;
-    saveState(); applyMotion();
+  $('flick').addEventListener('input', e => {
+    state.flick = +e.target.value; saveState();
+    $('flickVal').textContent = FLICK_LEVELS[state.flick].name;
   });
-  $('sz').addEventListener('input', e => {
-    state.size = +e.target.value;
-    saveState(); applySize();
+  document.querySelectorAll('[data-dir]').forEach(b => {
+    b.addEventListener('click', () => { state.dir = b.dataset.dir; saveState(); applyMotion(); renderDirBtns(); });
   });
-  $('glow').addEventListener('input', e => {
-    state.glow = +e.target.value;
-    saveState(); applyGlow();
-  });
-  document.querySelectorAll('.seg-btn').forEach(b => {
-    b.addEventListener('click', () => {
-      state.dir = b.dataset.dir;
-      saveState(); applyMotion(); renderDirBtns();
-    });
+  document.querySelectorAll('[data-mode]').forEach(b => {
+    b.addEventListener('click', () => { state.mode = b.dataset.mode; saveState(); applyMode(); });
   });
 
-  // 設定パネル開閉
-  stage.addEventListener('click', e => {
-    // textarea 入力中などは無視
-    if(panel.classList.contains('open')) return;
-    openPanel();
-  });
-  toggle.addEventListener('click', e => {
-    e.stopPropagation();
-    panel.classList.contains('open') ? closePanel() : openPanel();
-  });
+  stage.addEventListener('click', () => { if(!panel.classList.contains('open')) openPanel(); });
+  toggle.addEventListener('click', e => { e.stopPropagation(); panel.classList.contains('open') ? closePanel() : openPanel(); });
   $('closeBtn').addEventListener('click', closePanel);
   $('fullBtn').addEventListener('click', goFullscreen);
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePanel(); });
 
-  // パネル外をタップで閉じる
-  document.addEventListener('keydown', e => {
-    if(e.key === 'Escape') closePanel();
+  window.addEventListener('resize', () => {
+    if(state.mode === 'rain') resizeCanvas();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if(document.hidden) stopRain();
+    else if(state.mode === 'rain') startRain();
   });
 }
 
-function openPanel(){
-  panel.classList.add('open');
-  toggle.classList.add('hidden');
-}
-function closePanel(){
-  panel.classList.remove('open');
-  toggle.classList.remove('hidden');
-}
-
+function openPanel(){ panel.classList.add('open'); toggle.classList.add('hidden'); }
+function closePanel(){ panel.classList.remove('open'); toggle.classList.remove('hidden'); }
 function goFullscreen(){
   const el = document.documentElement;
   if(document.fullscreenElement){ document.exitFullscreen(); return; }
@@ -336,17 +554,25 @@ function goFullscreen(){
   closePanel();
 }
 
-// 初回適用
+// ============================================================
+// 起動
+// ============================================================
 applyText();
 applyPalette();
 applyGlow();
 applySize();
-applyMotion();
 renderSwatches();
 renderDirBtns();
 bind();
+applyMode();
 
-// Service Worker 登録
+// Web font 読み込み完了後にマスクを再描画 (フォント未ロード時に幅が狂うため)
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(() => { rebuildMask(); });
+}
+
+if(state.mode === 'rain'){ startRain(); }
+
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(()=>{});
