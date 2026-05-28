@@ -19,7 +19,7 @@
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;overflow:hidden;background:#000;color:#fff;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
-  body{font-family:'DotGothic16','Press Start 2P',monospace;display:flex;flex-direction:column;height:100dvh;width:100vw}
+  body{font-family:'DotGothic16','Press Start 2P','Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',monospace;display:flex;flex-direction:column;height:100dvh;width:100vw}
 
   #stage{flex:1;position:relative;overflow:hidden;background:#000;cursor:pointer}
   #rain{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
@@ -158,7 +158,7 @@
 
   <div class="rain-only">
     <label>背景の文字種 <span id="charsetVal">カタカナ+数字</span></label>
-    <input type="range" id="charset" min="0" max="3" value="0" step="1">
+    <input type="range" id="charset" min="0" max="7" value="0" step="1">
 
     <label>明滅の速さ <span id="flickVal">標準</span></label>
     <input type="range" id="flick" min="0" max="3" value="2" step="1">
@@ -194,7 +194,17 @@ const CHARSETS = [
   {name:'英数字+記号',   chars:'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*+=<>?/[]{}'},
   {name:'バイナリ',      chars:'01'},
   {name:'藪医者の漢字',  chars:'藪医者学電光掲示板診断推論家庭医療緩和ケアシステム思考認知バイアス'},
+  // 絵文字: Array.from で codePoint 単位 (サロゲートペア対応)。
+  // VS16 (U+FE0F) を含む合成絵文字は handle 不能なので、単一 codepoint の絵文字に絞る。
+  {name:'星空・雷',      chars:Array.from('⚡✨💫⭐🌟💎🌠🌌🪐☄🌙🌛🌜🌝🌞🔥')},
+  {name:'天気・自然',    chars:Array.from('☀☁☂☃❄⛄🌈🌊🌸🌺🌻🌷🌼🍀🌿🌱🌾')},
+  {name:'顔・ハート',    chars:Array.from('😀😊😎🥹😴🤔😇🥰😆😂🤩💖💙💚💛🧡💜🤍🖤❤')},
+  {name:'医療・学び',    chars:Array.from('🩺💊💉🧬🧠📚📖📝✏🔬🔭🎓🏥📊💡🩹')},
 ];
+// "DotGothic16", "Noto Sans CJK JP" の後に絵文字フォントを fallback で
+// 並べる。Mac/iOS は Apple Color Emoji、Win は Segoe UI Emoji、Android は
+// Noto Color Emoji。これがないと canvas で絵文字が豆腐になる。
+const FONT_STACK = `'DotGothic16', 'Noto Sans CJK JP', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', monospace`;
 const FLICK_LEVELS = [
   {name:'静か',   chgMin:1200, chgMax:4000},
   {name:'ゆるい', chgMin:600,  chgMax:2200},
@@ -293,11 +303,20 @@ let maskWidth = 0; // メッセージ1個分の幅 (繰り返し単位)
 
 function pickChar(){
   const cs = CHARSETS[state.charset].chars;
-  return cs.charAt(Math.floor(Math.random() * cs.length));
+  // 配列 (絵文字セット) と文字列 (BMP のみ) 両対応
+  const i = Math.floor(Math.random() * cs.length);
+  return typeof cs === 'string' ? cs.charAt(i) : cs[i];
 }
 
 function resizeCanvas(){
   const rect = stage.getBoundingClientRect();
+  // PWA standalone の初回 paint 前は rect が 0 のことがある (特に iOS Safari)。
+  // 一度ここで諦めると tick() が rows=0 で永遠に黒画面のまま → resize を
+  // 諦めない・次フレームで再試行する。
+  if(rect.width < 10 || rect.height < 10){
+    requestAnimationFrame(resizeCanvas);
+    return;
+  }
   stageW = rect.width;
   stageH = rect.height;
   dpr = Math.min(window.devicePixelRatio || 1, 1.75);
@@ -337,7 +356,7 @@ function rebuildMask(){
   const fs = Math.round(cellH * rows * 0.7);
 
   // 一旦オフスクリーンに描いてメッセージ幅を測定
-  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  mctx.font = `bold ${fs}px ${FONT_STACK}`;
   mctx.textBaseline = 'middle';
   const metrics = mctx.measureText(msg);
   const msgW = Math.ceil(metrics.width);
@@ -350,7 +369,7 @@ function rebuildMask(){
   mctx.setTransform(dpr,0,0,dpr,0,0);
   mctx.clearRect(0, 0, maskWidth * 2, stageH);
   mctx.fillStyle = '#fff';
-  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  mctx.font = `bold ${fs}px ${FONT_STACK}`;
   mctx.textBaseline = 'middle';
   // 軽くぼかしてマスクを膨らませる (シャープなエッジより馴染む)
   mctx.shadowColor = '#fff';
@@ -392,7 +411,7 @@ function tick(now){
 
   const p = PALETTES[state.palette];
   const fontSize = cellH * 0.78;
-  ctx.font = `${fontSize}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  ctx.font = `${fontSize}px ${FONT_STACK}`;
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'center';
 
@@ -417,7 +436,7 @@ function tick(now){
   fg.height = canvas.height;
   fctx.setTransform(dpr,0,0,dpr,0,0);
   fctx.clearRect(0, 0, stageW, stageH);
-  fctx.font = `bold ${fontSize}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  fctx.font = `bold ${fontSize}px ${FONT_STACK}`;
   fctx.textBaseline = 'middle';
   fctx.textAlign = 'center';
 
@@ -572,6 +591,13 @@ if(document.fonts && document.fonts.ready){
 }
 
 if(state.mode === 'rain'){ startRain(); }
+
+// PWA standalone 起動の初回 paint で stage rect が 0 になるケースの保険。
+// applyMode → resizeCanvas が走っているが、load 後にもう一度回しておくと
+// レイアウト確定後にちゃんと cells が組まれる。
+window.addEventListener('load', () => {
+  if(state.mode === 'rain') resizeCanvas();
+});
 
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
