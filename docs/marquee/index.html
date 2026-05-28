@@ -166,25 +166,34 @@
 // ============================================================
 // 設定
 // ============================================================
-const PALETTES = [
-  // === 既存 8 色 (ブルー系 + 寒色 + 暖色のアース) ===
-  {name:'電光青',     c1:'#4cc9ff', c2:'#0a84ff', c3:'#0033aa'},
-  {name:'白氷',       c1:'#bfe9ff', c2:'#7cd3ff', c3:'#3a80c0'},
-  {name:'シアン',     c1:'#5ffbf1', c2:'#0bc4d9', c3:'#0a6478'},
-  {name:'藍夜',       c1:'#7aa7ff', c2:'#3b5bdb', c3:'#1a237e'},
-  {name:'紫電',       c1:'#c39bff', c2:'#7c4dff', c3:'#311b92'},
-  {name:'珊瑚',       c1:'#ffb3a7', c2:'#ff6b6b', c3:'#a8324a'},
-  {name:'琥珀',       c1:'#ffd56b', c2:'#ff9d3a', c3:'#a05a00'},
-  {name:'若葉',       c1:'#a8ff8b', c2:'#3ddc84', c3:'#0a5d34'},
-  // === 駅 LED 風 (古き良きドットマトリクス) ===
+// クラシックモード用 (CSS text-shadow で発光・グロー前提の柔らかい色)
+const PALETTES_CLASSIC = [
+  {name:'電光青',  c1:'#4cc9ff', c2:'#0a84ff', c3:'#0033aa'},
+  {name:'白氷',    c1:'#bfe9ff', c2:'#7cd3ff', c3:'#3a80c0'},
+  {name:'シアン',  c1:'#5ffbf1', c2:'#0bc4d9', c3:'#0a6478'},
+  {name:'藍夜',    c1:'#7aa7ff', c2:'#3b5bdb', c3:'#1a237e'},
+  {name:'紫電',    c1:'#c39bff', c2:'#7c4dff', c3:'#311b92'},
+  {name:'珊瑚',    c1:'#ffb3a7', c2:'#ff6b6b', c3:'#a8324a'},
+  {name:'琥珀',    c1:'#ffd56b', c2:'#ff9d3a', c3:'#a05a00'},
+  {name:'若葉',    c1:'#a8ff8b', c2:'#3ddc84', c3:'#0a5d34'},
+];
+// ドット LED モード用 (硬い・ハッキリした LED 看板の色)
+const PALETTES_DOT = [
   {name:'明街赤',     c1:'#ff4d4d', c2:'#d92626', c3:'#6b0a0a'},
   {name:'アンバー',   c1:'#ffa54f', c2:'#d97516', c3:'#663300'},
   {name:'案内緑',     c1:'#5fff7f', c2:'#16a34a', c3:'#0a4d20'},
-  // === ネオン系 (繁華街・サイバーパンク) ===
+  {name:'電光青',     c1:'#4cc9ff', c2:'#0a84ff', c3:'#0033aa'},
+  {name:'純白',       c1:'#ffffff', c2:'#e0e0e0', c3:'#999999'},
   {name:'ホットピンク',c1:'#ff5fb3', c2:'#d61f7d', c3:'#6b0c3e'},
   {name:'アシッド緑', c1:'#c0ff00', c2:'#88c700', c3:'#3d5800'},
   {name:'電紫',       c1:'#d479ff', c2:'#8b00ff', c3:'#2c0066'},
 ];
+function activePalettes(){ return state.mode === 'dot' ? PALETTES_DOT : PALETTES_CLASSIC; }
+function activePaletteIdx(){ return state.mode === 'dot' ? state.paletteDot : state.paletteClassic; }
+function activePalette(){
+  const arr = activePalettes();
+  return arr[activePaletteIdx()] || arr[0];
+}
 const GLOW_LEVELS = [
   {name:'控えめ', css:`0 0 2px #fff,0 0 4px #fff,0 0 8px var(--c1),0 0 16px var(--c2)`,         canvas:[6,12]},
   {name:'標準',   css:`0 0 2px #fff,0 0 6px #fff,0 0 14px var(--c1),0 0 28px var(--c1),0 0 48px var(--c2),0 0 72px var(--c2),0 0 110px var(--c3)`, canvas:[14,28]},
@@ -193,7 +202,10 @@ const GLOW_LEVELS = [
 
 const DEFAULTS = {
   text:'藪医者の学び  Tama Marquee',
-  speed:22, size:22, dir:'left', palette:0, glow:1,
+  speed:22, size:22, dir:'left',
+  paletteClassic:0,  // 電光青
+  paletteDot:0,      // 明街赤
+  glow:1,
   mode:'classic',
 };
 const KEY = 'marquee.v2';
@@ -203,10 +215,22 @@ let state = (function(){
     const merged = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(KEY)||'{}'));
     const clamp = (v, max, fallback) =>
       (typeof v === 'number' && v >= 0 && v < max) ? v : fallback;
-    merged.palette = clamp(merged.palette, PALETTES.length,    DEFAULTS.palette);
-    merged.glow    = clamp(merged.glow,    GLOW_LEVELS.length, DEFAULTS.glow);
+    // 旧スキーマ (state.palette が単一の 0-13 整数) の自動 migration。
+    // 旧 0-7 は CLASSIC 8 色、旧 8-13 は DOT 用追加色だった。
+    if(typeof merged.palette === 'number'){
+      if(merged.palette < 8){
+        merged.paletteClassic = merged.palette;
+        if(typeof merged.paletteDot !== 'number') merged.paletteDot = 0;
+      } else {
+        merged.paletteDot = merged.palette - 8;
+        if(typeof merged.paletteClassic !== 'number') merged.paletteClassic = 0;
+      }
+      delete merged.palette;
+    }
+    merged.paletteClassic = clamp(merged.paletteClassic, PALETTES_CLASSIC.length, DEFAULTS.paletteClassic);
+    merged.paletteDot     = clamp(merged.paletteDot,     PALETTES_DOT.length,     DEFAULTS.paletteDot);
+    merged.glow           = clamp(merged.glow,           GLOW_LEVELS.length,      DEFAULTS.glow);
     // 旧バージョンの 'rain' (Glyph Rain) は dot に migrate。
-    // それ以外で classic/dot 以外の値は classic デフォルトに。
     if(merged.mode === 'rain') merged.mode = 'dot';
     if(merged.mode !== 'classic' && merged.mode !== 'dot') merged.mode = DEFAULTS.mode;
     if(merged.dir !== 'left' && merged.dir !== 'right' && merged.dir !== 'static') merged.dir = DEFAULTS.dir;
@@ -243,7 +267,7 @@ function applyText(){
   rebuildMask();
 }
 function applyPalette(){
-  const p = PALETTES[state.palette] || PALETTES[0];
+  const p = activePalette();
   document.documentElement.style.setProperty('--c1', p.c1);
   document.documentElement.style.setProperty('--c2', p.c2);
   document.documentElement.style.setProperty('--c3', p.c3);
@@ -279,6 +303,9 @@ function applyMode(){
   document.body.classList.toggle('mode-dot', state.mode === 'dot');
   document.body.classList.toggle('mode-classic', state.mode === 'classic');
   document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
+  // mode 切替で別パレット系統に切り替わる。swatches も再描画。
+  applyPalette();
+  renderSwatches();
   // dot モード: フレームループを start/stop。レイアウト確定を 3 重ガード。
   if(state.mode === 'dot'){
     requestAnimationFrame(() => {
@@ -425,7 +452,7 @@ function tick(now){
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, stageW, stageH);
 
-  const p = PALETTES[state.palette];
+  const p = activePalette();
   const [b1] = GLOW_LEVELS[state.glow].canvas;
 
   // ドット半径: セルの 40%。OFF はやや小さく (枯れた電球感)
@@ -491,13 +518,16 @@ function hexB(h){return parseInt(h.slice(5,7),16)}
 // ============================================================
 function renderSwatches(){
   swatchesEl.innerHTML = '';
-  PALETTES.forEach((p, i) => {
+  const arr = activePalettes();
+  const cur = activePaletteIdx();
+  arr.forEach((p, i) => {
     const el = document.createElement('div');
-    el.className = 'sw' + (i === state.palette ? ' active' : '');
+    el.className = 'sw' + (i === cur ? ' active' : '');
     el.style.background = `radial-gradient(circle at 35% 35%, #fff 0%, ${p.c1} 30%, ${p.c2} 70%, ${p.c3} 100%)`;
     el.title = p.name;
     el.addEventListener('click', () => {
-      state.palette = i;
+      if(state.mode === 'dot') state.paletteDot = i;
+      else state.paletteClassic = i;
       saveState(); applyPalette(); renderSwatches();
     });
     swatchesEl.appendChild(el);
