@@ -476,10 +476,17 @@ function tick(now){
   }
   ctx.fill();
 
-  // === Pass 2: ON ドット (明るい白コア + cyan glow) ===
+  // === Pass 2: ON ドット (パレット色 + 同色 glow + 小さい白コア) ===
+  // 旧実装は fillStyle='#ffffff' 固定で、パレット切替時に中心が常に
+  // 白くて「赤を選んでも赤くない」現象が起きていた (たまさん指摘
+  // 2026-05-28)。本体をパレット色 p.c1 に変更。
+  //
+  // 2 段描画で本物の LED 球感を出す:
+  //   2a) 大きい円を p.c1 で塗って glow shadow → 色がしっかり出る
+  //   2b) 中心に小さい白コア (shadow なし) → ハイライト感
   ctx.shadowColor = p.c1;
   ctx.shadowBlur = b1;
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = p.c1;
   ctx.beginPath();
   for(let r = 0; r < rows; r++){
     const y = r * cellH + cellH / 2;
@@ -492,7 +499,23 @@ function tick(now){
     }
   }
   ctx.fill();
+
+  // 中心の小さい白コア (shadow 無し、半径 dotR の 35%)
   ctx.shadowBlur = 0;
+  ctx.fillStyle = '#ffffff';
+  const coreR = dotR * 0.35;
+  ctx.beginPath();
+  for(let r = 0; r < rows; r++){
+    const y = r * cellH + cellH / 2;
+    for(let c = 0; c < cols; c++){
+      const x = c * cellW + cellW / 2;
+      if(isDotOn(x, y)){
+        ctx.moveTo(x + coreR, y);
+        ctx.arc(x, y, coreR, 0, Math.PI * 2);
+      }
+    }
+  }
+  ctx.fill();
 
   rafId = requestAnimationFrame(tick);
 }
