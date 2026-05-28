@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="電光">
+<meta name="description" content="電光掲示板 PWA — iPhone / Mac でメッセージを流す">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
+<title>電光 — Marquee</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:#000;color:#fff;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+  body{font-family:'DotGothic16','Press Start 2P',monospace;display:flex;flex-direction:column;height:100dvh;width:100vw}
+
+  /* === 電光掲示板ステージ === */
+  #stage{flex:1;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#020814 0%,#000 70%);cursor:pointer}
+  #stage::before,#stage::after{
+    content:"";position:absolute;left:0;right:0;height:24px;pointer-events:none;z-index:2;
+  }
+  #stage::before{top:0;background:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,0))}
+  #stage::after{bottom:0;background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,0))}
+
+  /* スキャンライン (LED の走査線感) */
+  #stage>.scan{position:absolute;inset:0;pointer-events:none;z-index:3;
+    background:repeating-linear-gradient(to bottom,
+      rgba(255,255,255,.04) 0px,
+      rgba(255,255,255,.04) 1px,
+      transparent 1px,
+      transparent 3px);
+    mix-blend-mode:overlay;opacity:.6}
+
+  /* テキスト軌道 */
+  #track{position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;display:flex;align-items:center;will-change:transform}
+  #track .seg{padding-right:4em;display:inline-block}
+
+  /* 電光テキスト本体: 白コア + 青グロー多段 */
+  .glow{
+    color:#ffffff;
+    font-size:var(--fs,22vh);
+    line-height:1;
+    letter-spacing:.02em;
+    text-shadow:
+      0 0 2px #ffffff,
+      0 0 6px #ffffff,
+      0 0 14px var(--c1,#4cc9ff),
+      0 0 28px var(--c1,#4cc9ff),
+      0 0 48px var(--c2,#0a84ff),
+      0 0 72px var(--c2,#0a84ff),
+      0 0 110px var(--c3,#0033aa);
+    animation:flicker 4.2s infinite;
+  }
+  @keyframes flicker{
+    0%,18%,22%,25%,53%,57%,100%{filter:brightness(1)}
+    20%{filter:brightness(1.18)}
+    24%{filter:brightness(.92)}
+    55%{filter:brightness(1.08)}
+  }
+
+  /* スクロールアニメーション (JS で duration / direction 動的設定) */
+  @keyframes scroll-left{from{transform:translate(0,-50%)}to{transform:translate(-50%,-50%)}}
+  @keyframes scroll-right{from{transform:translate(-50%,-50%)}to{transform:translate(0,-50%)}}
+
+  /* 静止モード */
+  #track.static{animation:none !important;left:50%;transform:translate(-50%,-50%) !important;text-align:center}
+  #track.static .seg{padding-right:0;display:block;text-align:center}
+  #track.static .seg+.seg{display:none}
+
+  /* === 設定パネル === */
+  #panel{
+    position:fixed;left:0;right:0;bottom:0;z-index:10;
+    background:rgba(8,12,24,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid rgba(76,201,255,.3);
+    padding:16px 18px calc(20px + env(safe-area-inset-bottom)) 18px;
+    transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 -8px 40px rgba(0,80,180,.25);
+    max-height:80vh;overflow-y:auto;
+  }
+  #panel.open{transform:translateY(0)}
+  #panel h2{font-family:'DotGothic16',sans-serif;font-size:14px;color:#7cd3ff;letter-spacing:.15em;margin-bottom:10px;text-shadow:0 0 8px rgba(76,201,255,.6)}
+  #panel label{display:block;font-size:12px;color:#9bb;letter-spacing:.1em;margin:14px 0 6px}
+  #panel input[type=text],#panel textarea{
+    width:100%;background:#000;border:1px solid rgba(76,201,255,.35);color:#fff;
+    font-family:'DotGothic16',sans-serif;font-size:18px;padding:10px 12px;border-radius:6px;
+    outline:none;transition:border-color .2s,box-shadow .2s;
+  }
+  #panel input[type=text]:focus,#panel textarea:focus{border-color:#4cc9ff;box-shadow:0 0 0 3px rgba(76,201,255,.2)}
+  #panel textarea{resize:vertical;min-height:60px;line-height:1.4}
+  #panel input[type=range]{width:100%;accent-color:#4cc9ff}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .row>div{flex:1;min-width:130px}
+  .swatches{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .sw{width:34px;height:34px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer;transition:transform .15s,border-color .15s}
+  .sw.active{border-color:#fff;transform:scale(1.12)}
+  .seg-btns{display:flex;gap:6px;margin-top:4px}
+  .seg-btn{flex:1;padding:8px;background:#000;border:1px solid rgba(76,201,255,.3);color:#9bb;border-radius:6px;font-family:'DotGothic16',sans-serif;font-size:13px;cursor:pointer;transition:all .15s}
+  .seg-btn.active{background:rgba(76,201,255,.15);border-color:#4cc9ff;color:#fff}
+  .actions{display:flex;gap:10px;margin-top:18px}
+  .btn{flex:1;padding:12px;background:linear-gradient(135deg,#0a84ff,#4cc9ff);color:#fff;border:none;border-radius:8px;font-family:'DotGothic16',sans-serif;font-size:14px;letter-spacing:.1em;cursor:pointer;box-shadow:0 4px 16px rgba(10,132,255,.4)}
+  .btn.ghost{background:transparent;border:1px solid rgba(76,201,255,.4);color:#7cd3ff;box-shadow:none}
+
+  /* 設定ボタン (ステージ右上) */
+  #toggle{position:fixed;top:calc(12px + env(safe-area-inset-top));right:12px;z-index:9;
+    width:44px;height:44px;border-radius:50%;background:rgba(8,12,24,.7);border:1px solid rgba(76,201,255,.4);
+    color:#7cd3ff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    transition:opacity .3s,transform .2s}
+  #toggle:active{transform:scale(.92)}
+  #toggle.hidden{opacity:0;pointer-events:none}
+
+  /* ヒント */
+  #hint{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(124,211,255,.5);font-size:14px;letter-spacing:.2em;text-align:center;pointer-events:none;z-index:1;animation:fadeOut 4s forwards}
+  @keyframes fadeOut{0%,60%{opacity:1}100%{opacity:0}}
+
+  @media (max-width:600px){
+    #panel h2{font-size:13px}
+    .glow{font-size:var(--fs,18vh)}
+  }
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="track"><span class="seg glow"></span><span class="seg glow"></span></div>
+  <div class="scan"></div>
+  <div id="hint">画面タップで設定</div>
+</div>
+
+<button id="toggle" aria-label="設定">⚙</button>
+
+<div id="panel">
+  <h2>⚡ 電光掲示板</h2>
+
+  <label for="msg">メッセージ</label>
+  <textarea id="msg" rows="2" placeholder="流したい文字を入力" maxlength="200"></textarea>
+
+  <div class="row">
+    <div>
+      <label>速度 <span id="spdVal">中</span></label>
+      <input type="range" id="spd" min="5" max="60" value="22" step="1">
+    </div>
+    <div>
+      <label>大きさ <span id="szVal">22</span></label>
+      <input type="range" id="sz" min="8" max="50" value="22" step="1">
+    </div>
+  </div>
+
+  <label>方向</label>
+  <div class="seg-btns">
+    <button class="seg-btn active" data-dir="left">← 左に流す</button>
+    <button class="seg-btn" data-dir="right">右に流す →</button>
+    <button class="seg-btn" data-dir="static">■ 静止</button>
+  </div>
+
+  <label>電光カラー</label>
+  <div class="swatches" id="swatches">
+    <!-- JS で挿入 -->
+  </div>
+
+  <label>グロー強度 <span id="glowVal">標準</span></label>
+  <input type="range" id="glow" min="0" max="2" value="1" step="1">
+
+  <div class="actions">
+    <button class="btn" id="closeBtn">閉じて全画面</button>
+    <button class="btn ghost" id="fullBtn">フルスクリーン</button>
+  </div>
+</div>
+
+<script>
+// ---------- 設定 ----------
+const PALETTES = [
+  {name:'電光青',  c1:'#4cc9ff', c2:'#0a84ff', c3:'#0033aa'},
+  {name:'白氷',    c1:'#bfe9ff', c2:'#7cd3ff', c3:'#3a80c0'},
+  {name:'シアン',  c1:'#5ffbf1', c2:'#0bc4d9', c3:'#0a6478'},
+  {name:'藍夜',    c1:'#7aa7ff', c2:'#3b5bdb', c3:'#1a237e'},
+  {name:'紫電',    c1:'#c39bff', c2:'#7c4dff', c3:'#311b92'},
+  {name:'珊瑚',    c1:'#ffb3a7', c2:'#ff6b6b', c3:'#a8324a'},
+  {name:'琥珀',    c1:'#ffd56b', c2:'#ff9d3a', c3:'#a05a00'},
+  {name:'若葉',    c1:'#a8ff8b', c2:'#3ddc84', c3:'#0a5d34'},
+];
+
+const GLOW_LEVELS = [
+  {name:'控えめ', val:`0 0 2px #fff,0 0 4px #fff,0 0 8px var(--c1),0 0 16px var(--c2)`},
+  {name:'標準',   val:`0 0 2px #fff,0 0 6px #fff,0 0 14px var(--c1),0 0 28px var(--c1),0 0 48px var(--c2),0 0 72px var(--c2),0 0 110px var(--c3)`},
+  {name:'眩しい', val:`0 0 4px #fff,0 0 10px #fff,0 0 22px var(--c1),0 0 44px var(--c1),0 0 70px var(--c2),0 0 110px var(--c2),0 0 160px var(--c3),0 0 220px var(--c3)`},
+];
+
+const DEFAULTS = {
+  text:'藪医者の学び ⚡ Tama Marquee',
+  speed:22, size:22, dir:'left', palette:0, glow:1
+};
+const KEY = 'marquee.v1';
+
+// ---------- 状態 ----------
+let state = loadState();
+
+function loadState(){
+  try{ return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(KEY)||'{}')); }
+  catch{ return {...DEFAULTS}; }
+}
+function saveState(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{} }
+
+// ---------- DOM ----------
+const $ = id => document.getElementById(id);
+const track = $('track');
+const segs  = track.querySelectorAll('.seg');
+const stage = $('stage');
+const panel = $('panel');
+const toggle = $('toggle');
+const swatchesEl = $('swatches');
+
+// ---------- 初期化 ----------
+function applyText(){
+  segs.forEach(s => s.textContent = state.text || ' ');
+}
+function applyPalette(){
+  const p = PALETTES[state.palette] || PALETTES[0];
+  document.documentElement.style.setProperty('--c1', p.c1);
+  document.documentElement.style.setProperty('--c2', p.c2);
+  document.documentElement.style.setProperty('--c3', p.c3);
+}
+function applyGlow(){
+  const g = GLOW_LEVELS[state.glow] || GLOW_LEVELS[1];
+  segs.forEach(s => s.style.textShadow = g.val);
+  $('glowVal').textContent = g.name;
+}
+function applySize(){
+  document.documentElement.style.setProperty('--fs', state.size + 'vh');
+  $('szVal').textContent = state.size;
+}
+function applyMotion(){
+  if(state.dir === 'static'){
+    track.classList.add('static');
+    track.style.animation = 'none';
+    return;
+  }
+  track.classList.remove('static');
+  // スピード: スライダーが大きいほど速い → duration を反比例
+  const dur = (65 - state.speed); // 5..60 → 60..5 秒
+  const dir = state.dir === 'right' ? 'scroll-right' : 'scroll-left';
+  track.style.animation = `${dir} ${dur}s linear infinite`;
+  $('spdVal').textContent = state.speed < 15 ? 'ゆっくり' : state.speed < 30 ? '中' : state.speed < 45 ? '速い' : '爆速';
+}
+
+function renderSwatches(){
+  swatchesEl.innerHTML = '';
+  PALETTES.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'sw' + (i === state.palette ? ' active' : '');
+    el.style.background = `radial-gradient(circle at 35% 35%, #fff 0%, ${p.c1} 30%, ${p.c2} 70%, ${p.c3} 100%)`;
+    el.title = p.name;
+    el.addEventListener('click', () => {
+      state.palette = i;
+      saveState(); applyPalette(); renderSwatches();
+    });
+    swatchesEl.appendChild(el);
+  });
+}
+
+function renderDirBtns(){
+  document.querySelectorAll('.seg-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.dir === state.dir);
+  });
+}
+
+function bind(){
+  $('msg').value = state.text;
+  $('spd').value = state.speed;
+  $('sz').value  = state.size;
+  $('glow').value = state.glow;
+
+  $('msg').addEventListener('input', e => {
+    state.text = e.target.value;
+    saveState(); applyText();
+  });
+  $('spd').addEventListener('input', e => {
+    state.speed = +e.target.value;
+    saveState(); applyMotion();
+  });
+  $('sz').addEventListener('input', e => {
+    state.size = +e.target.value;
+    saveState(); applySize();
+  });
+  $('glow').addEventListener('input', e => {
+    state.glow = +e.target.value;
+    saveState(); applyGlow();
+  });
+  document.querySelectorAll('.seg-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      state.dir = b.dataset.dir;
+      saveState(); applyMotion(); renderDirBtns();
+    });
+  });
+
+  // 設定パネル開閉
+  stage.addEventListener('click', e => {
+    // textarea 入力中などは無視
+    if(panel.classList.contains('open')) return;
+    openPanel();
+  });
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    panel.classList.contains('open') ? closePanel() : openPanel();
+  });
+  $('closeBtn').addEventListener('click', closePanel);
+  $('fullBtn').addEventListener('click', goFullscreen);
+
+  // パネル外をタップで閉じる
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closePanel();
+  });
+}
+
+function openPanel(){
+  panel.classList.add('open');
+  toggle.classList.add('hidden');
+}
+function closePanel(){
+  panel.classList.remove('open');
+  toggle.classList.remove('hidden');
+}
+
+function goFullscreen(){
+  const el = document.documentElement;
+  if(document.fullscreenElement){ document.exitFullscreen(); return; }
+  if(el.requestFullscreen) el.requestFullscreen();
+  else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+  closePanel();
+}
+
+// 初回適用
+applyText();
+applyPalette();
+applyGlow();
+applySize();
+applyMotion();
+renderSwatches();
+renderDirBtns();
+bind();
+
+// Service Worker 登録
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
