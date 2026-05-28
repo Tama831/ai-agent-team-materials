@@ -8,7 +8,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="電光">
-<meta name="description" content="電光掲示板 PWA — 背景の明滅文字が電光メッセージを象る (iPhone / Android / Mac)">
+<meta name="description" content="電光掲示板 PWA — クラシック marquee とドット LED の 2 モード (iPhone / Android / Mac)">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -22,7 +22,7 @@
   body{font-family:'DotGothic16','Press Start 2P',monospace;display:flex;flex-direction:column;height:100dvh;width:100vw}
 
   #stage{flex:1;position:relative;overflow:hidden;background:#000;cursor:pointer}
-  #rain{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+  #dotcanvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
 
   /* スキャンライン (LED 走査線) */
   #stage>.scan{position:absolute;inset:0;pointer-events:none;z-index:3;
@@ -57,8 +57,8 @@
   #track.static .seg{padding-right:0;display:block;text-align:center}
   #track.static .seg+.seg{display:none}
 
-  body.mode-rain #track{display:none}
-  body.mode-classic #rain{display:none}
+  body.mode-dot #track{display:none}
+  body.mode-classic #dotcanvas{display:none}
 
   /* === 設定パネル === */
   #panel{
@@ -103,15 +103,15 @@
   #hint{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(124,211,255,.4);font-size:14px;letter-spacing:.2em;text-align:center;pointer-events:none;z-index:4;animation:fadeOut 4s forwards}
   @keyframes fadeOut{0%,60%{opacity:1}100%{opacity:0}}
 
-  .rain-only,.classic-only{display:none}
-  body.mode-rain .rain-only{display:block}
+  .dot-only,.classic-only{display:none}
+  body.mode-dot .dot-only{display:block}
   body.mode-classic .classic-only{display:block}
 </style>
 </head>
-<body class="mode-rain">
+<body class="mode-classic">
 
 <div id="stage">
-  <canvas id="rain"></canvas>
+  <canvas id="dotcanvas"></canvas>
   <div id="track"><span class="seg glow"></span><span class="seg glow"></span></div>
   <div class="vignette"></div>
   <div class="scan"></div>
@@ -128,8 +128,8 @@
 
   <label>モード</label>
   <div class="seg-btns">
-    <button class="seg-btn" data-mode="rain">◉ Glyph Rain</button>
-    <button class="seg-btn" data-mode="classic">○ クラシック</button>
+    <button class="seg-btn" data-mode="classic">◉ クラシック</button>
+    <button class="seg-btn" data-mode="dot">▦ ドット LED</button>
   </div>
 
   <div class="row">
@@ -156,14 +156,6 @@
   <label>グロー強度 <span id="glowVal">標準</span></label>
   <input type="range" id="glow" min="0" max="2" value="1" step="1">
 
-  <div class="rain-only">
-    <label>背景の文字種 <span id="charsetVal">カタカナ+数字</span></label>
-    <input type="range" id="charset" min="0" max="3" value="0" step="1">
-
-    <label>明滅の速さ <span id="flickVal">標準</span></label>
-    <input type="range" id="flick" min="0" max="3" value="2" step="1">
-  </div>
-
   <div class="actions">
     <button class="btn" id="closeBtn">閉じて全画面</button>
     <button class="btn ghost" id="fullBtn">フルスクリーン</button>
@@ -189,44 +181,25 @@ const GLOW_LEVELS = [
   {name:'標準',   css:`0 0 2px #fff,0 0 6px #fff,0 0 14px var(--c1),0 0 28px var(--c1),0 0 48px var(--c2),0 0 72px var(--c2),0 0 110px var(--c3)`, canvas:[14,28]},
   {name:'眩しい', css:`0 0 4px #fff,0 0 10px #fff,0 0 22px var(--c1),0 0 44px var(--c1),0 0 70px var(--c2),0 0 110px var(--c2),0 0 160px var(--c3)`, canvas:[28,56]},
 ];
-const CHARSETS = [
-  {name:'カタカナ+数字', chars:'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789'},
-  {name:'英数字+記号',   chars:'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*+=<>?/[]{}'},
-  {name:'バイナリ',      chars:'01'},
-  {name:'藪医者の漢字',  chars:'藪医者学電光掲示板診断推論家庭医療緩和ケアシステム思考認知バイアス'},
-];
-// 絵文字は Glyph Rain の背景文字としては「密度が高すぎてメッセージが浮き
-// 出ない」、CSS marquee (クラシック) でも shadow がメッセージ周囲に太く
-// 広がる構造上カラー絵文字が映えず、結局白い豆腐っぽくなる。今は対応を
-// 見送り、入力フォームに注記する (たまさん判断 2026-05-28)。
-const FONT_STACK = `'DotGothic16', 'Noto Sans CJK JP', monospace`;
-const FLICK_LEVELS = [
-  {name:'静か',   chgMin:1200, chgMax:4000},
-  {name:'ゆるい', chgMin:600,  chgMax:2200},
-  {name:'標準',   chgMin:200,  chgMax:1400},
-  {name:'激しい', chgMin:60,   chgMax:500},
-];
 
 const DEFAULTS = {
   text:'藪医者の学び  Tama Marquee',
   speed:22, size:22, dir:'left', palette:0, glow:1,
-  mode:'rain', charset:0, flick:2,
+  mode:'classic',
 };
 const KEY = 'marquee.v2';
 
 let state = (function(){
   try{
     const merged = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(KEY)||'{}'));
-    // 復元時に範囲外 index を強制クランプ (バージョン跨ぎでアレイ長が
-    // 縮んだ場合に CHARSETS[old_idx]===undefined → pickChar が TypeError
-    // で die → Glyph Rain だけ真っ暗、という事故を防ぐ)
     const clamp = (v, max, fallback) =>
       (typeof v === 'number' && v >= 0 && v < max) ? v : fallback;
-    merged.charset = clamp(merged.charset, CHARSETS.length,    DEFAULTS.charset);
     merged.palette = clamp(merged.palette, PALETTES.length,    DEFAULTS.palette);
     merged.glow    = clamp(merged.glow,    GLOW_LEVELS.length, DEFAULTS.glow);
-    merged.flick   = clamp(merged.flick,   FLICK_LEVELS.length,DEFAULTS.flick);
-    if(merged.mode !== 'rain' && merged.mode !== 'classic') merged.mode = DEFAULTS.mode;
+    // 旧バージョンの 'rain' (Glyph Rain) は dot に migrate。
+    // それ以外で classic/dot 以外の値は classic デフォルトに。
+    if(merged.mode === 'rain') merged.mode = 'dot';
+    if(merged.mode !== 'classic' && merged.mode !== 'dot') merged.mode = DEFAULTS.mode;
     if(merged.dir !== 'left' && merged.dir !== 'right' && merged.dir !== 'static') merged.dir = DEFAULTS.dir;
     return merged;
   }
@@ -244,15 +217,14 @@ const stage = $('stage');
 const panel = $('panel');
 const toggle = $('toggle');
 const swatchesEl = $('swatches');
-const canvas = $('rain');
+const canvas = $('dotcanvas');
 const ctx = canvas.getContext('2d', { alpha:false });
 
-// オフスクリーン: メッセージマスク
+// オフスクリーン: メッセージマスク (白文字 on 黒で描画 → 各ドットの
+// 中心点が「白」なら ON、「黒」なら OFF と判定する用)
 const mask = document.createElement('canvas');
 const mctx = mask.getContext('2d');
-// オフスクリーン: 前景セル (グロー描画用)
-const fg = document.createElement('canvas');
-const fctx = fg.getContext('2d');
+let maskData = null;  // ImageData (rebuildMask 時に取得、tick で lookup)
 
 // ============================================================
 // クラシック / 共通スタイル適用
@@ -275,7 +247,7 @@ function applyGlow(){
 function applySize(){
   document.documentElement.style.setProperty('--fs', state.size + 'vh');
   $('szVal').textContent = state.size;
-  rebuildMask();
+  if(state.mode === 'dot') resizeCanvas();
 }
 function applyMotion(){
   if(state.mode === 'classic'){
@@ -292,59 +264,45 @@ function applyMotion(){
   $('spdVal').textContent = state.speed < 15 ? 'ゆっくり' : state.speed < 30 ? '中' : state.speed < 45 ? '速い' : '爆速';
 }
 function applyMode(){
-  document.body.classList.toggle('mode-rain', state.mode === 'rain');
+  document.body.classList.toggle('mode-dot', state.mode === 'dot');
   document.body.classList.toggle('mode-classic', state.mode === 'classic');
   document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
-  // モード切替: rain 側はフレームループを start/stop する。
-  // body class 切替直後は stage rect が未確定で resize が空振りする
-  // ことがあるので 2 段階で試行 (RAF → setTimeout 80ms) + ResizeObserver
-  // の 3 重ガード。
-  if(state.mode === 'rain'){
+  // dot モード: フレームループを start/stop。レイアウト確定を 3 重ガード。
+  if(state.mode === 'dot'){
     requestAnimationFrame(() => {
       resizeCanvas();
-      if(cells.length === 0){
-        setTimeout(() => { resizeCanvas(); startRain(); }, 80);
+      if(stageW < 10){
+        setTimeout(() => { resizeCanvas(); startDot(); }, 80);
       } else {
-        startRain();
+        startDot();
       }
     });
   } else {
-    stopRain();
+    stopDot();
   }
   applyMotion();
 }
 
 // ============================================================
-// Glyph Rain — canvas レンダリング
+// ドット LED — canvas レンダリング
 // ============================================================
-let cells = [];
 let cellW = 0, cellH = 0, cols = 0, rows = 0, dpr = 1;
 let scrollX = 0;
 let lastFrame = 0;
 let rafId = null;
 let stageW = 0, stageH = 0;
-let maskWidth = 0; // メッセージ1個分の幅 (繰り返し単位)
+let maskWidth = 0;
 
-function pickChar(){
-  // 防衛コード: 何らかの理由で state.charset が範囲外になった場合に
-  // tick() を die させない (一度 throw すると Glyph Rain が永続的に
-  // 真っ暗になる)。
-  const set = CHARSETS[state.charset] || CHARSETS[0];
-  const cs = (set && set.chars) || ' ';
-  return cs.charAt(Math.floor(Math.random() * cs.length));
-}
+// 30fps スロットル。LED 看板の体感には 30fps で十分、shadowBlur 付き
+// arc 描画を毎フレーム数百個叩く処理を半減できる。
+const FRAME_INTERVAL = 33;
 
 function resizeCanvas(){
   const rect = stage.getBoundingClientRect();
-  // rect が 0 ならまだ layout 未確定 — フレームループは黙って止め、
-  // 次の resize / load / モード切替で再エントリさせる (RAF retry は
-  // 無限ループの温床なのでやめた)。
   if(rect.width < 10 || rect.height < 10) return;
 
   stageW = rect.width;
   stageH = rect.height;
-  // iPhone の Retina 3x をそのまま使うと 1 フレーム当たりの pixel 処理
-  // 量が 9 倍になって熱を持つ。dpr は最大 1.5 に抑える。
   dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
   canvas.width  = Math.floor(stageW * dpr);
@@ -353,25 +311,13 @@ function resizeCanvas(){
   canvas.style.height = stageH + 'px';
   ctx.setTransform(dpr,0,0,dpr,0,0);
 
-  // セル数 = メッセージを象るドットマトリクス解像度。
-  // 行数 18〜34 (旧 14〜42 を粗くしすぎた 12〜22 から差し戻し)。
-  // 漢字 (藪・診断 等) を読ませるには縦 18 ドット以上 = 行 30+ が要る。
-  // スライダー size=8 → 34 行 (細密)、size=50 → 18 行 (粗ドット)。
-  const targetRows = Math.round(34 - (state.size - 8) * (16 / 42));
+  // ドット格子: size slider で疎密。size=8 → rows=32 (細密 LED)、
+  // size=50 → rows=12 (大きい LED 玉)。横は cellH と同比 (正方格子)。
+  const targetRows = Math.round(32 - (state.size - 8) * (20 / 42));
   cellH = stageH / targetRows;
-  cellW = cellH * 0.58; // 縦長セル (ドットマトリクス感、少し詰めた)
+  cellW = cellH; // 正方格子
   cols  = Math.ceil(stageW / cellW) + 2;
   rows  = Math.ceil(stageH / cellH);
-
-  const now = performance.now();
-  cells = [];
-  for(let r = 0; r < rows; r++){
-    const row = [];
-    for(let c = 0; c < cols; c++){
-      row.push({ ch: pickChar(), next: now + 100 + Math.random() * 2000 });
-    }
-    cells.push(row);
-  }
 
   rebuildMask();
 }
@@ -379,41 +325,48 @@ function resizeCanvas(){
 function rebuildMask(){
   if(!stageW) return;
   const msg = (state.text || ' ').trim() || ' ';
-  // フォントサイズ:
-  //   画面高さの 75% を目安 (= 大きく表示)。
-  //   ただし縦持ちスマホでは stageW < stageH なので、1 文字で画面横を
-  //   越えて 1 文字しか映らずスクロール待ちが長すぎる事故が起きる。
-  //   横幅の 55% でもクランプする (= スマホ縦持ちで 1.8 文字程度同時表示)。
+  // メッセージ高さ = 画面の 70% (縦持ちスマホでは横幅 0.55 でクランプ)
   const fs = Math.round(Math.min(stageH * 0.75, stageW * 0.55));
 
   // 一旦オフスクリーンに描いてメッセージ幅を測定
-  mctx.font = `bold ${fs}px ${FONT_STACK}`;
+  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
   mctx.textBaseline = 'middle';
   const metrics = mctx.measureText(msg);
   const msgW = Math.ceil(metrics.width);
-  const gap  = Math.round(fs * 1.2); // メッセージ間スペース
+  const gap  = Math.round(fs * 1.2);
   maskWidth  = msgW + gap;
 
-  // マスク canvas は (maskWidth * 2) で seamless 用に同じメッセージを2回描く
+  // mask を seamless 用に「メッセージ 2 個分」の幅で作る
   mask.width  = Math.max(2, Math.floor(maskWidth * 2 * dpr));
   mask.height = Math.max(2, Math.floor(stageH * dpr));
   mctx.setTransform(dpr,0,0,dpr,0,0);
-  mctx.clearRect(0, 0, maskWidth * 2, stageH);
+  // 背景を黒で塗ってから白文字を描く (alpha チャンネルではなく
+  // RGB の明度で ON/OFF 判定するため。alpha:false canvas 互換)
+  mctx.fillStyle = '#000';
+  mctx.fillRect(0, 0, maskWidth * 2, stageH);
   mctx.fillStyle = '#fff';
-  mctx.font = `bold ${fs}px ${FONT_STACK}`;
+  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
   mctx.textBaseline = 'middle';
-  // 軽くぼかしてマスクを膨らませる (シャープなエッジより馴染む)
-  mctx.shadowColor = '#fff';
-  mctx.shadowBlur = Math.max(2, fs * 0.04);
   mctx.fillText(msg, 0, stageH / 2);
   mctx.fillText(msg, maskWidth, stageH / 2);
-  mctx.shadowBlur = 0;
+
+  // 全 pixel data を保存。tick での isDotOn() はここから lookup する
+  // だけなので軽い。
+  maskData = mctx.getImageData(0, 0, mask.width, mask.height);
 }
 
-// 30fps スロットル: iPhone Safari で 60fps × shadowBlur 付き fillText
-// は確実に熱を持つ。電光掲示板の見栄えに 60fps は不要 (人間の目には
-// 30fps でも十分に明滅・スクロールが滑らかに見える)。
-const FRAME_INTERVAL = 33; // ms — ≒30fps
+function isDotOn(x, y){
+  if(!maskData || !maskWidth) return false;
+  // stage 座標 → mask 内の seamless 座標
+  let mx = (x + scrollX) % maskWidth;
+  if(mx < 0) mx += maskWidth;
+  const px = Math.floor(mx * dpr);
+  const py = Math.floor(y * dpr);
+  if(px < 0 || px >= mask.width || py < 0 || py >= mask.height) return false;
+  // 白文字部分 = R channel 高い。閾値 128 で ON 判定
+  const idx = (py * mask.width + px) * 4;
+  return maskData.data[idx] > 128;
+}
 
 function tick(now){
   if(!lastFrame) lastFrame = now;
@@ -422,32 +375,16 @@ function tick(now){
     rafId = requestAnimationFrame(tick);
     return;
   }
-  // dt は最大 60ms にクランプ (タブ復帰時の巨大ジャンプ抑制)
   const stepDt = Math.min(60, dt);
   lastFrame = now;
 
   // スクロール
   if(state.dir !== 'static'){
-    const v = state.speed * 0.08; // px / ms 換算
+    const v = state.speed * 0.08;
     scrollX += (state.dir === 'left' ? 1 : -1) * v * stepDt;
   }
   if(maskWidth){
     scrollX = ((scrollX % maskWidth) + maskWidth) % maskWidth;
-  }
-
-  // 文字明滅 — 全セル走査は重いので毎フレーム最大 N 個だけランダム
-  // 更新する。N は cells 数の 1/8 程度。flick "激しい" でも体感上十分。
-  const flick = FLICK_LEVELS[state.flick];
-  const cellCount = rows * cols;
-  const updatesPerFrame = Math.max(1, Math.floor(cellCount / 8));
-  for(let i = 0; i < updatesPerFrame; i++){
-    const r = Math.floor(Math.random() * rows);
-    const c = Math.floor(Math.random() * cols);
-    const cell = cells[r][c];
-    if(now >= cell.next){
-      cell.ch = pickChar();
-      cell.next = now + flick.chgMin + Math.random() * (flick.chgMax - flick.chgMin);
-    }
   }
 
   // 背景クリア
@@ -455,87 +392,56 @@ function tick(now){
   ctx.fillRect(0, 0, stageW, stageH);
 
   const p = PALETTES[state.palette];
-  const fontSize = cellH * 0.78;
-  ctx.font = `${fontSize}px ${FONT_STACK}`;
-  ctx.textBaseline = 'middle';
-  ctx.textAlign = 'center';
-
-  // === Layer A: 背景セル (薄い dim) — shadow なし ===
-  // dim alpha を sin 揺らぎで微妙に変化させる (オーラ感)。
-  // 0.12 → 0.06 に更に下げてもう一段地味に。メッセージとの段差最大化。
-  const dimBase = `rgba(${hexR(p.c2)},${hexG(p.c2)},${hexB(p.c2)},`;
-  for(let r = 0; r < rows; r++){
-    const y = r * cellH + cellH / 2;
-    const rowSin = 0.06 + Math.sin((now + r * 137) * 0.0008) * 0.03;
-    ctx.fillStyle = dimBase + rowSin.toFixed(3) + ')';
-    for(let c = 0; c < cols; c++){
-      const x = c * cellW + cellW / 2;
-      ctx.fillText(cells[r][c].ch, x, y);
-    }
-  }
-
-  // === メッセージ範囲を打ち抜き ===
-  // destination-out で mask の白 (= メッセージの形) 部分を透明化 →
-  // stage の CSS 背景 (#000) が透けて純黒に。これでメッセージ部の
-  // dim 文字がガッツリ消え、続けて乗せる白文字 + glow が周囲と
-  // ハッキリした明暗差で浮き出る。
-  ctx.globalCompositeOperation = 'destination-out';
-  const sxCut = -scrollX;
-  ctx.drawImage(mask, sxCut, 0, maskWidth, stageH);
-  ctx.drawImage(mask, sxCut + maskWidth, 0, maskWidth, stageH);
-  ctx.drawImage(mask, sxCut - maskWidth, 0, maskWidth, stageH);
-  ctx.globalCompositeOperation = 'source-over';
-
-  // === Layer B: メッセージ部分 (グロー 1 段で軽量化) ===
-  // 旧実装は shadow 2 段 (外側青 + 内側白) で seg 全セル分の fillText を
-  // 2 回 = 重さの 80%。1 段に絞っても見栄えは十分。
-  if(fg.width !== canvas.width || fg.height !== canvas.height){
-    fg.width = canvas.width;
-    fg.height = canvas.height;
-    fctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  fctx.clearRect(0, 0, stageW, stageH);
-  // 前景は文字を太く + 少し大きく + glow は控えめ。
-  // 旧 bold → 900 (Black) + cellH * 0.78 → 0.92 で 1セル目一杯。
-  // glow blur は GLOW_LEVELS の半分に絞ってメッセージ輪郭をシャープに
-  // (滲ませすぎると周囲の dim と混ざって読みづらくなる)。
-  const fgFontSize = cellH * 0.92;
-  fctx.font = `900 ${fgFontSize}px ${FONT_STACK}`;
-  fctx.textBaseline = 'middle';
-  fctx.textAlign = 'center';
-
   const [b1] = GLOW_LEVELS[state.glow].canvas;
-  fctx.shadowColor = p.c1;
-  fctx.shadowBlur = Math.round(b1 * 0.5);
-  fctx.fillStyle = '#ffffff';
+
+  // ドット半径: セルの 40%。OFF はやや小さく (枯れた電球感)
+  const dotR    = Math.min(cellW, cellH) * 0.40;
+  const dotROff = dotR * 0.55;
+
+  // === Pass 1: OFF ドット (薄い・shadow なし・小さい円) ===
+  // 全 dot のうち OFF (大多数) を先に shadow 無しで描いて軽くする
+  const offColor = `rgba(${hexR(p.c2)},${hexG(p.c2)},${hexB(p.c2)},0.10)`;
+  ctx.fillStyle = offColor;
+  ctx.beginPath();
   for(let r = 0; r < rows; r++){
     const y = r * cellH + cellH / 2;
     for(let c = 0; c < cols; c++){
       const x = c * cellW + cellW / 2;
-      fctx.fillText(cells[r][c].ch, x, y);
+      if(!isDotOn(x, y)){
+        ctx.moveTo(x + dotROff, y);
+        ctx.arc(x, y, dotROff, 0, Math.PI * 2);
+      }
     }
   }
-  fctx.shadowBlur = 0;
+  ctx.fill();
 
-  // メッセージマスクで切り抜き (seamless に 3 枚タイル)
-  fctx.globalCompositeOperation = 'destination-in';
-  const sx = -scrollX;
-  fctx.drawImage(mask, sx, 0, maskWidth, stageH);
-  fctx.drawImage(mask, sx + maskWidth, 0, maskWidth, stageH);
-  fctx.drawImage(mask, sx - maskWidth, 0, maskWidth, stageH);
-  fctx.globalCompositeOperation = 'source-over';
-
-  ctx.drawImage(fg, 0, 0, stageW, stageH);
+  // === Pass 2: ON ドット (明るい白コア + cyan glow) ===
+  ctx.shadowColor = p.c1;
+  ctx.shadowBlur = b1;
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath();
+  for(let r = 0; r < rows; r++){
+    const y = r * cellH + cellH / 2;
+    for(let c = 0; c < cols; c++){
+      const x = c * cellW + cellW / 2;
+      if(isDotOn(x, y)){
+        ctx.moveTo(x + dotR, y);
+        ctx.arc(x, y, dotR, 0, Math.PI * 2);
+      }
+    }
+  }
+  ctx.fill();
+  ctx.shadowBlur = 0;
 
   rafId = requestAnimationFrame(tick);
 }
 
-function startRain(){
+function startDot(){
   if(rafId) return;
   lastFrame = 0;
   rafId = requestAnimationFrame(tick);
 }
-function stopRain(){
+function stopDot(){
   if(rafId){ cancelAnimationFrame(rafId); rafId = null; }
 }
 
@@ -572,23 +478,11 @@ function bind(){
   $('spd').value = state.speed;
   $('sz').value  = state.size;
   $('glow').value = state.glow;
-  $('charset').value = state.charset;
-  $('flick').value = state.flick;
-  $('charsetVal').textContent = CHARSETS[state.charset].name;
-  $('flickVal').textContent = FLICK_LEVELS[state.flick].name;
 
   $('msg').addEventListener('input', e => { state.text = e.target.value; saveState(); applyText(); });
   $('spd').addEventListener('input', e => { state.speed = +e.target.value; saveState(); applyMotion(); });
-  $('sz').addEventListener('input', e => { state.size = +e.target.value; saveState(); applySize(); if(state.mode==='rain') resizeCanvas(); });
+  $('sz').addEventListener('input', e => { state.size = +e.target.value; saveState(); applySize(); });
   $('glow').addEventListener('input', e => { state.glow = +e.target.value; saveState(); applyGlow(); });
-  $('charset').addEventListener('input', e => {
-    state.charset = +e.target.value; saveState();
-    $('charsetVal').textContent = CHARSETS[state.charset].name;
-  });
-  $('flick').addEventListener('input', e => {
-    state.flick = +e.target.value; saveState();
-    $('flickVal').textContent = FLICK_LEVELS[state.flick].name;
-  });
   document.querySelectorAll('[data-dir]').forEach(b => {
     b.addEventListener('click', () => { state.dir = b.dataset.dir; saveState(); applyMotion(); renderDirBtns(); });
   });
@@ -603,26 +497,24 @@ function bind(){
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closePanel(); });
 
   window.addEventListener('resize', () => {
-    if(state.mode === 'rain') resizeCanvas();
+    if(state.mode === 'dot') resizeCanvas();
   });
   document.addEventListener('visibilitychange', () => {
     if(document.hidden){
-      stopRain();
-    } else if(state.mode === 'rain'){
-      // 復帰時に layout 再計算 + 強制 start。サイズが変わってる可能性も。
+      stopDot();
+    } else if(state.mode === 'dot'){
       resizeCanvas();
-      startRain();
+      startDot();
     }
   });
 
   // 3 重ガード: stage のサイズが確定 / 変動した瞬間に必ず resize + start。
-  // display:none ↔ block 切替、回転、PWA 起動直後の遅延 layout など、
-  // applyMode の RAF だけだと取りこぼすケースをここで救う。
+  // mode 切替で display:none ↔ block が動いた直後の layout 遅延を救う。
   if(typeof ResizeObserver !== 'undefined'){
     new ResizeObserver(() => {
-      if(state.mode === 'rain'){
+      if(state.mode === 'dot'){
         resizeCanvas();
-        startRain();
+        startDot();
       }
     }).observe(stage);
   }
@@ -650,18 +542,20 @@ renderDirBtns();
 bind();
 applyMode();
 
-// Web font 読み込み完了後にマスクを再描画 (フォント未ロード時に幅が狂うため)
+// Web font 読み込み完了後にマスクを再描画 (フォント未ロード時に幅が
+// 狂うため)
 if(document.fonts && document.fonts.ready){
-  document.fonts.ready.then(() => { rebuildMask(); });
+  document.fonts.ready.then(() => {
+    rebuildMask();
+    if(state.mode === 'dot') resizeCanvas();
+  });
 }
 
-if(state.mode === 'rain'){ startRain(); }
+if(state.mode === 'dot'){ startDot(); }
 
-// PWA standalone 起動の初回 paint で stage rect が 0 になるケースの保険。
-// applyMode → resizeCanvas が走っているが、load 後にもう一度回しておくと
-// レイアウト確定後にちゃんと cells が組まれる。
+// PWA standalone 起動の保険
 window.addEventListener('load', () => {
-  if(state.mode === 'rain') resizeCanvas();
+  if(state.mode === 'dot') resizeCanvas();
 });
 
 if('serviceWorker' in navigator){
