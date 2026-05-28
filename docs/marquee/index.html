@@ -436,11 +436,11 @@ function tick(now){
 
   // === Layer A: 背景セル (薄い dim) — shadow なし ===
   // dim alpha を sin 揺らぎで微妙に変化させる (オーラ感)。
-  // 旧 0.18 → 0.12 に下げて、メッセージ部分との明暗差を強調。
+  // 0.12 → 0.06 に更に下げてもう一段地味に。メッセージとの段差最大化。
   const dimBase = `rgba(${hexR(p.c2)},${hexG(p.c2)},${hexB(p.c2)},`;
   for(let r = 0; r < rows; r++){
     const y = r * cellH + cellH / 2;
-    const rowSin = 0.12 + Math.sin((now + r * 137) * 0.0008) * 0.04;
+    const rowSin = 0.06 + Math.sin((now + r * 137) * 0.0008) * 0.03;
     ctx.fillStyle = dimBase + rowSin.toFixed(3) + ')';
     for(let c = 0; c < cols; c++){
       const x = c * cellW + cellW / 2;
@@ -469,13 +469,18 @@ function tick(now){
     fctx.setTransform(dpr,0,0,dpr,0,0);
   }
   fctx.clearRect(0, 0, stageW, stageH);
-  fctx.font = `bold ${fontSize}px ${FONT_STACK}`;
+  // 前景は文字を太く + 少し大きく + glow は控えめ。
+  // 旧 bold → 900 (Black) + cellH * 0.78 → 0.92 で 1セル目一杯。
+  // glow blur は GLOW_LEVELS の半分に絞ってメッセージ輪郭をシャープに
+  // (滲ませすぎると周囲の dim と混ざって読みづらくなる)。
+  const fgFontSize = cellH * 0.92;
+  fctx.font = `900 ${fgFontSize}px ${FONT_STACK}`;
   fctx.textBaseline = 'middle';
   fctx.textAlign = 'center';
 
   const [b1] = GLOW_LEVELS[state.glow].canvas;
   fctx.shadowColor = p.c1;
-  fctx.shadowBlur = b1;
+  fctx.shadowBlur = Math.round(b1 * 0.5);
   fctx.fillStyle = '#ffffff';
   for(let r = 0; r < rows; r++){
     const y = r * cellH + cellH / 2;
