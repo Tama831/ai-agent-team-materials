@@ -295,11 +295,19 @@ function applyMode(){
   document.body.classList.toggle('mode-rain', state.mode === 'rain');
   document.body.classList.toggle('mode-classic', state.mode === 'classic');
   document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
-  // モード切替の本体: rain 側はフレームループを start/stop する。
-  // body class が変わった直後は stage rect が未確定なことがあるので
-  // requestAnimationFrame で layout 確定後にリサイズ → start。
+  // モード切替: rain 側はフレームループを start/stop する。
+  // body class 切替直後は stage rect が未確定で resize が空振りする
+  // ことがあるので 2 段階で試行 (RAF → setTimeout 80ms) + ResizeObserver
+  // の 3 重ガード。
   if(state.mode === 'rain'){
-    requestAnimationFrame(() => { resizeCanvas(); startRain(); });
+    requestAnimationFrame(() => {
+      resizeCanvas();
+      if(cells.length === 0){
+        setTimeout(() => { resizeCanvas(); startRain(); }, 80);
+      } else {
+        startRain();
+      }
+    });
   } else {
     stopRain();
   }
@@ -598,9 +606,26 @@ function bind(){
     if(state.mode === 'rain') resizeCanvas();
   });
   document.addEventListener('visibilitychange', () => {
-    if(document.hidden) stopRain();
-    else if(state.mode === 'rain') startRain();
+    if(document.hidden){
+      stopRain();
+    } else if(state.mode === 'rain'){
+      // 復帰時に layout 再計算 + 強制 start。サイズが変わってる可能性も。
+      resizeCanvas();
+      startRain();
+    }
   });
+
+  // 3 重ガード: stage のサイズが確定 / 変動した瞬間に必ず resize + start。
+  // display:none ↔ block 切替、回転、PWA 起動直後の遅延 layout など、
+  // applyMode の RAF だけだと取りこぼすケースをここで救う。
+  if(typeof ResizeObserver !== 'undefined'){
+    new ResizeObserver(() => {
+      if(state.mode === 'rain'){
+        resizeCanvas();
+        startRain();
+      }
+    }).observe(stage);
+  }
 }
 
 function openPanel(){ panel.classList.add('open'); toggle.classList.add('hidden'); }
