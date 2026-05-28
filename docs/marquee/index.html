@@ -256,10 +256,10 @@ function applyMotion(){
       track.style.animation = 'none';
     } else {
       track.classList.remove('static');
-      // 旧 (65 - speed) → 0.7 倍に短縮でクラシックの体感速度を上げ、
-      // ドットモードと揃える (たまさん: クラシック遅い・ドット早い)。
-      // speed=22 → 30.1s (旧 43s)、speed=60 → 3.5s (旧 5s)
-      const dur = Math.max(3, (65 - state.speed) * 0.7);
+      // 旧 (65-speed)*0.7 → 0.55 でさらに体感速度アップ (たまさん:
+      // クラシックもっと早く)。speed=22 → 23.6s、speed=60 → 2.7s。
+      // この値でドット側 multiplier 0.006 と画面横断時間がほぼ揃う。
+      const dur = Math.max(2, (65 - state.speed) * 0.55);
       const dir = state.dir === 'right' ? 'scroll-right' : 'scroll-left';
       track.style.animation = `${dir} ${dur}s linear infinite`;
     }
@@ -314,10 +314,12 @@ function resizeCanvas(){
   canvas.style.height = stageH + 'px';
   ctx.setTransform(dpr,0,0,dpr,0,0);
 
-  // ドット格子は固定 24 行 (= 標準的な駅 LED 看板の解像度)。
+  // ドット格子は固定 60 行 (漢字が読める解像度)。
+  // 駅 LED の 16-24 行だと漢字が潰れる、というたまさん指摘で増量。
+  // size=24 で文字 1 個 ≈ 14 ドット高、size=50 で 30 ドット高 → 漢字 OK
   // size slider は「文字の大きさ」(= mask のフォントサイズ) を変える
   // 役割で、ドット格子のサイズ自体は変えない。
-  const targetRows = 24;
+  const targetRows = 60;
   cellH = stageH / targetRows;
   cellW = cellH; // 正方格子
   cols  = Math.ceil(stageW / cellW) + 2;
@@ -385,10 +387,11 @@ function tick(now){
   const stepDt = Math.min(60, dt);
   lastFrame = now;
 
-  // スクロール: 旧 0.08 → 0.04 でクラシック CSS marquee と体感速度
-  // を揃える (ドット側が早すぎたので半分に絞った)。
+  // スクロール: クラシック CSS marquee と体感速度を揃える。
+  // 旧 0.08 → 0.04 → 0.006 (たまさん「ドット早すぎ」さらに減速)。
+  // speed=22 で ≈ 132 px/s。クラシック (msg 1周 ≈ 23s) と同等。
   if(state.dir !== 'static'){
-    const v = state.speed * 0.04;
+    const v = state.speed * 0.006;
     scrollX += (state.dir === 'left' ? 1 : -1) * v * stepDt;
   }
   if(maskWidth){
