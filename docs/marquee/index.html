@@ -215,7 +215,21 @@ const DEFAULTS = {
 const KEY = 'marquee.v2';
 
 let state = (function(){
-  try{ return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(KEY)||'{}')); }
+  try{
+    const merged = Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem(KEY)||'{}'));
+    // 復元時に範囲外 index を強制クランプ (バージョン跨ぎでアレイ長が
+    // 縮んだ場合に CHARSETS[old_idx]===undefined → pickChar が TypeError
+    // で die → Glyph Rain だけ真っ暗、という事故を防ぐ)
+    const clamp = (v, max, fallback) =>
+      (typeof v === 'number' && v >= 0 && v < max) ? v : fallback;
+    merged.charset = clamp(merged.charset, CHARSETS.length,    DEFAULTS.charset);
+    merged.palette = clamp(merged.palette, PALETTES.length,    DEFAULTS.palette);
+    merged.glow    = clamp(merged.glow,    GLOW_LEVELS.length, DEFAULTS.glow);
+    merged.flick   = clamp(merged.flick,   FLICK_LEVELS.length,DEFAULTS.flick);
+    if(merged.mode !== 'rain' && merged.mode !== 'classic') merged.mode = DEFAULTS.mode;
+    if(merged.dir !== 'left' && merged.dir !== 'right' && merged.dir !== 'static') merged.dir = DEFAULTS.dir;
+    return merged;
+  }
   catch{ return {...DEFAULTS}; }
 })();
 function saveState(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{} }
@@ -304,7 +318,11 @@ let stageW = 0, stageH = 0;
 let maskWidth = 0; // メッセージ1個分の幅 (繰り返し単位)
 
 function pickChar(){
-  const cs = CHARSETS[state.charset].chars;
+  // 防衛コード: 何らかの理由で state.charset が範囲外になった場合に
+  // tick() を die させない (一度 throw すると Glyph Rain が永続的に
+  // 真っ暗になる)。
+  const set = CHARSETS[state.charset] || CHARSETS[0];
+  const cs = (set && set.chars) || ' ';
   return cs.charAt(Math.floor(Math.random() * cs.length));
 }
 
