@@ -316,12 +316,12 @@ function resizeCanvas(){
 
   // ドット格子の行数は size に連動: 「文字 1 個に常に 22 ドット高」
   // を確保することで漢字 (藪・診断 等) が size に関わらず潰れないよう
-  // にする。固定 60 行だと size=24 で 14 ドット高にしかならず藪医者の
-  // 「藪」が一塊の光のシミになっていた (たまさん指摘 2026-05-28)。
-  //   rows = (画面全体 ÷ 文字 1 個) × 22
-  //        = (100 / size) × 22
-  // 上限 96 (PC パフォーマンス保護)、下限 60 (元の見栄え下限) でクランプ。
-  const targetRows = Math.max(60, Math.min(96, Math.round(2200 / state.size)));
+  // にする。さらにたまさん希望で全体のドット数を増量 (下限 100 / 上限
+  // 140)、細密 LED 看板感を強める。
+  //   rows = (画面全体 ÷ 文字 1 個) × 22 = 2200 / size
+  // size 大 (文字でかい) でも最低 100 行は出す → ドット感維持
+  // size 小 (文字小さい) でも 140 で頭打ち → PC パフォーマンス保護
+  const targetRows = Math.max(100, Math.min(140, Math.round(2200 / state.size)));
   cellH = stageH / targetRows;
   cellW = cellH; // 正方格子
   cols  = Math.ceil(stageW / cellW) + 2;
