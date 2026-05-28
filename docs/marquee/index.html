@@ -256,7 +256,10 @@ function applyMotion(){
       track.style.animation = 'none';
     } else {
       track.classList.remove('static');
-      const dur = (65 - state.speed);
+      // 旧 (65 - speed) → 0.7 倍に短縮でクラシックの体感速度を上げ、
+      // ドットモードと揃える (たまさん: クラシック遅い・ドット早い)。
+      // speed=22 → 30.1s (旧 43s)、speed=60 → 3.5s (旧 5s)
+      const dur = Math.max(3, (65 - state.speed) * 0.7);
       const dir = state.dir === 'right' ? 'scroll-right' : 'scroll-left';
       track.style.animation = `${dir} ${dur}s linear infinite`;
     }
@@ -311,9 +314,10 @@ function resizeCanvas(){
   canvas.style.height = stageH + 'px';
   ctx.setTransform(dpr,0,0,dpr,0,0);
 
-  // ドット格子: size slider で疎密。size=8 → rows=32 (細密 LED)、
-  // size=50 → rows=12 (大きい LED 玉)。横は cellH と同比 (正方格子)。
-  const targetRows = Math.round(32 - (state.size - 8) * (20 / 42));
+  // ドット格子は固定 24 行 (= 標準的な駅 LED 看板の解像度)。
+  // size slider は「文字の大きさ」(= mask のフォントサイズ) を変える
+  // 役割で、ドット格子のサイズ自体は変えない。
+  const targetRows = 24;
   cellH = stageH / targetRows;
   cellW = cellH; // 正方格子
   cols  = Math.ceil(stageW / cellW) + 2;
@@ -325,8 +329,11 @@ function resizeCanvas(){
 function rebuildMask(){
   if(!stageW) return;
   const msg = (state.text || ' ').trim() || ' ';
-  // メッセージ高さ = 画面の 70% (縦持ちスマホでは横幅 0.55 でクランプ)
-  const fs = Math.round(Math.min(stageH * 0.75, stageW * 0.55));
+  // メッセージのフォントサイズ = size slider の値 (画面高さの %)。
+  // クラシックモードの `--fs:${size}vh` と同じ計算で両モードの「文字
+  // の大きさ」体感を揃える。縦持ちスマホで横幅オーバーしないよう
+  // stageW * 0.55 でクランプ。
+  const fs = Math.round(Math.min(stageH * state.size / 100, stageW * 0.55));
 
   // 一旦オフスクリーンに描いてメッセージ幅を測定
   mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
@@ -378,9 +385,10 @@ function tick(now){
   const stepDt = Math.min(60, dt);
   lastFrame = now;
 
-  // スクロール
+  // スクロール: 旧 0.08 → 0.04 でクラシック CSS marquee と体感速度
+  // を揃える (ドット側が早すぎたので半分に絞った)。
   if(state.dir !== 'static'){
-    const v = state.speed * 0.08;
+    const v = state.speed * 0.04;
     scrollX += (state.dir === 'left' ? 1 : -1) * v * stepDt;
   }
   if(maskWidth){
