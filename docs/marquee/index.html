@@ -306,7 +306,10 @@ function resizeCanvas(){
 
   stageW = rect.width;
   stageH = rect.height;
-  dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  // mask 解像度を稼ぐため dpr 上限を 1.5 → 2.0 に引き上げ。
+  // iPhone 3x Retina でも 2x で十分綺麗 + 計算量 (3/2)² = 2.25 倍に
+  // 抑えられる。Mac M3 では 2x 本来の解像度で漢字エッジが綺麗。
+  dpr = Math.min(window.devicePixelRatio || 1, 2.0);
 
   canvas.width  = Math.floor(stageW * dpr);
   canvas.height = Math.floor(stageH * dpr);
@@ -340,7 +343,11 @@ function rebuildMask(){
   const fs = Math.round(Math.min(stageH * state.size / 100, stageW * 0.55));
 
   // 一旦オフスクリーンに描いてメッセージ幅を測定
-  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  // 漢字を綺麗な曲線でラスタライズしてからドット格子にサンプリングする。
+  // DotGothic16 (= 既に 16px ドット化された font) で描いて更にドット
+  // 格子でサンプルすると「ドット⊗ドット」で潰れる事故が起きるので、
+  // ここでは普通の bold ゴシック (CJK) を優先する。
+  mctx.font = `bold ${fs}px "Noto Sans CJK JP", "Hiragino Sans", "Yu Gothic Medium", "Meiryo", "Hiragino Kaku Gothic ProN", system-ui, sans-serif`;
   mctx.textBaseline = 'middle';
   const metrics = mctx.measureText(msg);
   const msgW = Math.ceil(metrics.width);
@@ -356,7 +363,11 @@ function rebuildMask(){
   mctx.fillStyle = '#000';
   mctx.fillRect(0, 0, maskWidth * 2, stageH);
   mctx.fillStyle = '#fff';
-  mctx.font = `bold ${fs}px DotGothic16, "Noto Sans CJK JP", monospace`;
+  // 漢字を綺麗な曲線でラスタライズしてからドット格子にサンプリングする。
+  // DotGothic16 (= 既に 16px ドット化された font) で描いて更にドット
+  // 格子でサンプルすると「ドット⊗ドット」で潰れる事故が起きるので、
+  // ここでは普通の bold ゴシック (CJK) を優先する。
+  mctx.font = `bold ${fs}px "Noto Sans CJK JP", "Hiragino Sans", "Yu Gothic Medium", "Meiryo", "Hiragino Kaku Gothic ProN", system-ui, sans-serif`;
   mctx.textBaseline = 'middle';
   mctx.fillText(msg, 0, stageH / 2);
   mctx.fillText(msg, maskWidth, stageH / 2);
@@ -374,9 +385,10 @@ function isDotOn(x, y){
   const px = Math.floor(mx * dpr);
   const py = Math.floor(y * dpr);
   if(px < 0 || px >= mask.width || py < 0 || py >= mask.height) return false;
-  // 白文字部分 = R channel 高い。閾値 128 で ON 判定
+  // 白文字部分 = R channel 高い。閾値 80 に下げて anti-alias 縁も
+  // ON 判定 → 漢字の細い線 (1-2px の払い・点) を取りこぼさない。
   const idx = (py * mask.width + px) * 4;
-  return maskData.data[idx] > 128;
+  return maskData.data[idx] > 80;
 }
 
 function tick(now){
