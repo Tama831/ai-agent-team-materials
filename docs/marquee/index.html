@@ -437,10 +437,10 @@ function tick(now){
   const stepDt = Math.min(60, dt);
   lastFrame = now;
 
-  // スクロール multiplier: 0.08 → 0.04 → 0.006 → 0.008 → 0.012
-  // (たまさん「もっとドットは早くていい」)。speed=22 で ≈ 264 px/s。
+  // スクロール multiplier: 0.08 → 0.04 → 0.006 → 0.008 → 0.012 → 0.015
+  // (たまさん「気持ちもうちょっと早く」)。speed=22 で ≈ 330 px/s。
   if(state.dir !== 'static'){
-    const v = state.speed * 0.012;
+    const v = state.speed * 0.015;
     scrollX += (state.dir === 'left' ? 1 : -1) * v * stepDt;
   }
   if(maskWidth){
