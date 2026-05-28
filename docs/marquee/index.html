@@ -327,11 +327,13 @@ function resizeCanvas(){
   canvas.style.height = stageH + 'px';
   ctx.setTransform(dpr,0,0,dpr,0,0);
 
-  // セル数を大幅に減らす: 行数 12〜22 (旧 14〜42)。
-  // スライダー size=8→22 行、size=50→12 行。cellW は cellH と同比。
-  const targetRows = Math.round(22 - (state.size - 8) * (10 / 42));
+  // セル数 = メッセージを象るドットマトリクス解像度。
+  // 行数 18〜34 (旧 14〜42 を粗くしすぎた 12〜22 から差し戻し)。
+  // 漢字 (藪・診断 等) を読ませるには縦 18 ドット以上 = 行 30+ が要る。
+  // スライダー size=8 → 34 行 (細密)、size=50 → 18 行 (粗ドット)。
+  const targetRows = Math.round(34 - (state.size - 8) * (16 / 42));
   cellH = stageH / targetRows;
-  cellW = cellH * 0.62; // 縦長セル (ドットマトリクス感)
+  cellW = cellH * 0.58; // 縦長セル (ドットマトリクス感、少し詰めた)
   cols  = Math.ceil(stageW / cellW) + 2;
   rows  = Math.ceil(stageH / cellH);
 
@@ -351,8 +353,12 @@ function resizeCanvas(){
 function rebuildMask(){
   if(!stageW) return;
   const msg = (state.text || ' ').trim() || ' ';
-  // フォントサイズ: 行数の 0.7 を目安 (画面の縦に大きく)
-  const fs = Math.round(cellH * rows * 0.7);
+  // フォントサイズ:
+  //   画面高さの 75% を目安 (= 大きく表示)。
+  //   ただし縦持ちスマホでは stageW < stageH なので、1 文字で画面横を
+  //   越えて 1 文字しか映らずスクロール待ちが長すぎる事故が起きる。
+  //   横幅の 55% でもクランプする (= スマホ縦持ちで 1.8 文字程度同時表示)。
+  const fs = Math.round(Math.min(stageH * 0.75, stageW * 0.55));
 
   // 一旦オフスクリーンに描いてメッセージ幅を測定
   mctx.font = `bold ${fs}px ${FONT_STACK}`;
