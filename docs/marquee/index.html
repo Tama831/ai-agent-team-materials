@@ -402,10 +402,10 @@ function tick(now){
   lastFrame = now;
 
   // スクロール: クラシック CSS marquee と体感速度を揃える。
-  // 旧 0.08 → 0.04 → 0.006 (たまさん「ドット早すぎ」さらに減速)。
-  // speed=22 で ≈ 132 px/s。クラシック (msg 1周 ≈ 23s) と同等。
+  // 0.08 → 0.04 → 0.006 → 0.008 (たまさん「ちょい遅、気持ち早め」)。
+  // speed=22 で ≈ 176 px/s、クラシック 1周24秒と同等の体感。
   if(state.dir !== 'static'){
-    const v = state.speed * 0.006;
+    const v = state.speed * 0.008;
     scrollX += (state.dir === 'left' ? 1 : -1) * v * stepDt;
   }
   if(maskWidth){
