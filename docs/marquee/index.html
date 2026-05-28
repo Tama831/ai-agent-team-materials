@@ -387,7 +387,10 @@ function rebuildMask(){
   mctx.textBaseline = 'middle';
   const metrics = mctx.measureText(msg);
   const msgW = Math.ceil(metrics.width);
-  const gap  = Math.round(fs * 1.2);
+  // メッセージ間の余白 = 4em (= fs × 4)。クラシックの
+  // `#track .seg { padding-right:4em }` と同じスケール感に揃える
+  // (旧 fs * 1.2 だと短文 "22" 等で間隔が詰まりすぎていた)。
+  const gap  = Math.round(fs * 4);
   maskWidth  = msgW + gap;
 
   // mask を seamless 用に「メッセージ 2 個分」の幅で作る
