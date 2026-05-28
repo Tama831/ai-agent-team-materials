@@ -19,7 +19,7 @@
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;overflow:hidden;background:#000;color:#fff;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
-  body{font-family:'DotGothic16','Press Start 2P','Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',monospace;display:flex;flex-direction:column;height:100dvh;width:100vw}
+  body{font-family:'DotGothic16','Press Start 2P',monospace;display:flex;flex-direction:column;height:100dvh;width:100vw}
 
   #stage{flex:1;position:relative;overflow:hidden;background:#000;cursor:pointer}
   #rain{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
@@ -123,7 +123,7 @@
 <div id="panel">
   <h2>⚡ 電光掲示板</h2>
 
-  <label for="msg">メッセージ</label>
+  <label for="msg">メッセージ <span style="color:#6c8a96;font-size:10px;letter-spacing:.05em">(絵文字は反映されません)</span></label>
   <textarea id="msg" rows="2" placeholder="流したい文字を入力" maxlength="200"></textarea>
 
   <label>モード</label>
@@ -158,7 +158,7 @@
 
   <div class="rain-only">
     <label>背景の文字種 <span id="charsetVal">カタカナ+数字</span></label>
-    <input type="range" id="charset" min="0" max="7" value="0" step="1">
+    <input type="range" id="charset" min="0" max="3" value="0" step="1">
 
     <label>明滅の速さ <span id="flickVal">標準</span></label>
     <input type="range" id="flick" min="0" max="3" value="2" step="1">
@@ -194,17 +194,12 @@ const CHARSETS = [
   {name:'英数字+記号',   chars:'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*+=<>?/[]{}'},
   {name:'バイナリ',      chars:'01'},
   {name:'藪医者の漢字',  chars:'藪医者学電光掲示板診断推論家庭医療緩和ケアシステム思考認知バイアス'},
-  // 絵文字: Array.from で codePoint 単位 (サロゲートペア対応)。
-  // VS16 (U+FE0F) を含む合成絵文字は handle 不能なので、単一 codepoint の絵文字に絞る。
-  {name:'星空・雷',      chars:Array.from('⚡✨💫⭐🌟💎🌠🌌🪐☄🌙🌛🌜🌝🌞🔥')},
-  {name:'天気・自然',    chars:Array.from('☀☁☂☃❄⛄🌈🌊🌸🌺🌻🌷🌼🍀🌿🌱🌾')},
-  {name:'顔・ハート',    chars:Array.from('😀😊😎🥹😴🤔😇🥰😆😂🤩💖💙💚💛🧡💜🤍🖤❤')},
-  {name:'医療・学び',    chars:Array.from('🩺💊💉🧬🧠📚📖📝✏🔬🔭🎓🏥📊💡🩹')},
 ];
-// "DotGothic16", "Noto Sans CJK JP" の後に絵文字フォントを fallback で
-// 並べる。Mac/iOS は Apple Color Emoji、Win は Segoe UI Emoji、Android は
-// Noto Color Emoji。これがないと canvas で絵文字が豆腐になる。
-const FONT_STACK = `'DotGothic16', 'Noto Sans CJK JP', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', monospace`;
+// 絵文字は Glyph Rain の背景文字としては「密度が高すぎてメッセージが浮き
+// 出ない」、CSS marquee (クラシック) でも shadow がメッセージ周囲に太く
+// 広がる構造上カラー絵文字が映えず、結局白い豆腐っぽくなる。今は対応を
+// 見送り、入力フォームに注記する (たまさん判断 2026-05-28)。
+const FONT_STACK = `'DotGothic16', 'Noto Sans CJK JP', monospace`;
 const FLICK_LEVELS = [
   {name:'静か',   chgMin:1200, chgMax:4000},
   {name:'ゆるい', chgMin:600,  chgMax:2200},
@@ -213,7 +208,7 @@ const FLICK_LEVELS = [
 ];
 
 const DEFAULTS = {
-  text:'藪医者の学び ⚡ Tama Marquee',
+  text:'藪医者の学び  Tama Marquee',
   speed:22, size:22, dir:'left', palette:0, glow:1,
   mode:'rain', charset:0, flick:2,
 };
@@ -286,7 +281,14 @@ function applyMode(){
   document.body.classList.toggle('mode-rain', state.mode === 'rain');
   document.body.classList.toggle('mode-classic', state.mode === 'classic');
   document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
-  if(state.mode === 'rain'){ resizeCanvas(); }
+  // モード切替の本体: rain 側はフレームループを start/stop する。
+  // body class が変わった直後は stage rect が未確定なことがあるので
+  // requestAnimationFrame で layout 確定後にリサイズ → start。
+  if(state.mode === 'rain'){
+    requestAnimationFrame(() => { resizeCanvas(); startRain(); });
+  } else {
+    stopRain();
+  }
   applyMotion();
 }
 
@@ -303,23 +305,21 @@ let maskWidth = 0; // メッセージ1個分の幅 (繰り返し単位)
 
 function pickChar(){
   const cs = CHARSETS[state.charset].chars;
-  // 配列 (絵文字セット) と文字列 (BMP のみ) 両対応
-  const i = Math.floor(Math.random() * cs.length);
-  return typeof cs === 'string' ? cs.charAt(i) : cs[i];
+  return cs.charAt(Math.floor(Math.random() * cs.length));
 }
 
 function resizeCanvas(){
   const rect = stage.getBoundingClientRect();
-  // PWA standalone の初回 paint 前は rect が 0 のことがある (特に iOS Safari)。
-  // 一度ここで諦めると tick() が rows=0 で永遠に黒画面のまま → resize を
-  // 諦めない・次フレームで再試行する。
-  if(rect.width < 10 || rect.height < 10){
-    requestAnimationFrame(resizeCanvas);
-    return;
-  }
+  // rect が 0 ならまだ layout 未確定 — フレームループは黙って止め、
+  // 次の resize / load / モード切替で再エントリさせる (RAF retry は
+  // 無限ループの温床なのでやめた)。
+  if(rect.width < 10 || rect.height < 10) return;
+
   stageW = rect.width;
   stageH = rect.height;
-  dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+  // iPhone の Retina 3x をそのまま使うと 1 フレーム当たりの pixel 処理
+  // 量が 9 倍になって熱を持つ。dpr は最大 1.5 に抑える。
+  dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
   canvas.width  = Math.floor(stageW * dpr);
   canvas.height = Math.floor(stageH * dpr);
@@ -327,15 +327,14 @@ function resizeCanvas(){
   canvas.style.height = stageH + 'px';
   ctx.setTransform(dpr,0,0,dpr,0,0);
 
-  // セルサイズはサイズスライダーから派生 (大きさ大→セル大→粗く見える)
-  // 行数: 14〜42 行ぐらいの幅で。サイズ 8→42行、50→14行
-  const targetRows = Math.round(42 - (state.size - 8) * (28 / 42));
+  // セル数を大幅に減らす: 行数 12〜22 (旧 14〜42)。
+  // スライダー size=8→22 行、size=50→12 行。cellW は cellH と同比。
+  const targetRows = Math.round(22 - (state.size - 8) * (10 / 42));
   cellH = stageH / targetRows;
   cellW = cellH * 0.62; // 縦長セル (ドットマトリクス感)
-  cols  = Math.ceil(stageW / cellW) + 4; // 横は少し余裕
+  cols  = Math.ceil(stageW / cellW) + 2;
   rows  = Math.ceil(stageH / cellH);
 
-  // セル初期化
   const now = performance.now();
   cells = [];
   for(let r = 0; r < rows; r++){
@@ -379,33 +378,47 @@ function rebuildMask(){
   mctx.shadowBlur = 0;
 }
 
+// 30fps スロットル: iPhone Safari で 60fps × shadowBlur 付き fillText
+// は確実に熱を持つ。電光掲示板の見栄えに 60fps は不要 (人間の目には
+// 30fps でも十分に明滅・スクロールが滑らかに見える)。
+const FRAME_INTERVAL = 33; // ms — ≒30fps
+
 function tick(now){
   if(!lastFrame) lastFrame = now;
-  const dt = Math.min(60, now - lastFrame);
+  const dt = now - lastFrame;
+  if(dt < FRAME_INTERVAL){
+    rafId = requestAnimationFrame(tick);
+    return;
+  }
+  // dt は最大 60ms にクランプ (タブ復帰時の巨大ジャンプ抑制)
+  const stepDt = Math.min(60, dt);
   lastFrame = now;
 
   // スクロール
   if(state.dir !== 'static'){
     const v = state.speed * 0.08; // px / ms 換算
-    scrollX += (state.dir === 'left' ? 1 : -1) * v * dt;
+    scrollX += (state.dir === 'left' ? 1 : -1) * v * stepDt;
   }
   if(maskWidth){
     scrollX = ((scrollX % maskWidth) + maskWidth) % maskWidth;
   }
 
-  // 文字明滅
+  // 文字明滅 — 全セル走査は重いので毎フレーム最大 N 個だけランダム
+  // 更新する。N は cells 数の 1/8 程度。flick "激しい" でも体感上十分。
   const flick = FLICK_LEVELS[state.flick];
-  for(let r = 0; r < rows; r++){
-    for(let c = 0; c < cols; c++){
-      const cell = cells[r][c];
-      if(now >= cell.next){
-        cell.ch = pickChar();
-        cell.next = now + flick.chgMin + Math.random() * (flick.chgMax - flick.chgMin);
-      }
+  const cellCount = rows * cols;
+  const updatesPerFrame = Math.max(1, Math.floor(cellCount / 8));
+  for(let i = 0; i < updatesPerFrame; i++){
+    const r = Math.floor(Math.random() * rows);
+    const c = Math.floor(Math.random() * cols);
+    const cell = cells[r][c];
+    if(now >= cell.next){
+      cell.ch = pickChar();
+      cell.next = now + flick.chgMin + Math.random() * (flick.chgMax - flick.chgMin);
     }
   }
 
-  // 黒で全消去 (背景)
+  // 背景クリア
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, stageW, stageH);
 
@@ -415,46 +428,33 @@ function tick(now){
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'center';
 
-  // === Layer A: 背景セル (暗めの dim 文字) ===
-  ctx.fillStyle = `rgba(${hexR(p.c2)},${hexG(p.c2)},${hexB(p.c2)},0.18)`;
+  // === Layer A: 背景セル (薄い dim) — shadow なし ===
+  // dim alpha を sin 揺らぎで微妙に変化させる (オーラ感)
+  const dimBase = `rgba(${hexR(p.c2)},${hexG(p.c2)},${hexB(p.c2)},`;
   for(let r = 0; r < rows; r++){
     const y = r * cellH + cellH / 2;
+    const rowSin = 0.18 + Math.sin((now + r * 137) * 0.0008) * 0.06;
+    ctx.fillStyle = dimBase + rowSin.toFixed(3) + ')';
     for(let c = 0; c < cols; c++){
       const x = c * cellW + cellW / 2;
-      // 明滅で時々ピカッと明るく (確率)
-      const cell = cells[r][c];
-      const alphaScale = 0.7 + Math.sin((now + r * 137 + c * 53) * 0.001) * 0.3;
-      ctx.globalAlpha = 0.22 * alphaScale;
-      ctx.fillText(cell.ch, x, y);
+      ctx.fillText(cells[r][c].ch, x, y);
     }
   }
-  ctx.globalAlpha = 1;
 
-  // === Layer B: メッセージ部分 (高輝度+グロー) ===
-  // 前景 canvas に描いてからメッセージマスクで切り抜く
-  fg.width = canvas.width;
-  fg.height = canvas.height;
-  fctx.setTransform(dpr,0,0,dpr,0,0);
+  // === Layer B: メッセージ部分 (グロー 1 段で軽量化) ===
+  // 旧実装は shadow 2 段 (外側青 + 内側白) で seg 全セル分の fillText を
+  // 2 回 = 重さの 80%。1 段に絞っても見栄えは十分。
+  if(fg.width !== canvas.width || fg.height !== canvas.height){
+    fg.width = canvas.width;
+    fg.height = canvas.height;
+    fctx.setTransform(dpr,0,0,dpr,0,0);
+  }
   fctx.clearRect(0, 0, stageW, stageH);
   fctx.font = `bold ${fontSize}px ${FONT_STACK}`;
   fctx.textBaseline = 'middle';
   fctx.textAlign = 'center';
 
-  // グロー設定 (shadow を 2 段で)
-  const [b1, b2] = GLOW_LEVELS[state.glow].canvas;
-  // 1段目: 外側の青グロー
-  fctx.shadowColor = p.c2;
-  fctx.shadowBlur = b2;
-  fctx.fillStyle = p.c1;
-  for(let r = 0; r < rows; r++){
-    const y = r * cellH + cellH / 2;
-    for(let c = 0; c < cols; c++){
-      const x = c * cellW + cellW / 2;
-      const cell = cells[r][c];
-      fctx.fillText(cell.ch, x, y);
-    }
-  }
-  // 2段目: 内側の白コア
+  const [b1] = GLOW_LEVELS[state.glow].canvas;
   fctx.shadowColor = p.c1;
   fctx.shadowBlur = b1;
   fctx.fillStyle = '#ffffff';
@@ -467,16 +467,14 @@ function tick(now){
   }
   fctx.shadowBlur = 0;
 
-  // メッセージマスクで切り抜き
+  // メッセージマスクで切り抜き (seamless に 3 枚タイル)
   fctx.globalCompositeOperation = 'destination-in';
-  // mask を seamless に 2 回貼る (scrollX 分ずらして)
   const sx = -scrollX;
   fctx.drawImage(mask, sx, 0, maskWidth, stageH);
   fctx.drawImage(mask, sx + maskWidth, 0, maskWidth, stageH);
   fctx.drawImage(mask, sx - maskWidth, 0, maskWidth, stageH);
   fctx.globalCompositeOperation = 'source-over';
 
-  // 前景を main に合成
   ctx.drawImage(fg, 0, 0, stageW, stageH);
 
   rafId = requestAnimationFrame(tick);
