@@ -8,7 +8,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="電光">
-<meta name="description" content="電光掲示板 PWA — 背景の明滅文字が電光メッセージを象る">
+<meta name="description" content="電光掲示板 PWA — 背景の明滅文字が電光メッセージを象る (iPhone / Android / Mac)">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -435,17 +435,30 @@ function tick(now){
   ctx.textAlign = 'center';
 
   // === Layer A: 背景セル (薄い dim) — shadow なし ===
-  // dim alpha を sin 揺らぎで微妙に変化させる (オーラ感)
+  // dim alpha を sin 揺らぎで微妙に変化させる (オーラ感)。
+  // 旧 0.18 → 0.12 に下げて、メッセージ部分との明暗差を強調。
   const dimBase = `rgba(${hexR(p.c2)},${hexG(p.c2)},${hexB(p.c2)},`;
   for(let r = 0; r < rows; r++){
     const y = r * cellH + cellH / 2;
-    const rowSin = 0.18 + Math.sin((now + r * 137) * 0.0008) * 0.06;
+    const rowSin = 0.12 + Math.sin((now + r * 137) * 0.0008) * 0.04;
     ctx.fillStyle = dimBase + rowSin.toFixed(3) + ')';
     for(let c = 0; c < cols; c++){
       const x = c * cellW + cellW / 2;
       ctx.fillText(cells[r][c].ch, x, y);
     }
   }
+
+  // === メッセージ範囲を打ち抜き ===
+  // destination-out で mask の白 (= メッセージの形) 部分を透明化 →
+  // stage の CSS 背景 (#000) が透けて純黒に。これでメッセージ部の
+  // dim 文字がガッツリ消え、続けて乗せる白文字 + glow が周囲と
+  // ハッキリした明暗差で浮き出る。
+  ctx.globalCompositeOperation = 'destination-out';
+  const sxCut = -scrollX;
+  ctx.drawImage(mask, sxCut, 0, maskWidth, stageH);
+  ctx.drawImage(mask, sxCut + maskWidth, 0, maskWidth, stageH);
+  ctx.drawImage(mask, sxCut - maskWidth, 0, maskWidth, stageH);
+  ctx.globalCompositeOperation = 'source-over';
 
   // === Layer B: メッセージ部分 (グロー 1 段で軽量化) ===
   // 旧実装は shadow 2 段 (外側青 + 内側白) で seg 全セル分の fillText を

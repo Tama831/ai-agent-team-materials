@@ -1,4 +1,4 @@
-const CACHE = 'marquee-v5';
+const CACHE = 'marquee-v6';
 const ASSETS = [
   './',
   './index.html',

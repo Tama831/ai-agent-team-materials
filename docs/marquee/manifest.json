@@ -1,7 +1,7 @@
 {
   "name": "電光 — Marquee",
   "short_name": "電光",
-  "description": "電光掲示板 PWA — iPhone / Mac でメッセージを流す",
+  "description": "電光掲示板 PWA — iPhone / Android / Mac でメッセージを流す",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
