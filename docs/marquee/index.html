@@ -437,11 +437,10 @@ function tick(now){
   const stepDt = Math.min(60, dt);
   lastFrame = now;
 
-  // スクロール: クラシック CSS marquee と体感速度を揃える。
-  // 0.08 → 0.04 → 0.006 → 0.008 (たまさん「ちょい遅、気持ち早め」)。
-  // speed=22 で ≈ 176 px/s、クラシック 1周24秒と同等の体感。
+  // スクロール multiplier: 0.08 → 0.04 → 0.006 → 0.008 → 0.012
+  // (たまさん「もっとドットは早くていい」)。speed=22 で ≈ 264 px/s。
   if(state.dir !== 'static'){
-    const v = state.speed * 0.008;
+    const v = state.speed * 0.012;
     scrollX += (state.dir === 'left' ? 1 : -1) * v * stepDt;
   }
   if(maskWidth){
