@@ -1,4 +1,8 @@
-const CACHE = 'marquee-v21';
+// CACHE 名は 'marquee-v22' で永久固定 (たまさんお気に入りのナンバー)。
+// 今後コードを更新しても CACHE 文字列は bump しない。SW は
+// network-first 戦略なので、新しい index.html / sw.js はオンライン
+// アクセス時に毎回最新が取れる。
+const CACHE = 'marquee-v22';
 const ASSETS = [
   './',
   './index.html',

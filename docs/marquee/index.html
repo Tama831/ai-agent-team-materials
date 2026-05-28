@@ -201,7 +201,7 @@ const GLOW_LEVELS = [
 ];
 
 const DEFAULTS = {
-  text:'藪医者の学び  Tama Marquee',
+  text:'22',
   speed:22, size:22, dir:'left',
   paletteClassic:0,  // 電光青
   paletteDot:0,      // 明街赤
@@ -576,7 +576,12 @@ function bind(){
     b.addEventListener('click', () => { state.mode = b.dataset.mode; saveState(); applyMode(); });
   });
 
-  stage.addEventListener('click', () => { if(!panel.classList.contains('open')) openPanel(); });
+  // stage クリックは panel をトグル (開→閉、閉→開)。
+  // stage は panel の外なので「設定欄の外タップで閉じる」が成立する。
+  stage.addEventListener('click', () => {
+    if(panel.classList.contains('open')) closePanel();
+    else openPanel();
+  });
   toggle.addEventListener('click', e => { e.stopPropagation(); panel.classList.contains('open') ? closePanel() : openPanel(); });
   $('closeBtn').addEventListener('click', closePanel);
   $('fullBtn').addEventListener('click', goFullscreen);
