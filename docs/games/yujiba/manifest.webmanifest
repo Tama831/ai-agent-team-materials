@@ -1,0 +1,16 @@
+{
+  "name": "湯治場物語",
+  "short_name": "湯治場",
+  "description": "のんびり湯治場を育てる放置×作業ゲー。電波がなくても遊べます。",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14141d",
+  "theme_color": "#14141d",
+  "icons": [
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

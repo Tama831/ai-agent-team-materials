@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#14141d">
+<title>湯治場物語</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="湯治場">
+<meta name="description" content="のんびり湯治場を育てる放置×作業ゲー。電波がなくても遊べます。">
+<style>
+  :root{
+    --bg:#14141d; --panel:#20202d; --panel2:#262031; --line:rgba(255,247,235,.09);
+    --ink:#f3ede1; --dim:#a79d8c; --faint:#6f6a60;
+    --amber:#e9a94e; --amber2:#f4c87a; --persimmon:#e0613f; --gold:#f1c764;
+    --hinoki:#caa06a; --good:#94c184;
+    --serif:"Hiragino Mincho ProN","Hiragino Mincho Pro","YuMincho","Yu Mincho",serif;
+    --sans:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic UI",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden}
+  body{
+    font-family:var(--sans); color:var(--ink);
+    background:
+      radial-gradient(120% 75% at 50% 118%, rgba(233,169,78,.22), transparent 58%),
+      radial-gradient(85% 55% at 50% -8%, rgba(74,46,86,.55), transparent 60%),
+      linear-gradient(#14141d 0%, #1a1524 60%, #1f1722 100%);
+    background-attachment:fixed;
+    -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
+    touch-action:manipulation;
+  }
+  body::after{ /* grain */
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:9; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh;max-width:560px;margin:0 auto;position:relative;z-index:1}
+
+  /* ---- HUD ---- */
+  #hud{flex:none;padding:calc(env(safe-area-inset-top) + 10px) 16px 8px;text-align:center}
+  .brand{font-family:var(--serif);font-size:13px;letter-spacing:.34em;color:var(--amber);opacity:.85;margin-bottom:2px;text-indent:.34em}
+  .yu{font-family:var(--serif);font-size:clamp(30px,9vw,42px);font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums;text-shadow:0 1px 16px rgba(233,169,78,.25)}
+  .yu #yu{color:var(--amber2)}
+  .yu .u{font-size:.5em;color:var(--dim);margin-left:.2em}
+  .sub{font-size:12px;color:var(--dim);margin-top:3px;font-variant-numeric:tabular-nums}
+  .sub b{color:var(--ink);font-weight:600}
+  .sub .sep{opacity:.4;margin:0 .5em}
+
+  /* ---- Tub / tap zone ---- */
+  #tubwrap{flex:none;position:relative;height:29vh;min-height:178px;max-height:240px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+  #steam{position:absolute;bottom:96px;left:50%;transform:translateX(-50%);width:160px;height:130px;pointer-events:none}
+  #steam span{position:absolute;bottom:0;width:34px;height:34px;border-radius:50%;
+    background:radial-gradient(circle,rgba(247,240,224,.5),rgba(247,240,224,0) 70%);
+    filter:blur(5px);animation:rise 4.6s ease-in-out infinite}
+  #steam span:nth-child(1){left:18px;animation-delay:0s}
+  #steam span:nth-child(2){left:62px;animation-delay:1.3s;animation-duration:5.4s}
+  #steam span:nth-child(3){left:104px;animation-delay:2.5s;animation-duration:5s}
+  @keyframes rise{0%{transform:translateY(10px) scale(.7);opacity:0}
+    25%{opacity:.85}70%{opacity:.5}100%{transform:translateY(-104px) scale(1.5);opacity:0}}
+  #tub{appearance:none;-webkit-appearance:none;border:0;background:transparent;padding:0;margin:0 0 8px;
+    position:relative;width:76%;max-width:330px;height:140px;cursor:pointer;touch-action:manipulation}
+  .tub-body{position:absolute;left:0;right:0;bottom:0;height:118px;border-radius:50%/46%;
+    background:
+      radial-gradient(120% 150% at 50% -10%, #8a5d39, #6b4528 55%, #4f3220 100%);
+    box-shadow:0 16px 40px rgba(0,0,0,.5), inset 0 -8px 18px rgba(0,0,0,.4), inset 0 6px 10px rgba(255,210,150,.18)}
+  .water{position:absolute;left:9%;right:9%;top:14px;bottom:20px;border-radius:50%/52%;overflow:hidden;
+    background:radial-gradient(110% 130% at 50% 22%, #f6cd85 0%, #e9a849 48%, #cf8636 100%);
+    box-shadow:inset 0 8px 16px rgba(255,236,196,.5), inset 0 -10px 18px rgba(120,70,25,.55)}
+  .water::before{content:"";position:absolute;inset:-40% -10%;
+    background:linear-gradient(115deg,transparent 40%,rgba(255,248,230,.5) 50%,transparent 60%);
+    animation:shimmer 5s linear infinite}
+  @keyframes shimmer{0%{transform:translateX(-30%)}100%{transform:translateX(30%)}}
+  #tub:active .water{transform:scale(.985)}
+  .hint{position:absolute;left:0;right:0;top:46px;text-align:center;font-family:var(--serif);
+    font-size:15px;color:rgba(80,48,28,.78);letter-spacing:.12em;pointer-events:none;
+    animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .pop{position:absolute;z-index:5;font-family:var(--serif);font-weight:600;font-size:20px;color:var(--amber2);
+    text-shadow:0 1px 6px rgba(0,0,0,.5);pointer-events:none;animation:pop .9s ease-out forwards;font-variant-numeric:tabular-nums}
+  @keyframes pop{0%{transform:translate(-50%,0) scale(.8);opacity:0}
+    18%{opacity:1;transform:translate(-50%,-10px) scale(1.08)}
+    100%{transform:translate(-50%,-74px) scale(1);opacity:0}}
+  .ripple{position:absolute;z-index:4;border:2px solid rgba(255,242,214,.7);border-radius:50%;
+    transform:translate(-50%,-50%);pointer-events:none;animation:rip .6s ease-out forwards}
+  @keyframes rip{0%{width:14px;height:10px;opacity:.8}100%{width:150px;height:96px;opacity:0}}
+
+  /* ---- Panel / tabs content ---- */
+  #panel{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+    padding:6px 12px 14px}
+  .tab{display:none} .tab.on{display:block}
+  .buymode{flex:none;display:flex;gap:6px;align-items:center;padding:8px 14px 9px;
+    background:#181221;border-bottom:1px solid var(--line);font-size:12px;color:var(--dim)}
+  .buymode .lbl{margin-right:auto}
+  .buymode button{font-family:var(--sans);border:1px solid var(--line);background:var(--panel);color:var(--dim);
+    border-radius:9px;padding:5px 11px;font-size:13px;font-weight:600}
+  .buymode button.on{background:var(--amber);color:#2a1c0a;border-color:transparent}
+
+  .card{display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+    border:1px solid var(--line);border-radius:15px;padding:11px 13px;margin-bottom:9px;
+    background:linear-gradient(180deg,#26202f,#211b29);color:var(--ink);font-family:var(--sans);
+    transition:transform .06s ease, opacity .2s}
+  .card:active{transform:scale(.985)}
+  .card.locked{opacity:.55;filter:grayscale(.35)}
+  .card .ic{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:21px;
+    background:radial-gradient(circle at 40% 30%, #3a2e22, #271f17);box-shadow:inset 0 0 0 1px rgba(255,210,150,.12)}
+  .card .body{flex:1;min-width:0}
+  .card .nm{font-family:var(--serif);font-size:16px;font-weight:600;display:flex;align-items:baseline;gap:7px}
+  .card .nm .ct{font-family:var(--sans);font-size:12px;color:var(--amber2);font-weight:700}
+  .card .ds{font-size:11px;color:var(--dim);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card .prod{font-size:11px;color:var(--faint);margin-top:2px;font-variant-numeric:tabular-nums}
+  .card .right{flex:none;text-align:right}
+  .card .cost{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--gold)}
+  .card.poor .cost{color:var(--faint)}
+  .card .costu{font-size:10px;color:var(--dim);font-weight:400}
+  .card .qty{font-size:10px;color:var(--good);margin-top:1px;height:12px}
+
+  .up .ic{background:radial-gradient(circle at 40% 30%, #3a2640, #271a2e)}
+  .ach{display:flex;gap:11px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;background:#211b29}
+  .ach.lock{opacity:.45}
+  .ach .ic{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:#2c2433}
+  .ach.got .ic{background:radial-gradient(circle at 40% 30%,#f4c87a,#d18a2f);color:#33240c}
+  .ach .nm{font-family:var(--serif);font-size:15px;font-weight:600}
+  .ach .ds{font-size:11px;color:var(--dim)}
+
+  .sec-t{font-family:var(--serif);font-size:13px;color:var(--amber);letter-spacing:.1em;margin:4px 2px 8px}
+  .note{font-size:12px;color:var(--dim);line-height:1.7;padding:2px 2px 10px}
+  .btn{display:block;width:100%;font-family:var(--sans);font-weight:700;font-size:15px;border:0;border-radius:13px;
+    padding:13px;margin:6px 0;color:#2a1c0a;background:linear-gradient(180deg,var(--amber2),var(--amber))}
+  .btn:disabled{filter:grayscale(.7) brightness(.7)}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .btn.danger{background:transparent;border:1px solid rgba(224,97,63,.6);color:var(--persimmon)}
+  .toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);
+    border-radius:13px;padding:13px 14px;margin:6px 0;background:var(--panel);font-size:15px}
+  .sw{width:50px;height:30px;border-radius:30px;background:#3a3344;position:relative;transition:.2s;flex:none}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}
+  .sw.on{background:var(--good)} .sw.on::after{left:23px}
+
+  /* ---- Renovate banner ---- */
+  #reno{margin:2px 0 10px;border:1px solid rgba(244,200,122,.4);border-radius:15px;padding:12px 14px;
+    background:linear-gradient(180deg,#2e2640,#241b2e);display:none}
+  #reno.show{display:block}
+  #reno .rt{font-family:var(--serif);font-size:15px;color:var(--amber2);margin-bottom:3px}
+  #reno .rd{font-size:12px;color:var(--dim);margin-bottom:9px;line-height:1.6}
+
+  /* ---- tabs nav ---- */
+  #tabs{flex:none;display:flex;border-top:1px solid var(--line);background:#191320ee;backdrop-filter:blur(8px);
+    padding-bottom:env(safe-area-inset-bottom)}
+  #tabs button{flex:1;background:none;border:0;color:var(--dim);font-family:var(--sans);font-size:11px;font-weight:600;
+    padding:9px 0 8px;display:flex;flex-direction:column;align-items:center;gap:3px}
+  #tabs button .g{font-size:19px;line-height:1}
+  #tabs button.on{color:var(--amber2)}
+  #tabs button.on .g{filter:drop-shadow(0 0 6px rgba(244,200,122,.5))}
+  .badge{position:absolute;transform:translate(10px,-4px);background:var(--persimmon);color:#fff;font-size:9px;
+    min-width:15px;height:15px;border-radius:9px;display:grid;place-items:center;padding:0 3px;font-weight:700}
+
+  /* ---- modal & toast ---- */
+  #scrim{position:fixed;inset:0;z-index:20;background:rgba(8,6,12,.66);backdrop-filter:blur(3px);
+    display:none;align-items:center;justify-content:center;padding:24px}
+  #scrim.show{display:flex}
+  .modal{width:100%;max-width:360px;background:linear-gradient(180deg,#262031,#1e1826);
+    border:1px solid var(--line);border-radius:20px;padding:20px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .modal h2{font-family:var(--serif);font-size:20px;margin:0 0 8px;color:var(--amber2)}
+  .modal p{font-size:14px;color:var(--ink);line-height:1.7;margin:0 0 16px}
+  .modal p b{color:var(--amber2);font-size:1.15em;font-variant-numeric:tabular-nums}
+  #toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 78px);transform:translateX(-50%);
+    z-index:30;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;width:max-content;max-width:88vw}
+  .tst{background:#2a2233ee;border:1px solid var(--line);color:var(--ink);font-size:13px;
+    padding:8px 15px;border-radius:30px;box-shadow:0 6px 20px rgba(0,0,0,.4);animation:tin .3s ease, tout .3s ease 2.1s forwards}
+  .tst .em{color:var(--amber2);font-weight:700}
+  @keyframes tin{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @keyframes tout{to{transform:translateY(-8px);opacity:0}}
+
+  @media (prefers-reduced-motion: reduce){
+    #steam span,.water::before,.hint{animation:none}
+    #steam{opacity:.5}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="hud">
+    <div class="brand">湯 治 場 物 語</div>
+    <div class="yu"><span id="yu">0</span><span class="u">湯</span></div>
+    <div class="sub"><b id="rate">0</b> 湯/秒<span class="sep">·</span>★<b id="stars">0</b><span class="sep">·</span>手帳 <b id="achc">0</b>/<span id="achn">0</span></div>
+  </header>
+
+  <section id="tubwrap">
+    <div id="steam"><span></span><span></span><span></span></div>
+    <button id="tub" aria-label="湯をくむ">
+      <div class="tub-body"><div class="water"></div></div>
+      <div class="hint" id="hint">ここを トン と</div>
+    </button>
+  </section>
+
+  <div id="buymodeBar" class="buymode">
+    <span class="lbl">買う数</span>
+    <button data-m="1" class="on">×1</button>
+    <button data-m="10">×10</button>
+    <button data-m="max">最大</button>
+  </div>
+
+  <main id="panel">
+    <div class="tab on" id="tab-fac">
+      <div id="facList"></div>
+    </div>
+
+    <div class="tab" id="tab-up">
+      <div id="reno">
+        <div class="rt">改装して格を上げる</div>
+        <div class="rd" id="renoDesc"></div>
+        <button class="btn" id="renoBtn">改装する</button>
+      </div>
+      <div class="sec-t">強化（一度きり）</div>
+      <div id="upList"></div>
+      <div class="note" id="upEmpty">まだ手の届く強化はありません。湯を貯めると現れます。</div>
+    </div>
+
+    <div class="tab" id="tab-ach">
+      <div class="sec-t">湯めぐり手帳</div>
+      <div id="achList"></div>
+    </div>
+
+    <div class="tab" id="tab-set">
+      <div class="sec-t">設定</div>
+      <div class="toggle">湯の音<div class="sw" id="swSound"></div></div>
+      <button class="btn ghost" id="helpBtn">あそびかた</button>
+      <button class="btn danger" id="resetBtn">最初からやり直す</button>
+      <div class="note">
+        進み具合はこの端末（ブラウザ）に自動で保存されます。電波がなくても遊べます。<br>
+        ホーム画面に追加すると、アプリのように全画面で開けます。<br>
+        <span id="ver"></span>
+      </div>
+    </div>
+  </main>
+
+  <nav id="tabs">
+    <button data-tab="fac" class="on"><span class="g">♨️</span>施設</button>
+    <button data-tab="up"><span class="g">✦</span>強化</button>
+    <button data-tab="ach"><span class="g">📔</span>手帳</button>
+    <button data-tab="set"><span class="g">⚙️</span>設定</button>
+  </nav>
+</div>
+
+<div id="scrim"><div class="modal" id="modal"></div></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+const VERSION = "v1.0";
+const SAVE_KEY = "yujiba_save_v1";
+const GROW = 1.15;            // facility cost growth
+const OFFLINE_CAP = 12*3600;  // 留守の還元は最大12時間ぶん
+const RENO_BASE = 1e6;        // 改装に必要な「今回の通算湯」の基準
+
+const FAC = [
+  {id:"yukumi",  ic:"🪣", nm:"湯くみ",       ds:"桶でこつこつ湯をくむ",       base:15,    rate:0.2},
+  {id:"goemon",  ic:"🔥", nm:"五右衛門風呂", ds:"鉄釜でじっくり沸かす",       base:110,   rate:1.2},
+  {id:"roten",   ic:"🌌", nm:"露天風呂",     ds:"星空の下の開放湯",          base:1200,  rate:9},
+  {id:"yumori",  ic:"🧓", nm:"湯守",         ds:"湯加減を見守る達人",         base:1.3e4, rate:47},
+  {id:"kyakuma", ic:"🏮", nm:"客間",         ds:"湯治客がのんびり長逗留",     base:1.4e5, rate:260},
+  {id:"uchiyu",  ic:"🏯", nm:"総檜の内湯",   ds:"木の香り漂う宿",            base:1.6e6, rate:1400},
+  {id:"gensen",  ic:"⛲", nm:"源泉櫓",       ds:"地の底から湧き上がる",       base:2e7,   rate:7800},
+  {id:"yunosato",ic:"🗻", nm:"湯の里",       ds:"里がまるごと湯の郷",         base:3.3e8, rate:44000},
+  {id:"unjo",    ic:"☁️", nm:"雲上の湯",     ds:"雲の上の伝説の湯",          base:5.1e9, rate:260000},
+  {id:"ryugu",   ic:"🐉", nm:"龍宮の湯",     ds:"海の底、竜の棲む湯",         base:7.5e10,rate:1.6e6},
+];
+const UPS = [
+  {id:"tap1", ic:"🥢", nm:"良い手桶",     ds:"タップで湧く湯 ×3",    cost:400,   kind:"tap", mult:3},
+  {id:"all1", ic:"💧", nm:"名水を引く",   ds:"全体の産出 ×2",        cost:9000,  kind:"all", mult:2},
+  {id:"tap2", ic:"⚖️", nm:"天秤棒",       ds:"タップで湧く湯 ×3",    cost:60000, kind:"tap", mult:3},
+  {id:"all2", ic:"🌲", nm:"檜の総替え",   ds:"全体の産出 ×2",        cost:7.5e5, kind:"all", mult:2},
+  {id:"tap3", ic:"🎡", nm:"大車輪の桶",   ds:"タップで湧く湯 ×5",    cost:6e6,   kind:"tap", mult:5},
+  {id:"all3", ic:"📣", nm:"秘湯の評判",   ds:"全体の産出 ×3",        cost:9e7,   kind:"all", mult:3},
+  {id:"all4", ic:"👘", nm:"名物の女将",   ds:"全体の産出 ×3",        cost:2e9,   kind:"all", mult:3},
+];
+const ACH = [
+  {id:"a1", ic:"💧", nm:"初しずく",     ds:"はじめて湯をくむ",     f:s=>s.taps>=1},
+  {id:"a2", ic:"♨️", nm:"湯けむり立つ", ds:"毎秒10湯を超える",     f:s=>s.rate>=10},
+  {id:"a3", ic:"🧓", nm:"湯守を雇う",   ds:"湯守を1人",            f:s=>(s.fac.yumori||0)>=1},
+  {id:"a4", ic:"🌌", nm:"露天デビュー", ds:"露天風呂を1つ",        f:s=>(s.fac.roten||0)>=1},
+  {id:"a5", ic:"🏮", nm:"千客万来",     ds:"客間を10",             f:s=>(s.fac.kyakuma||0)>=10},
+  {id:"a6", ic:"🌸", nm:"一番風呂",     ds:"通算 1万湯",           f:s=>s.lifetime>=1e4},
+  {id:"a7", ic:"⛩️", nm:"名湯ここにあり",ds:"通算 1億湯",          f:s=>s.lifetime>=1e8},
+  {id:"a8", ic:"🔨", nm:"はじめての改装",ds:"1回 改装する",        f:s=>s.renos>=1},
+  {id:"a9", ic:"⭐", nm:"七つ星の宿",   ds:"星を7つ集める",        f:s=>s.stars>=7},
+  {id:"a10",ic:"🐉", nm:"龍宮へ",       ds:"龍宮の湯を1つ",        f:s=>(s.fac.ryugu||0)>=1},
+  {id:"a11",ic:"🌊", nm:"湯治の達人",   ds:"毎秒 1万湯",           f:s=>s.rate>=1e4},
+  {id:"a12",ic:"💰", nm:"湯けむり長者", ds:"通算 1兆湯",           f:s=>s.lifetime>=1e12},
+];
+
+// ---------- state ----------
+function freshState(){
+  return {v:1, yu:0, lifetime:0, run:0, fac:{}, ups:[], stars:0, ach:[],
+          taps:0, renos:0, buyMode:1, soundOn:false, lastSeen:Date.now()};
+}
+let state = freshState();
+let rate = 0, tapGain = 1;   // derived
+const $ = id => document.getElementById(id);
+
+// ---------- number format (Japanese myriads) ----------
+const UNITS = ["","万","億","兆","京","垓","秭"];
+function fmt(n){
+  if(!isFinite(n)) return "∞";
+  n = Math.max(0,n);
+  if(n < 1) return (Math.round(n*10)/10).toString();
+  if(n < 10000) return Math.floor(n).toLocaleString("ja-JP");
+  let t = Math.floor(Math.log10(n)/4);
+  if(t >= UNITS.length) return n.toExponential(2);
+  const v = n / Math.pow(10, 4*t);
+  const s = v>=100 ? v.toFixed(0) : v>=10 ? v.toFixed(1) : v.toFixed(2);
+  return s + UNITS[t];
+}
+function fmtRate(n){ return n<100 ? (Math.round(n*10)/10).toString() : fmt(n); }
+
+// ---------- save / load ----------
+let saveTimer = 0;
+function save(){
+  state.lastSeen = Date.now();
+  try{ localStorage.setItem(SAVE_KEY, JSON.stringify(state)); }catch(e){}
+}
+function queueSave(){ clearTimeout(saveTimer); saveTimer = setTimeout(save, 600); }
+function load(){
+  try{
+    const raw = localStorage.getItem(SAVE_KEY);
+    if(!raw) return false;
+    const d = JSON.parse(raw);
+    state = Object.assign(freshState(), d);
+    state.fac = Object.assign({}, d.fac||{});
+    state.ups = Array.isArray(d.ups)? d.ups : [];
+    state.ach = Array.isArray(d.ach)? d.ach : [];
+    return true;
+  }catch(e){ state = freshState(); return false; }
+}
+
+// ---------- derive ----------
+function recalc(){
+  let r = 0;
+  for(const f of FAC) r += (state.fac[f.id]||0) * f.rate;
+  let allMult = 1, tapMult = 1;
+  for(const u of UPS){ if(state.ups.includes(u.id)){
+    if(u.kind==="all") allMult *= u.mult; else tapMult *= u.mult;
+  }}
+  const starMult = 1 + 0.02 * state.stars;
+  rate = r * allMult * starMult;
+  tapGain = (1 * tapMult) * starMult + rate * 0.01;
+}
+
+// ---------- buy math ----------
+function facCost(f, owned, q){
+  const a = f.base * Math.pow(GROW, owned);
+  return a * (Math.pow(GROW, q) - 1) / (GROW - 1);
+}
+function maxAffordable(f, owned){
+  const a = f.base * Math.pow(GROW, owned);
+  const q = Math.floor(Math.log(state.yu*(GROW-1)/a + 1) / Math.log(GROW));
+  return Math.max(0, q);
+}
+function buyQtyAndCost(f){
+  const owned = state.fac[f.id]||0;
+  if(state.buyMode === "max"){
+    const q = Math.max(1, maxAffordable(f, owned));
+    return {q, cost: facCost(f, owned, q), capped:true};
+  }
+  const q = state.buyMode;
+  return {q, cost: facCost(f, owned, q), capped:false};
+}
+
+// ---------- actions ----------
+function tap(clientX, clientY){
+  state.yu += tapGain; state.lifetime += tapGain; state.run += tapGain; state.taps++;
+  if(state.taps <= 6) $("hint").classList.add("hidden");
+  blip();
+  // floating +N and ripple
+  const wrap = $("tubwrap"); const rct = wrap.getBoundingClientRect();
+  const x = (clientX!=null? clientX - rct.left : rct.width/2);
+  const y = (clientY!=null? clientY - rct.top : rct.height*0.5);
+  const pop = document.createElement("div"); pop.className="pop"; pop.textContent="+"+fmt(tapGain);
+  pop.style.left = x+"px"; pop.style.top = y+"px"; wrap.appendChild(pop);
+  const rip = document.createElement("div"); rip.className="ripple";
+  rip.style.left = x+"px"; rip.style.top = y+"px"; wrap.appendChild(rip);
+  setTimeout(()=>{pop.remove();}, 920); setTimeout(()=>{rip.remove();}, 620);
+  flushHUD();
+  queueSave();
+}
+function buyFac(f){
+  const {q, cost} = buyQtyAndCost(f);
+  if(q<=0 || state.yu < cost) return;
+  state.yu -= cost;
+  state.fac[f.id] = (state.fac[f.id]||0) + q;
+  recalc(); blip(); renderFac(); flushHUD(); checkAch(); queueSave();
+}
+function buyUp(u){
+  if(state.ups.includes(u.id) || state.yu < u.cost) return;
+  state.yu -= u.cost; state.ups.push(u.id);
+  recalc(); blip(); renderUp(); flushHUD(); queueSave();
+  toast("🛠 強化: <span class='em'>"+u.nm+"</span>");
+}
+function starsFromRun(){
+  return Math.floor(Math.sqrt(state.run / RENO_BASE));
+}
+function doRenovate(){
+  const gain = starsFromRun();
+  if(gain <= 0) return;
+  state.stars += gain;
+  state.yu = 0; state.run = 0; state.fac = {}; state.ups = [];
+  state.renos++;
+  recalc(); renderAll(); flushHUD(); checkAch(); save();
+  closeModal();
+  toast("✨ 改装完了 星を <span class='em'>"+gain+"</span> 獲得（合計 ★"+state.stars+"）");
+}
+
+// ---------- rendering ----------
+let facEls = {}, upEls = {}, achEls = {};
+function renderFacSkeleton(){
+  const list = $("facList"); list.innerHTML=""; facEls={};
+  for(const f of FAC){
+    const b = document.createElement("button"); b.className="card"; b.dataset.id=f.id;
+    b.innerHTML =
+      '<div class="ic">'+f.ic+'</div>'+
+      '<div class="body"><div class="nm">'+f.nm+'<span class="ct"></span></div>'+
+      '<div class="ds">'+f.ds+'</div><div class="prod"></div></div>'+
+      '<div class="right"><div class="cost"></div><div class="costu">湯</div><div class="qty"></div></div>';
+    b.addEventListener("click", ()=>buyFac(f));
+    list.appendChild(b); facEls[f.id]=b;
+  }
+}
+function renderFac(){
+  FAC.forEach((f, idx)=>{
+    const el = facEls[f.id]; if(!el) return;
+    const owned = state.fac[f.id]||0;
+    const revealed = idx===0 || owned>0 || state.lifetime >= f.base*0.45;
+    el.style.display = revealed ? "flex" : "none";
+    if(!revealed) return;
+    const {q, cost, capped} = buyQtyAndCost(f);
+    const afford = state.yu >= cost && q>0;
+    el.classList.toggle("poor", !afford);
+    el.querySelector(".ct").textContent = owned>0 ? "×"+owned : "";
+    el.querySelector(".prod").textContent = owned>0
+      ? "+"+fmtRate(owned*f.rate)+"/秒  (1つ "+fmtRate(f.rate)+")"
+      : fmtRate(f.rate)+"/秒";
+    el.querySelector(".cost").textContent = fmt(cost);
+    el.querySelector(".qty").textContent = (state.buyMode!==1) ? "まとめて "+q+"つ" : "";
+  });
+}
+function renderUp(){
+  const list = $("upList"); list.innerHTML=""; let shown=0;
+  for(const u of UPS){
+    if(state.ups.includes(u.id)) continue;
+    if(state.lifetime < u.cost*0.4) continue;
+    shown++;
+    const afford = state.yu >= u.cost;
+    const b = document.createElement("button"); b.className="card up"+(afford?"":" poor");
+    b.innerHTML='<div class="ic">'+u.ic+'</div>'+
+      '<div class="body"><div class="nm">'+u.nm+'</div><div class="ds">'+u.ds+'</div></div>'+
+      '<div class="right"><div class="cost">'+fmt(u.cost)+'</div><div class="costu">湯</div></div>';
+    b.addEventListener("click", ()=>buyUp(u));
+    list.appendChild(b);
+  }
+  $("upEmpty").style.display = shown? "none":"block";
+  // renovate banner
+  const gain = starsFromRun();
+  const reno = $("reno");
+  if(gain >= 1){
+    reno.classList.add("show");
+    $("renoDesc").innerHTML = "今 改装すると星を <b style='color:var(--amber2)'>"+gain+"</b> つ獲得。"+
+      "星1つにつき全産出 +2%（★"+state.stars+" 〈+"+(2*state.stars)+"%〉 → ★"+(state.stars+gain)+" 〈+"+(2*(state.stars+gain))+"%〉）。"+
+      "<br>施設と強化はリセットされますが、湯はまたすぐ湧きます。";
+  }else{
+    reno.classList.remove("show");
+  }
+}
+function renderAchSkeleton(){
+  const list=$("achList"); list.innerHTML=""; achEls={};
+  for(const a of ACH){
+    const d=document.createElement("div"); d.className="ach lock";
+    d.innerHTML='<div class="ic">'+a.ic+'</div><div><div class="nm">'+a.nm+'</div><div class="ds">'+a.ds+'</div></div>';
+    list.appendChild(d); achEls[a.id]=d;
+  }
+  $("achn").textContent = ACH.length;
+}
+function renderAch(){
+  for(const a of ACH){
+    const got = state.ach.includes(a.id);
+    achEls[a.id].className = "ach "+(got?"got":"lock");
+  }
+  $("achc").textContent = state.ach.length;
+  const tb = document.querySelector('#tabs button[data-tab="ach"]');
+}
+function renderAll(){ renderFac(); renderUp(); renderAch(); }
+
+function snapshot(){ return {taps:state.taps, rate, fac:state.fac, lifetime:state.lifetime, renos:state.renos, stars:state.stars}; }
+function checkAch(){
+  const s = snapshot(); let changed=false;
+  for(const a of ACH){
+    if(!state.ach.includes(a.id) && a.f(s)){
+      state.ach.push(a.id); changed=true;
+      toast("📔 手帳に記帳: <span class='em'>"+a.nm+"</span>");
+    }
+  }
+  if(changed){ renderAch(); queueSave(); }
+}
+
+// ---------- HUD (throttled) ----------
+let hudDirty=true;
+function flushHUD(){
+  $("yu").textContent = fmt(state.yu);
+  $("rate").textContent = fmtRate(rate);
+  $("stars").textContent = state.stars;
+}
+
+// ---------- toast / modal ----------
+function toast(html){
+  const t=document.createElement("div"); t.className="tst"; t.innerHTML=html;
+  $("toast").appendChild(t); setTimeout(()=>t.remove(), 2500);
+}
+function openModal(html){ $("modal").innerHTML=html; $("scrim").classList.add("show"); }
+function closeModal(){ $("scrim").classList.remove("show"); }
+
+// ---------- sound ----------
+let actx=null;
+function blip(){
+  if(!state.soundOn) return;
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==="suspended") actx.resume();
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.type="sine"; o.frequency.value=400 + Math.random()*140;
+    o.connect(g); g.connect(actx.destination);
+    const t=actx.currentTime;
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.07, t+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t+0.19);
+    o.start(t); o.stop(t+0.2);
+  }catch(e){}
+}
+
+// ---------- idle / offline ----------
+function grantIdle(showModal){
+  const idle = Math.min(OFFLINE_CAP, (Date.now() - state.lastSeen)/1000);
+  state.lastSeen = Date.now();
+  if(idle < 1 || rate <= 0) return;
+  const g = rate * idle;
+  state.yu += g; state.lifetime += g; state.run += g;
+  if(showModal && idle >= 60 && g >= 1){
+    const mins = Math.floor(idle/60), hrs=Math.floor(mins/60);
+    const dur = hrs>0 ? hrs+"時間"+(mins%60)+"分" : mins+"分";
+    openModal('<h2>おかえりなさい</h2><p>留守のあいだ（'+dur+'）に<br><b>'+fmt(g)+'</b> 湯 が湧いていました。</p>'+
+      '<button class="btn" onclick="closeModal()">湯を受け取る</button>');
+  }else if(idle >= 60 && g >= 1){
+    toast("♨️ 留守ぶん <span class='em'>+"+fmt(g)+"</span> 湯");
+  }
+  flushHUD(); checkAch();
+}
+
+// ---------- main loop ----------
+let lastFrame = performance.now();
+let acc = 0;
+function loop(now){
+  let dt = (now - lastFrame)/1000; lastFrame = now;
+  if(dt > 5) dt = 5;               // active-only smoothing (idle handled separately)
+  if(dt > 0 && rate > 0){
+    const g = rate*dt;
+    state.yu += g; state.lifetime += g; state.run += g;
+  }
+  acc += dt;
+  if(acc >= 0.1){                   // refresh ~10/s
+    acc = 0;
+    flushHUD();
+    if(curTab==="fac") renderFac();
+    else if(curTab==="up") renderUp();
+    checkAch();
+  }
+  requestAnimationFrame(loop);
+}
+
+// ---------- tabs ----------
+let curTab="fac";
+function setTab(t){
+  curTab=t;
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on", b.dataset.tab===t));
+  document.querySelectorAll(".tab").forEach(el=>el.classList.toggle("on", el.id==="tab-"+t));
+  $("buymodeBar").style.display = (t==="fac") ? "flex" : "none";
+  if(t==="fac") renderFac(); else if(t==="up") renderUp(); else if(t==="ach") renderAch();
+}
+
+// ---------- wiring ----------
+function bind(){
+  const tub=$("tub");
+  tub.addEventListener("pointerdown", e=>{ e.preventDefault(); tap(e.clientX, e.clientY); }, {passive:false});
+  document.querySelectorAll("#tabs button").forEach(b=> b.addEventListener("click", ()=>setTab(b.dataset.tab)));
+  document.querySelectorAll(".buymode button").forEach(b=> b.addEventListener("click", ()=>{
+    state.buyMode = b.dataset.m==="max" ? "max" : parseInt(b.dataset.m,10);
+    document.querySelectorAll(".buymode button").forEach(x=>x.classList.toggle("on", x===b));
+    renderFac(); queueSave();
+  }));
+  $("renoBtn").addEventListener("click", ()=>{
+    const gain=starsFromRun();
+    openModal('<h2>改装しますか？</h2><p>星を <b>'+gain+'</b> つ受け取り、宿を建て直します。<br>施設と強化はリセット、湯は0に戻ります。<br>（星は永久に全産出を上げます）</p>'+
+      '<button class="btn" id="mYes">改装する</button><button class="btn ghost" onclick="closeModal()">やめておく</button>');
+    $("mYes").addEventListener("click", doRenovate);
+  });
+  $("swSound").addEventListener("click", ()=>{
+    state.soundOn=!state.soundOn; $("swSound").classList.toggle("on", state.soundOn);
+    if(state.soundOn) blip(); queueSave();
+  });
+  $("helpBtn").addEventListener("click", ()=>{
+    openModal('<h2>あそびかた</h2><p style="text-align:left">♨️ 湯ぶねを<b>トン</b>と押すと湯が湧きます。<br>🪣 貯めた湯で<b>施設</b>を買うと、ほっといても湯が増えます。<br>✦ <b>強化</b>でぐんと加速。<br>🔨 たくさん貯めたら<b>改装</b>＝星を得て永久に強くなります。<br>📔 節目ごとに<b>手帳</b>が埋まります。<br><br>電波がなくてもOK。閉じても湯は湧き続けます。</p><button class="btn" onclick="closeModal()">とじる</button>');
+  });
+  $("resetBtn").addEventListener("click", ()=>{
+    openModal('<h2>最初から？</h2><p>すべての進み具合（星・手帳もふくむ）が消えます。<br>本当によろしいですか？</p>'+
+      '<button class="btn danger" id="mReset">消してやり直す</button><button class="btn ghost" onclick="closeModal()">やめる</button>');
+    $("mReset").addEventListener("click", ()=>{
+      state=freshState(); try{localStorage.removeItem(SAVE_KEY);}catch(e){}
+      recalc(); renderAll(); flushHUD(); closeModal(); setTab("fac");
+      $("swSound").classList.remove("on");
+    });
+  });
+  $("scrim").addEventListener("click", e=>{ if(e.target===$("scrim")) closeModal(); });
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden){ save(); }
+    else { lastFrame=performance.now(); grantIdle(false); renderAll(); }
+  });
+  window.addEventListener("pagehide", save);
+  window.addEventListener("blur", ()=>{ state.lastSeen=Date.now(); });
+}
+
+// ---------- init ----------
+function init(){
+  const had = load();
+  recalc();
+  renderFacSkeleton(); renderAchSkeleton();
+  $("swSound").classList.toggle("on", state.soundOn);
+  document.querySelectorAll(".buymode button").forEach(x=>{
+    x.classList.toggle("on", (x.dataset.m==="max"? "max":parseInt(x.dataset.m,10))===state.buyMode);
+  });
+  $("ver").textContent = "湯治場物語 "+VERSION;
+  renderAll(); flushHUD();
+  if(state.taps>0) $("hint").classList.add("hidden");
+  bind();
+  if(had) grantIdle(true);
+  requestAnimationFrame(loop);
+  setInterval(save, 8000);
+}
+// hint hide helper via class
+const styleHint=document.createElement("style");
+styleHint.textContent=".hint.hidden{opacity:0;transition:opacity .6s}";
+document.head.appendChild(styleHint);
+
+window.addEventListener("DOMContentLoaded", init);
+
+// ---------- service worker ----------
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=> navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>
