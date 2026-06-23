@@ -223,8 +223,8 @@
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <radialGradient id="fur" cx="0.42" cy="0.30" r="0.8">
-    <stop offset="0" stop-color="#c89066"/><stop offset="0.55" stop-color="#b58258"/><stop offset="1" stop-color="#9a6940"/>
+  <radialGradient id="fur" cx="0.38" cy="0.26" r="0.92">
+    <stop offset="0" stop-color="#d8a274"/><stop offset="0.5" stop-color="#b58258"/><stop offset="1" stop-color="#855730"/>
   </radialGradient>
   <radialGradient id="cream" cx="0.5" cy="0.32" r="0.85">
     <stop offset="0" stop-color="#f7eddc"/><stop offset="1" stop-color="#ebdbbe"/>
@@ -232,12 +232,13 @@
   <radialGradient id="blush" cx="0.5" cy="0.5" r="0.5">
     <stop offset="0" stop-color="#f7a3ad"/><stop offset="0.65" stop-color="#f5a0aa" stop-opacity="0.85"/><stop offset="1" stop-color="#f5a0aa" stop-opacity="0"/>
   </radialGradient>
-  <radialGradient id="foxfur" cx="0.45" cy="0.3" r="0.85">
-    <stop offset="0" stop-color="#f0975a"/><stop offset="1" stop-color="#df7a3a"/>
+  <radialGradient id="foxfur" cx="0.42" cy="0.26" r="0.92">
+    <stop offset="0" stop-color="#f7a463"/><stop offset="0.55" stop-color="#e7833f"/><stop offset="1" stop-color="#c8682a"/>
   </radialGradient>
   <linearGradient id="towel" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#fcf6ec"/><stop offset="1" stop-color="#eee0cc"/>
   </linearGradient>
+  <clipPath id="phead"><circle cx="100" cy="86" r="55"/></clipPath>
 </defs></svg>
 <div id="app">
   <header id="hud">
@@ -252,12 +253,15 @@
     <div class="kon-wrap" id="konWrap" aria-hidden="true">
       <svg class="kon" viewBox="0 0 120 130">
         <path class="kon-tail" d="M92 70 Q128 60 118 100 Q112 120 92 108 Q86 88 92 70Z" fill="url(#foxfur)"/>
+        <path d="M98 78 Q116 74 112 100" stroke="#cc6a2c" stroke-width="4" fill="none" opacity=".4" stroke-linecap="round"/>
         <path d="M104 96 Q122 90 116 110 Q112 118 100 110Z" fill="#f3ead9"/>
         <path d="M30 44 L18 8 L50 34 Z" fill="url(#foxfur)"/>
         <path d="M90 44 L102 8 L70 34 Z" fill="url(#foxfur)"/>
         <path d="M30 40 L23 17 L43 33 Z" fill="#3a2a22"/>
         <path d="M90 40 L97 17 L77 33 Z" fill="#3a2a22"/>
         <path d="M60 32 Q96 42 86 78 Q72 104 60 104 Q48 104 34 78 Q24 42 60 32Z" fill="url(#foxfur)"/>
+        <path d="M40 46 Q34 66 44 86" stroke="#cc6a2c" stroke-width="5" fill="none" opacity=".28" stroke-linecap="round"/>
+        <path d="M80 46 Q86 66 76 86" stroke="#cc6a2c" stroke-width="5" fill="none" opacity=".28" stroke-linecap="round"/>
         <path d="M60 60 Q80 64 74 86 Q66 100 60 100 Q54 100 46 86 Q40 64 60 60Z" fill="#f5ecdd"/>
         <ellipse class="cheek" cx="40" cy="76" rx="7" ry="5" fill="url(#blush)"/>
         <ellipse class="cheek" cx="80" cy="76" rx="7" ry="5" fill="url(#blush)"/>
@@ -284,9 +288,20 @@
           <ellipse cx="138" cy="46" rx="21" ry="23" fill="#8a6038"/>
           <ellipse cx="62" cy="49" rx="11" ry="12" fill="#c08a5c"/>
           <ellipse cx="138" cy="49" rx="11" ry="12" fill="#c08a5c"/>
+          <ellipse cx="62" cy="55" rx="8" ry="6" fill="#8a5a32" opacity=".35"/>
+          <ellipse cx="138" cy="55" rx="8" ry="6" fill="#8a5a32" opacity=".35"/>
           <path d="M38 156 Q38 112 100 112 Q162 112 162 156 Z" fill="url(#fur)"/>
           <ellipse cx="100" cy="150" rx="50" ry="30" fill="url(#cream)"/>
+          <path d="M50 72 L39 73 L50 80 Z" fill="#a06d42"/>
+          <path d="M47 90 L36 92 L48 98 Z" fill="#a06d42"/>
+          <path d="M150 72 L161 73 L150 80 Z" fill="#a06d42"/>
+          <path d="M153 90 L164 92 L152 98 Z" fill="#a06d42"/>
           <circle cx="100" cy="86" r="55" fill="url(#fur)"/>
+          <g clip-path="url(#phead)">
+            <ellipse cx="100" cy="152" rx="62" ry="44" fill="#7a5230" opacity=".30"/>
+            <ellipse cx="84" cy="58" rx="38" ry="24" fill="#ecc596" opacity=".30"/>
+          </g>
+          <path d="M52 118 Q100 137 148 118" stroke="#7a5230" stroke-width="5" opacity=".20" fill="none" stroke-linecap="round"/>
           <ellipse cx="100" cy="104" rx="41" ry="33" fill="url(#cream)"/>
           <ellipse cx="78" cy="84" rx="17" ry="22" fill="#4f3825" transform="rotate(-12 78 84)"/>
           <ellipse cx="122" cy="84" rx="17" ry="22" fill="#4f3825" transform="rotate(12 122 84)"/>
