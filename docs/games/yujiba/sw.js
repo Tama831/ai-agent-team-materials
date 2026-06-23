@@ -1,5 +1,5 @@
 // 湯治場物語 — offline service worker (stale-while-revalidate)
-const CACHE = "yujiba-v1";
+const CACHE = "yujiba-v2";
 const ASSETS = [
   "./",
   "./index.html",
