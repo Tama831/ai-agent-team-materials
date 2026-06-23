@@ -107,6 +107,16 @@
     animation:konbob 4.2s ease-in-out infinite}
   .kon{width:100%;height:auto;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
   @keyframes konbob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-4px) rotate(2deg)}}
+  .kbubble{position:absolute;left:6px;bottom:108px;transform-origin:bottom left;
+    background:#eef0fb;color:#42506e;font-family:var(--serif);font-weight:700;font-size:13px;
+    padding:5px 12px;border-radius:15px;white-space:nowrap;opacity:0;pointer-events:none;z-index:6;
+    box-shadow:0 4px 12px rgba(0,0,0,.32)}
+  .kbubble::after{content:"";position:absolute;left:24px;bottom:-6px;
+    border:7px solid transparent;border-top-color:#eef0fb;border-bottom:0}
+  .kbubble.show{animation:kbub 2s ease forwards}
+  @keyframes kbub{0%{opacity:0;transform:scale(.5)}12%{opacity:1;transform:scale(1)}84%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.92)}}
+  .kon-wrap.react{animation:konreact .55s ease}
+  @keyframes konreact{0%,100%{transform:translateY(0) rotate(-3deg)}28%{transform:translateY(-8px) rotate(5deg)}60%{transform:translateY(0) rotate(-6deg)}}
   .pop{position:absolute;z-index:5;font-family:var(--serif);font-weight:600;font-size:20px;color:var(--amber2);
     text-shadow:0 1px 6px rgba(0,0,0,.5);pointer-events:none;animation:pop .9s ease-out forwards;font-variant-numeric:tabular-nums}
   @keyframes pop{0%{transform:translate(-50%,0) scale(.8);opacity:0}
@@ -234,11 +244,19 @@
         <path d="M60 60 Q80 64 74 86 Q66 100 60 100 Q54 100 46 86 Q40 64 60 60Z" fill="#f5ecdd"/>
         <ellipse class="cheek" cx="40" cy="76" rx="7" ry="5" fill="#f3a0aa"/>
         <ellipse class="cheek" cx="80" cy="76" rx="7" ry="5" fill="#f3a0aa"/>
-        <path d="M44 66 Q50 60 56 66" stroke="#3a2a22" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M64 66 Q70 60 76 66" stroke="#3a2a22" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M43 64 Q50 61 57 66 Q50 70 43 64Z" fill="#fff"/>
+        <path d="M77 64 Q70 61 63 66 Q70 70 77 64Z" fill="#fff"/>
+        <ellipse cx="51" cy="66" rx="2.8" ry="3.2" fill="#33241a"/>
+        <ellipse cx="69" cy="66" rx="2.8" ry="3.2" fill="#33241a"/>
+        <circle cx="52.2" cy="64.7" r=".9" fill="#fff"/>
+        <circle cx="70.2" cy="64.7" r=".9" fill="#fff"/>
+        <path d="M40 61 Q48 58 56 61" stroke="#caa06a" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7"/>
+        <path d="M64 61 Q72 58 80 61" stroke="#caa06a" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".7"/>
         <ellipse cx="60" cy="82" rx="4" ry="3" fill="#3a2a22"/>
+        <path d="M57 88 Q63 91 69 86.5" stroke="#3a2a22" stroke-width="2" fill="none" stroke-linecap="round"/>
       </svg>
     </div>
+    <div class="kbubble" id="kbubble" aria-hidden="true"></div>
 
     <button id="tub" aria-label="ぽんと湯につかる">
       <div class="tub-body"></div>
@@ -386,7 +404,7 @@ let rate = 0, tapGain = 1;   // derived
 const $ = id => document.getElementById(id);
 
 // ---------- number format (Japanese myriads) ----------
-const UNITS = ["","万","億","兆","京","垓","秭"];
+const UNITS = ["","万","億","兆","京","垓","秭","穣","溝","澗","正","載","極","恒河沙","阿僧祇","那由他","不可思議","無量大数"];
 function fmt(n){
   if(!isFinite(n)) return "∞";
   n = Math.max(0,n);
@@ -454,10 +472,19 @@ function buyQtyAndCost(f){
 }
 
 // ---------- actions ----------
-const PON_LINES = ["ぽんっ♪","ええ湯〜","ふぁ〜","あったか","ぽかぽか","きもちぃ","ごくらく〜","ふぅ…","のぼせる〜"];
+// ぽん=おっとり温かい見守り役 / こん=賢く生意気・鋭く言い切る (Whisper Spirits canon)
+const PON_LINES = ["ふぁ〜…","あったかいねぇ","ゆっくりしてってね","いいお湯だよ〜","ぽかぽか…","のぼせちゃう〜","むりしないでね","しあわせ〜","ふぅ、ごくらく"];
+const KON_LINES = ["ふん、悪くないわね","まだ序の口でしょ","サボってないでしょうね？","数字、伸びてる伸びてる","ぽんは茹だってるけどね","その調子。油断は禁物よ","ほら、手が止まってる","わたしは見てるからね","湯加減ばっかり見てないの"];
+const rnd = a => a[Math.floor(Math.random()*a.length)];
 function showBubble(text){
   const b=$("bubble"); b.textContent=text; b.classList.remove("show");
   void b.offsetWidth; b.classList.add("show");
+}
+function showKonBubble(text){
+  const b=$("kbubble"); if(!b) return;
+  b.textContent=text; b.classList.remove("show"); void b.offsetWidth; b.classList.add("show");
+  const k=$("konWrap"); if(k){ k.classList.remove("react"); void k.offsetWidth; k.classList.add("react");
+    clearTimeout(k._kt); k._kt=setTimeout(()=>k.classList.remove("react"), 560); }
 }
 function tap(clientX, clientY){
   state.yu += tapGain; state.lifetime += tapGain; state.run += tapGain; state.taps++;
@@ -487,6 +514,7 @@ function tap(clientX, clientY){
   }
   setTimeout(()=>{pop.remove();}, 920); setTimeout(()=>{rip.remove();}, 620);
   if(state.taps>3 && state.taps % 11 === 0) showBubble(PON_LINES[(state.taps/11) % PON_LINES.length | 0]);
+  if(state.taps>5 && state.taps % 37 === 0) showKonBubble(rnd(KON_LINES));
   flushHUD();
   queueSave();
 }
@@ -515,6 +543,9 @@ function doRenovate(){
   recalc(); renderAll(); flushHUD(); checkAch(); save();
   closeModal();
   toast("✨ 改装完了 星を <span class='em'>"+gain+"</span> 獲得（合計 ★"+state.stars+"）");
+  showKonBubble(gain>=20 ? "見事な宿になったわね。星 "+gain+" つ、受け取りなさい"
+            : gain>=5 ? "悪くない改装。星 "+gain+" つよ"
+            : "まあ及第点。星 "+gain+" つね");
 }
 
 // ---------- rendering ----------
@@ -605,7 +636,7 @@ function checkAch(){
       toast("📔 手帳に記帳: <span class='em'>"+a.nm+"</span>");
     }
   }
-  if(changed){ renderAch(); queueSave(); }
+  if(changed){ renderAch(); queueSave(); showKonBubble(rnd(["記帳ね。やるじゃない","ふん、上出来","手帳が埋まってきたわね","その意気よ"])); }
 }
 
 // ---------- HUD (throttled) ----------
@@ -652,7 +683,8 @@ function grantIdle(showModal){
   if(showModal && idle >= 60 && g >= 1){
     const mins = Math.floor(idle/60), hrs=Math.floor(mins/60);
     const dur = hrs>0 ? hrs+"時間"+(mins%60)+"分" : mins+"分";
-    openModal('<h2>おかえりなさい</h2><p>留守のあいだ（'+dur+'）に<br><b>'+fmt(g)+'</b> 湯 が湧いていました。</p>'+
+    openModal('<h2>おかえりなさい</h2><p>🦝ぽん「留守のあいだ（'+dur+'）に<br><b>'+fmt(g)+'</b> 湯 が湧いてたよ〜」</p>'+
+      '<p style="color:#42506e;font-size:13px;margin-top:2px">🦊こん「'+(g>=1e6?"ずいぶん溜め込んだじゃない":"ちゃんと湧かしておいたわよ")+'」</p>'+
       '<button class="btn" onclick="closeModal()">湯を受け取る</button>');
   }else if(idle >= 60 && g >= 1){
     toast("♨️ 留守ぶん <span class='em'>+"+fmt(g)+"</span> 湯");
@@ -712,7 +744,7 @@ function bind(){
     if(state.soundOn) blip(); queueSave();
   });
   $("helpBtn").addEventListener("click", ()=>{
-    openModal('<h2>あそびかた</h2><p style="text-align:left">♨️ 湯ぶねを<b>トン</b>と押すと湯が湧きます。<br>🪣 貯めた湯で<b>施設</b>を買うと、ほっといても湯が増えます。<br>✦ <b>強化</b>でぐんと加速。<br>🔨 たくさん貯めたら<b>改装</b>＝星を得て永久に強くなります。<br>📔 節目ごとに<b>手帳</b>が埋まります。<br><br>電波がなくてもOK。閉じても湯は湧き続けます。</p><button class="btn" onclick="closeModal()">とじる</button>');
+    openModal('<h2>あそびかた</h2><p style="text-align:left">🦝ぽん（おっとり屋の見守り役）と🦊こん（しっかり者の鋭い子）の湯治場へようこそ。<br>♨️ 湯ぶねを<b>トン</b>と押すと湯が湧きます。<br>🪣 貯めた湯で<b>施設</b>を買うと、ほっといても湯が増えます。<br>✦ <b>強化</b>でぐんと加速。<br>🔨 たくさん貯めたら<b>改装</b>＝星を得て永久に強くなります。<br>📔 節目ごとに<b>手帳</b>が埋まります。<br><br>電波がなくてもOK。閉じても湯は湧き続けます。</p><button class="btn" onclick="closeModal()">とじる</button>');
   });
   $("resetBtn").addEventListener("click", ()=>{
     openModal('<h2>最初から？</h2><p>すべての進み具合（星・手帳もふくむ）が消えます。<br>本当によろしいですか？</p>'+
