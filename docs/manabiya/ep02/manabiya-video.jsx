@@ -47,7 +47,7 @@ function card(t, active) {
 function Shell({ t, bg = 'night', chapter = null, chaptersTotal = 4, origin = '50% 42%', glow = null, children }) {
   const { localTime, duration } = useSprite();
   const o = clamp(Math.min(localTime / 0.5, (duration - localTime) / 0.5, 1), 0, 1);
-  const sc = 1 + 0.022 * (localTime / duration);
+  const sc = 1; // クローズアップ(ゆっくりズーム)は無効化 — 不要との判断
   const s = t[bg];
   const chs = Array.from({ length: chaptersTotal }, (_, i) => i + 1);
   return (
@@ -81,7 +81,7 @@ function Shell({ t, bg = 'night', chapter = null, chaptersTotal = 4, origin = '5
 
 function DayHeader({ t, label, title }) {
   return (
-    <div style={{ position: 'absolute', top: 88, left: 120 }}>
+    <div style={{ position: 'absolute', top: t.flags.cinema ? 130 : 88, left: 120 }}>
       <FadeIn delay={0.4} dy={18}>
         {t.flags.chyron ? (
           <div style={{ display: 'inline-block', background: '#030712', color: '#F5FAFF', fontFamily: t.fm, fontSize: 24, letterSpacing: 6, fontWeight: 700, padding: '8px 22px' }}>{label}</div>

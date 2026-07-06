@@ -45,7 +45,7 @@ function card(t, active) {
 function Shell({ t, bg = 'night', chapter = null, chaptersTotal = 4, origin = '50% 42%', glow = null, children }) {
   const { localTime, duration } = useSprite();
   const o = clamp(Math.min(localTime / 0.5, (duration - localTime) / 0.5, 1), 0, 1);
-  const sc = 1 + 0.022 * (localTime / duration);
+  const sc = 1; // クローズアップ(ゆっくりズーム)は無効化 — 不要との判断
   const s = t[bg];
   const chs = Array.from({ length: chaptersTotal }, (_, i) => i + 1);
   return (
