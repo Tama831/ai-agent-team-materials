@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>藪医者の学舎 — 解説動画プレイヤー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;700;800&family=Yomogi&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; background: #030712; overflow: hidden; }
+  #root { position: fixed; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="episode-ep02.js"></script>
+<script src="manabiya-themes.js"></script>
+<script type="text/babel" src="animations.jsx"></script>
+<script type="text/babel" src="manabiya-video.jsx"></script>
+<script type="text/babel" src="manabiya-video-vertical.jsx"></script>
+<script type="text/babel">
+  // ?ep=ep02 でエピソード切替、?mode=vertical で縦型9:16、?theme=broadcast などでテーマ切替
+  // theme: duotone / broadcast / paper / chalk / pop / cinema
+  // テロップ(字幕)は既定OFF＝本動画。読み上げ・ナレーション確認用に出すなら ?captions=on
+  const q = new URLSearchParams(location.search);
+  const epId = q.get('ep') || 'ep02';
+  const theme = q.get('theme') || 'duotone';
+  const showCaptions = q.get('captions') === 'on';
+  const App = q.get('mode') === 'vertical' ? window.ManabiyaVideoVertical : window.ManabiyaVideo;
+  ReactDOM.createRoot(document.getElementById('root')).render(<App episodeId={epId} theme={theme} showCaptions={showCaptions} />);
+</script>
+</body>
+</html>
