@@ -92,7 +92,7 @@ function DayHeader({ t, label, title }) {
         )}
       </FadeIn>
       <FadeIn delay={0.7} dy={22}>
-        <div style={{ fontFamily: t.fd, fontSize: 62, fontWeight: t.flags.pop ? 400 : 700, color: t.day.fg, letterSpacing: t.flags.serif || t.flags.cinema ? 1 : -1, marginTop: 12, whiteSpace: 'nowrap', display: 'inline-block', borderBottom: t.flags.chalk ? '3px dashed #E8C468' : 'none', paddingBottom: t.flags.chalk ? 10 : 0 }}>{title}</div>
+        <div style={{ fontFamily: t.fd, fontSize: 62, fontWeight: t.flags.pop ? 400 : 700, color: t.day.fg, letterSpacing: t.flags.serif || t.flags.cinema ? 1 : -1, marginTop: 12, maxWidth: 1680, lineHeight: 1.25, display: 'inline-block', borderBottom: t.flags.chalk ? '3px dashed #E8C468' : 'none', paddingBottom: t.flags.chalk ? 10 : 0 }}>{title}</div>
       </FadeIn>
     </div>
   );
@@ -187,7 +187,7 @@ function Opening({ t, kicker, ep, lead, title, sub, presenterIcon, presenterName
           <div style={{ background: '#030712', padding: '44px 120px', position: 'relative' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 14, background: 'linear-gradient(180deg,#22D3EE,#1E5BE6)' }}></div>
             <div style={{ fontFamily: t.fm, fontSize: 22, letterSpacing: 8, color: t.signal, marginBottom: 14 }}>{kicker}</div>
-            <div style={{ fontFamily: t.fd, fontSize: 78, fontWeight: 800, color: '#F5FAFF', letterSpacing: -1, whiteSpace: 'nowrap' }}>{title} <NightAccentText t={t} style={{ display: 'inline-block' }}>{sub}</NightAccentText></div>
+            <div style={{ fontFamily: t.fd, fontSize: 78, fontWeight: 800, color: '#F5FAFF', letterSpacing: -1, maxWidth: 1680, lineHeight: 1.15 }}>{title} <NightAccentText t={t} style={{ display: 'inline-block' }}>{sub}</NightAccentText></div>
           </div>
           <div style={{ background: t.accent, padding: '16px 120px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ fontFamily: t.fb, fontSize: 28, color: '#FFFFFF' }}>{presenterName}</div>
@@ -215,7 +215,7 @@ function Opening({ t, kicker, ep, lead, title, sub, presenterIcon, presenterName
           <div style={{ background: '#FFD43A', border: '3px solid #FFFDF4', color: '#111111', fontFamily: t.fd, fontSize: 30, padding: '10px 26px', borderRadius: 10, boxShadow: '5px 5px 0 rgba(255,253,244,0.35)' }}>5分解説!</div>
         </FadeIn>
       )}
-      <div style={{ position: 'absolute', left: 120, top: 380 }}>
+      <div style={{ position: 'absolute', left: 120, right: 120, top: 380 }}>
         <FadeIn delay={2.5} dy={20}>
           <div style={{ fontFamily: t.fb, fontSize: 40, color: t.night.fg2, marginBottom: 22 }}>{lead}</div>
         </FadeIn>
@@ -256,7 +256,7 @@ function Divider({ t, num, title, chaptersTotal = 4 }) {
           <div style={{ fontFamily: t.fm, fontSize: 108, fontWeight: 700, color: t.nightAccent || t.accent }}>{t.flags.cinema ? (ROMAN[num] || num) : num}</div>
         </FadeIn>
         <FadeIn delay={0.8} dy={24}>
-          <div style={{ fontFamily: t.fd, fontSize: 74, fontWeight: t.flags.pop ? 400 : 800, color: t.night.fg, marginTop: 14, letterSpacing: t.flags.serif || t.flags.cinema ? 2 : -1, whiteSpace: 'nowrap' }}>{title}</div>
+          <div style={{ fontFamily: t.fd, fontSize: 74, fontWeight: t.flags.pop ? 400 : 800, color: t.night.fg, marginTop: 14, letterSpacing: t.flags.serif || t.flags.cinema ? 2 : -1, maxWidth: 1680, lineHeight: 1.2 }}>{title}</div>
         </FadeIn>
         <FadeIn delay={1.3} dy={12}>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', marginTop: 46 }}>
@@ -411,7 +411,7 @@ function FlowScene({ t, chapter, chaptersTotal, label, title, steps = [], note }
       </div>
       {note && (
         <FadeIn delay={note.delay} style={{ position: 'absolute', left: 0, right: 0, top: 790, display: 'flex', justifyContent: 'center' }}>
-          <div style={{ fontFamily: t.fd, fontSize: 36, fontWeight: t.flags.pop ? 400 : 700, color: t.flags.chalk || t.flags.cinema ? t.nightAccent : t.tokens.iris, whiteSpace: 'nowrap', opacity: lt >= note.win[0] && lt < note.win[1] ? 1 : 0.4, transition: 'opacity 0.4s ease' }}>
+          <div style={{ fontFamily: t.fd, fontSize: 36, fontWeight: t.flags.pop ? 400 : 700, color: t.flags.chalk || t.flags.cinema ? t.nightAccent : t.tokens.iris, maxWidth: 1680, opacity: lt >= note.win[0] && lt < note.win[1] ? 1 : 0.4, transition: 'opacity 0.4s ease' }}>
             {note.text}
           </div>
         </FadeIn>
@@ -451,7 +451,7 @@ function RoleScene({ t, chapter, chaptersTotal, label, title, columns = [], conc
       </div>
       {conclusion && (
         <FadeIn delay={conclusion.delay} style={{ position: 'absolute', left: 0, right: 0, top: 880, display: 'flex', justifyContent: 'center' }}>
-          <div style={{ fontFamily: t.fd, fontSize: 40, fontWeight: t.flags.pop ? 400 : 800, color: t.day.fg, whiteSpace: 'nowrap' }}>{R(conclusion.runs, t)}</div>
+          <div style={{ fontFamily: t.fd, fontSize: 40, fontWeight: t.flags.pop ? 400 : 800, color: t.day.fg, maxWidth: 1680 }}>{R(conclusion.runs, t)}</div>
         </FadeIn>
       )}
     </Shell>
