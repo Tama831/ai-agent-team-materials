@@ -300,9 +300,9 @@ function CaseScene({ t, chapter, chaptersTotal, label, title, items = [], footer
         {items.map((it, i) => it.quote ? (
           <FadeIn key={i} delay={it.delay}>
             <div style={{
-              fontFamily: t.fd, fontSize: 36, fontWeight: t.flags.pop ? 400 : 700, lineHeight: 1.6, padding: '24px 30px',
+              fontFamily: t.fd, fontSize: 38, fontWeight: t.flags.pop ? 400 : 700, lineHeight: 1.6, padding: '24px 30px',
               ...card(t, !!(it.win && lt >= it.win[0] && lt < it.win[1])),
-              borderLeft: undefined, opacity: 1,
+              /* 左アクセントバーは card() のまま活かす */ opacity: 1,
               color: d.fg,
               transition: 'background 0.3s ease, border 0.3s ease',
             }}>
@@ -311,12 +311,12 @@ function CaseScene({ t, chapter, chaptersTotal, label, title, items = [], footer
           </FadeIn>
         ) : (
           <FadeIn key={i} delay={it.delay}>
-            <div style={{ fontFamily: t.fb, fontSize: 32, color: d.fg, lineHeight: 1.7 }}>{R(it.runs, t)}</div>
+            <div style={{ fontFamily: t.fb, fontSize: 36, color: d.fg, lineHeight: 1.7 }}>{R(it.runs, t)}</div>
           </FadeIn>
         ))}
         {footer && (
           <FadeIn delay={footer.delay}>
-            <div style={{ fontFamily: t.fb, fontSize: 26, color: d.fg3, borderTop: `1px dashed ${d.lineStrong || d.line}`, paddingTop: 20 }}>{footer.text}</div>
+            <div style={{ fontFamily: t.fb, fontSize: 30, color: d.fg3, borderTop: `1px dashed ${d.lineStrong || d.line}`, paddingTop: 20 }}>{footer.text}</div>
           </FadeIn>
         )}
       </div>
@@ -359,7 +359,7 @@ function PointsScene({ t, chapter, chaptersTotal, label, title, items = [] }) {
                 <div style={{ fontFamily: t.fm, fontSize: 50, fontWeight: 700, color: t.flags.pop ? '#111111' : (active ? t.tokens.deep : t.tokens.iris), fontVariantNumeric: 'tabular-nums' }}>{p.n}</div>
                 <div>
                   <div style={{ fontFamily: t.fd, fontSize: 44, fontWeight: t.flags.pop ? 400 : 700, color: d.fg, letterSpacing: t.flags.serif || t.flags.cinema ? 1 : -0.5 }}>{p.title}</div>
-                  <div style={{ fontFamily: t.fb, fontSize: 28, color: d.fg2, marginTop: 10, lineHeight: 1.6 }}>{p.sub}</div>
+                  <div style={{ fontFamily: t.fb, fontSize: 32, color: d.fg2, marginTop: 10, lineHeight: 1.6 }}>{p.sub}</div>
                 </div>
               </div>
             </FadeIn>
@@ -396,7 +396,7 @@ function FlowScene({ t, chapter, chaptersTotal, label, title, steps = [], note }
                   </div>
                   <div>
                     <div style={{ fontFamily: t.fd, fontSize: 40, fontWeight: t.flags.pop ? 400 : 700, color: d.fg }}>{s.title}</div>
-                    <div style={{ fontFamily: t.fb, fontSize: 26, color: d.fg2, marginTop: 6, lineHeight: 1.6 }}>{s.sub}</div>
+                    <div style={{ fontFamily: t.fb, fontSize: 30, color: d.fg2, marginTop: 6, lineHeight: 1.6 }}>{s.sub}</div>
                   </div>
                 </div>
               </FadeIn>
@@ -418,7 +418,7 @@ function FlowScene({ t, chapter, chaptersTotal, label, title, steps = [], note }
 function RoleList({ t, mono, title, items, base, emph }) {
   const d = t.day;
   return (
-    <div style={{ padding: '34px 40px', boxSizing: 'border-box', ...card(t, false), opacity: 1, borderLeft: emph && !t.flags.pop && !t.flags.chalk && !t.flags.cinema ? `6px solid ${t.accent}` : undefined }}>
+    <div style={{ padding: '34px 40px', boxSizing: 'border-box', ...card(t, false), opacity: 1 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 24 }}>
         <div style={{ fontFamily: t.fm, fontSize: 22, letterSpacing: 5, color: t.flags.pop ? '#111111' : t.tokens.iris, fontWeight: 700 }}>
           {!t.flags.serif && !t.flags.cinema && <span style={{ color: t.signal }}>▸ </span>}{mono}
@@ -430,7 +430,7 @@ function RoleList({ t, mono, title, items, base, emph }) {
           <FadeIn key={i} delay={base + i * 1.2} dy={22}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 26px', ...card(t, emph), opacity: 1 }}>
               <span style={{ fontFamily: t.fm, fontSize: 26, fontWeight: 700, color: t.flags.pop ? '#111111' : (emph ? t.tokens.deep : t.tokens.iris) }}>{String(i + 1).padStart(2, '0')}</span>
-              <span style={{ fontFamily: t.fb, fontSize: 30, color: d.fg }}>{it}</span>
+              <span style={{ fontFamily: t.fb, fontSize: 34, color: d.fg }}>{it}</span>
             </div>
           </FadeIn>
         ))}

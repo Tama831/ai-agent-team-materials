@@ -180,10 +180,12 @@ function Opening({ t, kicker, ep, lead, title, sub, presenterIcon, presenterName
           <div style={{ width: 12, height: 12, borderRadius: '50%', background: t.signal }}></div>
           <div style={{ fontFamily: t.fm, fontSize: 22, letterSpacing: 4, color: t.day.fg, fontWeight: 700 }}>{ep}</div>
         </div>
-        <FadeIn delay={1.2} dy={16} style={{ position: 'absolute', left: 120, bottom: 470 }}>
+        {/* lead と帯を1つの下寄せコンテナに — 帯(タイトル)が2行に伸びても lead を覆わない */}
+        <div style={{ position: 'absolute', left: 0, right: 0, bottom: 220 }}>
+        <FadeIn delay={1.2} dy={16} style={{ padding: '0 120px', marginBottom: 28 }}>
           <div style={{ fontFamily: t.fb, fontSize: 36, color: t.day.fg2 }}>{lead}</div>
         </FadeIn>
-        <FadeIn delay={2.2} dy={30} style={{ position: 'absolute', left: 0, right: 0, bottom: 220 }}>
+        <FadeIn delay={2.2} dy={30}>
           <div style={{ background: '#030712', padding: '44px 120px', position: 'relative' }}>
             <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 14, background: 'linear-gradient(180deg,#22D3EE,#1E5BE6)' }}></div>
             <div style={{ fontFamily: t.fm, fontSize: 22, letterSpacing: 8, color: t.signal, marginBottom: 14 }}>{kicker}</div>
@@ -194,6 +196,7 @@ function Opening({ t, kicker, ep, lead, title, sub, presenterIcon, presenterName
             <div style={{ fontFamily: t.fm, fontSize: 22, letterSpacing: 4, color: '#DFF0FF' }}>05:00</div>
           </div>
         </FadeIn>
+        </div>
       </Shell>
     );
   }
@@ -220,10 +223,10 @@ function Opening({ t, kicker, ep, lead, title, sub, presenterIcon, presenterName
           <div style={{ fontFamily: t.fb, fontSize: 40, color: t.night.fg2, marginBottom: 22 }}>{lead}</div>
         </FadeIn>
         <FadeIn delay={3.3} dy={30}>
-          <div style={{ fontFamily: t.fd, fontSize: 116, fontWeight: t.flags.pop ? 400 : 800, color: t.night.fg, letterSpacing: t.flags.serif || t.flags.cinema ? 3 : -2, lineHeight: 1.2, textShadow: t.flags.cinema ? '0 2px 20px rgba(0,0,0,0.85)' : 'none' }}>{title}</div>
+          <div style={{ fontFamily: t.fd, fontSize: 92, fontWeight: t.flags.pop ? 400 : 800, color: t.night.fg, letterSpacing: t.flags.serif || t.flags.cinema ? 3 : -2, lineHeight: 1.2, textShadow: t.flags.cinema ? '0 2px 20px rgba(0,0,0,0.85)' : 'none' }}>{title}</div>
         </FadeIn>
         <FadeIn delay={4.2} dy={30}>
-          <NightAccentText t={t} style={{ fontFamily: t.fd, fontSize: 116, fontWeight: t.flags.pop ? 400 : 800, letterSpacing: t.flags.serif || t.flags.cinema ? 3 : -2, lineHeight: 1.2, textShadow: t.flags.cinema ? '0 2px 20px rgba(0,0,0,0.85)' : 'none' }}>{sub}</NightAccentText>
+          <NightAccentText t={t} style={{ fontFamily: t.fd, fontSize: 92, fontWeight: t.flags.pop ? 400 : 800, letterSpacing: t.flags.serif || t.flags.cinema ? 3 : -2, lineHeight: 1.2, textShadow: t.flags.cinema ? '0 2px 20px rgba(0,0,0,0.85)' : 'none' }}>{sub}</NightAccentText>
         </FadeIn>
         <div style={{ width: `${lineW * 560}px`, height: t.flags.cinema || t.flags.serif ? 2 : 3, background: t.sig || t.nightAccent, marginTop: 34 }}></div>
       </div>
@@ -277,14 +280,14 @@ function Bar({ t, delay, h, label, value, fill, border, valueColor, badge }) {
   const fillMap = { tint: d.tint, frost: d.active };
   const borderMap = { lineStrong: d.lineStrong || d.line, ice: d.activeBorder };
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 14, height: 470, minWidth: 190 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 14, height: t.flags.cinema ? 400 : 470, minWidth: 190 }}>
       <div style={{ opacity: p, fontFamily: t.fd, fontSize: 52, fontWeight: t.flags.pop ? 400 : 800, color: t.tokens[valueColor] || valueColor || d.fg, fontVariantNumeric: 'tabular-nums', display: 'flex', alignItems: 'center', gap: 12, whiteSpace: 'nowrap' }}>
         {value}
         {badge && (
           <span style={{ fontFamily: t.fm, fontSize: 24, fontWeight: 700, color: t.flags.pop ? '#111111' : t.tokens.deep, background: t.flags.pop ? '#FFD43A' : 'rgba(34,211,238,0.18)', border: t.flags.pop ? '2px solid #111111' : `1px solid ${t.signal}`, borderRadius: 999, padding: '4px 16px' }}>{badge}</span>
         )}
       </div>
-      <div style={{ width: 190, height: Math.max(4, h * p), background: fillMap[fill] || fill || d.tint, border: t.flags.pop ? '3px solid #111111' : `1px solid ${borderMap[border] || border || d.line}`, borderRadius: t.flags.cinema ? 0 : 10 }}></div>
+      <div style={{ width: 190, height: Math.max(4, (t.flags.cinema ? h * 0.75 : h) * p), background: fillMap[fill] || fill || d.tint, border: t.flags.pop ? '3px solid #111111' : `1px solid ${borderMap[border] || border || d.line}`, borderRadius: t.flags.cinema ? 0 : 10 }}></div>
       <div style={{ fontFamily: t.fb, fontSize: 28, color: d.fg2 }}>{label}</div>
     </div>
   );
@@ -309,7 +312,7 @@ function CaseScene({ t, chapter, chaptersTotal, label, title, items = [], footer
             <div style={{
               fontFamily: t.fd, fontSize: 38, fontWeight: t.flags.pop ? 400 : 700, lineHeight: 1.6, padding: '26px 32px',
               ...card(t, !!(it.win && lt >= it.win[0] && lt < it.win[1])),
-              borderLeft: undefined,
+              /* 左アクセントバーは card() のまま活かす */
               color: (it.win && lt >= it.win[0] && lt < it.win[1] && t.flags.pop) ? '#111111' : d.fg,
               opacity: 1,
               transition: 'background 0.3s ease, border 0.3s ease',
@@ -423,7 +426,7 @@ function FlowScene({ t, chapter, chaptersTotal, label, title, steps = [], note }
 function RoleList({ t, mono, title, items, base, emph }) {
   const d = t.day;
   return (
-    <div style={{ flex: 1, padding: '40px 44px', boxSizing: 'border-box', ...card(t, false), opacity: 1, borderLeft: emph && !t.flags.pop && !t.flags.chalk && !t.flags.cinema ? `6px solid ${t.accent}` : undefined }}>
+    <div style={{ flex: 1, padding: '40px 44px', boxSizing: 'border-box', ...card(t, false), opacity: 1 }}>
       <div style={{ fontFamily: t.fm, fontSize: 24, letterSpacing: 6, color: t.flags.pop ? '#111111' : t.tokens.iris, fontWeight: 700 }}>
         {!t.flags.serif && !t.flags.cinema && <span style={{ color: t.signal }}>▸ </span>}{mono}
       </div>
