@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal Google Drive client</title>
+<style>
+  :root { --fg: #222; --bg: #fff; --link: #1a5fb4; --rule: #ddd; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #ddd; --bg: #111; --link: #8ab4f8; --rule: #333; } }
+  html { background: var(--bg); }
+  body { font-family: system-ui, -apple-system, "Hiragino Sans", sans-serif; max-width: 40rem; margin: 3rem auto; padding: 0 1rem; line-height: 1.7; color: var(--fg); }
+  main { position: relative; z-index: 1; }
+  a { color: var(--link); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  .cat { position: fixed; right: -40px; bottom: -48px; width: min(300px, 70vw); opacity: .1; pointer-events: none; z-index: 0; }
+  .cat svg { display: block; width: 100%; height: auto; }
+  @media (prefers-color-scheme: dark) {
+    .cat { opacity: .22; mix-blend-mode: screen; filter: drop-shadow(0 0 24px rgba(255, 222, 140, .35)); }
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>Personal Google Drive client</h1>
+<p>This is a personal OAuth client. It is used only by its owner, to access the owner's own Google Drive.</p>
+<p>It is not a public service and is not offered to anyone else.</p>
+<p><a href="privacy.html">Privacy Policy</a></p>
+<hr>
+<p lang="ja">持ち主本人だけが、自分の Google ドライブにアクセスするために使う個人用のクライアントです。公開サービスではありません。</p>
+</main>
+<div class="cat" aria-hidden="true">
+  <svg viewBox="0 0 120 100">
+    <defs>
+      <radialGradient id="glow" cx="50%" cy="62%" r="70%">
+        <stop offset="0%" stop-color="#fffdf6"/>
+        <stop offset="65%" stop-color="#fff2cf"/>
+        <stop offset="100%" stop-color="#ffe4a8"/>
+      </radialGradient>
+    </defs>
+    <path d="M8,100 L8,62 C8,52 11,45 16,40 C18,28 21,16 25,12 Q28,9 32,12 L46,24 C52,22 56,21.5 60,21.5 C64,21.5 68,22 74,24 L88,12 Q92,9 95,12 C99,16 102,28 104,40 C109,45 112,52 112,62 L112,100 Z" fill="url(#glow)" stroke="#ecd49a" stroke-width="1.5" stroke-linejoin="round"/>
+    <ellipse cx="36" cy="70" rx="6" ry="3.5" fill="#f6b8b8" opacity=".55"/>
+    <ellipse cx="84" cy="70" rx="6" ry="3.5" fill="#f6b8b8" opacity=".55"/>
+    <circle cx="44" cy="59" r="4.5" fill="#5b5249"/>
+    <circle cx="76" cy="59" r="4.5" fill="#5b5249"/>
+    <path d="M57,66 Q60,64.5 63,66 Q60,69.5 57,66 Z" fill="#f0a3a3"/>
+    <path d="M60,68.5 Q57.5,73.5 54,70.5 M60,68.5 Q62.5,73.5 66,70.5" fill="none" stroke="#5b5249" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+</div>
+</body>
+</html>
