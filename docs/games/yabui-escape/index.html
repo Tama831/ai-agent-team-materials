@@ -983,7 +983,7 @@ function showFinal() {
   ta.oninput = () => { state.reflection = ta.value; saveState(); };
 
   document.getElementById("reset-final").onclick = () => {
-    if (confirm("進行をリセットして最初から始める?")) {
+    if (confirm("進行をリセットして最初から始める?\n振り返りメモも消えます。")) {
       state.cleared = {};
       state.reflection = "";
       saveState();
@@ -997,7 +997,7 @@ function showFinal() {
 document.getElementById("picker-back-btn").addEventListener("click", showTitle);
 document.getElementById("back-btn").addEventListener("click", () => enterPicker(state.currentRoom));
 document.getElementById("reset-btn").addEventListener("click", () => {
-  if (confirm("進行をリセット (12シナリオの記録を消す)?")) {
+  if (confirm("進行をリセット (全シナリオの記録を消す)?\n振り返りメモも消えます。")) {
     state.cleared = {};
     state.reflection = "";
     saveState();
