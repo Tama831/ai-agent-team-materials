@@ -1,0 +1,9 @@
+React の出典（2026-10-17）
+
+元の player.html は unpkg.com から react@18 / react-dom@18（版の固定なし）と @babel/standalone（版の指定なし。
+2026-10-17 時点で 8.0.7 が返っていた）を読んでいた。いまは同じフォルダの写しを読む。Babel は使わない（JSX は前もって変換済み）。
+
+  react.production.min.js — npm react@18.3.1 の umd/ — SHA-256 d949f1c3687aedadcedac85261865f29b17cd273997e7f6b2bfc53b2f9d4c4dd
+  react-dom.production.min.js — npm react-dom@18.3.1 の umd/ — SHA-256 35f4f974f4b2bcd44da73963347f8952e341f83909e4498227d4e26b98f66f0d
+  （2026-10-17 に unpkg が react@18 / react-dom@18 で返した中身と SHA-256 一致を確認）
+ライセンス: MIT（LICENSE-react.txt / LICENSE-react-dom.txt）

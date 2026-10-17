@@ -1,0 +1,44 @@
+藪医者の学舎 EP.02 — フォントの出典と作り方（2026-10-17）
+
+元の player.html は Google Fonts（fonts.googleapis.com / fonts.gstatic.com）から6書体を読んでいた。
+エンジンのフォント埋め込み（animations.jsx の useInlineFontsInto）が全サブセットを取りに行くため、
+1回の表示で約1,750件・約45MBの外部通信になっていた。
+
+ここにあるのは、同じ6書体16太さを、このエピソードで使う 442 文字だけに絞った woff2。
+Google Fonts の text= パラメータ（文字を指定した絞り込み）で 2026-10-17 に取得した（JetBrains Mono だけは下の理由で取り直した）。
+入っている文字の一覧: subset-chars.txt（episode-ep02.js / manabiya-themes.js / animations.jsx / manabiya-video.jsx /
+manabiya-video-vertical.jsx / player.html に出てくる文字 + ASCII の印字可能文字）。
+台本を書き換えて新しい字が増えたら、その字だけ端末のフォントで表示される（文字化けはしない）。作り直しで直る。
+
+Noto Sans JP と JetBrains Mono は可変フォント（太さを1本で持つ）なので、どの太さも同じファイルを指す（元の配信も同じ）。
+fonts.css の unicode-range は、元の Google の配信での各書体の担当範囲と同じ（JetBrains Mono は英数字など99字、
+日本語の5書体は ▸ と ✎ 以外）。どの字をどの書体で描くかは、直す前と変わらない。
+JetBrains Mono だけは、その99字だけで別に取得した。範囲外の字（▸ など）の形がファイルにあると、Mac は
+代わりの書体を探す段階でそのファイル自身を使ってしまうため（元の Google のファイルには ▸ が無く、Menlo で描かれていた）。
+
+作り直しの道具（作者の手元のみ・このリポには含めていない）: rea-lab/cases/20261017_materials-site-network/fix-manabiya-ep02/tools/build_public.mjs
+手で作り直すなら: Google Fonts の css2 に text=<subset-chars.txt の字> を付けて取得する（JetBrains Mono は unicode-range の99字だけ）。
+fonts.css の unicode-range はそのまま使う。
+
+ファイル（SHA-256）:
+  zen-kaku-gothic-new-400.woff2  50360 bytes  003d14f3414eae329af5317814d26836f9dbe94e72da62f3c55c0e0ea6094911  （400）
+  zen-kaku-gothic-new-500.woff2  50620 bytes  f0d5fe9a3164040a784b7f0033569278d097a3ac322695a7df2bf11c68356a2d  （500）
+  zen-kaku-gothic-new-700.woff2  50672 bytes  dde273ffe5f03a7facfaa37fe5828369dc9db49579e5e033a81f99b16012cd92  （700）
+  zen-kaku-gothic-new-900.woff2  50464 bytes  9ce4f21945871b896706529db40d09bc45d0776347ebe678338e2480277f9349  （900）
+  jetbrains-mono.woff2  26240 bytes  2386dfe3cf09f6a437ce44a7d02cd47cbbfa72adc1c5931e6240d758a51c814f  （400/700）
+  noto-sans-jp.woff2  144920 bytes  80da3c68d814a799007a354c5ac301e691d333a088a5481d52894666dad2c8e0  （400/500/700/900）
+  shippori-mincho-500.woff2  81652 bytes  37b14a699657e49d7d242f18f5a3b8dc892fc8b0c7c5cfc8fc254b0c8a0f8e26  （500）
+  shippori-mincho-600.woff2  82748 bytes  b7e69e635d4643081f56b3b604f6013bfcf95fd840dfd297af1739aa553662ee  （600）
+  shippori-mincho-700.woff2  82772 bytes  a361566476e84ede3d88c4829b4f36ce2643b9bbea40337044764bdd42a43786  （700）
+  shippori-mincho-800.woff2  82924 bytes  91bb8fec544d4189efb40bb70eba7b9a3c41fd8a4b46ec7557c1fce32c4d5dc0  （800）
+  yomogi-400.woff2  90200 bytes  f7b3e65a5e9f9b2b234f177d32e39f7bf595a80eb8683f9dee91bc43f5dd1491  （400）
+  mochiy-pop-one-400.woff2  56360 bytes  7f66a6f4f9bb8e9c85e7d2427ae0ca035b3f1aa0bf920d2501db94b8663f6be7  （400）
+
+ライセンス（すべて SIL Open Font License 1.1。出典は github.com/google/fonts の ofl/<書体>/OFL.txt）:
+  OFL-ZenKakuGothicNew.txt — Zen Kaku Gothic New — Copyright 2022 The Zen Kaku Gothic Project Authors (https://github.com/googlefonts/zen-kakugothic)
+  OFL-JetBrainsMono.txt — JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+  OFL-NotoSansJP.txt — Noto Sans JP — Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'
+  OFL-ShipporiMincho.txt — Shippori Mincho — Copyright 2021 The Shippori Mincho Project Authors (https://github.com/fontdasu/ShipporiMincho)
+  OFL-Yomogi.txt — Yomogi — Copyright 2020 The Yomogi Project Authors (https://github.com/satsuyako/YomogiFont), all rights reserved.
+  OFL-MochiyPopOne.txt — Mochiy Pop One — Copyright 2020 The Mochiypop Project Authors (https://github.com/fontdasu/Mochiypop)
+  ※ Noto Sans JP の OFL にある Reserved Font Name は 'Source'。この書体名（Noto Sans JP）には使われていない。

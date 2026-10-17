@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>藪医者の学舎 — 解説動画プレイヤー</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;700;800&family=Yomogi&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<!-- 外部から何も読み込まない版（2026-10-17）。フォントと React は同じフォルダに置き、JSX は前もって .js に変換してある。
+     出典と作り方: fonts/SOURCE.txt・vendor/SOURCE.txt。エンジンを直すときは .jsx を編集して .js を作り直す -->
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
   html, body { margin: 0; height: 100%; background: #030712; overflow: hidden; }
   #root { position: fixed; inset: 0; }
@@ -14,15 +14,14 @@
 </head>
 <body>
 <div id="root"></div>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
 <script src="episode-ep02.js"></script>
 <script src="manabiya-themes.js"></script>
-<script type="text/babel" src="animations.jsx"></script>
-<script type="text/babel" src="manabiya-video.jsx"></script>
-<script type="text/babel" src="manabiya-video-vertical.jsx"></script>
-<script type="text/babel">
+<script src="animations.js"></script>
+<script src="manabiya-video.js"></script>
+<script src="manabiya-video-vertical.js"></script>
+<script>
   // ?ep=ep02 でエピソード切替、?mode=vertical で縦型9:16、?theme=broadcast などでテーマ切替
   // theme: duotone / broadcast / paper / chalk / pop / cinema
   // テロップ(字幕)は既定OFF＝本動画。読み上げ・ナレーション確認用に出すなら ?captions=on
@@ -31,7 +30,7 @@
   const theme = q.get('theme') || 'duotone';
   const showCaptions = q.get('captions') === 'on';
   const App = q.get('mode') === 'vertical' ? window.ManabiyaVideoVertical : window.ManabiyaVideo;
-  ReactDOM.createRoot(document.getElementById('root')).render(<App episodeId={epId} theme={theme} showCaptions={showCaptions} />);
+  ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App, { episodeId: epId, theme: theme, showCaptions: showCaptions }));
 </script>
 </body>
 </html>

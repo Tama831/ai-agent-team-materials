@@ -1,0 +1,21 @@
+/* 藪医者の学舎 EP.02 — 同じフォルダに置いたフォント（外部への読み込みなし）
+   元の player.html が Google Fonts から読んでいた6書体16太さを、このエピソードで使う文字だけに絞ったもの。
+   取得 2026-10-17・作り方と出典は SOURCE.txt、ライセンスは OFL-*.txt（SIL Open Font License 1.1）。 */
+/* unicode-range は元の Google の配信と同じ担当範囲（範囲外の字は、元どおり次の書体＝端末のフォントで描かれる）:
+   JetBrains Mono は英数字など99字だけ。日本語の5書体は ▸ と ✎ 以外。 */
+@font-face { font-family: 'Zen Kaku Gothic New'; font-style: normal; font-weight: 400; font-display: swap; src: url(zen-kaku-gothic-new-400.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Zen Kaku Gothic New'; font-style: normal; font-weight: 500; font-display: swap; src: url(zen-kaku-gothic-new-500.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Zen Kaku Gothic New'; font-style: normal; font-weight: 700; font-display: swap; src: url(zen-kaku-gothic-new-700.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Zen Kaku Gothic New'; font-style: normal; font-weight: 900; font-display: swap; src: url(zen-kaku-gothic-new-900.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(jetbrains-mono.woff2) format('woff2'); unicode-range: U+20-7E, U+D7, U+2014, U+2026, U+2193; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url(jetbrains-mono.woff2) format('woff2'); unicode-range: U+20-7E, U+D7, U+2014, U+2026, U+2193; }
+@font-face { font-family: 'Noto Sans JP'; font-style: normal; font-weight: 400; font-display: swap; src: url(noto-sans-jp.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Noto Sans JP'; font-style: normal; font-weight: 500; font-display: swap; src: url(noto-sans-jp.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Noto Sans JP'; font-style: normal; font-weight: 700; font-display: swap; src: url(noto-sans-jp.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Noto Sans JP'; font-style: normal; font-weight: 900; font-display: swap; src: url(noto-sans-jp.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Shippori Mincho'; font-style: normal; font-weight: 500; font-display: swap; src: url(shippori-mincho-500.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Shippori Mincho'; font-style: normal; font-weight: 600; font-display: swap; src: url(shippori-mincho-600.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Shippori Mincho'; font-style: normal; font-weight: 700; font-display: swap; src: url(shippori-mincho-700.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Shippori Mincho'; font-style: normal; font-weight: 800; font-display: swap; src: url(shippori-mincho-800.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Yomogi'; font-style: normal; font-weight: 400; font-display: swap; src: url(yomogi-400.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
+@font-face { font-family: 'Mochiy Pop One'; font-style: normal; font-weight: 400; font-display: swap; src: url(mochiy-pop-one-400.woff2) format('woff2'); unicode-range: U+0-25B7, U+25B9-270D, U+270F-10FFFF; }
