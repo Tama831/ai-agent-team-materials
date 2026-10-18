@@ -16,7 +16,7 @@ fonts.css の unicode-range は、元の Google の配信での各書体の担�
 JetBrains Mono だけは、その99字だけで別に取得した。範囲外の字（▸ など）の形がファイルにあると、Mac は
 代わりの書体を探す段階でそのファイル自身を使ってしまうため（元の Google のファイルには ▸ が無く、Menlo で描かれていた）。
 
-作り直しの道具（作者の手元のみ・このリポには含めていない）: rea-lab/cases/20261017_materials-site-network/fix-manabiya-ep02/tools/build_public.mjs
+作り直しの道具（作者の手元のみ・このリポには含めていない）: ai-agent-team/scripts/manabiya-render/build_public.mjs（控え: scripts/manabiya-render/public-cache/ep02/）
 手で作り直すなら: Google Fonts の css2 に text=<subset-chars.txt の字> を付けて取得する（JetBrains Mono は unicode-range の99字だけ）。
 fonts.css の unicode-range はそのまま使う。
 
