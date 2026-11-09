@@ -1,11 +1,302 @@
 [
   {
+    "date": "2026-11-05",
+    "slug": "qaly-cea-primer",
+    "title": "QALY と費用対効果 — 手で動かして、読めるようになる",
+    "meta": "医学生〜研修医 読んで25分・教えて20分 | 触れる教材 (Web)",
+    "key_msg": "QALY を「面積」として手で動かし、ICER・閾値・割引・不確実性までを 8 章の計器で読む。日本の費用対効果評価と英国 NICE の基準は 2026-11 時点の一次資料で確認。最後の章は教える人のための 20 分の流れと一枚の表。",
+    "search_keywords": "2026-11-05 QALY ICER 費用対効果 医療経済 閾値 割引 不確実性 CEAC トルネード NICE 中医協 C2H 触れる教材 医学生 研修医",
+    "slides": [],
+    "guides": [
+      {
+        "label": "触れる教材を開く (Web)",
+        "path": "https://tama831.github.io/ai-agent-team-materials/primers/qaly-cea/",
+        "audience": "guide"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-17",
+    "slug": "academic-half-day-hybrid",
+    "title": "学びの時間を「守る」と何が変わるか",
+    "meta": "指導医 20分 | 学術半日(AHD)ハイブリッドモデル",
+    "key_msg": "月1回の学術半日(AHD)を導入した1研修プログラムの報告では、出席率が97.5%(通常週60%台)だった。一方、ウェルネス等の自己申告の改善は n=27・完全回答13・後ろ向き前後比較・対照群なしで、割り引いて読む必要がある。日本では保護時間の明示規定は確認できず、所定労働時間内に月1回3時間を置き、時間・カバー・評価指標を先に決めて試す案を考える。",
+    "search_keywords": "2026-09-17 学術半日 AHD 保護時間 研修医 指導医 DiPaolo 出席率 ウェルネス 総合診療 研修設計 働き方 時間外 ハイブリッド Academic Half Day",
+    "slides": [
+      {
+        "label": "指導医 PPTX",
+        "path": "output/education/2026-09-17_academic-half-day-hybrid/academic-half-day-hybrid_slides_supervisors.pptx",
+        "audience": "supervisors",
+        "pdf_path": "output/education/2026-09-17_academic-half-day-hybrid/academic-half-day-hybrid_slides_supervisors.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-09-17_academic-half-day-hybrid/academic-half-day-hybrid_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-09-17_academic-half-day-hybrid/academic-half-day-hybrid_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-12",
+    "slug": "game-design-learning-principles",
+    "title": "学びを「ゲーム」の構造で設計する",
+    "meta": "研修医 15分 | ゲーム設計 x 学習原則",
+    "key_msg": "学びの意欲を支えるのは、ポイントやバッジを配ること以上に、少し難しいチャレンジ・安全に失敗できる場・進捗が見えるフィードバックの構造かもしれない。ゲーミフィケーションの効果は小〜中程度で、医学教育での証拠は質が低い。明日の一手は、外来前5分に診断仮説を紙に1つ書く試み(教材側の提案)。",
+    "search_keywords": "2026-09-12 ゲーミフィケーション ゲームデザイン 学習 フィードバック チャレンジ 安全な失敗 エンゲージメント メタ分析 医学教育 研修医 Sailer Homner Gamification",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-09-12_game-design-learning-principles/game-design-learning-principles_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-09-12_game-design-learning-principles/game-design-learning-principles_slides_residents.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-09-12_game-design-learning-principles/game-design-learning-principles_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-09-12_game-design-learning-principles/game-design-learning-principles_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-22",
+    "slug": "walkable-city-health",
+    "title": "まちの「型」が健康を決める",
+    "meta": "全スタッフ 15分 | まちづくり x 健康",
+    "key_msg": "短くつながった街区・店の近さ・緑と公園は、身体とこころの健康と関連する。低所得の地区ほど関連が大きいという推定だが、横断データによるモデルの試算(2〜5.6倍の幅)で、因果の確認はこれから。「歩かない患者」の前に「歩けないまち」を見る視点を持つ。",
+    "search_keywords": "2026-08-22 歩けるまち ウォーカブル 緑 公園 近隣環境 健康格差 SDH 都市計画 まちづくり 低所得 全スタッフ Nature Health Walkable City",
+    "slides": [
+      {
+        "label": "スタッフ PPTX",
+        "path": "output/education/2026-08-22_walkable-city-health/walkable-city-health_slides_allstaff.pptx",
+        "audience": "allstaff",
+        "pdf_path": "output/education/2026-08-22_walkable-city-health/walkable-city-health_slides_allstaff.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-08-22_walkable-city-health/walkable-city-health_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-08-22_walkable-city-health/walkable-city-health_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-18",
+    "slug": "sdh-fee-schedule-japan",
+    "title": "社会を診る医療は、いくらで評価されているか",
+    "meta": "研修医 20分 | SDH x 診療報酬",
+    "key_msg": "SDHを明確に含む診療報酬は、レビューが扱った8プログラム中2(入退院支援加算・こころの連携指導料)。外来・在宅の枠組みは「本レビューの範囲」では薄く、点数がつかない実践は統計に残りにくい。2026年6月施行の改定で入退院支援加算は見直し済みで、論文の評価時点とのずれにも注意する。",
+    "search_keywords": "2026-08-18 SDH 健康の社会的決定要因 診療報酬 入退院支援加算 こころの連携指導料 社会的処方 制度 研修医 JMA Journal 診療報酬改定 Social Determinants Fee Schedule",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-08-18_sdh-fee-schedule-japan/sdh-fee-schedule-japan_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-08-18_sdh-fee-schedule-japan/sdh-fee-schedule-japan_slides_residents.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-08-18_sdh-fee-schedule-japan/sdh-fee-schedule-japan_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-08-18_sdh-fee-schedule-japan/sdh-fee-schedule-japan_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-08-16",
+    "slug": "nudge-choice-architecture",
+    "title": "あなたはすでに選択設計者である",
+    "meta": "研修医 20分 | ナッジ x 選択設計",
+    "key_msg": "処方画面の初期値はすでにナッジで、中立なデフォルトは存在しない。是非を分けるのは「誰が誰の利益で設定したか」の透明性。論文は展望論文で、抗菌薬処方などへの応用は教材側の例(院内承認やベンダー仕様の壁もある)。",
+    "search_keywords": "2026-08-16 ナッジ 選択設計 デフォルト 処方 電子カルテ 透明性 行動経済学 抗菌薬 EU AI法 研修医 Nudge Choice Architecture",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-08-16_nudge-choice-architecture/nudge-choice-architecture_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-08-16_nudge-choice-architecture/nudge-choice-architecture_slides_residents.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-08-16_nudge-choice-architecture/nudge-choice-architecture_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-08-16_nudge-choice-architecture/nudge-choice-architecture_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-06-19",
+    "slug": "access-continuity-residents",
+    "title": "\"あの先生がいい\"を分解する — アクセスと継続性の設計学",
+    "meta": "研修医 | アクセスと継続性",
+    "key_msg": "患者の「あの先生がいい」を、アクセス(Boyle)と継続性(Haggerty)に分解して語る。56論文のシステマティックレビューでは、choice of access と関係継続性の関連が最も強く、両者はゼロサムとは限らない。ただし英国中心でレビューに日本は登場せず、日本への適用は解釈として慎重に。",
+    "search_keywords": "2026-06-19 アクセス 継続性 関係継続性 情報継続性 かかりつけ医 フリーアクセス 予約 チーム医療 研修医 Haggerty Boyle Access Continuity",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-06-19_access-continuity-residents/access-continuity_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-06-19_access-continuity-residents/access-continuity_slides_residents.pdf"
+      }
+    ],
+    "guides": []
+  },
+  {
+    "date": "2026-05-27",
+    "slug": "ebm-3percent-srma",
+    "title": "EBM「3%問題」— 系統的レビューを使いこなすリテラシー",
+    "meta": "研修医・全スタッフ 15分 | EBM x 系統的レビュー",
+    "key_msg": "系統的レビューは2019年に1日約80本出ており、臨床に有益なのは約3%という見積もりがある(Ioannidis 2016、概算)。量でなく質で選び、AMSTAR-2の重要項目で当たりをつけ、一次研究の質がレビューの限界を決めることを押さえる。",
+    "search_keywords": "2026-05-27 EBM 系統的レビュー メタ分析 SRMA AMSTAR-2 I2 異質性 批判的吟味 Ioannidis 3% 研修医 全スタッフ Systematic Review Literacy",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-05-27_ebm-3percent-srma/ebm-3percent-srma_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-05-27_ebm-3percent-srma/ebm-3percent-srma_slides_residents.pdf"
+      },
+      {
+        "label": "スタッフ PPTX",
+        "path": "output/education/2026-05-27_ebm-3percent-srma/ebm-3percent-srma_slides_allstaff.pptx",
+        "audience": "allstaff",
+        "pdf_path": "output/education/2026-05-27_ebm-3percent-srma/ebm-3percent-srma_slides_allstaff.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-05-27_ebm-3percent-srma/ebm-3percent-srma_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-05-27_ebm-3percent-srma/ebm-3percent-srma_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-05-27",
+    "slug": "sdh-screening-context-design",
+    "title": "プライマリケアでSDHスクリーニングを始めるには",
+    "meta": "研修医 | SDHスクリーニング x 文脈設計",
+    "key_msg": "SDHスクリーニングは、どのツールを使うかより、スクリーニング後に何ができるか(actionability)を含む文脈の設計が先決。米国の研究では時間と人手の不足が障壁として報告されている。引用レビューはプロトコルで結果を含まない。まず1問から始める。",
+    "search_keywords": "2026-05-27 SDH スクリーニング 文脈設計 actionability PRAPARE AHC WE CARE 社会的リスク 1問 研修医 プライマリケア Screening Context Design",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-05-27_sdh-screening-context-design/sdh-screening-context-design_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-05-27_sdh-screening-context-design/sdh-screening-context-design_slides_residents.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-05-27_sdh-screening-context-design/sdh-screening-context-design_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-05-27_sdh-screening-context-design/sdh-screening-context-design_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-05-15",
+    "slug": "psychological-safety-training-healthcare",
+    "title": "心理的安全性トレーニングが医療を変える",
+    "meta": "研修医 20分 | 心理的安全性トレーニング",
+    "key_msg": "ベトナム7病院の質改善(QI)報告で、eラーニング+2日間の対面シミュレーションの後、テストの正答率が41%から89%に上がった。ただし対照群なしの前後比較で、測ったのは知識であって心理的安全性そのものではない。訓練できる側面がある、という示唆にとどめ、自チームで小さく試す。",
+    "search_keywords": "2026-05-15 心理的安全性 トレーニング シミュレーション 医療安全 インシデント報告 権威勾配 チーム医療 研修医 BMJ Open Quality Psychological Safety",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-05-15_psychological-safety-training-healthcare/psychological-safety-training-healthcare_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-05-15_psychological-safety-training-healthcare/psychological-safety-training-healthcare_slides_residents.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-05-15_psychological-safety-training-healthcare/psychological-safety-training-healthcare_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-05-15_psychological-safety-training-healthcare/psychological-safety-training-healthcare_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
+    "date": "2026-05-14",
+    "slug": "sdh-chronic-disease-risk",
+    "title": "健康の社会的決定要因と慢性疾患リスク",
+    "meta": "研修医 20分 | SDH x 慢性疾患リスク",
+    "key_msg": "26万人規模の予測研究(medRxiv・査読前)で、SDHのみのモデルの予測精度は人口統計のみと同程度かそれ以上だった。疾患別のスクリーニングは著者らの提案で、効果の検証はこれから。社会的処方も、効果を確かめながら試す段階。",
+    "search_keywords": "2026-05-14 SDH 健康の社会的決定要因 慢性疾患 リスク予測 All of Us プレプリント medRxiv 社会的処方 スクリーニング 研修医 Social Determinants Chronic Disease",
+    "slides": [
+      {
+        "label": "研修医 PPTX",
+        "path": "output/education/2026-05-14_sdh-chronic-disease-risk/sdh-chronic-disease-risk_slides_residents.pptx",
+        "audience": "residents",
+        "pdf_path": "output/education/2026-05-14_sdh-chronic-disease-risk/sdh-chronic-disease-risk_slides_residents.pdf"
+      }
+    ],
+    "guides": [
+      {
+        "label": "ファシリテーターガイド DOCX",
+        "path": "output/education/2026-05-14_sdh-chronic-disease-risk/sdh-chronic-disease-risk_guide_facilitator.docx",
+        "audience": "guide"
+      },
+      {
+        "label": "A4チートシート DOCX",
+        "path": "output/education/2026-05-14_sdh-chronic-disease-risk/sdh-chronic-disease-risk_cheatsheet_a4.docx",
+        "audience": "cheatsheet"
+      }
+    ]
+  },
+  {
     "date": "2026-04-09",
     "slug": "who-systems-thinking-residents",
     "title": "WHOシステム思考を、明日の外来でどう使うか",
     "meta": "研修医(初期〜専攻医) 20分 | Systems Thinking × Family Medicine",
-    "key_msg": "WHO/NHS 2026の3つのフレーム転換(部品→繋がり/処方→学習/測定→文脈)を、糖尿病外来の1症例から始めて、半径を広げる1本の物語で研修医に届ける。明日の外来で1問試せるレベルまで具体化。",
-    "search_keywords": "2026-04-09 WHO システム思考 研修医 部品 繋がり 処方 学習 文脈 家庭医療 専攻医 外来 糖尿病 ナラティブ Systems Thinking residents Family Medicine WHO NHS",
+    "key_msg": "WHO/AHPSRが2009年報告書について整理した3つの転換(部品→繋がり/管理→学習/結果だけの評価→文脈と過程の説明)を、糖尿病外来の架空の1症例から始めて、半径を広げる1本の物語で研修医に届ける。明日の外来で1問試せるレベルまで具体化。",
+    "search_keywords": "2026-04-09 WHO AHPSR システム思考 研修医 部品 繋がり 管理 学習 文脈 2009年報告書 家庭医療 専攻医 外来 糖尿病 ナラティブ Systems Thinking residents Family Medicine",
     "slides": [
       {
         "label": "研修医 PPTX",
@@ -32,8 +323,8 @@
     "slug": "behavioral-economics-mental-health-residents",
     "title": "行動経済学で支えるメンタルヘルス診療 — ナッジ・インセンティブ・コミットメントデバイス",
     "meta": "研修医(初期〜専攻医) 20分 | Behavioral Economics × Mental Health",
-    "key_msg": "「分かっていてもやめられない」を報酬処理の連続体(transdiagnostic)として捉え、ナッジ/インセンティブ/コミットメントデバイスを使い分けるデシジョンツリー。説教モードから設計モードへの言い換えで、明日の外来から実装可能。Penn Nudge Unit を最後に紹介。",
-    "search_keywords": "2026-04-09 行動経済学 ナッジ メンタルヘルス うつ病 依存症 不安症 報酬処理 transdiagnostic コミットメントデバイス インセンティブ Nudge Unit 研修医 専攻医 外来導線 設計 PMC11904746 RDoC",
+    "key_msg": "「分かっていてもやめられない」を、複数の疾患にまたがる報酬処理の特徴(仮説段階、因果は未確立)として捉え、ナッジ/インセンティブ/コミットメントデバイスを使い分けるデシジョンツリー。説教モードから設計モードへの言い換えを、明日の外来の設計の手がかりとして。Penn Nudge Unit を最後に紹介。",
+    "search_keywords": "2026-04-09 行動経済学 ナッジ メンタルヘルス うつ病 依存症 不安症 報酬処理 transdiagnostic コミットメントデバイス インセンティブ Nudge Unit 研修医 専攻医 外来導線 設計 叙述的レビュー PMC11904746 RDoC",
     "slides": [
       {
         "label": "研修医 PPTX",
@@ -60,7 +351,7 @@
     "slug": "systems-thinking-health-workforce",
     "title": "複雑性を抱擁する：保健人材強化のためのシステム思考",
     "meta": "研修医 15分 + 全スタッフ 10分 | Systems Thinking × Health Workforce",
-    "key_msg": "WHOが提唱する保健人材エコシステム視点。フィードバックループ・創発・レバレッジポイントの3概念で臨床の複雑性を可視化。「誰が悪い」から「どこが詰まっている」への思考転換。",
+    "key_msg": "WHOのウェビナーが示した、人材を広いエコシステムで捉える視点を入口に、フィードバックループ・創発・レバレッジポイントというシステム思考の定番の道具で臨床の複雑性を可視化する。「誰が悪い」から「どこが詰まっている」への思考転換。",
     "search_keywords": "2026-04-01 システム思考 保健人材 複雑系 WHO フィードバックループ レバレッジポイント 創発 多職種連携 因果ループ図 Systems Thinking Health Workforce 研修医 スタッフ",
     "slides": [
       {
@@ -89,7 +380,7 @@
     "slug": "cognitive-bias-diagnostic-reasoning",
     "title": "認知バイアスが診断推論を歪める -- 行動経済学からの処方箋",
     "meta": "研修医 20分 + 全スタッフ 20分 | 認知バイアス x 診断推論 x 行動経済学",
-    "key_msg": "二重過程理論に基づく4バイアス（確認・アンカリング・利用可能性・過信）の統合フレーム。診断エラーの36-77%にバイアスが寄与。除偏介入3種（診断タイムアウト・プレモーテム・構造化振り返り）。AI x バイアスの双方向リスク。「予測可能なシステムエラー」としての再フレーミング。",
+    "key_msg": "二重過程理論に基づく4バイアス(確認・アンカリング・利用可能性・過信)の統合フレーム。症例シナリオの研究では36.5〜77%で認知バイアスが診断の不正確さと関連(多くは低質、実診療の頻度ではない)。除偏介入3種(診断タイムアウト・プレモーテム・構造化振り返り)を候補として紹介。AI x バイアスの双方向リスク。「予測可能なシステムエラー」としての再フレーミング。",
     "search_keywords": "2026-03-30 認知バイアス 確認バイアス アンカリング 利用可能性 過信 診断推論 二重過程理論 System1 System2 行動経済学 デバイアス 診断タイムアウト プレモーテム メタ認知 研修医 スタッフ",
     "slides": [
       {
@@ -118,7 +409,7 @@
     "slug": "palliative-home-death-concordance",
     "title": "在宅看取り場所一致率 -- 緩和ケア病棟からの在宅退院後の遺族調査",
     "meta": "研修医 20分 + 全スタッフ 20分 | Palliative Care & ACP",
-    "key_msg": "遺族調査359名: 自宅死亡80%、緩和ケア病棟死亡82%が看取り方針と一致。国際統合値51%と比較し上位。不一致要因は医師偏在・痛み管理格差・教育格差の3層構造。ACPは「紙」ではなく「プロセスとしての繰り返し対話」が鍵。",
+    "key_msg": "遺族調査359名: 事前の看取り方針と実際の死亡場所が一致したのは、自宅死亡で80%、緩和ケア病棟死亡で82%。研究ごとに定義も集団も異なり、他国の数値との単純比較はできない(想起バイアス等の限界あり)。不一致要因は医師偏在・痛み管理格差・教育格差の3層構造。ACPは「紙」ではなく「プロセスとしての繰り返し対話」が鍵。",
     "search_keywords": "2026-03-30 在宅看取り 看取り場所 一致率 緩和ケア ACP アドバンスケアプランニング 遺族調査 トランジション 多職種連携 Palliative Care Research 研修医 スタッフ",
     "slides": [
       {
@@ -145,9 +436,9 @@
   {
     "date": "2026-03-29",
     "slug": "japan-sweden-longevity",
-    "title": "日本の長寿優位は介護受給者の低死亡率が主因 -- 日瑞比較研究",
+    "title": "日本の長寿優位は介護受給者の低死亡率が主因か -- 日瑞比較研究",
     "meta": "研修医 15分 + 全スタッフ 10分 | Longevity & Care",
-    "key_msg": "日瑞比較で判明: 健康寿命はほぼ同等。日本の長寿優位は介護受給者の低死亡率、すなわち「ケアの力」が支えている。在宅医療・多職種連携の日々の実践が国際データで証明された。",
+    "key_msg": "日瑞比較の観察研究: 健康寿命はほぼ同等で、日本の長寿優位は介護受給者の低死亡率に由来する可能性が示された(原因まで確定したわけではなく、健康状態の違いは調整できていない)。在宅医療・多職種連携の日々の実践が支えている可能性を考える。",
     "search_keywords": "2026-03-29 日本 スウェーデン 長寿 介護 死亡率 在宅医療 BMC Medicine カロリンスカ Longevity Care 研修医 スタッフ",
     "slides": [
       {
@@ -176,7 +467,7 @@
     "slug": "availability-bias",
     "title": "利用可能性バイアスと診断推論",
     "meta": "研修医15分 + 全スタッフ10分 | 認知バイアス | ガニェの9教授事象",
-    "key_msg": "直近の臨床経験が誤診率を有意に上昇させる。経験年数ではなく「構造化されたフィードバック」がバイアス軽減の鍵。",
+    "key_msg": "直近の臨床経験が誤診率を上昇させることが、臨床ビネットを用いた横断調査で示された。経験年数の影響は専門性との組み合わせで変わり(専門医では10年以上で誤診が減少)、年数だけでは決まらない。構造化フィードバックなどの反省的実践は候補だが、効果の実証は限られる。",
     "search_keywords": "2026-03-29 利用可能性バイアス availability bias 認知バイアス cognitive bias 診断エラー diagnostic error 臨床推論 clinical reasoning System1 System2 研修医 全スタッフ",
     "slides": [
       {
@@ -233,9 +524,9 @@
     "date": "2026-03-28",
     "slug": "medical-fee-revision-2026",
     "title": "2026年度 診療報酬改定 — 管理者・指導医のための完全ガイド",
-    "meta": "指導医・管理職 30枚 | Medical Fee Revision",
-    "key_msg": "30年ぶりの大幅改定+3.09%を5セクション30枚で網羅。外来→入院→DX→BCP→経営戦略。ベースアップ評価料3倍化、BCP義務化（2027年5月期限）が管理者の最重要課題。",
-    "search_keywords": "2026-03-28 診療報酬改定2026 管理職 指導医 外来 入院 DX BCP 経営 Medical Fee Revision",
+    "meta": "指導医・管理職 | Medical Fee Revision",
+    "key_msg": "本体+3.09%(令和8・9年度の2年度平均)、3%台は1996年度以来30年ぶりの改定を5セクションで整理。外来→入院→DX→BCP→経営戦略。ベースアップ評価料の引き上げ(初診時6→17点)と、災害等の業務継続計画(BCP)の経過措置(2027年5月末まで)が管理者の主要課題。",
+    "search_keywords": "2026-03-28 診療報酬改定2026 管理職 指導医 外来 入院 DX BCP 業務継続計画 経過措置 ベースアップ評価料 経営 Medical Fee Revision",
     "slides": [
       {
         "label": "指導医 PPTX",
@@ -257,8 +548,8 @@
     "slug": "ethics-guideline-revision",
     "title": "研究倫理指針の改正 — ミニ研究計画書ワークショップ付き",
     "meta": "研修医・指導医 15分 | Research Ethics",
-    "key_msg": "2025年改正の3大変更（多機関共同審査一本化・デジタル研究対応・同意プロセス柔軟化）を理解し、実際に研究計画書の倫理パートを書いてみる。",
-    "search_keywords": "2026-03-27 研究倫理指針 改正 研究計画書 ワークショップ IRB 同意 Research Ethics 研修医 指導医",
+    "key_msg": "2026年8月27日告示・12月1日適用の改正の要点(仮名・匿名加工情報は個人情報保護法に沿って取り扱う/IC とオプトアウトの2本柱/既存試料・情報はオプトアウトが基本)を理解し、実際に研究計画書の倫理パートを書いてみる。",
+    "search_keywords": "2026-03-27 研究倫理指針 改正 2026年12月1日適用 研究計画書 ワークショップ 倫理審査 同意 オプトアウト Research Ethics 研修医 指導医",
     "slides": [
       {
         "label": "研修医 PPTX",
@@ -303,7 +594,7 @@
     "slug": "palliative-care-community",
     "title": "緩和ケアと地域連携",
     "meta": "全スタッフ 10分 | Palliative Care",
-    "key_msg": "地域包括ケアにおける緩和ケアの役割と多職種連携の実践ポイント。",
+    "key_msg": "地域包括ケアにおける緩和ケアの役割と多職種連携の実践ポイント。学会員調査では、介護従事者向けの地域教育活動は約1割にとどまる。",
     "search_keywords": "2026-03-26 緩和ケア 地域連携 地域包括ケア 多職種連携 Palliative Care スタッフ",
     "slides": [
       {
@@ -407,7 +698,7 @@
     "slug": "family-medicine-orchestrator",
     "title": "家庭医 = オーケストレーター（AIメタファー x 国際エビデンス）",
     "meta": "研修医 30分 | Family Medicine",
-    "key_msg": "Google/MITが証明：「専門家の数」より「統合の質」が成果を決める。家庭医はシステムの専門医。",
+    "key_msg": "Google/MITの研究が示したのは、AIエージェントでは「個々の数」より「統合の仕組み」が誤りの広がりを左右することで、家庭医の役割を考える比喩として使う(因果の証拠ではない)。家庭医はシステムの専門医。",
     "search_keywords": "2026-03-24 家庭医 オーケストレーター AIメタファー Google MIT Family Medicine 研修医",
     "slides": [
       {
@@ -430,7 +721,7 @@
     "slug": "cbme-epa-reform",
     "title": "CBE/EPA改革 — 能力基盤型医学教育の再設計",
     "meta": "指導医 30分 | Medical Education",
-    "key_msg": "「何年目か」ではなく「何ができるか」で評価する時代へ。EPA 5段階で「任せられるか」を判断。",
+    "key_msg": "「何年目か」ではなく「何ができるか」で評価する方向へ。EPA 5段階で「任せられるか」を判断。日本での導入範囲は施設・領域で異なる。",
     "search_keywords": "2026-03-24 CBE EPA 能力基盤型 医学教育 CBME Medical Education 指導医",
     "slides": [
       {
@@ -480,7 +771,7 @@
     "slug": "narrative-medicine-integrated",
     "title": "デジタル時代のナラティブ・メディスン",
     "meta": "研修医 30分 + 全スタッフ 15分 | Narrative Medicine",
-    "key_msg": "ナラティブは「優しさ」ではなく科学的アプローチ。デジタルで「聴く」を拡張できる。",
+    "key_msg": "ナラティブ・メディスンは共感・コミュニケーション・専門職性を育むと報告されている(評価枠組みは整備途上)。デジタルで「聴く」を拡張する試みは、単施設の比較研究など初期のエビデンスの段階。",
     "search_keywords": "2026-03-21 ナラティブ・メディスン デジタル 物語 Narrative Medicine 研修医 スタッフ",
     "slides": [
       {

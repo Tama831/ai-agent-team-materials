@@ -1,0 +1,1626 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QALY と費用対効果 — 手で動かして読めるようになる</title>
+<meta name="description" content="駆け出しの医学生のための、QALY・ICER・閾値・割引・不確実性を手で動かして学ぶ一枚。教える人の部屋つき。">
+<style>.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+/* QALY と費用対効果 — 誠実性原理 / Neo Futura（純白＋電光青）。トークンは design-system/project/colors_and_type.css に合わせる */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{
+  --nf-snow:#FFFFFF;--nf-tint:#F5F8FC;--nf-frost:#DFF0FF;--nf-ice:#8AD9FF;--nf-signal:#22D3EE;--nf-iris:#1E5BE6;--nf-deep:#0B2B6B;--nf-void:#030712;
+  --nf-line:#E4ECF5;--nf-line-strong:#C9D6E6;--nf-fg2:#4A5568;--nf-fg3:#5B6577;
+  --warn:#D97706;--warn-bg:#FEF3C7;--ok:#059669;--ok-bg:#ECFDF5;--ng:#DC2626;--ng-bg:#FEF2F2;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;color-scheme:light}
+body{margin:0;padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--nf-snow);color:var(--nf-void);font:15px/1.85 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--nf-iris)}
+.wrap{width:min(780px,100%);margin:0 auto}
+/* 上の帯（HUD） */
+.hud{position:sticky;top:env(safe-area-inset-top,0px);margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0 calc(-1 * max(16px,env(safe-area-inset-right,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--nf-line)}
+.hud .wrap{display:flex;align-items:center;gap:12px;height:44px}
+.hud .brand{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--nf-fg3);white-space:nowrap}
+.hud nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.hud nav::-webkit-scrollbar{display:none}
+.hud nav a{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:34px;padding:0 8px;border:1px solid var(--nf-line-strong);border-radius:999px;font-family:var(--mono);font-size:12px;color:var(--nf-fg2);text-decoration:none;white-space:nowrap}
+.hud nav a[aria-current="true"]{background:var(--nf-iris);border-color:var(--nf-iris);color:#fff}
+.progress{height:2px;background:var(--nf-line)}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--nf-iris),var(--nf-signal))}
+/* 表紙 */
+.cover{padding:56px 0 28px;border-bottom:1px solid var(--nf-line)}
+.cover .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--nf-iris)}
+.cover h1{font-size:clamp(26px,5vw,38px);line-height:1.25;margin:10px 0 12px;font-weight:700;letter-spacing:-.01em}
+.cover h1 .thin{font-weight:400;color:var(--nf-fg2)}
+.cover p{color:var(--nf-fg2);max-width:62ch;margin:0 0 14px}
+.cover .meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:12px;color:var(--nf-fg3)}
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:18px}
+.howto div{border:1px solid var(--nf-line);border-radius:10px;padding:10px 12px;background:var(--nf-tint);font-size:13px}
+.howto b{display:block;font-family:var(--mono);font-size:12px;color:var(--nf-iris);letter-spacing:.08em;margin-bottom:2px}
+/* 章 */
+.chapter{padding:48px 0 8px;border-bottom:1px solid var(--nf-line);scroll-margin-top:56px}
+.chapter .num{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--nf-iris)}
+.chapter h2{font-size:clamp(21px,3.6vw,27px);line-height:1.3;margin:6px 0 10px;letter-spacing:-.01em}
+.takeaway{display:block;padding:12px 16px 14px;border-top:2px solid var(--nf-iris);background:var(--nf-tint);margin:0 0 18px}
+.takeaway .tag{display:block;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--nf-iris);margin-bottom:2px}
+.takeaway p{margin:0;font-weight:500}
+.prose p{margin:0 0 12px;color:#1f2937}
+.prose p b{font-weight:700;color:var(--nf-void)}
+.prose ul{margin:0 0 12px;padding-left:1.2em}
+.prose li{margin:2px 0}
+.prose .src{font-size:12.5px;color:var(--nf-fg3)}
+.prose .src a{color:var(--nf-fg2)}
+/* 計器のカード */
+.inst{margin:16px 0 14px;border:1px solid var(--nf-line-strong);border-radius:14px;background:#fff;box-shadow:0 1px 0 #fff inset,0 0 0 1px #0b2b6b05,0 10px 30px -18px #0b2b6b33;overflow:hidden}
+.inst .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--nf-line);background:var(--nf-tint)}
+.inst .bar .t{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--nf-fg2)}
+.inst .bar .t b{color:var(--nf-iris);margin-right:8px}
+.inst .bar .r{font-family:var(--mono);font-size:12px;color:var(--nf-void);font-variant-numeric:tabular-nums;text-align:right}
+.inst .body{padding:14px}
+.inst .iso-figure{margin:0}
+.inst .iso-plate{border-radius:10px;box-shadow:0 0 0 1px var(--nf-line)}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 18px;margin-top:12px}
+.ctl{display:grid;gap:4px;font-size:13px;color:var(--nf-fg2)}
+.ctl.wide{grid-column:1/-1}
+.ctl .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.ctl .lab output{color:var(--nf-void);font-weight:500}
+input[type=range]{width:100%;accent-color:var(--nf-iris);height:44px;margin:0;touch-action:pan-y}
+select{font:inherit;font-size:14px;min-height:44px;padding:8px 10px;width:100%;border:1px solid var(--nf-line-strong);border-radius:8px;background:#fff;color:var(--nf-void)}
+.btn{font:inherit;font-size:13px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid var(--nf-iris);background:#fff;color:var(--nf-iris);cursor:pointer;min-height:44px}
+.btn:hover{background:var(--nf-frost)}
+.btn.primary{background:var(--nf-iris);color:#fff}
+.btn.primary:hover{background:var(--nf-deep)}
+.btn.ghost{border-color:var(--nf-line-strong);color:var(--nf-fg2)}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.cards2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.pcard{border:1px solid var(--nf-line-strong);border-radius:12px;padding:12px 14px;cursor:pointer;background:#fff;transition:box-shadow .2s,border-color .2s}
+.pcard:hover{border-color:var(--nf-ice)}
+.pcard[aria-pressed="true"]{border-color:var(--nf-iris);box-shadow:0 0 0 3px var(--nf-frost)}
+.pcard h4{margin:0 0 4px;font-size:15px}
+.pcard,.btn{touch-action:manipulation}
+.pcard .n{font-family:var(--mono);font-size:12px;color:var(--nf-fg2)}
+.pcard p{margin:6px 0 0;font-size:13px;color:var(--nf-fg2)}
+.reveal{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--nf-tint);border:1px dashed var(--nf-line-strong);font-size:14px}
+.reveal[hidden]{display:none}
+.reveal .big{font-family:var(--mono);font-size:18px;color:var(--nf-iris);font-weight:500}
+.verdict:empty{display:none}
+.hint{margin:0 0 8px;font-size:13.5px;color:var(--nf-fg2)}
+.cap{margin:12px 0 2px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--nf-fg2)}
+.verdict{margin-top:8px;padding:8px 12px;border-radius:8px;font-size:13.5px;background:var(--nf-frost)}
+.verdict.ok{background:var(--ok-bg);color:#065f46}.verdict.ng{background:var(--ng-bg);color:#991b1b}.verdict.warn{background:var(--warn-bg);color:#92400e}
+svg.chart{display:block;width:100%;height:auto;font-family:var(--sans);font-size:12px}
+svg.chart text{fill:var(--nf-fg2)}
+svg.chart .axis{stroke:var(--nf-line-strong);stroke-width:1}
+svg.chart .grid{stroke:var(--nf-line);stroke-width:1}
+svg.chart .thr{stroke:var(--nf-iris);stroke-width:1.2;stroke-dasharray:4 4}
+svg.chart .thr2{stroke:var(--nf-ice);stroke-width:1;stroke-dasharray:2 4}
+svg.chart .pt{fill:var(--nf-iris);stroke:#fff;stroke-width:2;cursor:grab}
+svg.chart .pt.ref{fill:var(--nf-fg3)}
+svg.chart .cloud{fill:var(--nf-iris);opacity:.18}
+svg.chart .line{fill:none;stroke:var(--nf-iris);stroke-width:2}
+svg.chart .bar{fill:var(--nf-ice)}
+svg.chart .bar.hi{fill:var(--nf-iris)}
+svg.chart .band0{fill:#ECFDF5}.band1{fill:#FEF3C7}.band2{fill:#FFEDD5}.band3{fill:#FEE2E2}
+svg.chart .marker{stroke:var(--nf-void);stroke-width:1.5}
+svg.chart .q{fill:var(--nf-fg3);font-size:12px}
+svg.chart text{paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+svg.chart .bandtxt{stroke:none}
+/* 見方ガイド・講師ノート */
+.guide{margin:12px 0 0;padding:12px 14px;border-radius:10px;background:var(--nf-tint);font-size:13.5px}
+.guide b{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--nf-fg2);display:block;margin-bottom:4px}
+.guide ol{margin:0;padding-left:1.3em}
+details.teach{margin:14px 0 24px;border:1px solid var(--nf-line);border-radius:10px;background:#fff}
+details.teach summary{cursor:pointer;padding:10px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--nf-iris);list-style:none}
+details.teach summary::-webkit-details-marker{display:none}
+details.teach summary::before{content:"▸ ";}
+details[open].teach summary::before{content:"▾ ";}
+details.teach .in{padding:0 14px 12px;font-size:13.5px;color:#1f2937}
+details.teach .in p{margin:6px 0}
+details.teach .in .pit{color:#92400e;background:var(--warn-bg);padding:6px 10px;border-radius:8px;display:inline-block}
+/* クイズ */
+.quiz{display:grid;gap:12px}
+.qitem{border:1px solid var(--nf-line-strong);border-radius:12px;padding:12px 14px}
+.qitem .qn{font-family:var(--mono);font-size:12px;color:var(--nf-iris);letter-spacing:.1em}
+.qitem p{margin:4px 0 8px;font-weight:500}
+.qitem label{display:block;min-height:44px;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:14px}
+.qitem label:hover{background:var(--nf-tint)}
+.qitem .ans{margin-top:8px;font-size:13.5px}
+/* 8 章 */
+.onepage{border:1px solid var(--nf-line-strong);border-radius:12px;padding:16px 18px;background:#fff}
+.onepage h3{margin:0 0 8px;font-size:16px}
+.onepage table{width:100%;border-collapse:collapse;font-size:13px}
+.onepage th,.onepage td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--nf-line);vertical-align:top}
+.onepage th{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--nf-fg3);font-weight:500}
+.script{display:grid;gap:0}
+.script .s{display:grid;grid-template-columns:8.5em 1fr;gap:4px 14px;border-top:1px solid var(--nf-line-strong);padding:10px 0}
+.script .s>b{font-family:var(--mono);font-size:12px;color:var(--nf-iris);letter-spacing:.06em;font-weight:700}
+.script .st p{margin:0 0 6px;font-size:14px}
+.script .st p:last-child{margin-bottom:0}
+.script .st .pit{color:#92400e;background:var(--warn-bg);padding:4px 10px;border-radius:8px}
+.srclist{margin:6px 0 10px;padding:0;list-style:none;font-size:13px}
+.srclist li{border-top:1px solid var(--nf-line);padding:9px 0;min-height:44px;display:flex;align-items:center}
+#c8 .wrap{display:flex;flex-direction:column}
+.onepage td.ex{color:var(--nf-fg2)}
+footer{padding:28px 0 60px;color:var(--nf-fg3);font-size:12.5px}
+footer a{color:var(--nf-fg2)}
+@media (max-width:560px){
+  .inst .body{padding:10px}.chapter{padding-top:36px}.hud .brand{display:none}
+  .script .s{grid-template-columns:1fr}
+  .onepage{padding:12px}
+  .onepage thead th:nth-child(3){display:none}
+  .onepage table,.onepage tbody,.onepage thead,.onepage tr{display:block}
+  .onepage tr{display:grid;grid-template-columns:5.2em 1fr;gap:0 10px;border-bottom:1px solid var(--nf-line);padding:6px 0}
+  .onepage th,.onepage td{border:0;padding:2px 0}
+  .onepage td.ex{grid-column:2}
+}
+@page{size:A4;margin:12mm}
+@media print{
+  .hud,.inst,.guide,footer,.cover,.btnrow,details.teach,.chapter:not(#c8){display:none!important}
+  body{padding:0;font-size:10pt;line-height:1.55;overflow:visible}
+  .wrap{width:100%}
+  #c8{border:0;padding:0;display:block!important}
+  #c8 .num,#c8 .takeaway{display:none}
+  #c8 h2{font-size:15pt;margin:0 0 4pt}
+  #c8 .wrap{display:flex;flex-direction:column}
+  .part.flow{order:1}.part.one{order:2}.part.src-part{order:3}.part.scripts{order:4;break-before:page}
+  #c8 .prose p{margin:0 0 3pt}
+  .script .s{grid-template-columns:5em 1fr;padding:2pt 0;break-inside:avoid}
+  .script .s>b{font-size:9pt}.script .st p{font-size:9.5pt;margin:0}
+  .part.flow .script .s{padding:1.5pt 0}
+  .onepage{border:0;padding:0}.onepage table{font-size:9pt}.onepage th,.onepage td{padding:2.5pt 5pt}.onepage th{font-size:8pt}
+  .srclist{font-size:7.5pt;columns:2;column-gap:10pt;margin:2pt 0}.srclist li{min-height:0;padding:1pt 0;border:0;display:block;break-inside:avoid}
+  .srclist a,.prose .src a{color:#000;text-decoration:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.iso .iso-plate-corner{font-size:12px!important}
+
+[data-figure="area"] .qaly-sheet .iso-top,[data-figure="area"] .qaly-sheet .iso-fill{fill:var(--nf-frost)}
+[data-figure="area"] .qaly-sheet .iso-edge{stroke:var(--nf-iris)}
+.iso .iso-plate{--anatomy-card:#ffffff;--anatomy-page:#ffffff}
+</style></head><body>
+<header class="hud"><div class="wrap"><span class="brand">QALY × 費用対効果 ／ 誠実性原理</span><nav aria-label="章"><a href="#c0" aria-current="false">0</a><a href="#c1" aria-current="false">1</a><a href="#c2" aria-current="false">2</a><a href="#c3" aria-current="false">3</a><a href="#c4" aria-current="false">4</a><a href="#c5" aria-current="false">5</a><a href="#c6" aria-current="false">6</a><a href="#c7" aria-current="false">7</a><a href="#c8" aria-current="false">8</a></nav></div><div class="progress"><i></i></div></header>
+<section class="cover"><div class="wrap">
+<div class="kicker">触れる教材 — 医学生のための費用対効果入門</div>
+<h1>QALY と費用対効果<br><span class="thin">手で動かして、読めるようになる</span></h1>
+<p>「1 年長生き」は同じ 1 年ではない、から始めて、論文の ICER を最後に見る目まで。8 つの計器を自分の手で動かし、最後の部屋には教える人のための台本と一枚の表があります。</p>
+<div class="meta"><span>対象: 駆け出しの医学生〜研修医</span><span>所要: 読んで 25 分／教えて 20 分</span><span>2026-11-09 改訂（v1.1）</span></div>
+<div class="howto"><div><b>READ</b>上から順に。各章に「持ち帰る一文」が一つ</div><div><b>TOUCH</b>計器はポインタ・つまみ・ボタンで動く。数字はその場で計算</div><div><b>TEACH</b>各章の「教える人の 1 分」と、8 章の部屋</div></div>
+</div></section>
+<section class="chapter" id="c0"><div class="wrap">
+<div class="num">CHAPTER 0</div><h2>なぜ「単位」が要るのか</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>「1 年長生き」は、同じ 1 年ではない。長さと質を一つの数にしたい、から始まる。</p></div>
+<div class="prose">
+<p>二人の患者がいます。同じ病気、同じ年齢。使える治療が二つあって、どちらか一つしか選べません。</p>
+<p><b>治療 A</b> は余命を 2 年延ばしますが、強い副作用で、その 2 年の生活の質は健康なときの 4 割ほど。<b>治療 B</b> は余命を 1 年しか延ばしませんが、その 1 年はほぼ元気に過ごせます（9 割）。</p>
+<p>「長く生きる」だけで比べれば A。「元気に過ごす」だけで比べれば B。医療はこの二つを毎日天秤にかけています。だから、<b>時間と質を掛け合わせた一つの単位</b>が欲しくなった。それが QALY（質調整生存年）です。</p>
+<p class="src">この考え方を医療の費用対効果の枠組みに据えた原点は <a href="https://doi.org/10.1056/NEJM197703312961304" target="_blank" rel="noopener">Weinstein & Stason 1977, NEJM</a>。生存年を質で調整し、将来を割り引き、感度分析する、という今の型がすでに全部あります。</p></div>
+<div class="inst" id="inst-0"><div class="bar"><span class="t"><b>計器 0</b>二人の患者 — まず直感で選ぶ</span><span class="r" id="r0"></span></div><div class="body">
+<div class="cards2">
+  <button class="pcard" type="button" data-pick="A" aria-pressed="false"><h4>治療 A</h4><div class="n">余命 +2 年 × 生活の質 0.4</div><p>長いが、つらい 2 年。</p></button>
+  <button class="pcard" type="button" data-pick="B" aria-pressed="false"><h4>治療 B</h4><div class="n">余命 +1 年 × 生活の質 0.9</div><p>短いが、ほぼ元気な 1 年。</p></button>
+</div>
+<div class="btnrow"><button class="btn primary" type="button" id="b0-calc" disabled>QALY を出す</button><button class="btn ghost" type="button" id="b0-reset">やり直す</button></div>
+<div class="reveal" id="rev0" hidden></div></div></div>
+<div class="guide"><b>見るところ</b><ol><li>まず自分の直感でどちらかを押す（正解はない）</li><li>年 × 質 の掛け算を見る。0.8 と 0.9</li><li>直感と逆転したか、しなかったかを確かめる。逆転した人は、質に重みを置いていたということ</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>学生に先に選ばせてください。半分くらいは A を選びます。そこで「2 年 × 0.4 と 1 年 × 0.9」を黒板に書くと、0.8 と 0.9 で逆転する。この驚きが単位の必要性の説明になります。QALY は『長生きの価値』ではなく『質で重みづけした時間』だと一言添える。</p><p class="pit">つまずき: 「QALY が大きい方が正しい治療」と受け取られがち。QALY は比べるための物差しで、選ぶのは患者と医師。物差しが決めるわけではない。</p></div></details>
+</div></section>
+<section class="chapter" id="c1"><div class="wrap">
+<div class="num">CHAPTER 1</div><h2>QALY は「面積」</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>QALY ＝ 生存年 × 効用（0〜1）。横が時間、縦が質、その長方形の面積。</p></div>
+<div class="prose">
+<p>横軸に時間（年）、縦軸に生活の質を 0〜1 の数で置きます。この数を<b>効用（utility）</b>と呼びます。1 が完全な健康、0 が死。寝たきりで強い痛みがある状態などは 0.2 や 0.3、死より悪いと本人が感じる状態は負の値もあります。</p>
+<p>その状態で過ごした年数と効用を掛けたものが QALY です。2 年を 0.4 で過ごせば 0.8 QALY。状態が変わるなら区切って足します: 2 年を 0.8、その後 3 年を 0.5 なら 1.6 ＋ 1.5 ＝ 3.1 QALY。</p>
+<p>下の計器は、この掛け算を機械にしたものです。横の送り台で年を、縦の送り台で効用を決めると、腕が交わる角までの板が灯り、その面積を奥のダイヤルが読みます。</p></div>
+<div class="inst" id="inst-1"><div class="bar"><span class="t"><b>計器 1</b>健康の面積計（anatomy）</span><span class="r"></span></div><div class="body"><div class="iso" data-theme="light"><div data-figure="area"><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">計器 1</span><span class="iso-plate-corner" data-corner="title">健康の面積計</span><span class="iso-plate-corner" data-corner="hint">板の上でポインタを動かす／矢印キー</span><span class="iso-plate-corner" data-corner="readout" data-readout>2.0 年 × 0.40 = 0.80 QALY</span></div><div class="iso-stage" tabindex="0" role="slider" aria-label="健康の面積計: 矢印キーで年（左右）と効用（上下）を変える" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0.80"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg" viewBox="0 0 640 400" role="img" aria-label="健康の面積計。二本のレールの台で、横の送り台が生存年（0〜10 年）、縦の送り台が効用（0〜1）を決め、二本の腕が交わる角までの灯った板の面積が QALY。奥のダイヤルがその面積を読む。"><path class="iso-halo" d="M32.1 142.2L32.6 140.7L33.6 139.4L35.1 138.1L37 137L235.5 47.7L237.9 46.8L240.5 46.2L243.3 45.8L246.3 45.8L249.1 46L251.9 46.5L254.4 47.2L256.5 48.2L604.1 241.2L605.8 242.4L607 243.7L607.7 245.1L607.9 246.6L607.9 265.9L607.4 267.3L606.4 268.7L604.9 269.9L603 271L404.5 360.4L402.1 361.2L399.5 361.8L396.7 362.2L393.7 362.3L390.9 362L388.1 361.5L385.6 360.8L383.5 359.8L35.9 166.8L34.2 165.6L33 164.3L32.3 162.9L32.1 161.5Z"/><g class="iso-solid"><path class="iso-fill" d="M230.6 88.6L230.7 87.2L231.5 85.8L232.9 84.5L234.9 83.4L237.2 82.6L239.9 82L242.8 81.8L245.7 81.8L248.5 82.2L251 82.9L253.2 83.9L254.9 85.1L256 86.4L256.5 87.8L256.5 90.4L256.4 91.9L255.6 93.3L254.2 94.5L252.2 95.6L249.9 96.5L247.2 97L244.3 97.3L241.4 97.2L238.6 96.8L236.1 96.1L233.9 95.2L232.2 94L231.1 92.6L230.6 91.2Z"/><path class="iso-shade" data-shade="0" d="M252.2 95.6L249.9 96.5L249.9 93.9L252.2 93.1ZM256.5 90.4L256.4 91.9L256.4 89.3L256.5 87.8ZM256.4 91.9L255.6 93.3L255.6 90.7L256.4 89.3ZM255.6 93.3L254.2 94.5L254.2 92L255.6 90.7ZM254.2 94.5L252.2 95.6L252.2 93.1L254.2 92Z"/><path class="iso-shade" data-shade="1" d="M249.9 96.5L247.2 97L247.2 94.5L249.9 93.9ZM247.2 97L244.3 97.3L244.3 94.7L247.2 94.5Z"/><path class="iso-shade" data-shade="2" d="M244.3 97.3L241.4 97.2L241.4 94.6L244.3 94.7ZM241.4 97.2L238.6 96.8L238.6 94.2L241.4 94.6ZM238.6 96.8L236.1 96.1L236.1 93.5L238.6 94.2Z"/><path class="iso-shade" data-shade="3" d="M236.1 96.1L233.9 95.2L233.9 92.6L236.1 93.5ZM233.9 95.2L232.2 94L232.2 91.4L233.9 92.6ZM232.2 94L231.1 92.6L231.1 90.1L232.2 91.4ZM231.1 92.6L230.6 91.2L230.6 88.6L231.1 90.1Z"/><path class="iso-top" d="M252.2 93.1L249.9 93.9L247.2 94.5L244.3 94.7L241.4 94.6L238.6 94.2L236.1 93.5L233.9 92.6L232.2 91.4L231.1 90.1L230.6 88.6L230.7 87.2L231.5 85.8L232.9 84.5L234.9 83.4L237.2 82.6L239.9 82L242.8 81.8L245.7 81.8L248.5 82.2L251 82.9L253.2 83.9L254.9 85.1L256 86.4L256.5 87.8L256.4 89.3L255.6 90.7L254.2 92Z"/><path class="iso-line iso-crease" data-tone="faint" d="M256.5 87.8L256.4 89.3L255.6 90.7L254.2 92L252.2 93.1L249.9 93.9L247.2 94.5L244.3 94.7L241.4 94.6L238.6 94.2L236.1 93.5L233.9 92.6L232.2 91.4L231.1 90.1L230.6 88.6"/><path class="iso-line iso-edge" data-tone="lo" d="M230.6 88.6L230.7 87.2L231.5 85.8L232.9 84.5L234.9 83.4L237.2 82.6L239.9 82L242.8 81.8L245.7 81.8L248.5 82.2L251 82.9L253.2 83.9L254.9 85.1L256 86.4L256.5 87.8M256.5 90.4L256.4 91.9L255.6 93.3L254.2 94.5L252.2 95.6L249.9 96.5L247.2 97L244.3 97.3L241.4 97.2L238.6 96.8L236.1 96.1L233.9 95.2L232.2 94L231.1 92.6L230.6 91.2M230.6 88.6L230.6 91.2M256.5 87.8L256.5 90.4"/></g><g class="iso-solid"><path class="iso-fill" d="M233.6 83.1L233.7 82L234.3 80.9L235.4 79.9L236.9 79.1L238.7 78.4L240.7 78L243 77.8L245.2 77.8L247.4 78.1L249.3 78.7L251 79.4L252.3 80.3L253.2 81.4L253.6 82.5L253.6 87.9L253.4 89.1L252.8 90.1L251.7 91.1L250.3 92L248.4 92.6L246.4 93L244.2 93.2L241.9 93.2L239.8 92.9L237.8 92.3L236.1 91.6L234.8 90.7L233.9 89.6L233.6 88.5Z"/><path class="iso-shade" data-shade="0" d="M250.3 92L248.4 92.6L248.4 87.1L250.3 86.5ZM253.6 87.9L253.4 89.1L253.4 83.6L253.6 82.5ZM253.4 89.1L252.8 90.1L252.8 84.7L253.4 83.6ZM252.8 90.1L251.7 91.1L251.7 85.7L252.8 84.7ZM251.7 91.1L250.3 92L250.3 86.5L251.7 85.7Z"/><path class="iso-shade" data-shade="1" d="M248.4 92.6L246.4 93L246.4 87.6L248.4 87.1ZM246.4 93L244.2 93.2L244.2 87.8L246.4 87.6Z"/><path class="iso-shade" data-shade="2" d="M244.2 93.2L241.9 93.2L241.9 87.7L244.2 87.8ZM241.9 93.2L239.8 92.9L239.8 87.4L241.9 87.7ZM239.8 92.9L237.8 92.3L237.8 86.9L239.8 87.4Z"/><path class="iso-shade" data-shade="3" d="M237.8 92.3L236.1 91.6L236.1 86.1L237.8 86.9ZM236.1 91.6L234.8 90.7L234.8 85.2L236.1 86.1ZM234.8 90.7L233.9 89.6L233.9 84.2L234.8 85.2ZM233.9 89.6L233.6 88.5L233.6 83.1L233.9 84.2Z"/><path class="iso-top" d="M250.3 86.5L248.4 87.1L246.4 87.6L244.2 87.8L241.9 87.7L239.8 87.4L237.8 86.9L236.1 86.1L234.8 85.2L233.9 84.2L233.6 83.1L233.7 82L234.3 80.9L235.4 79.9L236.9 79.1L238.7 78.4L240.7 78L243 77.8L245.2 77.8L247.4 78.1L249.3 78.7L251 79.4L252.3 80.3L253.2 81.4L253.6 82.5L253.4 83.6L252.8 84.7L251.7 85.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M253.6 82.5L253.4 83.6L252.8 84.7L251.7 85.7L250.3 86.5L248.4 87.1L246.4 87.6L244.2 87.8L241.9 87.7L239.8 87.4L237.8 86.9L236.1 86.1L234.8 85.2L233.9 84.2L233.6 83.1"/><path class="iso-line iso-edge" data-tone="mid" d="M233.6 83.1L233.7 82L234.3 80.9L235.4 79.9L236.9 79.1L238.7 78.4L240.7 78L243 77.8L245.2 77.8L247.4 78.1L249.3 78.7L251 79.4L252.3 80.3L253.2 81.4L253.6 82.5M253.6 87.9L253.4 89.1L252.8 90.1L251.7 91.1L250.3 92L248.4 92.6L246.4 93L244.2 93.2L241.9 93.2L239.8 92.9L237.8 92.3L236.1 91.6L234.8 90.7L233.9 89.6L233.6 88.5M233.6 83.1L233.6 88.5M253.6 82.5L253.6 87.9"/></g><g class="iso-solid"><path class="iso-fill" d="M70.7 160.6L70.8 159.2L71.6 157.8L73 156.5L74.9 155.4L77.3 154.6L80 154L82.9 153.7L85.8 153.8L88.6 154.2L91.1 154.9L93.3 155.9L95 157.1L96.1 158.4L96.6 159.8L96.6 162.4L96.4 163.9L95.7 165.3L94.3 166.5L92.3 167.6L90 168.5L87.3 169L84.4 169.3L81.5 169.2L78.7 168.8L76.2 168.1L74 167.1L72.3 166L71.2 164.6L70.7 163.2Z"/><path class="iso-shade" data-shade="0" d="M92.3 167.6L90 168.5L90 165.9L92.3 165.1ZM96.6 162.4L96.4 163.9L96.4 161.3L96.6 159.8ZM96.4 163.9L95.7 165.3L95.7 162.7L96.4 161.3ZM95.7 165.3L94.3 166.5L94.3 164L95.7 162.7ZM94.3 166.5L92.3 167.6L92.3 165.1L94.3 164Z"/><path class="iso-shade" data-shade="1" d="M90 168.5L87.3 169L87.3 166.5L90 165.9ZM87.3 169L84.4 169.3L84.4 166.7L87.3 166.5Z"/><path class="iso-shade" data-shade="2" d="M84.4 169.3L81.5 169.2L81.5 166.6L84.4 166.7ZM81.5 169.2L78.7 168.8L78.7 166.2L81.5 166.6ZM78.7 168.8L76.2 168.1L76.2 165.5L78.7 166.2Z"/><path class="iso-shade" data-shade="3" d="M76.2 168.1L74 167.1L74 164.6L76.2 165.5ZM74 167.1L72.3 166L72.3 163.4L74 164.6ZM72.3 166L71.2 164.6L71.2 162.1L72.3 163.4ZM71.2 164.6L70.7 163.2L70.7 160.6L71.2 162.1Z"/><path class="iso-top" d="M92.3 165.1L90 165.9L87.3 166.5L84.4 166.7L81.5 166.6L78.7 166.2L76.2 165.5L74 164.6L72.3 163.4L71.2 162.1L70.7 160.6L70.8 159.2L71.6 157.8L73 156.5L74.9 155.4L77.3 154.6L80 154L82.9 153.7L85.8 153.8L88.6 154.2L91.1 154.9L93.3 155.9L95 157.1L96.1 158.4L96.6 159.8L96.4 161.3L95.7 162.7L94.3 164Z"/><path class="iso-line iso-crease" data-tone="faint" d="M96.6 159.8L96.4 161.3L95.7 162.7L94.3 164L92.3 165.1L90 165.9L87.3 166.5L84.4 166.7L81.5 166.6L78.7 166.2L76.2 165.5L74 164.6L72.3 163.4L71.2 162.1L70.7 160.6"/><path class="iso-line iso-edge" data-tone="lo" d="M70.7 160.6L70.8 159.2L71.6 157.8L73 156.5L74.9 155.4L77.3 154.6L80 154L82.9 153.7L85.8 153.8L88.6 154.2L91.1 154.9L93.3 155.9L95 157.1L96.1 158.4L96.6 159.8M96.6 162.4L96.4 163.9L95.7 165.3L94.3 166.5L92.3 167.6L90 168.5L87.3 169L84.4 169.3L81.5 169.2L78.7 168.8L76.2 168.1L74 167.1L72.3 166L71.2 164.6L70.7 163.2M70.7 160.6L70.7 163.2M96.6 159.8L96.6 162.4"/></g><g class="iso-solid"><path class="iso-fill" d="M73.6 155.1L73.8 153.9L74.4 152.9L75.4 151.9L76.9 151L78.8 150.4L80.8 150L83 149.8L85.3 149.8L87.4 150.1L89.4 150.7L91.1 151.4L92.4 152.3L93.3 153.4L93.6 154.5L93.6 159.9L93.5 161.1L92.9 162.1L91.8 163.1L90.3 164L88.5 164.6L86.4 165L84.2 165.2L82 165.2L79.8 164.9L77.9 164.3L76.2 163.6L74.9 162.7L74 161.6L73.6 160.5Z"/><path class="iso-shade" data-shade="0" d="M90.3 164L88.5 164.6L88.5 159.1L90.3 158.5ZM93.6 159.9L93.5 161.1L93.5 155.6L93.6 154.5ZM93.5 161.1L92.9 162.1L92.9 156.7L93.5 155.6ZM92.9 162.1L91.8 163.1L91.8 157.7L92.9 156.7ZM91.8 163.1L90.3 164L90.3 158.5L91.8 157.7Z"/><path class="iso-shade" data-shade="1" d="M88.5 164.6L86.4 165L86.4 159.6L88.5 159.1ZM86.4 165L84.2 165.2L84.2 159.8L86.4 159.6Z"/><path class="iso-shade" data-shade="2" d="M84.2 165.2L82 165.2L82 159.7L84.2 159.8ZM82 165.2L79.8 164.9L79.8 159.4L82 159.7ZM79.8 164.9L77.9 164.3L77.9 158.9L79.8 159.4Z"/><path class="iso-shade" data-shade="3" d="M77.9 164.3L76.2 163.6L76.2 158.1L77.9 158.9ZM76.2 163.6L74.9 162.7L74.9 157.2L76.2 158.1ZM74.9 162.7L74 161.6L74 156.2L74.9 157.2ZM74 161.6L73.6 160.5L73.6 155.1L74 156.2Z"/><path class="iso-top" d="M90.3 158.5L88.5 159.1L86.4 159.6L84.2 159.8L82 159.7L79.8 159.4L77.9 158.9L76.2 158.1L74.9 157.2L74 156.2L73.6 155.1L73.8 153.9L74.4 152.9L75.4 151.9L76.9 151L78.8 150.4L80.8 150L83 149.8L85.3 149.8L87.4 150.1L89.4 150.7L91.1 151.4L92.4 152.3L93.3 153.4L93.6 154.5L93.5 155.6L92.9 156.7L91.8 157.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M93.6 154.5L93.5 155.6L92.9 156.7L91.8 157.7L90.3 158.5L88.5 159.1L86.4 159.6L84.2 159.8L82 159.7L79.8 159.4L77.9 158.9L76.2 158.1L74.9 157.2L74 156.2L73.6 155.1"/><path class="iso-line iso-edge" data-tone="mid" d="M73.6 155.1L73.8 153.9L74.4 152.9L75.4 151.9L76.9 151L78.8 150.4L80.8 150L83 149.8L85.3 149.8L87.4 150.1L89.4 150.7L91.1 151.4L92.4 152.3L93.3 153.4L93.6 154.5M93.6 159.9L93.5 161.1L92.9 162.1L91.8 163.1L90.3 164L88.5 164.6L86.4 165L84.2 165.2L82 165.2L79.8 164.9L77.9 164.3L76.2 163.6L74.9 162.7L74 161.6L73.6 160.5M73.6 155.1L73.6 160.5M93.6 154.5L93.6 159.9"/></g><g class="iso-solid"><path class="iso-fill" d="M543.4 262.3L543.6 260.9L544.3 259.5L545.7 258.2L547.7 257.1L550 256.3L552.7 255.7L555.6 255.5L558.5 255.5L561.3 255.9L563.8 256.6L566 257.6L567.7 258.8L568.8 260.1L569.3 261.6L569.3 264.1L569.2 265.6L568.4 267L567 268.2L565.1 269.3L562.7 270.2L560 270.7L557.1 271L554.2 270.9L551.4 270.5L548.9 269.8L546.7 268.9L545 267.7L543.9 266.3L543.4 264.9Z"/><path class="iso-shade" data-shade="0" d="M565.1 269.3L562.7 270.2L562.7 267.6L565.1 266.8ZM569.3 264.1L569.2 265.6L569.2 263L569.3 261.6ZM569.2 265.6L568.4 267L568.4 264.4L569.2 263ZM568.4 267L567 268.2L567 265.7L568.4 264.4ZM567 268.2L565.1 269.3L565.1 266.8L567 265.7Z"/><path class="iso-shade" data-shade="1" d="M562.7 270.2L560 270.7L560 268.2L562.7 267.6ZM560 270.7L557.1 271L557.1 268.4L560 268.2Z"/><path class="iso-shade" data-shade="2" d="M557.1 271L554.2 270.9L554.2 268.3L557.1 268.4ZM554.2 270.9L551.4 270.5L551.4 267.9L554.2 268.3ZM551.4 270.5L548.9 269.8L548.9 267.2L551.4 267.9Z"/><path class="iso-shade" data-shade="3" d="M548.9 269.8L546.7 268.9L546.7 266.3L548.9 267.2ZM546.7 268.9L545 267.7L545 265.1L546.7 266.3ZM545 267.7L543.9 266.3L543.9 263.8L545 265.1ZM543.9 266.3L543.4 264.9L543.4 262.3L543.9 263.8Z"/><path class="iso-top" d="M565.1 266.8L562.7 267.6L560 268.2L557.1 268.4L554.2 268.3L551.4 267.9L548.9 267.2L546.7 266.3L545 265.1L543.9 263.8L543.4 262.3L543.6 260.9L544.3 259.5L545.7 258.2L547.7 257.1L550 256.3L552.7 255.7L555.6 255.5L558.5 255.5L561.3 255.9L563.8 256.6L566 257.6L567.7 258.8L568.8 260.1L569.3 261.6L569.2 263L568.4 264.4L567 265.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M569.3 261.6L569.2 263L568.4 264.4L567 265.7L565.1 266.8L562.7 267.6L560 268.2L557.1 268.4L554.2 268.3L551.4 267.9L548.9 267.2L546.7 266.3L545 265.1L543.9 263.8L543.4 262.3"/><path class="iso-line iso-edge" data-tone="lo" d="M543.4 262.3L543.6 260.9L544.3 259.5L545.7 258.2L547.7 257.1L550 256.3L552.7 255.7L555.6 255.5L558.5 255.5L561.3 255.9L563.8 256.6L566 257.6L567.7 258.8L568.8 260.1L569.3 261.6M569.3 264.1L569.2 265.6L568.4 267L567 268.2L565.1 269.3L562.7 270.2L560 270.7L557.1 271L554.2 270.9L551.4 270.5L548.9 269.8L546.7 268.9L545 267.7L543.9 266.3L543.4 264.9M543.4 262.3L543.4 264.9M569.3 261.6L569.3 264.1"/></g><g class="iso-solid"><path class="iso-fill" d="M546.4 256.8L546.5 255.7L547.1 254.6L548.2 253.6L549.7 252.8L551.5 252.1L553.6 251.7L555.8 251.5L558 251.5L560.2 251.8L562.1 252.4L563.8 253.1L565.1 254L566 255.1L566.4 256.2L566.4 261.6L566.2 262.8L565.6 263.8L564.6 264.8L563.1 265.7L561.2 266.3L559.2 266.7L557 266.9L554.7 266.9L552.6 266.6L550.6 266L548.9 265.3L547.6 264.4L546.7 263.3L546.4 262.2Z"/><path class="iso-shade" data-shade="0" d="M563.1 265.7L561.2 266.3L561.2 260.9L563.1 260.2ZM566.4 261.6L566.2 262.8L566.2 257.3L566.4 256.2ZM566.2 262.8L565.6 263.8L565.6 258.4L566.2 257.3ZM565.6 263.8L564.6 264.8L564.6 259.4L565.6 258.4ZM564.6 264.8L563.1 265.7L563.1 260.2L564.6 259.4Z"/><path class="iso-shade" data-shade="1" d="M561.2 266.3L559.2 266.7L559.2 261.3L561.2 260.9ZM559.2 266.7L557 266.9L557 261.5L559.2 261.3Z"/><path class="iso-shade" data-shade="2" d="M557 266.9L554.7 266.9L554.7 261.4L557 261.5ZM554.7 266.9L552.6 266.6L552.6 261.1L554.7 261.4ZM552.6 266.6L550.6 266L550.6 260.6L552.6 261.1Z"/><path class="iso-shade" data-shade="3" d="M550.6 266L548.9 265.3L548.9 259.8L550.6 260.6ZM548.9 265.3L547.6 264.4L547.6 258.9L548.9 259.8ZM547.6 264.4L546.7 263.3L546.7 257.9L547.6 258.9ZM546.7 263.3L546.4 262.2L546.4 256.8L546.7 257.9Z"/><path class="iso-top" d="M563.1 260.2L561.2 260.9L559.2 261.3L557 261.5L554.7 261.4L552.6 261.1L550.6 260.6L548.9 259.8L547.6 258.9L546.7 257.9L546.4 256.8L546.5 255.7L547.1 254.6L548.2 253.6L549.7 252.8L551.5 252.1L553.6 251.7L555.8 251.5L558 251.5L560.2 251.8L562.1 252.4L563.8 253.1L565.1 254L566 255.1L566.4 256.2L566.2 257.3L565.6 258.4L564.6 259.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M566.4 256.2L566.2 257.3L565.6 258.4L564.6 259.4L563.1 260.2L561.2 260.9L559.2 261.3L557 261.5L554.7 261.4L552.6 261.1L550.6 260.6L548.9 259.8L547.6 258.9L546.7 257.9L546.4 256.8"/><path class="iso-line iso-edge" data-tone="mid" d="M546.4 256.8L546.5 255.7L547.1 254.6L548.2 253.6L549.7 252.8L551.5 252.1L553.6 251.7L555.8 251.5L558 251.5L560.2 251.8L562.1 252.4L563.8 253.1L565.1 254L566 255.1L566.4 256.2M566.4 261.6L566.2 262.8L565.6 263.8L564.6 264.8L563.1 265.7L561.2 266.3L559.2 266.7L557 266.9L554.7 266.9L552.6 266.6L550.6 266L548.9 265.3L547.6 264.4L546.7 263.3L546.4 262.2M546.4 256.8L546.4 262.2M566.4 256.2L566.4 261.6"/></g><g class="iso-solid"><path class="iso-fill" d="M383.5 334.3L383.6 332.9L384.4 331.5L385.8 330.2L387.8 329.1L390.1 328.3L392.8 327.7L395.7 327.5L398.6 327.5L401.4 327.9L403.9 328.6L406.1 329.6L407.8 330.8L408.9 332.1L409.4 333.5L409.4 336.1L409.3 337.6L408.5 339L407.1 340.2L405.1 341.3L402.8 342.2L400.1 342.7L397.2 343L394.3 342.9L391.5 342.5L389 341.8L386.8 340.8L385.1 339.7L384 338.3L383.5 336.9Z"/><path class="iso-shade" data-shade="0" d="M405.1 341.3L402.8 342.2L402.8 339.6L405.1 338.8ZM409.4 336.1L409.3 337.6L409.3 335L409.4 333.5ZM409.3 337.6L408.5 339L408.5 336.4L409.3 335ZM408.5 339L407.1 340.2L407.1 337.7L408.5 336.4ZM407.1 340.2L405.1 341.3L405.1 338.8L407.1 337.7Z"/><path class="iso-shade" data-shade="1" d="M402.8 342.2L400.1 342.7L400.1 340.2L402.8 339.6ZM400.1 342.7L397.2 343L397.2 340.4L400.1 340.2Z"/><path class="iso-shade" data-shade="2" d="M397.2 343L394.3 342.9L394.3 340.3L397.2 340.4ZM394.3 342.9L391.5 342.5L391.5 339.9L394.3 340.3ZM391.5 342.5L389 341.8L389 339.2L391.5 339.9Z"/><path class="iso-shade" data-shade="3" d="M389 341.8L386.8 340.8L386.8 338.3L389 339.2ZM386.8 340.8L385.1 339.7L385.1 337.1L386.8 338.3ZM385.1 339.7L384 338.3L384 335.8L385.1 337.1ZM384 338.3L383.5 336.9L383.5 334.3L384 335.8Z"/><path class="iso-top" d="M405.1 338.8L402.8 339.6L400.1 340.2L397.2 340.4L394.3 340.3L391.5 339.9L389 339.2L386.8 338.3L385.1 337.1L384 335.8L383.5 334.3L383.6 332.9L384.4 331.5L385.8 330.2L387.8 329.1L390.1 328.3L392.8 327.7L395.7 327.5L398.6 327.5L401.4 327.9L403.9 328.6L406.1 329.6L407.8 330.8L408.9 332.1L409.4 333.5L409.3 335L408.5 336.4L407.1 337.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M409.4 333.5L409.3 335L408.5 336.4L407.1 337.7L405.1 338.8L402.8 339.6L400.1 340.2L397.2 340.4L394.3 340.3L391.5 339.9L389 339.2L386.8 338.3L385.1 337.1L384 335.8L383.5 334.3"/><path class="iso-line iso-edge" data-tone="lo" d="M383.5 334.3L383.6 332.9L384.4 331.5L385.8 330.2L387.8 329.1L390.1 328.3L392.8 327.7L395.7 327.5L398.6 327.5L401.4 327.9L403.9 328.6L406.1 329.6L407.8 330.8L408.9 332.1L409.4 333.5M409.4 336.1L409.3 337.6L408.5 339L407.1 340.2L405.1 341.3L402.8 342.2L400.1 342.7L397.2 343L394.3 342.9L391.5 342.5L389 341.8L386.8 340.8L385.1 339.7L384 338.3L383.5 336.9M383.5 334.3L383.5 336.9M409.4 333.5L409.4 336.1"/></g><g class="iso-solid"><path class="iso-fill" d="M386.4 328.8L386.6 327.7L387.2 326.6L388.3 325.6L389.7 324.8L391.6 324.1L393.6 323.7L395.8 323.5L398.1 323.5L400.2 323.8L402.2 324.4L403.9 325.1L405.2 326L406.1 327.1L406.4 328.2L406.4 333.6L406.3 334.8L405.7 335.8L404.6 336.8L403.1 337.7L401.3 338.3L399.3 338.7L397 338.9L394.8 338.9L392.6 338.6L390.7 338L389 337.3L387.7 336.4L386.8 335.3L386.4 334.2Z"/><path class="iso-shade" data-shade="0" d="M403.1 337.7L401.3 338.3L401.3 332.8L403.1 332.2ZM406.4 333.6L406.3 334.8L406.3 329.3L406.4 328.2ZM406.3 334.8L405.7 335.8L405.7 330.4L406.3 329.3ZM405.7 335.8L404.6 336.8L404.6 331.4L405.7 330.4ZM404.6 336.8L403.1 337.7L403.1 332.2L404.6 331.4Z"/><path class="iso-shade" data-shade="1" d="M401.3 338.3L399.3 338.7L399.3 333.3L401.3 332.8ZM399.3 338.7L397 338.9L397 333.5L399.3 333.3Z"/><path class="iso-shade" data-shade="2" d="M397 338.9L394.8 338.9L394.8 333.4L397 333.5ZM394.8 338.9L392.6 338.6L392.6 333.1L394.8 333.4ZM392.6 338.6L390.7 338L390.7 332.6L392.6 333.1Z"/><path class="iso-shade" data-shade="3" d="M390.7 338L389 337.3L389 331.8L390.7 332.6ZM389 337.3L387.7 336.4L387.7 330.9L389 331.8ZM387.7 336.4L386.8 335.3L386.8 329.9L387.7 330.9ZM386.8 335.3L386.4 334.2L386.4 328.8L386.8 329.9Z"/><path class="iso-top" d="M403.1 332.2L401.3 332.8L399.3 333.3L397 333.5L394.8 333.4L392.6 333.1L390.7 332.6L389 331.8L387.7 330.9L386.8 329.9L386.4 328.8L386.6 327.7L387.2 326.6L388.3 325.6L389.7 324.8L391.6 324.1L393.6 323.7L395.8 323.5L398.1 323.5L400.2 323.8L402.2 324.4L403.9 325.1L405.2 326L406.1 327.1L406.4 328.2L406.3 329.3L405.7 330.4L404.6 331.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M406.4 328.2L406.3 329.3L405.7 330.4L404.6 331.4L403.1 332.2L401.3 332.8L399.3 333.3L397 333.5L394.8 333.4L392.6 333.1L390.7 332.6L389 331.8L387.7 330.9L386.8 329.9L386.4 328.8"/><path class="iso-line iso-edge" data-tone="mid" d="M386.4 328.8L386.6 327.7L387.2 326.6L388.3 325.6L389.7 324.8L391.6 324.1L393.6 323.7L395.8 323.5L398.1 323.5L400.2 323.8L402.2 324.4L403.9 325.1L405.2 326L406.1 327.1L406.4 328.2M406.4 333.6L406.3 334.8L405.7 335.8L404.6 336.8L403.1 337.7L401.3 338.3L399.3 338.7L397 338.9L394.8 338.9L392.6 338.6L390.7 338L389 337.3L387.7 336.4L386.8 335.3L386.4 334.2M386.4 328.8L386.4 334.2M406.4 328.2L406.4 333.6"/></g><g class="iso-solid"><path class="iso-fill" d="M32.1 134.1L32.6 132.7L33.6 131.3L35.1 130.1L37 129L235.5 39.6L237.9 38.8L240.5 38.2L243.3 37.8L246.3 37.7L249.1 38L251.9 38.5L254.4 39.2L256.5 40.2L604.1 233.2L605.8 234.4L607 235.7L607.7 237.1L607.9 238.5L607.9 257.8L607.4 259.3L606.4 260.6L604.9 261.9L603 263L404.5 352.3L402.1 353.2L399.5 353.8L396.7 354.2L393.7 354.2L390.9 354L388.1 353.5L385.6 352.8L383.5 351.8L35.9 158.8L34.2 157.6L33 156.3L32.3 154.9L32.1 153.4Z"/><path class="iso-shade" data-shade="0" d="M607.9 257.8L607.4 259.3L607.4 240L607.9 238.5ZM607.4 259.3L606.4 260.6L606.4 241.4L607.4 240ZM606.4 260.6L604.9 261.9L604.9 242.6L606.4 241.4ZM604.9 261.9L603 263L603 243.7L604.9 242.6ZM603 263L404.5 352.3L404.5 333L603 243.7ZM404.5 352.3L402.1 353.2L402.1 333.9L404.5 333Z"/><path class="iso-shade" data-shade="1" d="M402.1 353.2L399.5 353.8L399.5 334.5L402.1 333.9ZM399.5 353.8L396.7 354.2L396.7 334.9L399.5 334.5ZM396.7 354.2L393.7 354.2L393.7 334.9L396.7 334.9Z"/><path class="iso-shade" data-shade="2" d="M393.7 354.2L390.9 354L390.9 334.7L393.7 334.9ZM390.9 354L388.1 353.5L388.1 334.2L390.9 334.7Z"/><path class="iso-shade" data-shade="3" d="M388.1 353.5L385.6 352.8L385.6 333.5L388.1 334.2ZM385.6 352.8L383.5 351.8L383.5 332.5L385.6 333.5ZM383.5 351.8L35.9 158.8L35.9 139.5L383.5 332.5ZM35.9 158.8L34.2 157.6L34.2 138.3L35.9 139.5ZM34.2 157.6L33 156.3L33 137L34.2 138.3ZM33 156.3L32.3 154.9L32.3 135.6L33 137ZM32.3 154.9L32.1 153.4L32.1 134.1L32.3 135.6Z"/><path class="iso-top" d="M604.1 233.2L605.8 234.4L607 235.7L607.7 237.1L607.9 238.5L607.4 240L606.4 241.4L604.9 242.6L603 243.7L404.5 333L402.1 333.9L399.5 334.5L396.7 334.9L393.7 334.9L390.9 334.7L388.1 334.2L385.6 333.5L383.5 332.5L35.9 139.5L34.2 138.3L33 137L32.3 135.6L32.1 134.1L32.6 132.7L33.6 131.3L35.1 130.1L37 129L235.5 39.6L237.9 38.8L240.5 38.2L243.3 37.8L246.3 37.7L249.1 38L251.9 38.5L254.4 39.2L256.5 40.2Z"/><path class="iso-line iso-crease" data-tone="faint" d="M607.9 238.5L607.4 240L606.4 241.4L604.9 242.6L603 243.7L404.5 333L402.1 333.9L399.5 334.5L396.7 334.9L393.7 334.9L390.9 334.7L388.1 334.2L385.6 333.5L383.5 332.5L35.9 139.5L34.2 138.3L33 137L32.3 135.6L32.1 134.1"/><path class="iso-line iso-bevel" data-tone="faint" d="M607.9 238.5L604.5 239.6L603.8 240.7L602.6 241.7L600.9 242.6L402.6 331.9L400.6 332.6L398.5 333.1L396.2 333.4L393.9 333.5L391.6 333.3L389.4 332.9L387.4 332.3L385.6 331.5L38.2 138.6L36.8 137.6L35.8 136.5L35.2 135.4L32.1 134.1"/><path class="iso-line iso-edge" data-tone="mid" d="M32.1 134.1L32.6 132.7L33.6 131.3L35.1 130.1L37 129L235.5 39.6L237.9 38.8L240.5 38.2L243.3 37.8L246.3 37.7L249.1 38L251.9 38.5L254.4 39.2L256.5 40.2L604.1 233.2L605.8 234.4L607 235.7L607.7 237.1L607.9 238.5M607.9 257.8L607.4 259.3L606.4 260.6L604.9 261.9L603 263L404.5 352.3L402.1 353.2L399.5 353.8L396.7 354.2L393.7 354.2L390.9 354L388.1 353.5L385.6 352.8L383.5 351.8L35.9 158.8L34.2 157.6L33 156.3L32.3 154.9L32.1 153.4M607.9 238.5L607.9 257.8M32.1 134.1L32.1 153.4"/></g><path class="iso-line" data-tone="lo" d="M597.2 236.3L597.8 236.7L598.3 237.2L598.5 237.8L598.6 238.3L598.4 238.8L598.1 239.4L597.5 239.8L596.8 240.2L398.2 329.6L397.4 329.9L396.4 330.2L395.3 330.3L394.2 330.3L393.2 330.2L392.1 330L391.2 329.8L390.4 329.4L42.8 136.4L42.2 136L41.7 135.5L41.5 134.9L41.4 134.4L41.6 133.8L41.9 133.3L42.5 132.9L43.2 132.5L241.8 43.1L242.6 42.8L243.6 42.5L244.7 42.4L245.8 42.4L246.8 42.5L247.9 42.6L248.8 42.9L249.6 43.3Z"/><path class="iso-line" data-tone="lo" d="M247.9 49.3L246.6 49.7L245 49.8L243.4 49.6L242.2 49.1L241.4 48.5L241.1 47.7L241.5 46.9L242.5 46.3L243.8 45.9L245.4 45.7L247 45.9L248.2 46.4L249.1 47.1L249.3 47.9L248.9 48.7ZM590.5 239.5L589.2 239.9L587.6 240.1L586 239.9L584.8 239.4L584 238.7L583.7 237.9L584.1 237.1L585.1 236.5L586.4 236.1L588 236L589.6 236.2L590.8 236.7L591.6 237.3L591.9 238.1L591.5 238.9ZM54.9 136.2L53.6 136.6L52 136.7L50.4 136.5L49.2 136L48.4 135.3L48.1 134.6L48.5 133.8L49.5 133.1L50.8 132.7L52.4 132.6L54 132.8L55.2 133.3L56 134L56.3 134.8L55.9 135.5ZM397.5 326.4L396.2 326.8L394.6 327L393 326.8L391.8 326.3L390.9 325.6L390.7 324.8L391.1 324L392.1 323.4L393.4 323L395 322.9L396.6 323.1L397.8 323.5L398.6 324.2L398.9 325L398.5 325.8Z"/><g class="iso-dots" data-tone="mid"><circle cx="245.2" cy="47.8" r="0.5"/><circle cx="587.8" cy="238" r="0.5"/><circle cx="52.2" cy="134.7" r="0.5"/><circle cx="394.8" cy="324.9" r="0.5"/></g><g class="iso-solid"><path class="iso-fill" d="M222.1 52.5L222.4 51.9L223 51.5L240.9 43.4L241.9 43.1L242.9 43.1L244 43.2L244.9 43.5L298.2 73.2L298.8 73.6L298.9 74.2L298.9 75.5L298.7 76L298 76.4L280.1 84.5L279.2 84.8L278.1 84.8L277 84.7L276.2 84.4L222.8 54.7L222.2 54.3L222.1 53.7Z"/><path class="iso-shade" data-shade="0" d="M298.9 75.5L298.7 76L298.7 74.7L298.9 74.2ZM298.7 76L298 76.4L298 75.1L298.7 74.7ZM298 76.4L280.1 84.5L280.1 83.2L298 75.1ZM280.1 84.5L279.2 84.8L279.2 83.5L280.1 83.2Z"/><path class="iso-shade" data-shade="1" d="M279.2 84.8L278.1 84.8L278.1 83.6L279.2 83.5Z"/><path class="iso-shade" data-shade="2" d="M278.1 84.8L277 84.7L277 83.4L278.1 83.6Z"/><path class="iso-shade" data-shade="3" d="M277 84.7L276.2 84.4L276.2 83.1L277 83.4ZM276.2 84.4L222.8 54.7L222.8 53.5L276.2 83.1ZM222.8 54.7L222.2 54.3L222.2 53L222.8 53.5ZM222.2 54.3L222.1 53.7L222.1 52.5L222.2 53Z"/><path class="iso-top" d="M298.2 73.2L298.8 73.6L298.9 74.2L298.7 74.7L298 75.1L280.1 83.2L279.2 83.5L278.1 83.6L277 83.4L276.2 83.1L222.8 53.5L222.2 53L222.1 52.5L222.4 51.9L223 51.5L240.9 43.4L241.9 43.1L242.9 43.1L244 43.2L244.9 43.5Z"/><path class="iso-line iso-crease" data-tone="lo" d="M298.9 74.2L298.7 74.7L298 75.1L280.1 83.2L279.2 83.5L278.1 83.6L277 83.4L276.2 83.1L222.8 53.5L222.2 53L222.1 52.5"/><path class="iso-line iso-edge" data-tone="lo" d="M222.1 52.5L222.4 51.9L223 51.5L240.9 43.4L241.9 43.1L242.9 43.1L244 43.2L244.9 43.5L298.2 73.2L298.8 73.6L298.9 74.2M298.9 75.5L298.7 76L298 76.4L280.1 84.5L279.2 84.8L278.1 84.8L277 84.7L276.2 84.4L222.8 54.7L222.2 54.3L222.1 53.7M298.9 74.2L298.9 75.5M222.1 52.5L222.1 53.7"/></g><path class="iso-line" data-tone="faint" d="M295.9 74.1L278.3 82L225.1 52.5L242.8 44.6Z"/><path class="iso-line" data-tone="lo" data-free="" d="M256 53.9L247.7 57.6"/><path class="iso-line" data-tone="lo" data-free="" d="M267.4 60.2L256.7 65"/><path class="iso-line" data-tone="lo" data-free="" d="M278.8 66.5L271.9 69.7"/><g class="iso-dots" data-tone="mid"><circle cx="228.8" cy="52.6" r="0.45"/><circle cx="292.2" cy="74" r="0.45"/></g><g class="iso-solid"><path class="iso-fill" d="M122.2 137.7L122.3 137.3L122.8 136.9L129.7 133.8L130.5 133.5L131.5 133.6L132.3 133.8L338.4 248.3L338.8 248.7L338.8 249.6L338.8 250.1L338.2 250.5L331.3 253.6L330.5 253.9L329.5 253.8L328.7 253.6L122.7 139.1L122.2 138.7Z"/><path class="iso-shade" data-shade="0" d="M338.8 249.6L338.8 250.1L338.8 249.2L338.8 248.7ZM338.8 250.1L338.2 250.5L338.2 249.6L338.8 249.2ZM338.2 250.5L331.3 253.6L331.3 252.7L338.2 249.6Z"/><path class="iso-shade" data-shade="1" d="M331.3 253.6L330.5 253.9L330.5 252.9L331.3 252.7Z"/><path class="iso-shade" data-shade="2" d="M330.5 253.9L329.5 253.8L329.5 252.9L330.5 252.9Z"/><path class="iso-shade" data-shade="3" d="M329.5 253.8L328.7 253.6L328.7 252.6L329.5 252.9ZM328.7 253.6L122.7 139.1L122.7 138.2L328.7 252.6ZM122.7 139.1L122.2 138.7L122.2 137.7L122.7 138.2Z"/><path class="iso-top" d="M338.4 248.3L338.8 248.7L338.8 249.2L338.2 249.6L331.3 252.7L330.5 252.9L329.5 252.9L328.7 252.6L122.7 138.2L122.2 137.7L122.3 137.3L122.8 136.9L129.7 133.8L130.5 133.5L131.5 133.6L132.3 133.8Z"/><path class="iso-line iso-edge" data-tone="lo" d="M122.2 137.7L122.3 137.3L122.8 136.9L129.7 133.8L130.5 133.5L131.5 133.6L132.3 133.8L338.4 248.3L338.8 248.7M338.8 249.6L338.8 250.1L338.2 250.5L331.3 253.6L330.5 253.9L329.5 253.8L328.7 253.6L122.7 139.1L122.2 138.7M338.8 248.7L338.8 249.6M122.2 137.7L122.2 138.7"/></g><path class="iso-line" data-tone="lo" d="M134.9 136.4L132.2 137.6M154.8 147.4L152 148.7M174.7 158.5L171.9 159.7M194.5 169.5L191.8 170.7M214.4 180.5L211.6 181.8M234.2 191.5L231.5 192.8M254.1 202.6L251.3 203.8M274 213.6L271.2 214.8M293.8 224.6L291.1 225.9M313.7 235.7L310.9 236.9M333.5 246.7L330.8 247.9"/><path class="iso-line" data-tone="mid" d="M144.9 141.9L139.9 144.1M164.7 152.9L159.8 155.2M184.6 164L179.6 166.2M204.4 175L199.5 177.2M224.3 186L219.3 188.3M244.2 197.1L239.2 199.3M264 208.1L259.1 210.3M283.9 219.1L278.9 221.3M303.7 230.1L298.8 232.4M323.6 241.2L318.6 243.4"/><path class="iso-line" data-tone="hi" d="M134.9 136.4L128.9 139.1"/><g class="iso-dots" data-tone="mid"><circle cx="128.7" cy="136.7" r="0.45"/><circle cx="332.3" cy="249.7" r="0.45"/></g><text class="iso-face-text" data-tone="lo" transform="matrix(1.241 0.689 -1.379 0.621 302.79 244.018)" font-size="2.4" text-anchor="start">YEARS</text><g class="iso-solid"><path class="iso-fill" d="M122.2 125.3L122.3 124.8L122.8 124.4L230.3 76L231.2 75.8L232.1 75.8L232.9 76L239.2 79.5L239.6 79.9L239.6 80.9L239.5 81.4L239 81.8L131.5 130.2L130.6 130.4L129.7 130.4L128.9 130.1L122.7 126.7L122.2 126.2Z"/><path class="iso-shade" data-shade="0" d="M239.6 80.9L239.5 81.4L239.5 80.4L239.6 79.9ZM239.5 81.4L239 81.8L239 80.8L239.5 80.4ZM239 81.8L131.5 130.2L131.5 129.2L239 80.8Z"/><path class="iso-shade" data-shade="1" d="M131.5 130.2L130.6 130.4L130.6 129.4L131.5 129.2Z"/><path class="iso-shade" data-shade="2" d="M130.6 130.4L129.7 130.4L129.7 129.4L130.6 129.4Z"/><path class="iso-shade" data-shade="3" d="M129.7 130.4L128.9 130.1L128.9 129.1L129.7 129.4ZM128.9 130.1L122.7 126.7L122.7 125.7L128.9 129.1ZM122.7 126.7L122.2 126.2L122.2 125.3L122.7 125.7Z"/><path class="iso-top" d="M239.2 79.5L239.6 79.9L239.5 80.4L239 80.8L131.5 129.2L130.6 129.4L129.7 129.4L128.9 129.1L122.7 125.7L122.2 125.3L122.3 124.8L122.8 124.4L230.3 76L231.2 75.8L232.1 75.8L232.9 76Z"/><path class="iso-line iso-edge" data-tone="lo" d="M122.2 125.3L122.3 124.8L122.8 124.4L230.3 76L231.2 75.8L232.1 75.8L232.9 76L239.2 79.5L239.6 79.9M239.6 80.9L239.5 81.4L239 81.8L131.5 130.2L130.6 130.4L129.7 130.4L128.9 130.1L122.7 126.7L122.2 126.2M239.6 79.9L239.6 80.9M122.2 125.3L122.2 126.2"/></g><path class="iso-line" data-tone="lo" d="M221.2 87.8L223.7 89.2M211.3 92.3L213.8 93.7M201.3 96.8L203.8 98.1M191.4 101.2L193.9 102.6M171.6 110.2L174.1 111.5M161.6 114.6L164.1 116M151.7 119.1L154.2 120.5M141.8 123.6L144.3 124.9"/><path class="iso-line" data-tone="mid" d="M231.1 83.4L235.6 85.8M181.5 105.7L186 108.2"/><path class="iso-line" data-tone="hi" d="M233.9 82.1L228.2 78.9"/><g class="iso-dots" data-tone="mid"><circle cx="233.3" cy="79" r="0.45"/><circle cx="128.5" cy="126.2" r="0.45"/></g><text class="iso-face-text" data-tone="lo" transform="matrix(1.241 0.689 -1.379 0.621 118.932 124.593)" font-size="2.2" text-anchor="start">UTILITY 0-1</text><g class="iso-solid"><path class="iso-fill" d="M103.7 134.7L103.8 134.2L104.3 133.8L108.5 132L109.3 131.8L110.3 131.8L111.1 132L332 254.7L332.5 255.2L332.5 260L332.4 260.5L331.9 260.9L327.8 262.7L326.9 263L325.9 262.9L325.1 262.7L104.2 140L103.7 139.5Z"/><path class="iso-shade" data-shade="0" d="M332.5 260L332.4 260.5L332.4 255.6L332.5 255.2ZM332.4 260.5L331.9 260.9L331.9 256.1L332.4 255.6ZM331.9 260.9L327.8 262.7L327.8 257.9L331.9 256.1Z"/><path class="iso-shade" data-shade="1" d="M327.8 262.7L326.9 263L326.9 258.1L327.8 257.9Z"/><path class="iso-shade" data-shade="2" d="M326.9 263L325.9 262.9L325.9 258.1L326.9 258.1Z"/><path class="iso-shade" data-shade="3" d="M325.9 262.9L325.1 262.7L325.1 257.8L325.9 258.1ZM325.1 262.7L104.2 140L104.2 135.1L325.1 257.8ZM104.2 140L103.7 139.5L103.7 134.7L104.2 135.1Z"/><path class="iso-top" d="M332 254.7L332.5 255.2L332.4 255.6L331.9 256.1L327.8 257.9L326.9 258.1L325.9 258.1L325.1 257.8L104.2 135.1L103.7 134.7L103.8 134.2L104.3 133.8L108.5 132L109.3 131.8L110.3 131.8L111.1 132Z"/><path class="iso-line iso-crease" data-tone="faint" d="M332.5 255.2L332.4 255.6L331.9 256.1L327.8 257.9L326.9 258.1L325.9 258.1L325.1 257.8L104.2 135.1L103.7 134.7"/><path class="iso-line iso-bevel" data-tone="faint" d="M332.5 255.2L331.7 255.5L331.3 255.8L327.3 257.6L326.7 257.8L326.2 257.8L325.6 257.6L104.8 134.9L103.7 134.7"/><path class="iso-line iso-edge" data-tone="mid" d="M103.7 134.7L103.8 134.2L104.3 133.8L108.5 132L109.3 131.8L110.3 131.8L111.1 132L332 254.7L332.5 255.2M332.5 260L332.4 260.5L331.9 260.9L327.8 262.7L326.9 263L325.9 262.9L325.1 262.7L104.2 140L103.7 139.5M332.5 255.2L332.5 260M103.7 134.7L103.7 139.5"/></g><g class="iso-dots" data-tone="mid"><circle cx="113.8" cy="137" r="0.4"/><circle cx="322.4" cy="252.8" r="0.4"/></g><g class="iso-solid"><path class="iso-fill" d="M93.6 126.8L93.6 126.2L94.3 125.7L106.1 120.4L107.1 120.1L108.3 120.1L109.3 120.4L112.5 122.2L113 122.8L113 134L112.9 134.6L112.3 135.1L100.5 140.4L99.4 140.7L98.3 140.6L97.3 140.3L94.1 138.5L93.6 138Z"/><path class="iso-shade" data-shade="0" d="M113 134L112.9 134.6L112.9 123.3L113 122.8ZM112.9 134.6L112.3 135.1L112.3 123.8L112.9 123.3ZM112.3 135.1L100.5 140.4L100.5 129.2L112.3 123.8Z"/><path class="iso-shade" data-shade="1" d="M100.5 140.4L99.4 140.7L99.4 129.4L100.5 129.2Z"/><path class="iso-shade" data-shade="2" d="M99.4 140.7L98.3 140.6L98.3 129.4L99.4 129.4Z"/><path class="iso-shade" data-shade="3" d="M98.3 140.6L97.3 140.3L97.3 129.1L98.3 129.4ZM97.3 140.3L94.1 138.5L94.1 127.3L97.3 129.1ZM94.1 138.5L93.6 138L93.6 126.8L94.1 127.3Z"/><path class="iso-top" d="M112.5 122.2L113 122.8L112.9 123.3L112.3 123.8L100.5 129.2L99.4 129.4L98.3 129.4L97.3 129.1L94.1 127.3L93.6 126.8L93.6 126.2L94.3 125.7L106.1 120.4L107.1 120.1L108.3 120.1L109.3 120.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M113 122.8L112.9 123.3L112.3 123.8L100.5 129.2L99.4 129.4L98.3 129.4L97.3 129.1L94.1 127.3L93.6 126.8"/><path class="iso-line iso-bevel" data-tone="faint" d="M113 122.8L112.1 123.2L111.6 123.5L99.9 128.8L99.2 129L98.6 128.9L97.9 128.7L94.9 127L93.6 126.8"/><path class="iso-line iso-edge" data-tone="mid" d="M93.6 126.8L93.6 126.2L94.3 125.7L106.1 120.4L107.1 120.1L108.3 120.1L109.3 120.4L112.5 122.2L113 122.8M113 134L112.9 134.6L112.3 135.1L100.5 140.4L99.4 140.7L98.3 140.6L97.3 140.3L94.1 138.5L93.6 138M113 122.8L113 134M93.6 126.8L93.6 138"/></g><g class="iso-dots" data-tone="mid"><circle cx="108.1" cy="122.6" r="0.45"/><circle cx="98.5" cy="126.9" r="0.45"/></g><g class="iso-solid"><path class="iso-fill" d="M323.2 254.3L323.3 253.7L323.9 253.2L335.8 247.9L336.8 247.6L337.9 247.7L338.9 248L342.1 249.8L342.6 250.3L342.6 261.5L342.6 262.1L342 262.6L330.1 267.9L329.1 268.2L327.9 268.1L327 267.8L323.7 266L323.2 265.5Z"/><path class="iso-shade" data-shade="0" d="M342.6 261.5L342.6 262.1L342.6 250.9L342.6 250.3ZM342.6 262.1L342 262.6L342 251.3L342.6 250.9ZM342 262.6L330.1 267.9L330.1 256.7L342 251.3Z"/><path class="iso-shade" data-shade="1" d="M330.1 267.9L329.1 268.2L329.1 256.9L330.1 256.7Z"/><path class="iso-shade" data-shade="2" d="M329.1 268.2L327.9 268.1L327.9 256.9L329.1 256.9Z"/><path class="iso-shade" data-shade="3" d="M327.9 268.1L327 267.8L327 256.6L327.9 256.9ZM327 267.8L323.7 266L323.7 254.8L327 256.6ZM323.7 266L323.2 265.5L323.2 254.3L323.7 254.8Z"/><path class="iso-top" d="M342.1 249.8L342.6 250.3L342.6 250.9L342 251.3L330.1 256.7L329.1 256.9L327.9 256.9L327 256.6L323.7 254.8L323.2 254.3L323.3 253.7L323.9 253.2L335.8 247.9L336.8 247.6L337.9 247.7L338.9 248Z"/><path class="iso-line iso-crease" data-tone="faint" d="M342.6 250.3L342.6 250.9L342 251.3L330.1 256.7L329.1 256.9L327.9 256.9L327 256.6L323.7 254.8L323.2 254.3"/><path class="iso-line iso-bevel" data-tone="faint" d="M342.6 250.3L341.7 250.7L341.3 251L329.6 256.3L328.9 256.5L328.2 256.5L327.6 256.2L324.5 254.5L323.2 254.3"/><path class="iso-line iso-edge" data-tone="mid" d="M323.2 254.3L323.3 253.7L323.9 253.2L335.8 247.9L336.8 247.6L337.9 247.7L338.9 248L342.1 249.8L342.6 250.3M342.6 261.5L342.6 262.1L342 262.6L330.1 267.9L329.1 268.2L327.9 268.1L327 267.8L323.7 266L323.2 265.5M342.6 250.3L342.6 261.5M323.2 254.3L323.2 265.5"/></g><g class="iso-dots" data-tone="mid"><circle cx="337.8" cy="250.1" r="0.45"/><circle cx="328.1" cy="254.5" r="0.45"/></g><g class="iso-solid"><path class="iso-fill" d="M93.5 119.3L93.6 118.9L94.1 118.5L223.7 60.1L224.6 59.9L225.5 59.9L226.3 60.2L230 62.3L230.5 62.7L230.5 67.5L230.4 68L229.9 68.4L100.3 126.7L99.5 127L98.5 126.9L97.7 126.7L94 124.6L93.5 124.2Z"/><path class="iso-shade" data-shade="0" d="M230.5 67.5L230.4 68L230.4 63.2L230.5 62.7ZM230.4 68L229.9 68.4L229.9 63.6L230.4 63.2ZM229.9 68.4L100.3 126.7L100.3 121.9L229.9 63.6Z"/><path class="iso-shade" data-shade="1" d="M100.3 126.7L99.5 127L99.5 122.1L100.3 121.9Z"/><path class="iso-shade" data-shade="2" d="M99.5 127L98.5 126.9L98.5 122.1L99.5 122.1Z"/><path class="iso-shade" data-shade="3" d="M98.5 126.9L97.7 126.7L97.7 121.8L98.5 122.1ZM97.7 126.7L94 124.6L94 119.8L97.7 121.8ZM94 124.6L93.5 124.2L93.5 119.3L94 119.8Z"/><path class="iso-top" d="M230 62.3L230.5 62.7L230.4 63.2L229.9 63.6L100.3 121.9L99.5 122.1L98.5 122.1L97.7 121.8L94 119.8L93.5 119.3L93.6 118.9L94.1 118.5L223.7 60.1L224.6 59.9L225.5 59.9L226.3 60.2Z"/><path class="iso-line iso-crease" data-tone="faint" d="M230.5 62.7L230.4 63.2L229.9 63.6L100.3 121.9L99.5 122.1L98.5 122.1L97.7 121.8L94 119.8L93.5 119.3"/><path class="iso-line iso-bevel" data-tone="faint" d="M230.5 62.7L229.7 63.1L229.3 63.3L99.9 121.6L99.3 121.8L98.7 121.8L98.2 121.6L94.6 119.6L93.5 119.3"/><path class="iso-line iso-edge" data-tone="mid" d="M93.5 119.3L93.6 118.9L94.1 118.5L223.7 60.1L224.6 59.9L225.5 59.9L226.3 60.2L230 62.3L230.5 62.7M230.5 67.5L230.4 68L229.9 68.4L100.3 126.7L99.5 127L98.5 126.9L97.7 126.7L94 124.6L93.5 124.2M230.5 62.7L230.5 67.5M93.5 119.3L93.5 124.2"/></g><g class="iso-dots" data-tone="mid"><circle cx="219.9" cy="65" r="0.4"/><circle cx="104.1" cy="117.1" r="0.4"/></g><g class="iso-solid"><path class="iso-fill" d="M222.3 51.3L222.4 50.7L223 50.3L226.6 48.7L227.6 48.4L228.8 48.4L229.7 48.7L240.4 54.7L240.9 55.2L240.9 66.4L240.9 67L240.2 67.5L236.7 69.1L235.6 69.4L234.5 69.3L233.5 69L222.8 63.1L222.3 62.6Z"/><path class="iso-shade" data-shade="0" d="M240.9 66.4L240.9 67L240.9 55.8L240.9 55.2ZM240.9 67L240.2 67.5L240.2 56.2L240.9 55.8ZM240.2 67.5L236.7 69.1L236.7 57.8L240.2 56.2Z"/><path class="iso-shade" data-shade="1" d="M236.7 69.1L235.6 69.4L235.6 58.1L236.7 57.8Z"/><path class="iso-shade" data-shade="2" d="M235.6 69.4L234.5 69.3L234.5 58.1L235.6 58.1Z"/><path class="iso-shade" data-shade="3" d="M234.5 69.3L233.5 69L233.5 57.8L234.5 58.1ZM233.5 69L222.8 63.1L222.8 51.8L233.5 57.8ZM222.8 63.1L222.3 62.6L222.3 51.3L222.8 51.8Z"/><path class="iso-top" d="M240.4 54.7L240.9 55.2L240.9 55.8L240.2 56.2L236.7 57.8L235.6 58.1L234.5 58.1L233.5 57.8L222.8 51.8L222.3 51.3L222.4 50.7L223 50.3L226.6 48.7L227.6 48.4L228.8 48.4L229.7 48.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M240.9 55.2L240.9 55.8L240.2 56.2L236.7 57.8L235.6 58.1L234.5 58.1L233.5 57.8L222.8 51.8L222.3 51.3"/><path class="iso-line iso-bevel" data-tone="faint" d="M240.9 55.2L240 55.6L239.5 55.9L236.1 57.5L235.4 57.7L234.8 57.6L234.1 57.4L223.6 51.6L222.3 51.3"/><path class="iso-line iso-edge" data-tone="mid" d="M222.3 51.3L222.4 50.7L223 50.3L226.6 48.7L227.6 48.4L228.8 48.4L229.7 48.7L240.4 54.7L240.9 55.2M240.9 66.4L240.9 67L240.2 67.5L236.7 69.1L235.6 69.4L234.5 69.3L233.5 69L222.8 63.1L222.3 62.6M240.9 55.2L240.9 66.4M222.3 51.3L222.3 62.6"/></g><g class="iso-dots" data-tone="mid"><circle cx="227.3" cy="50.8" r="0.45"/><circle cx="236" cy="55.7" r="0.45"/></g><g class="iso-solid"><path class="iso-fill" d="M83.1 114L83.1 113.4L83.8 113L87.4 111.3L88.4 111.1L89.5 111.1L90.5 111.4L101.2 117.3L101.7 117.9L101.7 129.1L101.6 129.7L101 130.2L97.4 131.8L96.4 132L95.2 132L94.3 131.7L83.6 125.8L83.1 125.3Z"/><path class="iso-shade" data-shade="0" d="M101.7 129.1L101.6 129.7L101.6 118.4L101.7 117.9ZM101.6 129.7L101 130.2L101 118.9L101.6 118.4ZM101 130.2L97.4 131.8L97.4 120.5L101 118.9Z"/><path class="iso-shade" data-shade="1" d="M97.4 131.8L96.4 132L96.4 120.8L97.4 120.5Z"/><path class="iso-shade" data-shade="2" d="M96.4 132L95.2 132L95.2 120.8L96.4 120.8Z"/><path class="iso-shade" data-shade="3" d="M95.2 132L94.3 131.7L94.3 120.5L95.2 120.8ZM94.3 131.7L83.6 125.8L83.6 114.5L94.3 120.5ZM83.6 125.8L83.1 125.3L83.1 114L83.6 114.5Z"/><path class="iso-top" d="M101.2 117.3L101.7 117.9L101.6 118.4L101 118.9L97.4 120.5L96.4 120.8L95.2 120.8L94.3 120.5L83.6 114.5L83.1 114L83.1 113.4L83.8 113L87.4 111.3L88.4 111.1L89.5 111.1L90.5 111.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M101.7 117.9L101.6 118.4L101 118.9L97.4 120.5L96.4 120.8L95.2 120.8L94.3 120.5L83.6 114.5L83.1 114"/><path class="iso-line iso-bevel" data-tone="faint" d="M101.7 117.9L100.8 118.3L100.3 118.6L96.9 120.2L96.2 120.3L95.5 120.3L94.9 120.1L84.4 114.3L83.1 114"/><path class="iso-line iso-edge" data-tone="mid" d="M83.1 114L83.1 113.4L83.8 113L87.4 111.3L88.4 111.1L89.5 111.1L90.5 111.4L101.2 117.3L101.7 117.9M101.7 129.1L101.6 129.7L101 130.2L97.4 131.8L96.4 132L95.2 132L94.3 131.7L83.6 125.8L83.1 125.3M101.7 117.9L101.7 129.1M83.1 114L83.1 125.3"/></g><g class="iso-dots" data-tone="mid"><circle cx="88" cy="113.5" r="0.45"/><circle cx="96.7" cy="118.3" r="0.45"/></g><g data-part="sheet"><g class="iso-solid qaly-sheet" data-lit=""><path class="iso-fill" d="M204.3 104.9L204.7 104.5L242.7 87.4L243.5 87.2L244.3 87.4L282.5 108.7L282.8 109.1L282.8 110.5L282.5 110.9L244.4 128L243.6 128.2L242.8 128L204.6 106.7L204.3 106.3Z"/><path class="iso-shade" data-shade="0" d="M282.8 110.5L282.5 110.9L282.5 109.4L282.8 109.1ZM282.5 110.9L244.4 128L244.4 126.6L282.5 109.4Z"/><path class="iso-shade" data-shade="1" d="M244.4 128L243.6 128.2L243.6 126.7L244.4 126.6Z"/><path class="iso-shade" data-shade="2" d="M243.6 128.2L242.8 128L242.8 126.5L243.6 126.7Z"/><path class="iso-shade" data-shade="3" d="M242.8 128L204.6 106.7L204.6 105.3L242.8 126.5ZM204.6 106.7L204.3 106.3L204.3 104.9L204.6 105.3Z"/><path class="iso-top" d="M282.5 108.7L282.8 109.1L282.5 109.4L244.4 126.6L243.6 126.7L242.8 126.5L204.6 105.3L204.3 104.9L204.7 104.5L242.7 87.4L243.5 87.2L244.3 87.4Z"/><path class="iso-line iso-crease" data-tone="lo" d="M282.8 109.1L282.5 109.4L244.4 126.6L243.6 126.7L242.8 126.5L204.6 105.3L204.3 104.9"/><path class="iso-line iso-bevel" data-tone="lo" d="M282.8 109.1L282.2 109.3L244.2 126.4L243.6 126.5L243.1 126.4L204.9 105.2L204.3 104.9"/><path class="iso-line iso-edge" data-tone="hi" d="M204.3 104.9L204.7 104.5L242.7 87.4L243.5 87.2L244.3 87.4L282.5 108.7L282.8 109.1M282.8 110.5L282.5 110.9L244.4 128L243.6 128.2L242.8 128L204.6 106.7L204.3 106.3M282.8 109.1L282.8 110.5M204.3 104.9L204.3 106.3"/></g></g><g data-part="cx" transform="translate(-89.37 -49.63)"><path class="iso-halo" d="M233.7 209L244.7 204L262.1 213.7L262.1 213.8L251.1 218.8L233.7 209.1Z" style="filter:blur(3px)"/><g class="iso-solid"><path class="iso-fill" d="M230 201L230.3 200.3L231.2 199.7L242.2 194.8L243.5 194.4L244.9 194.3L246.3 194.5L247.5 194.9L264.9 204.6L265.6 205.2L265.8 205.9L265.8 213.9L265.5 214.6L264.6 215.2L253.6 220.2L252.3 220.5L250.9 220.6L249.5 220.5L248.3 220L230.9 210.4L230.2 209.8L230 209Z"/><path class="iso-shade" data-shade="0" d="M265.8 213.9L265.5 214.6L265.5 206.6L265.8 205.9ZM265.5 214.6L264.6 215.2L264.6 207.2L265.5 206.6ZM264.6 215.2L253.6 220.2L253.6 212.1L264.6 207.2ZM253.6 220.2L252.3 220.5L252.3 212.5L253.6 212.1Z"/><path class="iso-shade" data-shade="1" d="M252.3 220.5L250.9 220.6L250.9 212.6L252.3 212.5Z"/><path class="iso-shade" data-shade="2" d="M250.9 220.6L249.5 220.5L249.5 212.4L250.9 212.6Z"/><path class="iso-shade" data-shade="3" d="M249.5 220.5L248.3 220L248.3 212L249.5 212.4ZM248.3 220L230.9 210.4L230.9 202.4L248.3 212ZM230.9 210.4L230.2 209.8L230.2 201.7L230.9 202.4ZM230.2 209.8L230 209L230 201L230.2 201.7Z"/><path class="iso-top" d="M264.9 204.6L265.6 205.2L265.8 205.9L265.5 206.6L264.6 207.2L253.6 212.1L252.3 212.5L250.9 212.6L249.5 212.4L248.3 212L230.9 202.4L230.2 201.7L230 201L230.3 200.3L231.2 199.7L242.2 194.8L243.5 194.4L244.9 194.3L246.3 194.5L247.5 194.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M265.8 205.9L265.5 206.6L264.6 207.2L253.6 212.1L252.3 212.5L250.9 212.6L249.5 212.4L248.3 212L230.9 202.4L230.2 201.7L230 201"/><path class="iso-line iso-bevel" data-tone="faint" d="M265.8 205.9L264.4 206.4L263.8 206.8L252.9 211.7L251.9 212L250.9 212.1L250 211.9L249.1 211.6L231.8 202L231.2 201.5L230 201"/><path class="iso-line iso-edge" data-tone="mid" d="M230 201L230.3 200.3L231.2 199.7L242.2 194.8L243.5 194.4L244.9 194.3L246.3 194.5L247.5 194.9L264.9 204.6L265.6 205.2L265.8 205.9M265.8 213.9L265.5 214.6L264.6 215.2L253.6 220.2L252.3 220.5L250.9 220.6L249.5 220.5L248.3 220L230.9 210.4L230.2 209.8L230 209M265.8 205.9L265.8 213.9M230 201L230 209"/></g><g class="iso-dots" data-tone="lo"><circle cx="236.5" cy="202.4" r="0.4"/><circle cx="248.9" cy="209.3" r="0.4"/></g><g class="iso-solid"><path class="iso-fill" d="M234.8 209.3L235.3 208.7L237.2 207.9L238.3 207.7L239.3 207.9L241.3 209L241.7 209.6L241.7 214.4L241.2 214.9L239.3 215.8L238.2 216L237.2 215.7L235.2 214.6L234.8 214.1Z"/><path class="iso-shade" data-shade="0" d="M241.7 214.4L241.2 214.9L241.2 210.1L241.7 209.6ZM241.2 214.9L239.3 215.8L239.3 210.9L241.2 210.1Z"/><path class="iso-shade" data-shade="1" d="M239.3 215.8L238.2 216L238.2 211.1L239.3 210.9Z"/><path class="iso-shade" data-shade="2" d="M238.2 216L237.2 215.7L237.2 210.9L238.2 211.1Z"/><path class="iso-shade" data-shade="3" d="M237.2 215.7L235.2 214.6L235.2 209.8L237.2 210.9ZM235.2 214.6L234.8 214.1L234.8 209.3L235.2 209.8Z"/><path class="iso-top" d="M241.3 209L241.7 209.6L241.2 210.1L239.3 210.9L238.2 211.1L237.2 210.9L235.2 209.8L234.8 209.3L235.3 208.7L237.2 207.9L238.3 207.7L239.3 207.9Z"/><path class="iso-line iso-edge" data-tone="mid" d="M234.8 209.3L235.3 208.7L237.2 207.9L238.3 207.7L239.3 207.9L241.3 209L241.7 209.6M241.7 214.4L241.2 214.9L239.3 215.8L238.2 216L237.2 215.7L235.2 214.6L234.8 214.1M241.7 209.6L241.7 214.4M234.8 209.3L234.8 214.1"/></g><g class="iso-solid"><path class="iso-fill" d="M226.9 210.5L227 209.6L227.5 208.7L228.3 208L229.5 207.3L230.9 206.8L232.5 206.5L234.2 206.3L235.9 206.4L237.6 206.6L239.1 207L240.5 207.6L241.5 208.3L242.1 209.1L242.4 210L242.4 217.2L242.3 218.1L241.9 218.9L241 219.7L239.9 220.3L238.5 220.8L236.8 221.2L235.1 221.3L233.4 221.3L231.7 221.1L230.2 220.6L228.9 220.1L227.9 219.3L227.2 218.5L226.9 217.7Z"/><path class="iso-shade" data-shade="0" d="M239.9 220.3L238.5 220.8L238.5 213.6L239.9 213.1ZM242.4 217.2L242.3 218.1L242.3 210.9L242.4 210ZM242.3 218.1L241.9 218.9L241.9 211.7L242.3 210.9ZM241.9 218.9L241 219.7L241 212.5L241.9 211.7ZM241 219.7L239.9 220.3L239.9 213.1L241 212.5Z"/><path class="iso-shade" data-shade="1" d="M238.5 220.8L236.8 221.2L236.8 214L238.5 213.6ZM236.8 221.2L235.1 221.3L235.1 214.1L236.8 214Z"/><path class="iso-shade" data-shade="2" d="M235.1 221.3L233.4 221.3L233.4 214.1L235.1 214.1ZM233.4 221.3L231.7 221.1L231.7 213.8L233.4 214.1ZM231.7 221.1L230.2 220.6L230.2 213.4L231.7 213.8Z"/><path class="iso-shade" data-shade="3" d="M230.2 220.6L228.9 220.1L228.9 212.8L230.2 213.4ZM228.9 220.1L227.9 219.3L227.9 212.1L228.9 212.8ZM227.9 219.3L227.2 218.5L227.2 211.3L227.9 212.1ZM227.2 218.5L226.9 217.7L226.9 210.5L227.2 211.3Z"/><path class="iso-top" d="M239.9 213.1L238.5 213.6L236.8 214L235.1 214.1L233.4 214.1L231.7 213.8L230.2 213.4L228.9 212.8L227.9 212.1L227.2 211.3L226.9 210.5L227 209.6L227.5 208.7L228.3 208L229.5 207.3L230.9 206.8L232.5 206.5L234.2 206.3L235.9 206.4L237.6 206.6L239.1 207L240.5 207.6L241.5 208.3L242.1 209.1L242.4 210L242.3 210.9L241.9 211.7L241 212.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M242.4 210L242.3 210.9L241.9 211.7L241 212.5L239.9 213.1L238.5 213.6L236.8 214L235.1 214.1L233.4 214.1L231.7 213.8L230.2 213.4L228.9 212.8L227.9 212.1L227.2 211.3L226.9 210.5"/><path class="iso-line iso-edge" data-tone="mid" d="M226.9 210.5L227 209.6L227.5 208.7L228.3 208L229.5 207.3L230.9 206.8L232.5 206.5L234.2 206.3L235.9 206.4L237.6 206.6L239.1 207L240.5 207.6L241.5 208.3L242.1 209.1L242.4 210M242.4 217.2L242.3 218.1L241.9 218.9L241 219.7L239.9 220.3L238.5 220.8L236.8 221.2L235.1 221.3L233.4 221.3L231.7 221.1L230.2 220.6L228.9 220.1L227.9 219.3L227.2 218.5L226.9 217.7M226.9 210.5L226.9 217.7M242.4 210L242.4 217.2"/></g><path class="iso-line" data-tone="lo" d="M239.9 219.7L239.9 213.8M238.2 220.3L238.2 214.3M236.3 220.6L236.3 214.7M234.3 220.7L234.3 214.8M232.3 220.5L232.3 214.6M230.4 220.1L230.4 214.1M228.9 219.4L228.9 213.5M227.7 218.6L227.7 212.6M227 217.6L227 211.7M242.1 218L242.1 212.1M241.2 218.9L241.2 213"/><path class="iso-line" data-tone="hi" d="M231.7 208.6L238.9 212.6"/><g class="iso-solid"><path class="iso-fill" d="M253.7 203.3L254.2 202.7L380.8 145.7L381.9 145.5L382.9 145.8L384.4 146.6L384.8 147.1L384.8 149.7L384.3 150.2L257.6 207.2L256.6 207.4L255.5 207.2L254 206.4L253.7 205.8Z"/><path class="iso-shade" data-shade="0" d="M384.8 149.7L384.3 150.2L384.3 147.6L384.8 147.1ZM384.3 150.2L257.6 207.2L257.6 204.7L384.3 147.6Z"/><path class="iso-shade" data-shade="1" d="M257.6 207.2L256.6 207.4L256.6 204.9L257.6 204.7Z"/><path class="iso-shade" data-shade="2" d="M256.6 207.4L255.5 207.2L255.5 204.6L256.6 204.9Z"/><path class="iso-shade" data-shade="3" d="M255.5 207.2L254 206.4L254 203.8L255.5 204.6ZM254 206.4L253.7 205.8L253.7 203.3L254 203.8Z"/><path class="iso-top" d="M384.4 146.6L384.8 147.1L384.3 147.6L257.6 204.7L256.6 204.9L255.5 204.6L254 203.8L253.7 203.3L254.2 202.7L380.8 145.7L381.9 145.5L382.9 145.8Z"/><path class="iso-line iso-edge" data-tone="mid" d="M253.7 203.3L254.2 202.7L380.8 145.7L381.9 145.5L382.9 145.8L384.4 146.6L384.8 147.1M384.8 149.7L384.3 150.2L257.6 207.2L256.6 207.4L255.5 207.2L254 206.4L253.7 205.8M384.8 147.1L384.8 149.7M253.7 203.3L253.7 205.8"/></g><g class="iso-solid"><path class="iso-fill" d="M378 145.7L378.3 145.2L378.9 144.7L379.9 144.4L381.1 144.3L382.2 144.5L383.1 144.8L383.7 145.3L383.9 145.9L383.9 150.1L383.6 150.6L382.9 151.1L381.9 151.4L380.8 151.5L379.7 151.3L378.7 151L378.1 150.5L378 149.9Z"/><path class="iso-shade" data-shade="0" d="M382.9 151.1L381.9 151.4L381.9 147.2L382.9 146.9ZM383.9 150.1L383.6 150.6L383.6 146.5L383.9 145.9ZM383.6 150.6L382.9 151.1L382.9 146.9L383.6 146.5Z"/><path class="iso-shade" data-shade="1" d="M381.9 151.4L380.8 151.5L380.8 147.3L381.9 147.2Z"/><path class="iso-shade" data-shade="2" d="M380.8 151.5L379.7 151.3L379.7 147.2L380.8 147.3Z"/><path class="iso-shade" data-shade="3" d="M379.7 151.3L378.7 151L378.7 146.8L379.7 147.2ZM378.7 151L378.1 150.5L378.1 146.3L378.7 146.8ZM378.1 150.5L378 149.9L378 145.7L378.1 146.3Z"/><path class="iso-top" d="M382.9 146.9L381.9 147.2L380.8 147.3L379.7 147.2L378.7 146.8L378.1 146.3L378 145.7L378.3 145.2L378.9 144.7L379.9 144.4L381.1 144.3L382.2 144.5L383.1 144.8L383.7 145.3L383.9 145.9L383.6 146.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M383.9 145.9L383.6 146.5L382.9 146.9L381.9 147.2L380.8 147.3L379.7 147.2L378.7 146.8L378.1 146.3L378 145.7"/><path class="iso-line iso-edge" data-tone="mid" d="M378 145.7L378.3 145.2L378.9 144.7L379.9 144.4L381.1 144.3L382.2 144.5L383.1 144.8L383.7 145.3L383.9 145.9M383.9 150.1L383.6 150.6L382.9 151.1L381.9 151.4L380.8 151.5L379.7 151.3L378.7 151L378.1 150.5L378 149.9M378 145.7L378 149.9M383.9 145.9L383.9 150.1"/></g></g><g data-part="cy" transform="translate(12.68 -5.71)"><path class="iso-halo" d="M147.4 92.4L166.7 83.8L176.6 89.3L176.6 89.4L157.3 98.1L147.4 92.6Z" style="filter:blur(3px)"/><g class="iso-solid"><path class="iso-fill" d="M143.7 84.5L144 83.8L144.9 83.2L164.2 74.5L165.5 74.1L166.9 74L168.3 74.2L169.5 74.6L179.4 80.2L180.1 80.8L180.3 81.5L180.3 89.5L180 90.2L179.1 90.8L159.8 99.5L158.6 99.9L157.1 100L155.7 99.8L154.6 99.4L144.6 93.8L143.9 93.2L143.7 92.5Z"/><path class="iso-shade" data-shade="0" d="M180.3 89.5L180 90.2L180 82.2L180.3 81.5ZM180 90.2L179.1 90.8L179.1 82.8L180 82.2ZM179.1 90.8L159.8 99.5L159.8 91.5L179.1 82.8ZM159.8 99.5L158.6 99.9L158.6 91.8L159.8 91.5Z"/><path class="iso-shade" data-shade="1" d="M158.6 99.9L157.1 100L157.1 91.9L158.6 91.8Z"/><path class="iso-shade" data-shade="2" d="M157.1 100L155.7 99.8L155.7 91.8L157.1 91.9Z"/><path class="iso-shade" data-shade="3" d="M155.7 99.8L154.6 99.4L154.6 91.3L155.7 91.8ZM154.6 99.4L144.6 93.8L144.6 85.8L154.6 91.3ZM144.6 93.8L143.9 93.2L143.9 85.2L144.6 85.8ZM143.9 93.2L143.7 92.5L143.7 84.5L143.9 85.2Z"/><path class="iso-top" d="M179.4 80.2L180.1 80.8L180.3 81.5L180 82.2L179.1 82.8L159.8 91.5L158.6 91.8L157.1 91.9L155.7 91.8L154.6 91.3L144.6 85.8L143.9 85.2L143.7 84.5L144 83.8L144.9 83.2L164.2 74.5L165.5 74.1L166.9 74L168.3 74.2L169.5 74.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M180.3 81.5L180 82.2L179.1 82.8L159.8 91.5L158.6 91.8L157.1 91.9L155.7 91.8L154.6 91.3L144.6 85.8L143.9 85.2L143.7 84.5"/><path class="iso-line iso-bevel" data-tone="faint" d="M180.3 81.5L179 82L178.3 82.4L159.1 91L158.2 91.3L157.2 91.4L156.2 91.3L155.3 90.9L145.5 85.5L144.9 85L143.7 84.5"/><path class="iso-line iso-edge" data-tone="mid" d="M143.7 84.5L144 83.8L144.9 83.2L164.2 74.5L165.5 74.1L166.9 74L168.3 74.2L169.5 74.6L179.4 80.2L180.1 80.8L180.3 81.5M180.3 89.5L180 90.2L179.1 90.8L159.8 99.5L158.6 99.9L157.1 100L155.7 99.8L154.6 99.4L144.6 93.8L143.9 93.2L143.7 92.5M180.3 81.5L180.3 89.5M143.7 84.5L143.7 92.5"/></g><g class="iso-dots" data-tone="lo"><circle cx="164.2" cy="77.3" r="0.4"/><circle cx="150.4" cy="83.5" r="0.4"/></g><g class="iso-solid"><path class="iso-fill" d="M149.9 79.7L150.4 79.2L152.6 78.2L153.6 78L154.7 78.3L156.4 79.3L156.8 79.8L156.8 84.6L156.3 85.1L154.1 86.1L153 86.3L152 86.1L150.2 85.1L149.9 84.6Z"/><path class="iso-shade" data-shade="0" d="M156.8 84.6L156.3 85.1L156.3 80.3L156.8 79.8ZM156.3 85.1L154.1 86.1L154.1 81.3L156.3 80.3Z"/><path class="iso-shade" data-shade="1" d="M154.1 86.1L153 86.3L153 81.5L154.1 81.3Z"/><path class="iso-shade" data-shade="2" d="M153 86.3L152 86.1L152 81.2L153 81.5Z"/><path class="iso-shade" data-shade="3" d="M152 86.1L150.2 85.1L150.2 80.3L152 81.2ZM150.2 85.1L149.9 84.6L149.9 79.7L150.2 80.3Z"/><path class="iso-top" d="M156.4 79.3L156.8 79.8L156.3 80.3L154.1 81.3L153 81.5L152 81.2L150.2 80.3L149.9 79.7L150.4 79.2L152.6 78.2L153.6 78L154.7 78.3Z"/><path class="iso-line iso-edge" data-tone="mid" d="M149.9 79.7L150.4 79.2L152.6 78.2L153.6 78L154.7 78.3L156.4 79.3L156.8 79.8M156.8 84.6L156.3 85.1L154.1 86.1L153 86.3L152 86.1L150.2 85.1L149.9 84.6M156.8 79.8L156.8 84.6M149.9 79.7L149.9 84.6"/></g><g class="iso-solid"><path class="iso-fill" d="M142.3 77.4L142.4 76.5L142.9 75.7L143.7 74.9L144.9 74.3L146.3 73.8L147.9 73.4L149.6 73.3L151.4 73.3L153 73.6L154.6 74L155.9 74.6L156.9 75.3L157.6 76.1L157.9 76.9L157.9 84.2L157.8 85L157.3 85.9L156.5 86.6L155.3 87.3L153.9 87.8L152.3 88.1L150.6 88.3L148.8 88.2L147.1 88L145.6 87.6L144.3 87L143.3 86.3L142.6 85.5L142.3 84.6Z"/><path class="iso-shade" data-shade="0" d="M155.3 87.3L153.9 87.8L153.9 80.6L155.3 80.1ZM157.9 84.2L157.8 85L157.8 77.8L157.9 76.9ZM157.8 85L157.3 85.9L157.3 78.6L157.8 77.8ZM157.3 85.9L156.5 86.6L156.5 79.4L157.3 78.6ZM156.5 86.6L155.3 87.3L155.3 80.1L156.5 79.4Z"/><path class="iso-shade" data-shade="1" d="M153.9 87.8L152.3 88.1L152.3 80.9L153.9 80.6ZM152.3 88.1L150.6 88.3L150.6 81.1L152.3 80.9Z"/><path class="iso-shade" data-shade="2" d="M150.6 88.3L148.8 88.2L148.8 81L150.6 81.1ZM148.8 88.2L147.1 88L147.1 80.8L148.8 81ZM147.1 88L145.6 87.6L145.6 80.4L147.1 80.8Z"/><path class="iso-shade" data-shade="3" d="M145.6 87.6L144.3 87L144.3 79.8L145.6 80.4ZM144.3 87L143.3 86.3L143.3 79.1L144.3 79.8ZM143.3 86.3L142.6 85.5L142.6 78.3L143.3 79.1ZM142.6 85.5L142.3 84.6L142.3 77.4L142.6 78.3Z"/><path class="iso-top" d="M155.3 80.1L153.9 80.6L152.3 80.9L150.6 81.1L148.8 81L147.1 80.8L145.6 80.4L144.3 79.8L143.3 79.1L142.6 78.3L142.3 77.4L142.4 76.5L142.9 75.7L143.7 74.9L144.9 74.3L146.3 73.8L147.9 73.4L149.6 73.3L151.4 73.3L153 73.6L154.6 74L155.9 74.6L156.9 75.3L157.6 76.1L157.9 76.9L157.8 77.8L157.3 78.6L156.5 79.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M157.9 76.9L157.8 77.8L157.3 78.6L156.5 79.4L155.3 80.1L153.9 80.6L152.3 80.9L150.6 81.1L148.8 81L147.1 80.8L145.6 80.4L144.3 79.8L143.3 79.1L142.6 78.3L142.3 77.4"/><path class="iso-line iso-edge" data-tone="mid" d="M142.3 77.4L142.4 76.5L142.9 75.7L143.7 74.9L144.9 74.3L146.3 73.8L147.9 73.4L149.6 73.3L151.4 73.3L153 73.6L154.6 74L155.9 74.6L156.9 75.3L157.6 76.1L157.9 76.9M157.9 84.2L157.8 85L157.3 85.9L156.5 86.6L155.3 87.3L153.9 87.8L152.3 88.1L150.6 88.3L148.8 88.2L147.1 88L145.6 87.6L144.3 87L143.3 86.3L142.6 85.5L142.3 84.6M142.3 77.4L142.3 84.6M157.9 76.9L157.9 84.2"/></g><path class="iso-line" data-tone="lo" d="M155.3 86.7L155.3 80.7M153.6 87.2L153.6 81.3M151.7 87.6L151.7 81.6M149.7 87.6L149.7 81.7M147.7 87.5L147.7 81.5M145.8 87L145.8 81.1M144.3 86.4L144.3 80.4M143.2 85.5L143.2 79.6M142.5 84.6L142.5 78.6M157.5 85L157.5 79M156.6 85.9L156.6 79.9"/><path class="iso-line" data-tone="hi" d="M153.4 75.7L145.4 79.3"/><g class="iso-solid"><path class="iso-fill" d="M166.9 86.4L167.4 85.8L169 85.1L170.1 84.9L171.1 85.2L400.7 212.6L401 213.1L401 215.7L400.5 216.2L398.9 217L397.8 217.2L396.8 216.9L167.3 89.5L166.9 88.9Z"/><path class="iso-shade" data-shade="0" d="M401 215.7L400.5 216.2L400.5 213.7L401 213.1ZM400.5 216.2L398.9 217L398.9 214.4L400.5 213.7Z"/><path class="iso-shade" data-shade="1" d="M398.9 217L397.8 217.2L397.8 214.6L398.9 214.4Z"/><path class="iso-shade" data-shade="2" d="M397.8 217.2L396.8 216.9L396.8 214.3L397.8 214.6Z"/><path class="iso-shade" data-shade="3" d="M396.8 216.9L167.3 89.5L167.3 86.9L396.8 214.3ZM167.3 89.5L166.9 88.9L166.9 86.4L167.3 86.9Z"/><path class="iso-top" d="M400.7 212.6L401 213.1L400.5 213.7L398.9 214.4L397.8 214.6L396.8 214.3L167.3 86.9L166.9 86.4L167.4 85.8L169 85.1L170.1 84.9L171.1 85.2Z"/><path class="iso-line iso-edge" data-tone="mid" d="M166.9 86.4L167.4 85.8L169 85.1L170.1 84.9L171.1 85.2L400.7 212.6L401 213.1M401 215.7L400.5 216.2L398.9 217L397.8 217.2L396.8 216.9L167.3 89.5L166.9 88.9M401 213.1L401 215.7M166.9 86.4L166.9 88.9"/></g><g class="iso-solid"><path class="iso-fill" d="M394.3 211L394.6 210.4L395.2 209.9L396.2 209.6L397.4 209.6L398.5 209.7L399.4 210L400 210.5L400.2 211.1L400.2 215.3L399.9 215.9L399.2 216.3L398.2 216.6L397.1 216.7L396 216.6L395 216.2L394.4 215.7L394.3 215.1Z"/><path class="iso-shade" data-shade="0" d="M399.2 216.3L398.2 216.6L398.2 212.4L399.2 212.1ZM400.2 215.3L399.9 215.9L399.9 211.7L400.2 211.1ZM399.9 215.9L399.2 216.3L399.2 212.1L399.9 211.7Z"/><path class="iso-shade" data-shade="1" d="M398.2 216.6L397.1 216.7L397.1 212.5L398.2 212.4Z"/><path class="iso-shade" data-shade="2" d="M397.1 216.7L396 216.6L396 212.4L397.1 212.5Z"/><path class="iso-shade" data-shade="3" d="M396 216.6L395 216.2L395 212L396 212.4ZM395 216.2L394.4 215.7L394.4 211.5L395 212ZM394.4 215.7L394.3 215.1L394.3 211L394.4 211.5Z"/><path class="iso-top" d="M399.2 212.1L398.2 212.4L397.1 212.5L396 212.4L395 212L394.4 211.5L394.3 211L394.6 210.4L395.2 209.9L396.2 209.6L397.4 209.6L398.5 209.7L399.4 210L400 210.5L400.2 211.1L399.9 211.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M400.2 211.1L399.9 211.7L399.2 212.1L398.2 212.4L397.1 212.5L396 212.4L395 212L394.4 211.5L394.3 211"/><path class="iso-line iso-edge" data-tone="mid" d="M394.3 211L394.6 210.4L395.2 209.9L396.2 209.6L397.4 209.6L398.5 209.7L399.4 210L400 210.5L400.2 211.1M400.2 215.3L399.9 215.9L399.2 216.3L398.2 216.6L397.1 216.7L396 216.6L395 216.2L394.4 215.7L394.3 215.1M394.3 211L394.3 215.1M400.2 211.1L400.2 215.3"/></g><g class="iso-solid"><path class="iso-fill" d="M163 84.3L163.3 83.7L164.1 83.2L165.2 82.9L166.5 82.8L167.8 82.9L168.8 83.3L169.5 83.9L169.7 84.5L169.7 85.5L169.4 86.1L168.6 86.6L167.5 87L166.2 87.1L164.9 86.9L163.9 86.5L163.2 86L163 85.3Z"/><path class="iso-shade" data-shade="0" d="M168.6 86.6L167.5 87L167.5 86L168.6 85.7ZM169.7 85.5L169.4 86.1L169.4 85.2L169.7 84.5ZM169.4 86.1L168.6 86.6L168.6 85.7L169.4 85.2Z"/><path class="iso-shade" data-shade="1" d="M167.5 87L166.2 87.1L166.2 86.1L167.5 86Z"/><path class="iso-shade" data-shade="2" d="M166.2 87.1L164.9 86.9L164.9 85.9L166.2 86.1Z"/><path class="iso-shade" data-shade="3" d="M164.9 86.9L163.9 86.5L163.9 85.6L164.9 85.9ZM163.9 86.5L163.2 86L163.2 85L163.9 85.6ZM163.2 86L163 85.3L163 84.3L163.2 85Z"/><path class="iso-top" d="M168.6 85.7L167.5 86L166.2 86.1L164.9 85.9L163.9 85.6L163.2 85L163 84.3L163.3 83.7L164.1 83.2L165.2 82.9L166.5 82.8L167.8 82.9L168.8 83.3L169.5 83.9L169.7 84.5L169.4 85.2Z"/><path class="iso-line iso-edge" data-tone="mid" d="M163 84.3L163.3 83.7L164.1 83.2L165.2 82.9L166.5 82.8L167.8 82.9L168.8 83.3L169.5 83.9L169.7 84.5M169.7 85.5L169.4 86.1L168.6 86.6L167.5 87L166.2 87.1L164.9 86.9L163.9 86.5L163.2 86L163 85.3M163 84.3L163 85.3M169.7 84.5L169.7 85.5"/></g></g><g class="iso-solid"><path class="iso-fill" d="M536.6 232.4L536.7 231.3L537.3 230.3L538.3 229.4L539.7 228.7L541.4 228.1L543.3 227.7L545.3 227.5L547.4 227.5L549.4 227.8L551.2 228.3L552.8 229L554 229.8L554.8 230.8L555.1 231.8L555.1 236.6L555 237.7L554.5 238.7L553.5 239.6L552.1 240.4L550.4 241L548.5 241.4L546.4 241.6L544.4 241.5L542.4 241.2L540.5 240.7L539 240L537.8 239.2L537 238.2L536.6 237.2Z"/><path class="iso-shade" data-shade="0" d="M552.1 240.4L550.4 241L550.4 236.2L552.1 235.6ZM555.1 236.6L555 237.7L555 232.9L555.1 231.8ZM555 237.7L554.5 238.7L554.5 233.9L555 232.9ZM554.5 238.7L553.5 239.6L553.5 234.8L554.5 233.9ZM553.5 239.6L552.1 240.4L552.1 235.6L553.5 234.8Z"/><path class="iso-shade" data-shade="1" d="M550.4 241L548.5 241.4L548.5 236.6L550.4 236.2ZM548.5 241.4L546.4 241.6L546.4 236.7L548.5 236.6Z"/><path class="iso-shade" data-shade="2" d="M546.4 241.6L544.4 241.5L544.4 236.7L546.4 236.7ZM544.4 241.5L542.4 241.2L542.4 236.4L544.4 236.7ZM542.4 241.2L540.5 240.7L540.5 235.9L542.4 236.4Z"/><path class="iso-shade" data-shade="3" d="M540.5 240.7L539 240L539 235.2L540.5 235.9ZM539 240L537.8 239.2L537.8 234.4L539 235.2ZM537.8 239.2L537 238.2L537 233.4L537.8 234.4ZM537 238.2L536.6 237.2L536.6 232.4L537 233.4Z"/><path class="iso-top" d="M552.1 235.6L550.4 236.2L548.5 236.6L546.4 236.7L544.4 236.7L542.4 236.4L540.5 235.9L539 235.2L537.8 234.4L537 233.4L536.6 232.4L536.7 231.3L537.3 230.3L538.3 229.4L539.7 228.7L541.4 228.1L543.3 227.7L545.3 227.5L547.4 227.5L549.4 227.8L551.2 228.3L552.8 229L554 229.8L554.8 230.8L555.1 231.8L555 232.9L554.5 233.9L553.5 234.8Z"/><path class="iso-line iso-crease" data-tone="faint" d="M555.1 231.8L555 232.9L554.5 233.9L553.5 234.8L552.1 235.6L550.4 236.2L548.5 236.6L546.4 236.7L544.4 236.7L542.4 236.4L540.5 235.9L539 235.2L537.8 234.4L537 233.4L536.6 232.4"/><path class="iso-line iso-edge" data-tone="mid" d="M536.6 232.4L536.7 231.3L537.3 230.3L538.3 229.4L539.7 228.7L541.4 228.1L543.3 227.7L545.3 227.5L547.4 227.5L549.4 227.8L551.2 228.3L552.8 229L554 229.8L554.8 230.8L555.1 231.8M555.1 236.6L555 237.7L554.5 238.7L553.5 239.6L552.1 240.4L550.4 241L548.5 241.4L546.4 241.6L544.4 241.5L542.4 241.2L540.5 240.7L539 240L537.8 239.2L537 238.2L536.6 237.2M536.6 232.4L536.6 237.2M555.1 231.8L555.1 236.6"/></g><g class="iso-solid"><path class="iso-fill" d="M540 205L540 204.3L540.4 203.7L541 203.1L541.9 202.6L543 202.2L544.2 201.9L545.5 201.8L546.9 201.9L548.1 202L549.3 202.4L550.3 202.8L551.1 203.3L551.6 204L551.8 204.6L551.8 231.9L551.7 232.6L551.4 233.2L550.7 233.8L549.9 234.3L548.8 234.7L547.5 235L546.2 235.1L544.9 235L543.6 234.9L542.5 234.5L541.5 234.1L540.7 233.5L540.2 232.9L540 232.3Z"/><path class="iso-shade" data-shade="0" d="M549.9 234.3L548.8 234.7L548.8 207.4L549.9 207ZM551.8 231.9L551.7 232.6L551.7 205.3L551.8 204.6ZM551.7 232.6L551.4 233.2L551.4 205.9L551.7 205.3ZM551.4 233.2L550.7 233.8L550.7 206.5L551.4 205.9ZM550.7 233.8L549.9 234.3L549.9 207L550.7 206.5Z"/><path class="iso-shade" data-shade="1" d="M548.8 234.7L547.5 235L547.5 207.6L548.8 207.4ZM547.5 235L546.2 235.1L546.2 207.8L547.5 207.6Z"/><path class="iso-shade" data-shade="2" d="M546.2 235.1L544.9 235L544.9 207.7L546.2 207.8ZM544.9 235L543.6 234.9L543.6 207.5L544.9 207.7ZM543.6 234.9L542.5 234.5L542.5 207.2L543.6 207.5Z"/><path class="iso-shade" data-shade="3" d="M542.5 234.5L541.5 234.1L541.5 206.8L542.5 207.2ZM541.5 234.1L540.7 233.5L540.7 206.2L541.5 206.8ZM540.7 233.5L540.2 232.9L540.2 205.6L540.7 206.2ZM540.2 232.9L540 232.3L540 205L540.2 205.6Z"/><path class="iso-top" d="M549.9 207L548.8 207.4L547.5 207.6L546.2 207.8L544.9 207.7L543.6 207.5L542.5 207.2L541.5 206.8L540.7 206.2L540.2 205.6L540 205L540 204.3L540.4 203.7L541 203.1L541.9 202.6L543 202.2L544.2 201.9L545.5 201.8L546.9 201.9L548.1 202L549.3 202.4L550.3 202.8L551.1 203.3L551.6 204L551.8 204.6L551.7 205.3L551.4 205.9L550.7 206.5Z"/><path class="iso-line iso-edge" data-tone="mid" d="M540 205L540 204.3L540.4 203.7L541 203.1L541.9 202.6L543 202.2L544.2 201.9L545.5 201.8L546.9 201.9L548.1 202L549.3 202.4L550.3 202.8L551.1 203.3L551.6 204L551.8 204.6M551.8 231.9L551.7 232.6L551.4 233.2L550.7 233.8L549.9 234.3L548.8 234.7L547.5 235L546.2 235.1L544.9 235L543.6 234.9L542.5 234.5L541.5 234.1L540.7 233.5L540.2 232.9L540 232.3M540 205L540 232.3M551.8 204.6L551.8 231.9"/></g><path class="iso-line" data-tone="faint" d="M551.8 222.5L551.7 223L551.4 223.6L550.8 224.1L550.1 224.6L549.2 224.9L548.2 225.2L547 225.4L545.9 225.4L544.7 225.4L543.6 225.2L542.6 224.9L541.7 224.6L540.9 224.1L540.4 223.6L540.1 223L539.9 222.5M551.8 212.8L551.7 213.4L551.4 214L550.8 214.5L550.1 214.9L549.2 215.3L548.2 215.6L547 215.7L545.9 215.8L544.7 215.7L543.6 215.6L542.6 215.3L541.7 214.9L540.9 214.5L540.4 214L540.1 213.4L539.9 212.8"/><g class="iso-solid"><path class="iso-fill" d="M512.5 189.5L512.5 187.9L512.9 186.2L513.5 184.6L514.5 183.1L515.7 181.5L517.3 180.1L519.1 178.7L521.2 177.5L523.5 176.3L526.1 175.3L528.8 174.4L531.7 173.6L534.7 173L537.9 172.5L541.1 172.2L544.4 172L547.6 172.1L550.9 172.2L554.1 172.5L557.2 173L560.3 173.7L563.1 174.4L565.9 175.3L568.4 176.4L570.7 177.6L572.8 178.8L574.6 180.2L576.1 181.6L577.4 183.2L578.3 184.7L578.9 186.3L579.2 188L579.2 204L579.2 205.7L578.9 207.3L578.2 208.9L577.3 210.5L576 212L574.5 213.4L572.6 214.8L570.6 216L568.2 217.2L565.7 218.2L563 219.1L560.1 219.9L557 220.5L553.9 221L550.7 221.3L547.4 221.5L544.1 221.5L540.9 221.3L537.7 221L534.5 220.5L531.5 219.9L528.6 219.1L525.9 218.2L523.4 217.1L521.1 216L519 214.7L517.2 213.3L515.7 211.9L514.4 210.4L513.5 208.8L512.8 207.2L512.5 205.6Z"/><path class="iso-shade" data-shade="0" d="M568.2 217.2L565.7 218.2L565.7 202.2L568.2 201.1ZM565.7 218.2L563 219.1L563 203.1L565.7 202.2ZM579.2 204L579.2 205.7L579.2 189.6L579.2 188ZM579.2 205.7L578.9 207.3L578.9 191.2L579.2 189.6ZM578.9 207.3L578.2 208.9L578.2 192.8L578.9 191.2ZM578.2 208.9L577.3 210.5L577.3 194.4L578.2 192.8ZM577.3 210.5L576 212L576 195.9L577.3 194.4ZM576 212L574.5 213.4L574.5 197.4L576 195.9ZM574.5 213.4L572.6 214.8L572.6 198.7L574.5 197.4ZM572.6 214.8L570.6 216L570.6 200L572.6 198.7ZM570.6 216L568.2 217.2L568.2 201.1L570.6 200Z"/><path class="iso-shade" data-shade="1" d="M563 219.1L560.1 219.9L560.1 203.8L563 203.1ZM560.1 219.9L557 220.5L557 204.5L560.1 203.8ZM557 220.5L553.9 221L553.9 204.9L557 204.5ZM553.9 221L550.7 221.3L550.7 205.3L553.9 204.9ZM550.7 221.3L547.4 221.5L547.4 205.4L550.7 205.3Z"/><path class="iso-shade" data-shade="2" d="M547.4 221.5L544.1 221.5L544.1 205.4L547.4 205.4ZM544.1 221.5L540.9 221.3L540.9 205.2L544.1 205.4ZM540.9 221.3L537.7 221L537.7 204.9L540.9 205.2ZM537.7 221L534.5 220.5L534.5 204.4L537.7 204.9ZM534.5 220.5L531.5 219.9L531.5 203.8L534.5 204.4ZM531.5 219.9L528.6 219.1L528.6 203L531.5 203.8Z"/><path class="iso-shade" data-shade="3" d="M528.6 219.1L525.9 218.2L525.9 202.1L528.6 203ZM525.9 218.2L523.4 217.1L523.4 201.1L525.9 202.1ZM523.4 217.1L521.1 216L521.1 199.9L523.4 201.1ZM521.1 216L519 214.7L519 198.6L521.1 199.9ZM519 214.7L517.2 213.3L517.2 197.3L519 198.6ZM517.2 213.3L515.7 211.9L515.7 195.8L517.2 197.3ZM515.7 211.9L514.4 210.4L514.4 194.3L515.7 195.8ZM514.4 210.4L513.5 208.8L513.5 192.7L514.4 194.3ZM513.5 208.8L512.8 207.2L512.8 191.1L513.5 192.7ZM512.8 207.2L512.5 205.6L512.5 189.5L512.8 191.1Z"/><path class="iso-top" d="M568.2 201.1L565.7 202.2L563 203.1L560.1 203.8L557 204.5L553.9 204.9L550.7 205.3L547.4 205.4L544.1 205.4L540.9 205.2L537.7 204.9L534.5 204.4L531.5 203.8L528.6 203L525.9 202.1L523.4 201.1L521.1 199.9L519 198.6L517.2 197.3L515.7 195.8L514.4 194.3L513.5 192.7L512.8 191.1L512.5 189.5L512.5 187.9L512.9 186.2L513.5 184.6L514.5 183.1L515.7 181.5L517.3 180.1L519.1 178.7L521.2 177.5L523.5 176.3L526.1 175.3L528.8 174.4L531.7 173.6L534.7 173L537.9 172.5L541.1 172.2L544.4 172L547.6 172.1L550.9 172.2L554.1 172.5L557.2 173L560.3 173.7L563.1 174.4L565.9 175.3L568.4 176.4L570.7 177.6L572.8 178.8L574.6 180.2L576.1 181.6L577.4 183.2L578.3 184.7L578.9 186.3L579.2 188L579.2 189.6L578.9 191.2L578.2 192.8L577.3 194.4L576 195.9L574.5 197.4L572.6 198.7L570.6 200Z"/><path class="iso-line iso-crease" data-tone="lo" d="M579.2 188L579.2 189.6L578.9 191.2L578.2 192.8L577.3 194.4L576 195.9L574.5 197.4L572.6 198.7L570.6 200L568.2 201.1L565.7 202.2L563 203.1L560.1 203.8L557 204.5L553.9 204.9L550.7 205.3L547.4 205.4L544.1 205.4L540.9 205.2L537.7 204.9L534.5 204.4L531.5 203.8L528.6 203L525.9 202.1L523.4 201.1L521.1 199.9L519 198.6L517.2 197.3L515.7 195.8L514.4 194.3L513.5 192.7L512.8 191.1L512.5 189.5"/><path class="iso-line iso-bevel" data-tone="lo" d="M579.2 188L577.7 189.6L577.4 191.1L576.8 192.7L575.9 194.2L574.7 195.6L573.2 197L571.4 198.3L569.5 199.5L567.2 200.6L564.8 201.6L562.2 202.4L559.4 203.2L556.5 203.8L553.5 204.2L550.5 204.5L547.3 204.7L544.2 204.7L541.1 204.5L538 204.2L535 203.7L532.1 203.1L529.4 202.4L526.8 201.5L524.4 200.5L522.2 199.4L520.2 198.2L518.5 196.9L517 195.5L515.8 194.1L514.9 192.6L514.3 191L512.5 189.5"/><path class="iso-line iso-edge" data-tone="hi" d="M512.5 189.5L512.5 187.9L512.9 186.2L513.5 184.6L514.5 183.1L515.7 181.5L517.3 180.1L519.1 178.7L521.2 177.5L523.5 176.3L526.1 175.3L528.8 174.4L531.7 173.6L534.7 173L537.9 172.5L541.1 172.2L544.4 172L547.6 172.1L550.9 172.2L554.1 172.5L557.2 173L560.3 173.7L563.1 174.4L565.9 175.3L568.4 176.4L570.7 177.6L572.8 178.8L574.6 180.2L576.1 181.6L577.4 183.2L578.3 184.7L578.9 186.3L579.2 188M579.2 204L579.2 205.7L578.9 207.3L578.2 208.9L577.3 210.5L576 212L574.5 213.4L572.6 214.8L570.6 216L568.2 217.2L565.7 218.2L563 219.1L560.1 219.9L557 220.5L553.9 221L550.7 221.3L547.4 221.5L544.1 221.5L540.9 221.3L537.7 221L534.5 220.5L531.5 219.9L528.6 219.1L525.9 218.2L523.4 217.1L521.1 216L519 214.7L517.2 213.3L515.7 211.9L514.4 210.4L513.5 208.8L512.8 207.2L512.5 205.6M512.5 189.5L512.5 205.6M579.2 188L579.2 204"/></g><path class="iso-line" data-tone="lo" d="M568.2 206.1L568.2 201.6M566.3 206.9L566.3 202.4M564.3 207.6L564.3 203.1M562.1 208.3L562.1 203.8M559.9 208.9L559.9 204.4M557.6 209.3L557.6 204.8M555.2 209.7L555.2 205.2M552.8 210L552.8 205.5M550.4 210.3L550.4 205.8M547.9 210.4L547.9 205.9M545.4 210.4L545.4 205.9M542.9 210.3L542.9 205.8M540.4 210.2L540.4 205.7M538 209.9L538 205.4M535.6 209.6L535.6 205.1M533.2 209.2L533.2 204.7M530.9 208.6L530.9 204.1M528.8 208L528.8 203.5M526.7 207.4L526.7 202.9M524.7 206.6L524.7 202.1M522.8 205.8L522.8 201.3M521.1 204.9L521.1 200.4M519.5 203.9L519.5 199.4M518 202.9L518 198.4M516.7 201.8L516.7 197.3M515.6 200.7L515.6 196.2M514.6 199.6L514.6 195.1M513.8 198.4L513.8 193.9M513.2 197.2L513.2 192.7M578.8 196.4L578.8 191.9M578.3 197.7L578.3 193.2M577.6 198.9L577.6 194.4M576.8 200L576.8 195.5M575.7 201.2L575.7 196.7M574.5 202.3L574.5 197.8M573.2 203.3L573.2 198.8M571.7 204.3L571.7 199.8M570 205.2L570 200.7"/><path class="iso-line" data-tone="faint" d="M579.3 194.2L579.2 195.5L578.9 196.8L578.4 198.1L577.6 199.3L576.7 200.6L575.6 201.8L574.4 202.9L572.9 204L571.3 205L569.5 206L567.6 206.9L565.5 207.7L563.3 208.4L561 209.1L558.7 209.6L556.2 210.1L553.7 210.4L551.1 210.7L548.5 210.8L545.9 210.9L543.3 210.8L540.7 210.7L538.1 210.4L535.6 210.1L533.1 209.6L530.7 209.1L528.4 208.4L526.3 207.7L524.2 206.9L522.3 206L520.5 205L518.9 204L517.4 202.9L516.1 201.8L515 200.6L514.1 199.3L513.4 198.1L512.9 196.8L512.6 195.5L512.5 194.2"/><path class="iso-line" data-tone="lo" d="M565.5 199.6L563.3 200.5L560.9 201.3L558.3 202L555.7 202.5L552.9 203L550.1 203.2L547.2 203.4L544.3 203.4L541.5 203.2L538.7 202.9L535.9 202.5L533.3 202L530.7 201.3L528.3 200.5L526.1 199.6L524.1 198.5L522.3 197.4L520.7 196.2L519.3 194.9L518.3 193.6L517.4 192.2L516.9 190.8L516.6 189.4L516.6 188L516.9 186.5L517.5 185.1L518.3 183.7L519.4 182.4L520.8 181.2L522.4 180L524.2 178.8L526.3 177.8L528.5 176.9L530.9 176.1L533.4 175.5L536.1 174.9L538.9 174.5L541.7 174.2L544.5 174.1L547.4 174.1L550.3 174.2L553.1 174.5L555.8 174.9L558.5 175.5L561 176.2L563.4 177L565.6 177.9L567.7 178.9L569.5 180L571.1 181.2L572.4 182.5L573.5 183.8L574.3 185.2L574.9 186.6L575.2 188.1L575.2 189.5L574.9 190.9L574.3 192.3L573.4 193.7L572.3 195L571 196.3L569.4 197.5L567.5 198.6Z"/><path class="iso-line" data-tone="lo" d="M566.8 181.5L568.7 180.8M568.4 182.8L570.5 182.3M569.7 184.3L572 183.9M570.6 185.8L573 185.6M571.3 189L573.7 189M571 190.6L573.4 190.8M570.4 192.1L572.7 192.5M569.3 193.7L571.5 194.1M566.1 196.4L568 197.1M564 197.6L565.8 198.5M561.7 198.7L563.2 199.6M559 199.6L560.3 200.6M553.2 200.9L553.9 202M550.1 201.3L550.5 202.4M546.9 201.4L547 202.6M543.8 201.4L543.6 202.6M537.5 200.7L536.7 201.9M534.6 200.1L533.5 201.2M531.8 199.3L530.5 200.3M529.3 198.3L527.7 199.3M525 196L523 196.7M523.4 194.6L521.2 195.2M522.1 193.2L519.8 193.6M521.1 191.6L518.8 191.9M520.5 188.5L518.1 188.4M520.7 186.9L518.4 186.7M521.4 185.3L519.1 185M522.5 183.8L520.2 183.3M525.6 181L523.7 180.3M527.7 179.8L526 179M530.1 178.8L528.6 177.8M532.7 177.9L531.5 176.8M538.5 176.6L537.8 175.4M541.6 176.2L541.2 175M544.8 176L544.7 174.8M548 176.1L548.2 174.9M554.2 176.7L555 175.6M557.2 177.3L558.3 176.3M559.9 178.1L561.3 177.1M562.5 179.1L564.1 178.2"/><path class="iso-line" data-tone="mid" d="M562.7 181.2L566.6 179.4M568.4 187.5L573.6 187.3M565.5 194.4L570 195.7M555.1 199.1L557.2 201.4M541.2 199.8L540.1 202.3M529.1 196.3L525.2 198M523.4 189.9L518.2 190.2M526.3 183.1L521.8 181.8M536.7 178.4L534.6 176M550.6 177.7L551.7 175.1"/><path class="iso-line" data-tone="hi" d="M566.6 179.4L562.2 181.4"/><g class="iso-solid"><path class="iso-fill" d="M564.6 207.1L564.7 206.5L565.3 206L568.6 204.5L569.7 204.3L570.8 204.3L571.8 204.6L575 206.4L575.5 206.9L575.5 214.9L575.5 215.5L574.8 216L571.5 217.5L570.5 217.8L569.4 217.7L568.4 217.4L565.2 215.6L564.6 215.1Z"/><path class="iso-shade" data-shade="0" d="M575.5 214.9L575.5 215.5L575.5 207.5L575.5 206.9ZM575.5 215.5L574.8 216L574.8 208L575.5 207.5ZM574.8 216L571.5 217.5L571.5 209.5L574.8 208Z"/><path class="iso-shade" data-shade="1" d="M571.5 217.5L570.5 217.8L570.5 209.7L571.5 209.5Z"/><path class="iso-shade" data-shade="2" d="M570.5 217.8L569.4 217.7L569.4 209.7L570.5 209.7Z"/><path class="iso-shade" data-shade="3" d="M569.4 217.7L568.4 217.4L568.4 209.4L569.4 209.7ZM568.4 217.4L565.2 215.6L565.2 207.6L568.4 209.4ZM565.2 215.6L564.6 215.1L564.6 207.1L565.2 207.6Z"/><path class="iso-top" d="M575 206.4L575.5 206.9L575.5 207.5L574.8 208L571.5 209.5L570.5 209.7L569.4 209.7L568.4 209.4L565.2 207.6L564.6 207.1L564.7 206.5L565.3 206L568.6 204.5L569.7 204.3L570.8 204.3L571.8 204.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M575.5 206.9L575.5 207.5L574.8 208L571.5 209.5L570.5 209.7L569.4 209.7L568.4 209.4L565.2 207.6L564.6 207.1"/><path class="iso-line iso-edge" data-tone="mid" d="M564.6 207.1L564.7 206.5L565.3 206L568.6 204.5L569.7 204.3L570.8 204.3L571.8 204.6L575 206.4L575.5 206.9M575.5 214.9L575.5 215.5L574.8 216L571.5 217.5L570.5 217.8L569.4 217.7L568.4 217.4L565.2 215.6L564.6 215.1M575.5 206.9L575.5 214.9M564.6 207.1L564.6 215.1"/></g><g class="iso-solid"><path class="iso-fill" d="M569.2 209.5L569.3 208.9L569.9 208.4L575.5 205.9L576.5 205.6L577.6 205.7L578.6 206L578.8 206.1L579.4 206.6L579.4 217.2L579.3 217.8L578.7 218.3L573.2 220.8L572.1 221L571 221L570 220.7L569.8 220.6L569.2 220.1Z"/><path class="iso-shade" data-shade="0" d="M579.4 217.2L579.3 217.8L579.3 207.2L579.4 206.6ZM579.3 217.8L578.7 218.3L578.7 207.7L579.3 207.2ZM578.7 218.3L573.2 220.8L573.2 210.2L578.7 207.7Z"/><path class="iso-shade" data-shade="1" d="M573.2 220.8L572.1 221L572.1 210.4L573.2 210.2Z"/><path class="iso-shade" data-shade="2" d="M572.1 221L571 221L571 210.4L572.1 210.4Z"/><path class="iso-shade" data-shade="3" d="M571 221L570 220.7L570 210.1L571 210.4ZM570 220.7L569.8 220.6L569.8 210L570 210.1ZM569.8 220.6L569.2 220.1L569.2 209.5L569.8 210Z"/><path class="iso-top" d="M578.8 206.1L579.4 206.6L579.3 207.2L578.7 207.7L573.2 210.2L572.1 210.4L571 210.4L570 210.1L569.8 210L569.2 209.5L569.3 208.9L569.9 208.4L575.5 205.9L576.5 205.6L577.6 205.7L578.6 206Z"/><path class="iso-line iso-crease" data-tone="faint" d="M579.4 206.6L579.3 207.2L578.7 207.7L573.2 210.2L572.1 210.4L571 210.4L570 210.1L569.8 210L569.2 209.5"/><path class="iso-line iso-edge" data-tone="mid" d="M569.2 209.5L569.3 208.9L569.9 208.4L575.5 205.9L576.5 205.6L577.6 205.7L578.6 206L578.8 206.1L579.4 206.6M579.4 217.2L579.3 217.8L578.7 218.3L573.2 220.8L572.1 221L571 221L570 220.7L569.8 220.6L569.2 220.1M579.4 206.6L579.4 217.2M569.2 209.5L569.2 220.1"/></g><path class="iso-line" data-tone="mid" d="M547.9 189.8L546.9 190.1L545.7 190.2L544.6 190.1L543.7 189.7L543.1 189.2L542.9 188.6L543.2 188.1L543.9 187.6L544.9 187.3L546 187.2L547.2 187.4L548.1 187.7L548.7 188.2L548.8 188.8L548.6 189.4Z"/><text class="iso-face-text" data-tone="lo" transform="matrix(1.241 0.689 -1.379 0.621 534.165 194.003)" font-size="2.4" text-anchor="middle">QALY</text><text class="iso-face-text" data-tone="lo" transform="matrix(1.241 0.689 -1.379 0.621 561.047 181.9)" font-size="2" text-anchor="middle">0</text><path data-part="needle" class="iso-line" data-tone="lit" data-free="start" d="M539.7 189.1L571.2 185.4" style="stroke-width:1.1"/></svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="lit" viewBox="0 0 16 10" aria-hidden="true"><path d="M2 4.5 8 1.5 14 4.5 14 6 8 9 2 6Z"/><path class="iso-swatch-crease" d="M2 4.5 8 7.5 14 4.5"/></svg>灯った板: 面積が QALY（年 × 効用）</span><span class="iso-key"><svg class="iso-swatch" data-mark="raised" viewBox="0 0 16 10" aria-hidden="true"><path d="M2 4.5 8 1.5 14 4.5 14 6 8 9 2 6Z"/><path class="iso-swatch-crease" d="M2 4.5 8 7.5 14 4.5"/></svg>横の送り台 = 年、縦の送り台 = 効用</span></span><span class="iso-caption">横に送ると生存年、縦に送ると生活の質（効用）。灯った板は二つの積で、奥のダイヤルは一周が 10 QALY。治療 A（2 年 × 0.4）と B（1 年 × 0.9）を往復する。</span></figcaption></figure></div></div></div></div>
+<div class="inst" id="inst-1b"><div class="bar"><span class="t"><b>計器 1</b>つまみで動かす</span><span class="r" id="r1"></span></div><div class="body">
+<div class="controls"><label class="ctl"><span class="lab"><span>生存年</span><output id="s1-years-out">2 年</output></span><input type="range" id="s1-years" min="0.5" max="10" step="0.5" value="2"></label><label class="ctl"><span class="lab"><span>効用</span><output id="s1-util-out">0.4</output></span><input type="range" id="s1-util" min="0" max="1" step="0.05" value="0.4"></label></div>
+<div class="btnrow"><button class="btn" type="button" data-set="2,0.4">治療 A（2 年 × 0.4）</button><button class="btn" type="button" data-set="1,0.9">治療 B（1 年 × 0.9）</button><button class="btn ghost" type="button" data-set="10,1">完全健康で 10 年</button></div>
+</div></div>
+<div class="guide"><b>見るところ</b><ol><li>板の上でポインタを動かす。横で年、縦で効用。灯った板が QALY</li><li>治療 A と B を押して、面積の違いを目で比べる</li><li>効用を 0 に近づけると、何年あっても面積が消えるのを見る</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>「面積」という言葉を使ってください。式より先に図。横を伸ばす治療（延命）と、縦を上げる治療（症状緩和）は、同じ面積を違う形で増やす、と言うと緩和ケアの価値が QALY の中で見えます。</p><p class="pit">つまずき: 効用は「満足度」や「幸福度」ではない。健康状態への選好の強さで、次の章の「賭け」で測る。</p></div></details>
+</div></section>
+<section class="chapter" id="c2"><div class="wrap">
+<div class="num">CHAPTER 2</div><h2>効用は、どう測るのか</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>効用は「賭け」で測れる。確率 p で完全健康・1−p で死の賭けと、いまの状態で確実の二択が無差別になる p が、その状態の効用。</p></div>
+<div class="prose">
+<p>0〜1 の数を、どうやって決めるのか。三つの測り方があります。</p>
+<ul>
+<li><b>標準的賭け（SG）</b>: 「いまの状態で確実に 10 年」か、「確率 p で完全健康 10 年、1−p で死」の賭けか。p が 1 なら誰でも賭けます。p を下げていき、迷い始めた点が効用。ノイマンとモルゲンシュテルンの期待効用理論そのもので、QALY の理論的な背骨です。</li>
+<li><b>時間得失法（TTO）</b>: 「いまの状態で 10 年」と「完全健康で x 年」が釣り合う x を聞く。x ＝ 7 年なら効用 0.7。</li>
+<li><b>EQ-5D-5L</b>: 移動・身の回り・ふだんの活動・痛み/不快・不安/ふさぎ込みの 5 項目を 5 段階で答える質問票。答えの組み合わせを、一般集団に聞いた選好（価値づけ）で効用に換算する。日本の価値づけは <a href="https://doi.org/10.1016/j.jval.2016.03.1834" target="_blank" rel="noopener">Shiroiwa ら 2016, Value in Health</a>。費用対効果評価の分析ガイドラインは、日本語版 EQ-5D-5L を第一選択として推奨しています（8.2.2、<a href="https://c2h.niph.go.jp/tools/guideline/guideline_ja_2026.pdf" target="_blank" rel="noopener">C2H 分析ガイドライン 2026 年度版（2026-01-16 中医協総会了承）</a>）。</li>
+</ul>
+<p>弱点も知っておきます。SG と TTO で同じ状態の効用が食い違う。賭けの問い方は、人が確率を歪めて感じる（プロスペクト理論）ことを織り込んでいない。それでも代わりの物差しがなく、制度の背骨になっています。</p></div>
+<div class="inst" id="inst-2"><div class="bar"><span class="t"><b>計器 2</b>標準的賭け — 迷い始める点を探す</span><span class="r" id="r2"></span></div><div class="body">
+<p style="margin:0 0 8px;font-size:13.5px;color:var(--nf-fg2)">想像してください: 慢性の痛みで仕事と外出に支障がある状態で、確実に 10 年生きる。それとも、賭けに乗る？</p>
+<div class="reveal" style="margin-top:0" id="sg-box">
+  <div>賭け: <span class="big" id="sg-p">50%</span> の確率で<b>完全健康で 10 年</b>、残りの確率で<b>すぐ死ぬ</b></div>
+  <div class="btnrow"><button class="btn primary" type="button" id="sg-gamble">賭ける</button><button class="btn" type="button" id="sg-sure">確実を選ぶ</button><button class="btn ghost" type="button" id="sg-reset">最初から</button></div>
+  <div id="sg-log" style="font-family:var(--mono);font-size:11.5px;color:var(--nf-fg3);margin-top:6px"></div>
+</div>
+<p style="margin:14px 0 6px;font-size:13px;color:var(--nf-fg2)">質問票で測る: EQ-5D-5L（5 項目 × 5 段階）。換算は<b>模式値</b>です（日本の実際の係数ではなく、形だけ写したもの）。</p>
+<div class="controls" id="eq5d"></div>
+<div class="verdict" id="eq5d-out"></div></div></div>
+<div class="guide"><b>見るところ</b><ol><li>「賭ける」を押すと確率は下がり、「確実」を押すと上がる。迷い始めるまで 6 回</li><li>止まった確率が、その状態の効用。0.6 なら「この状態の 10 年は、完全健康の 6 年ぶん」</li><li>質問票の 5 項目を動かし、同じ 0〜1 に落ちることを見る（数字は模式）</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>学生を一人指名して、本当に賭けさせてください。「賭ける？確実？」を 5〜6 回。教室の空気が変わります。止まった p を黒板に書いて「これが効用」。そのあとで TTO と EQ-5D を『同じものを別の問い方で測っている』と並べる。</p><p class="pit">つまずき: 「効用 0.5 ＝ 半分くらい元気」ではない。「完全健康の半分の時間と交換してもいい」という強さ。</p></div></details>
+</div></section>
+<section class="chapter" id="c3"><div class="wrap">
+<div class="num">CHAPTER 3</div><h2>ICER — 追加費用 ÷ 追加 QALY</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>ICER は「追加でいくら払って、追加で何 QALY 得るか」。何と比べたかで、半分は決まる。</p></div>
+<div class="prose">
+<p>新しい治療を、いまの標準治療と比べます。費用の差（Δ費用）を QALY の差（ΔQALY）で割ったものが <b>ICER</b>（増分費用効果比）。たとえば追加費用 300 万円で 0.5 QALY 増えるなら、600 万円/QALY。</p>
+<p>平面で見ると分かりやすい。横軸が ΔQALY、縦軸が Δ費用。右下（安くて効く）は<b>支配</b>、ICER を計算するまでもなく採用。左上（高くて効かない）は<b>支配される</b>、却下。問題は右上、「高いが効く」で、ここで初めて「1 QALY あたりいくらまで払うか」という<b>閾値</b>の線が意味を持ちます。</p>
+<p>そして最初の落とし穴。比較対照を古い弱い治療にすり替えると、ΔQALY が膨らんで ICER は小さく見えます。論文を読むとき、数字の前に「何と比べたか」を見るのはそのためです。</p></div>
+<div class="inst" id="inst-3"><div class="bar"><span class="t"><b>計器 3</b>費用効果平面 — 点をつまんで動かす</span><span class="r" id="r3"></span></div><div class="body">
+<p class="hint">点をつまんで動かす（下のつまみでも動きます）。点線は ICER の区分点。右上（高いが効く）だけが ICER の出番です。</p>
+<svg class="chart" id="ce-plane" viewBox="0 0 520 340" role="img" aria-label="費用効果平面。横軸が追加 QALY、縦軸が追加費用。点を動かすと ICER が変わる"></svg>
+<div class="controls"><label class="ctl"><span class="lab"><span>追加 QALY（ΔQALY）</span><output id="s3-dq-out">0.5</output></span><input type="range" id="s3-dq" min="-1" max="1" step="0.05" value="0.5"></label><label class="ctl"><span class="lab"><span>追加費用（Δ費用・万円）</span><output id="s3-dc-out">300 万円</output></span><input type="range" id="s3-dc" min="-1000" max="1000" step="10" value="300"></label></div>
+<div class="btnrow"><button class="btn" type="button" id="b3-cmp">比較対照を「古い治療」にすり替える</button><button class="btn ghost" type="button" id="b3-std">標準治療に戻す</button></div>
+<div class="verdict" id="v3"></div></div></div>
+<div class="guide"><b>見るところ</b><ol><li>点を右下に持っていく: 支配。左上: 支配される。ICER の出番は右上だけ</li><li>点が閾値の線（500 万円/QALY）より下にあるか上にあるかを見る</li><li>「古い治療にすり替える」を押すと、同じ薬なのに ICER が良く見える。対照の罠</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>平面を 4 つに切って「ここは計算しない」「ここも計算しない」と先に消す。残った右上で初めて閾値の話をする、という順にすると ICER が怖くなくなります。すり替えのボタンは、企業のプレゼンで実際に起きることだと言ってよい。</p><p class="pit">つまずき: ICER が小さい＝良い、とだけ覚えると、ΔQALY が負（効かない）のときに負の ICER を「安い」と誤読する。平面で象限を先に見る。</p></div></details>
+</div></section>
+<section class="chapter" id="c4"><div class="wrap">
+<div class="num">CHAPTER 4</div><h2>閾値は、どこから来たのか</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>閾値は「命の値段」ではなく、価格調整のものさし。慣習と調査から生まれた数字で、下がる場所は価格の成り立ちで違う。</p></div>
+<div class="prose">
+<p>米国でよく使われた「5 万ドル/QALY」は、1970〜80 年代に公的保険が透析を給付したときの費用に由来すると語られ、物価が 3 倍になっても 30 年ほど据え置かれました（<a href="https://doi.org/10.1056/NEJMp1405158" target="_blank" rel="noopener">Neumann, Cohen, Weinstein 2014, NEJM</a>）。科学の定数ではなく、慣習です。</p>
+<p>日本の「500 万円/QALY」は、日本・韓国・台湾・豪・英・米で「健康な 1 年にいくら払うか」を尋ねた支払意思額調査が、根拠の一つとして挙げられてきました（<a href="https://doi.org/10.1002/hec.1481" target="_blank" rel="noopener">Shiroiwa ら 2010, Health Econ</a>）。制度上の区分点がその値になった経緯は、中医協の資料が正です。英国 NICE は長く £20,000〜30,000 でしたが、2026 年 4 月から £25,000〜35,000 を適用すると NICE が発表しています（規則の改正が前提。実際の運用は未確認、<a href="https://www.nice.org.uk/news/articles/changes-to-nice-s-cost-effectiveness-thresholds-confirmed" target="_blank" rel="noopener">NICE 「閾値の変更を確認」</a>）。</p>
+<p>日本の制度（中医協、2019 年 4 月〜）は、この数字を<b>保険で使えるかどうかの線にはしていません</b>（<a href="https://www.mhlw.go.jp/content/12404000/001178116.pdf" target="_blank" rel="noopener">中医協 費-2 参考（制度の概要図）</a>）。いったん保険収載したうえで、ICER が高いほど価格のうち<b>決まった部分</b>を引き下げる、価格調整の区分点です。現行の通知（<a href="https://kouseikyoku.mhlw.go.jp/chugokushikoku/000431383.pdf" target="_blank" rel="noopener">厚労省「薬価算定の基準について」令和 8 年 2 月 13 日 保発 0213 第 3 号（別表 12）</a>）では、区分点は 500・750・1,000 万円/QALY。総合的評価で配慮が必要とされた品目（抗がん剤等）は 750・1,125・1,500 万円/QALY です。</p>
+<p>引き下げるのは価格の全部ではありません。類似薬効比較方式なら<b>有用性系加算の部分</b>だけを 30・60・90% 引き下げ、原価計算方式で開示度が 50% 未満なら<b>営業利益の部分</b>だけを 17・33・50% 引き下げます。加算のない類似薬効比較の品目は、調整される部分がありません。同じ ICER でも、価格の成り立ちで下がる場所が違います。なお、追加的な有用性が示されず費用が増える品目の調整方法は、2026 年度の改革で見直しの議論中です（<a href="https://www.mhlw.go.jp/content/10808000/001754063.pdf" target="_blank" rel="noopener">中医協 費用対効果評価専門部会 第 80 回 費-1（2026-09-30）</a>。確定した姿は未確認）。</p></div>
+<div class="inst" id="inst-4"><div class="bar"><span class="t"><b>計器 4</b>区分点のものさし — ICER を置くと調整幅が出る</span><span class="r" id="r4"></span></div><div class="body">
+<svg class="chart" id="band-ruler" viewBox="0 0 520 96" role="img" aria-label="日本の価格調整の帯。ICER の位置で引き下げ率が決まる"></svg>
+<div class="controls"><label class="ctl"><span class="lab"><span>ICER（万円 / QALY）</span><output id="s4-icer-out">600 万円</output></span><input type="range" id="s4-icer" min="0" max="1600" step="10" value="600"></label><label class="ctl"><span class="lab"><span>対象</span></span><select id="s4-type"><option value="normal">通常</option><option value="cancer">配慮が必要とされた品目（抗がん剤等）</option></select></label><label class="ctl wide"><span class="lab"><span>価格の成り立ち</span></span><select id="s4-kind"><option value="kasan">類似薬効比較・加算あり</option><option value="profit">原価計算・開示度 50% 未満</option><option value="both">原価計算・開示度低・2022 年 3 月以前収載で加算あり</option><option value="none">類似薬効比較・加算なし</option></select></label></div>
+<div class="verdict" id="v4"></div></div></div>
+<div class="guide"><b>見るところ</b><ol><li>同じ 600 万円でも、通常と抗がん剤等で区分点が違う</li><li>「価格の成り立ち」を替えると、下がる部分が加算か営業利益か、そもそも無いかが変わる</li><li>1,000 万円を超えると加算部分の 9 割が削られる。それでも保険からは外れない</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>「命の値段を決めているのか」と学生は必ず聞きます。答えは「価格調整のものさし」。透析の逸話（5 万ドルが 30 年動かなかった）を話すと、閾値が人間の決めごとだと腑に落ちます。</p><p class="pit">つまずき: 閾値を超えた薬は使えない、という誤解。日本では価格が調整されるだけで、保険適用は続く。</p></div></details>
+</div></section>
+<section class="chapter" id="c5"><div class="wrap">
+<div class="num">CHAPTER 5</div><h2>時間と割引 — 遠い効果は目減りする</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>将来の費用も効果も、年 2% ずつ割り引く。遠い先の 1 QALY は、いまの 1 QALY より小さく数える。</p></div>
+<div class="prose">
+<p>10 年後の 100 万円は、いまの 100 万円と同じではありません。健康も同じ扱いにするのが費用対効果評価の約束で、日本の分析ガイドラインは費用・効果とも<b>年 2%</b>、感度分析で 0〜4% を振ります（12.2・12.3、<a href="https://c2h.niph.go.jp/tools/guideline/guideline_ja_2026.pdf" target="_blank" rel="noopener">C2H 分析ガイドライン 2026 年度版（2026-01-16 中医協総会了承）</a>）。</p>
+<p>t 年後の 1 の価値は 1 ÷ (1 + r)<sup>t</sup>。2% なら 10 年後は 0.82、30 年後は 0.55。</p>
+<p>ここで予防とワクチンが不利になります。費用はいま払い、効果は 20〜40 年後に来るから、割引率を上げるほど ICER は悪化する。論文の割引率と時間軸を見るのは、この効き方を知っているからです。</p></div>
+<div class="inst" id="inst-5"><div class="bar"><span class="t"><b>計器 5</b>割引のつまみ — 遠い 1 QALY がどう縮むか</span><span class="r" id="r5"></span></div><div class="body">
+<p class="hint">棒の高さが「t 年後の 1 QALY の現在価値」。濃い棒が 10 年後と 30 年後です。</p>
+<svg class="chart" id="disc-chart" viewBox="0 0 520 220" role="img" aria-label="年ごとの 1 QALY の現在価値。割引率で縮み方が変わる"></svg>
+<div class="controls"><label class="ctl"><span class="lab"><span>割引率</span><output id="s5-rate-out">2 %</output></span><input type="range" id="s5-rate" min="0" max="4" step="0.5" value="2"></label></div>
+<div class="verdict" id="v5"></div></div></div>
+<div class="guide"><b>見るところ</b><ol><li>割引率 0% で棒がそろい、4% で遠い年が沈むのを見る</li><li>下の「予防の例」（例示用の仮の数字）で、同じ効果なのに ICER が割引率だけで変わる</li><li>日本の既定は 2%。論文が 3% や 3.5% なら、どこの国の決まりかを疑う</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>「10 年後の 1 QALY は 2% で 0.82」を学生に電卓で出させてください。式より手触りが残ります。次に「ワクチンは費用がいま、効果は 30 年後」と言うと、予防の費用対効果がなぜ割引に弱いかが一言で伝わります。</p><p class="pit">つまずき: 割引は「インフレの補正」ではない。物価とは別に、将来より現在を重く見る約束。</p></div></details>
+</div></section>
+<section class="chapter" id="c6"><div class="wrap">
+<div class="num">CHAPTER 6</div><h2>不確実性 — 点より「確率」</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>ICER の点推定より、「閾値のもとで費用対効果ありと言える確率」を見る。</p></div>
+<div class="prose">
+<p>ICER は、費用も QALY も推定値の割り算です。入力が少し揺れると答えは大きく揺れる。だから見せ方が二つ決まっています。</p>
+<ul>
+<li><b>一つずつ振る（トルネード図）</b>: 入力を一つだけ低め・高めに振って ICER の振れ幅を棒にし、大きい順に並べる。どの仮定が結論を握っているかが分かる。</li>
+<li><b>全部同時に振る（確率的感度分析, PSA）</b>: 入力に確率分布を与え、何千回も乱数で引いて ICER の雲を作る。乱数で積分を数える手法はモンテカルロ法で、ノイマンとウラムが 1940 年代に作ったものです。</li>
+</ul>
+<p>雲から、閾値ごとに「費用対効果あり（閾値 × ΔQALY − Δ費用 ＞ 0）」の割合を出した曲線が <b>CEAC</b>。500 万円で 5 割なら五分五分。論文に CEAC が無く点推定の ICER だけなら、弱い論文です。</p></div>
+<div class="inst" id="inst-6"><div class="bar"><span class="t"><b>計器 6</b>モンテカルロ — 1,000 回振って雲と曲線を作る</span><span class="r" id="r6"></span></div><div class="body">
+<div class="controls"><label class="ctl"><span class="lab"><span>QALY の不確かさ（標準偏差）</span><output id="s6-qsd-out">0.2</output></span><input type="range" id="s6-qsd" min="0.05" max="0.4" step="0.05" value="0.2"></label><label class="ctl"><span class="lab"><span>費用の不確かさ（万円）</span><output id="s6-csd-out">100 万円</output></span><input type="range" id="s6-csd" min="20" max="300" step="10" value="100"></label></div>
+<div class="btnrow"><button class="btn primary" type="button" id="b6-run">1,000 回振る</button><button class="btn ghost" type="button" id="b6-again">別の種で振り直す</button></div>
+<p class="hint">まず「1,000 回振る」を押す。下の雲・曲線が描かれます（種を変えると少し違う雲になります）。</p>
+<p class="cap">結果の雲（点推定は濃い点）</p>
+<svg class="chart" id="psa-plane" viewBox="0 0 520 340" role="img" aria-label="費用効果平面に散らばる 1,000 回の結果"></svg>
+<p class="cap">CEAC: 閾値ごとの費用対効果ありの確率</p>
+<svg class="chart" id="ceac" viewBox="0 0 520 200" role="img" aria-label="CEAC。閾値ごとの費用対効果ありの確率"></svg>
+<p class="cap">トルネード: 一つずつ振ったときの ICER</p>
+<svg class="chart" id="tornado" viewBox="0 0 520 120" role="img" aria-label="トルネード図"></svg>
+<div class="verdict" id="v6"></div></div></div>
+<div class="guide"><b>見るところ</b><ol><li>雲の広がりが、入力の不確かさ。QALY の不確かさを上げると雲は横に伸びる</li><li>CEAC の 500 万円の高さが「ありと言える確率」。0.5 なら五分五分</li><li>トルネードの一番上の棒が、結論を握っている仮定</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>「振る」ボタンを学生に押させて、種を変えるたび雲が少し変わるのを見せる。ICER が一つの数でないことが体で分かります。そのうえで CEAC の 500 万円の点を読ませ、「この薬、採用？」と聞くと議論が始まります。</p><p class="pit">つまずき: PSA の雲が広い＝悪い論文、ではない。正直に不確かさを見せている。広さを隠している論文のほうが危ない。</p></div></details>
+</div></section>
+<section class="chapter" id="c7"><div class="wrap">
+<div class="num">CHAPTER 7</div><h2>読む 6 問と、落とし穴</h2>
+<div class="takeaway"><span class="tag">持ち帰る一文</span><p>ICER の数字は最後に見る。先に、立場・比較対照・効用の出どころ・閾値・不確実性・資金源。</p></div>
+<div class="prose">
+<p>論文を開いたら、この順で 6 つ確かめます。</p>
+<ul>
+<li><b>立場</b>: 公的医療の立場か、社会の立場か。休業の費用（生産性損失）は入っているか。日本のガイドラインは公的医療の立場を基本にしています（<a href="https://c2h.niph.go.jp/tools/guideline/guideline_ja_2026.pdf" target="_blank" rel="noopener">C2H 分析ガイドライン 2026 年度版（2026-01-16 中医協総会了承）</a>）。米国の標準手順は両方の立場を求めます（<a href="https://doi.org/10.1001/jama.2016.12195" target="_blank" rel="noopener">Sanders ら 2016, JAMA（第 2 次パネル）</a>）。</li>
+<li><b>比較対照</b>: いまの標準治療か。</li>
+<li><b>効用の出どころ</b>: どの国の、どの測り方の、何年の値か。</li>
+<li><b>ICER と閾値</b>: 分子・分母は何の差か。閾値は誰の決めごとか。</li>
+<li><b>不確実性</b>: トルネードと PSA → CEAC があるか。</li>
+<li><b>資金源</b>: 誰が払ったか。企業が資金を出した分析は閾値未満の結果を報告しやすい、という系統的レビューがあります（<a href="https://doi.org/10.1136/bmj.38737.607558.80" target="_blank" rel="noopener">Bell ら 2006, BMJ</a>）。</li>
+</ul>
+<p>報告の型は <b>CHEERS 2022</b>（<a href="https://doi.org/10.1016/j.jval.2021.11.1351" target="_blank" rel="noopener">Husereau ら 2022, CHEERS 2022</a>）。著者向けの 28 項目ですが、読者のチェックリストにそのまま使えます。もう二つ。<b>予算影響</b>は別物で、安くても対象が多ければ財政は破れる。そして QALY は、障害や高齢で効用が低い人の延命を「安く」数えるという公平性の批判を受けています。米国は 2010 年の医療保険改革法（ACA §6301、社会保障法 1182 条）で、PCORI が「QALY あたりの費用」を閾値に使うこと、およびメディケアの給付・支払の決定に同様の閾値を使うことを禁じました（条文が名指しするのはこの二つで、公的保険一般を禁じているわけではありません。<a href="https://www.law.cornell.edu/uscode/text/42/1320e-1" target="_blank" rel="noopener">42 U.S.C. §1320e-1（社会保障法 1182 条。ACA §6301）</a>）。日本が価格調整に限って使うのは、この弱さを制度の外に置く工夫でもあります。</p></div>
+<div class="inst" id="inst-7"><div class="bar"><span class="t"><b>計器 7</b>3 問 — 読む目を試す</span><span class="r" id="r7"></span></div><div class="body"><div class="quiz" id="quiz"></div></div></div>
+<div class="guide"><b>見るところ</b><ol><li>3 問とも「数字」ではなく「数字の前に見るもの」を問う</li><li>答えを開いたら、6 問のどれに当たるかを確かめる</li><li>自分が論文を書く側なら、どこで誘惑に負けそうかを考える</li></ol></div>
+<details class="teach"><summary>教える人の 1 分</summary><div class="in"><p>6 問を黒板に縦に書き、学生が持ってきた論文を一本、上から当ててください。立場と対照で止まる論文が多い。ICER の数字に触れるのは最後です。</p><p class="pit">つまずき: 「閾値未満なら採用」という一本道。閾値は立場・対照・効用・割引の仮定の上に乗った数で、仮定が変われば動く。</p></div></details>
+</div></section>
+<section class="chapter" id="c8"><div class="wrap">
+<div class="num">CHAPTER 8</div><h2>教える人の部屋</h2>
+<div class="takeaway"><span class="tag">使い方</span><p>この章だけ印刷すれば、20 分の勉強会がそのまま回る。各章の「教える人の 1 分」を順に並べ、最後に一枚の表。</p></div>
+<div class="part flow"><div class="prose"><p><b>20 分の流れ</b></p></div>
+<div class="script"><div class="s"><b>0 分</b><div class="st">二人の患者を見せて、先に選ばせる（2 分）</div></div><div class="s"><b>2 分</b><div class="st">QALY は面積。計器 1 で A と B を往復（3 分）</div></div><div class="s"><b>5 分</b><div class="st">一人を指名して賭けさせる。止まった p が効用（4 分）</div></div><div class="s"><b>9 分</b><div class="st">平面を 4 つに切る。ICER の出番は右上だけ（3 分）</div></div><div class="s"><b>12 分</b><div class="st">閾値は慣習と調査。日本は価格調整（2 分）</div></div><div class="s"><b>14 分</b><div class="st">割引 2%。10 年後の 1 QALY は 0.82（2 分）</div></div><div class="s"><b>16 分</b><div class="st">1,000 回振る。CEAC の 500 万円の点を読む（3 分）</div></div><div class="s"><b>19 分</b><div class="st">読む 6 問。持ってきた論文に当てる（残り）</div></div></div></div>
+<div class="part scripts"><div class="prose" style="margin-top:18px"><p><b>各章の 1 分台本</b>（本文の折りたたみと同じもの）</p></div>
+<div class="script"><div class="s"><b>0. なぜ「単位」が要るのか</b><div class="st"><p>学生に先に選ばせてください。半分くらいは A を選びます。</p><p>そこで「2 年 × 0.4 と 1 年 × 0.9」を黒板に書くと、0.8 と 0.9 で逆転する。この驚きが単位の必要性の説明になります。</p><p>QALY は『長生きの価値』ではなく『質で重みづけした時間』だと一言添える。</p><p class="pit">つまずき: 「QALY が大きい方が正しい治療」と受け取られがち。QALY は比べるための物差しで、選ぶのは患者と医師。物差しが決めるわけではない。</p></div></div><div class="s"><b>1. QALY は「面積」</b><div class="st"><p>「面積」という言葉を使ってください。式より先に図。</p><p>横を伸ばす治療（延命）と、縦を上げる治療（症状緩和）は、同じ面積を違う形で増やす、と言うと緩和ケアの価値が QALY の中で見えます。</p><p class="pit">つまずき: 効用は「満足度」や「幸福度」ではない。健康状態への選好の強さで、次の章の「賭け」で測る。</p></div></div><div class="s"><b>2. 効用は、どう測るのか</b><div class="st"><p>学生を一人指名して、本当に賭けさせてください。「賭ける？確実？」を 5〜6 回。</p><p>教室の空気が変わります。止まった p を黒板に書いて「これが効用」。</p><p>そのあとで TTO と EQ-5D を『同じものを別の問い方で測っている』と並べる。</p><p class="pit">つまずき: 「効用 0.5 ＝ 半分くらい元気」ではない。「完全健康の半分の時間と交換してもいい」という強さ。</p></div></div><div class="s"><b>3. ICER — 追加費用 ÷ 追加 QALY</b><div class="st"><p>平面を 4 つに切って「ここは計算しない」「ここも計算しない」と先に消す。残った右上で初めて閾値の話をする、という順にすると ICER が怖くなくなります。</p><p>すり替えのボタンは、企業のプレゼンで実際に起きることだと言ってよい。</p><p class="pit">つまずき: ICER が小さい＝良い、とだけ覚えると、ΔQALY が負（効かない）のときに負の ICER を「安い」と誤読する。平面で象限を先に見る。</p></div></div><div class="s"><b>4. 閾値は、どこから来たのか</b><div class="st"><p>「命の値段を決めているのか」と学生は必ず聞きます。答えは「価格調整のものさし」。</p><p>透析の逸話（5 万ドルが 30 年動かなかった）を話すと、閾値が人間の決めごとだと腑に落ちます。</p><p class="pit">つまずき: 閾値を超えた薬は使えない、という誤解。日本では価格が調整されるだけで、保険適用は続く。</p></div></div><div class="s"><b>5. 時間と割引 — 遠い効果は目減りする</b><div class="st"><p>「10 年後の 1 QALY は 2% で 0.82」を学生に電卓で出させてください。式より手触りが残ります。</p><p>次に「ワクチンは費用がいま、効果は 30 年後」と言うと、予防の費用対効果がなぜ割引に弱いかが一言で伝わります。</p><p class="pit">つまずき: 割引は「インフレの補正」ではない。物価とは別に、将来より現在を重く見る約束。</p></div></div><div class="s"><b>6. 不確実性 — 点より「確率」</b><div class="st"><p>「振る」ボタンを学生に押させて、種を変えるたび雲が少し変わるのを見せる。ICER が一つの数でないことが体で分かります。</p><p>そのうえで CEAC の 500 万円の点を読ませ、「この薬、採用？」と聞くと議論が始まります。</p><p class="pit">つまずき: PSA の雲が広い＝悪い論文、ではない。正直に不確かさを見せている。広さを隠している論文のほうが危ない。</p></div></div><div class="s"><b>7. 読む 6 問と、落とし穴</b><div class="st"><p>6 問を黒板に縦に書き、学生が持ってきた論文を一本、上から当ててください。立場と対照で止まる論文が多い。</p><p>ICER の数字に触れるのは最後です。</p><p class="pit">つまずき: 「閾値未満なら採用」という一本道。閾値は立場・対照・効用・割引の仮定の上に乗った数で、仮定が変われば動く。</p></div></div></div></div>
+<div class="part one"><div class="prose" style="margin-top:18px"><p><b>一枚の表</b>（印刷用）</p></div>
+<div class="onepage"><table><thead><tr><th>用語</th><th>一言</th><th>数字の例</th></tr></thead><tbody><tr><td><b>QALY</b></td><td>生存年 × 効用（0〜1）。状態が変わるなら区切って足す</td><td class="ex">2 年 × 0.4 ＝ 0.8</td></tr><tr><td><b>効用</b></td><td>完全健康 1、死 0、負もあり。SG・TTO・EQ-5D-5L で測る</td><td class="ex">日本の EQ-5D-5L 価値づけ: Shiroiwa 2016</td></tr><tr><td><b>ICER</b></td><td>Δ費用 ÷ ΔQALY。支配／支配される は計算しない</td><td class="ex">300 万円 ÷ 0.5 ＝ 600 万円/QALY</td></tr><tr><td><b>閾値</b></td><td>日本は価格調整の区分点 500 万円/QALY〜。英 £25–35k（2026 年 4 月〜と発表）。米 $50k は慣習</td><td class="ex">価格調整のものさし。償還の可否ではない</td></tr><tr><td><b>日本の帯</b></td><td>区分点 通常 500/750/1,000 万円。抗がん剤等 750/1,125/1,500 万円</td><td class="ex">加算部分 30/60/90%、営業利益部分 17/33/50% 引き下げ（どちらが下がるかは価格の成り立ちで決まる）</td></tr><tr><td><b>立場</b></td><td>公的医療の立場が基本。社会の立場では生産性損失も</td><td class="ex">C2H ガイドライン 2026 年度版</td></tr><tr><td><b>割引</b></td><td>費用・効果とも年 2%。感度分析 0〜4%</td><td class="ex">10 年後の 1 QALY ＝ 0.82</td></tr><tr><td><b>不確実性</b></td><td>トルネード（一つずつ）＋ PSA（全部同時）→ CEAC</td><td class="ex">500 万円で 0.5 なら五分五分</td></tr><tr><td><b>読む 6 問</b></td><td>立場・対照・効用・閾値・不確実性・資金源</td><td class="ex">CHEERS 2022 を読者の側で使う</td></tr></tbody></table>
+<div class="btnrow"><button class="btn primary" type="button" id="b8-print">この部屋を印刷する</button></div></div></div>
+<div class="part src-part"><div class="prose" style="margin-top:18px"><p class="src"><b>出典</b>（日本の制度・ガイドライン・NICE・米国の条文・HPV の資料は 2026-11-09 に一次資料を開いて確認。論文は DOI を Crossref で実在確認 2026-11-05）</p>
+<ul class="srclist"><li><a href="https://doi.org/10.1056/NEJM197703312961304" target="_blank" rel="noopener">Weinstein & Stason 1977, NEJM</a></li><li><a href="https://doi.org/10.1056/NEJMp1405158" target="_blank" rel="noopener">Neumann, Cohen, Weinstein 2014, NEJM</a></li><li><a href="https://doi.org/10.1002/hec.1481" target="_blank" rel="noopener">Shiroiwa ら 2010, Health Econ</a></li><li><a href="https://doi.org/10.1016/j.jval.2016.03.1834" target="_blank" rel="noopener">Shiroiwa ら 2016, Value in Health</a></li><li><a href="https://doi.org/10.1001/jama.2016.12195" target="_blank" rel="noopener">Sanders ら 2016, JAMA（第 2 次パネル）</a></li><li><a href="https://doi.org/10.1016/j.jval.2021.11.1351" target="_blank" rel="noopener">Husereau ら 2022, CHEERS 2022</a></li><li><a href="https://doi.org/10.1136/bmj.38737.607558.80" target="_blank" rel="noopener">Bell ら 2006, BMJ</a></li><li><a href="https://kouseikyoku.mhlw.go.jp/chugokushikoku/000431383.pdf" target="_blank" rel="noopener">厚労省「薬価算定の基準について」令和 8 年 2 月 13 日 保発 0213 第 3 号（別表 12）</a></li><li><a href="https://www.mhlw.go.jp/content/12404000/001178116.pdf" target="_blank" rel="noopener">中医協 費-2 参考（制度の概要図）</a></li><li><a href="https://www.mhlw.go.jp/content/10808000/001754063.pdf" target="_blank" rel="noopener">中医協 費用対効果評価専門部会 第 80 回 費-1（2026-09-30）</a></li><li><a href="https://c2h.niph.go.jp/tools/guideline/guideline_ja_2026.pdf" target="_blank" rel="noopener">C2H 分析ガイドライン 2026 年度版（2026-01-16 中医協総会了承）</a></li><li><a href="https://www.nice.org.uk/news/articles/changes-to-nice-s-cost-effectiveness-thresholds-confirmed" target="_blank" rel="noopener">NICE 「閾値の変更を確認」</a></li><li><a href="https://www.law.cornell.edu/uscode/text/42/1320e-1" target="_blank" rel="noopener">42 U.S.C. §1320e-1（社会保障法 1182 条。ACA §6301）</a></li><li><a href="https://www.mhlw.go.jp/content/10900000/001726207.pdf" target="_blank" rel="noopener">第 35 回ワクチン評価小委員会 資料 3-2（2026-07-22）</a></li><li><a href="https://www.mhlw.go.jp/content/10900000/001726448.pdf" target="_blank" rel="noopener">同 資料 3-1</a></li></ul>
+<p class="src">計器 2 の EQ-5D-5L の換算は模式値、計器 5 の予防の例は例示用の仮の数字。未確認のものは本文に「未確認」と書いてあります。</p></div></div>
+</div></section>
+<footer><div class="wrap">作成: 玄（Claude）とたまさん、2026-11-05（制度の数字は 2026-11-09 に一次資料で確認し直しました）。見た目は誠実性原理 / Neo Futura。計器 1 の機械は anatomy の道具箱で描き、数字はすべて同じ模型（model.mjs）から出しています。誤りの指摘は歓迎です。</div></footer>
+<script type="module">const AZIMUTH = 45;
+const ELEVATION = 30;
+const SHADES = 4;
+const RADIANS = Math.PI / 180;
+const UNIT = Math.sqrt(1.6);
+function cameraOf({ scale, azimuth = AZIMUTH, elevation = ELEVATION }) {
+    const a = azimuth * RADIANS;
+    const e = elevation * RADIANS;
+    return { sinA: Math.sin(a), cosA: Math.cos(a), sinE: Math.sin(e), cosE: Math.cos(e), k: scale * UNIT };
+}
+function iso([x, y, z], projection) {
+    const { origin } = projection;
+    const { sinA, cosA, sinE, cosE, k } = cameraOf(projection);
+    return [origin[0] + (x * sinA - y * cosA) * k, origin[1] + ((x * cosA + y * sinA) * sinE - z * cosE) * k];
+}
+function towardViewer(projection) {
+    const { sinA, cosA } = cameraOf(projection);
+    return [cosA, sinA];
+}
+function depthOf([x, y, z], projection) {
+    const { sinA, cosA, sinE, cosE } = cameraOf(projection);
+    return (x * cosA + y * sinA) * cosE + z * sinE;
+}
+const tenth = (value) => {
+    const text = (Math.round(value * 10) / 10).toFixed(1).replace(/\.0$/, "");
+    return text === "-0" ? "0" : text;
+};
+function pathOf(points, closed = false) {
+    if (!points.length)
+        return "";
+    return points.map(([x, y], at) => `${at ? "L" : "M"}${tenth(x)} ${tenth(y)}`).join("") + (closed ? "Z" : "");
+}
+const joinPaths = (paths) => paths.filter(Boolean).join("");
+function roundedPlan({ x, y, w, d, r }, steps = 8) {
+    const radius = Math.max(0, Math.min(r, w / 2, d / 2));
+    const corners = [
+        [x + w - radius, y + radius, -90],
+        [x + w - radius, y + d - radius, 0],
+        [x + radius, y + d - radius, 90],
+        [x + radius, y + radius, 180],
+    ];
+    const out = [];
+    for (const [cx, cy, start] of corners) {
+        const count = radius > 0 ? steps : 0;
+        for (let step = 0; step <= count; step++) {
+            const angle = (start + (count ? (90 * step) / count : 45)) * RADIANS;
+            out.push([cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)]);
+        }
+    }
+    return out;
+}
+function signedArea(points) {
+    let area = 0;
+    for (let index = 0; index < points.length; index++) {
+        const [ax, ay] = points[index];
+        const [bx, by] = points[(index + 1) % points.length];
+        area += ax * by - bx * ay;
+    }
+    return area / 2;
+}
+const oriented = (points) => (signedArea(points) < 0 ? [...points].reverse() : points);
+function convexHull(points) {
+    const sorted = [...points].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    if (sorted.length < 3)
+        return sorted;
+    const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+    const lower = [];
+    for (const point of sorted) {
+        while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0)
+            lower.pop();
+        lower.push(point);
+    }
+    const upper = [];
+    for (let index = sorted.length - 1; index >= 0; index--) {
+        const point = sorted[index];
+        while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0)
+            upper.pop();
+        upper.push(point);
+    }
+    return [...lower.slice(0, -1), ...upper.slice(0, -1)];
+}
+function runsOf(flags, want) {
+    const count = flags.length;
+    const runs = [];
+    const start = flags.findIndex((flag, index) => flag !== flags[(index + count - 1) % count]);
+    if (start < 0)
+        return flags[0] === want ? [Array.from({ length: count + 1 }, (_, index) => index % count)] : [];
+    let run = null;
+    for (let step = 0; step < count; step++) {
+        const index = (start + step) % count;
+        if (flags[index] === want) {
+            if (!run)
+                run = [index];
+            run.push((index + 1) % count);
+        }
+        else if (run) {
+            runs.push(run);
+            run = null;
+        }
+    }
+    if (run)
+        runs.push(run);
+    return runs;
+}
+function extrude(ring, z, height, projection, options = {}) {
+    const convex = options.convex ?? true;
+    const count = ring.length;
+    const counter = signedArea(ring) > 0;
+    const [vx, vy] = towardViewer(projection);
+    const { sinA, cosA } = cameraOf(projection);
+    const normals = ring.map(([ax, ay], index) => {
+        const [bx, by] = ring[(index + 1) % count];
+        const dx = bx - ax;
+        const dy = by - ay;
+        const length = Math.hypot(dx, dy) || 1;
+        return (counter ? [dy / length, -dx / length] : [-dy / length, dx / length]);
+    });
+    const facing = normals.map(([nx, ny]) => nx * vx + ny * vy > 1e-9);
+    const top = ring.map(([x, y]) => iso([x, y, z + height], projection));
+    const bottom = ring.map(([x, y]) => iso([x, y, z], projection));
+    const outline = [];
+    const crease = [];
+    for (const run of runsOf(facing, false))
+        outline.push(pathOf(run.map((index) => top[index])));
+    for (const run of runsOf(facing, true)) {
+        crease.push(pathOf(run.map((index) => top[index])));
+        if (height > 0)
+            outline.push(pathOf(run.map((index) => bottom[index])));
+    }
+    if (height > 0) {
+        for (let index = 0; index < count; index++) {
+            if (facing[(index + count - 1) % count] !== facing[index])
+                outline.push(pathOf([top[index], bottom[index]]));
+        }
+    }
+    let fill;
+    if (convex) {
+        fill = pathOf(convexHull([...top, ...bottom]), true);
+    }
+    else {
+        const parts = [pathOf(oriented(top), true), pathOf(oriented(bottom), true)];
+        for (let index = 0; index < count; index++) {
+            if (!facing[index])
+                continue;
+            const next = (index + 1) % count;
+            parts.push(pathOf(oriented([top[index], top[next], bottom[next], bottom[index]]), true));
+        }
+        fill = parts.join("");
+    }
+    const buckets = Array.from({ length: SHADES }, () => []);
+    if (height > 0) {
+        const [lx, ly] = [-sinA, cosA];
+        for (let index = 0; index < count; index++) {
+            if (!facing[index])
+                continue;
+            const [nx, ny] = normals[index];
+            const lit = (nx * lx + ny * ly + 1) / 2;
+            const shade = Math.min(SHADES - 1, Math.max(0, Math.floor(lit * SHADES)));
+            const next = (index + 1) % count;
+            buckets[shade].push(pathOf(oriented([top[index], top[next], bottom[next], bottom[index]]), true));
+        }
+    }
+    let bevel;
+    if (options.bevel && options.bevel > 0) {
+        const by = options.bevel;
+        const inset = ring.map(([x, y], index) => {
+            const [ax, ay] = normals[(index + count - 1) % count];
+            const [bx, by2] = normals[index];
+            const mx = ax + bx;
+            const my = ay + by2;
+            const length = Math.hypot(mx, my) || 1;
+            return [x - (mx / length) * by, y - (my / length) * by];
+        });
+        const insetTop = inset.map(([x, y]) => iso([x, y, z + height], projection));
+        bevel = runsOf(facing, true)
+            .map((run) => pathOf([top[run[0]], ...run.slice(1, -1).map((index) => insetTop[index]), top[run[run.length - 1]]]))
+            .join("");
+    }
+    return {
+        fill,
+        outline: outline.join(""),
+        crease: crease.join(""),
+        top: pathOf(oriented(top), true),
+        shades: buckets.map((paths) => paths.join("")),
+        bevel,
+    };
+}
+const ringOf = (plan, steps = 8) => roundedPlan(plan, steps);
+function slabOf(plan, z, height, projection, steps = 8, bevel = 0) {
+    return extrude(ringOf(plan, steps), z, height, projection, { convex: true, bevel });
+}
+function circleRing(cx, cy, radius, steps = 40) {
+    return Array.from({ length: steps }, (_, step) => {
+        const angle = (step / steps) * Math.PI * 2;
+        return [cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)];
+    });
+}
+function cylinder(cx, cy, radius, z, height, projection, steps = 32, bevel = 0) {
+    return extrude(circleRing(cx, cy, radius, steps), z, height, projection, { convex: true, bevel });
+}
+const insetPlan = ({ x, y, w, d, r }, by) => ({ x: x + by, y: y + by, w: w - by * 2, d: d - by * 2, r: Math.max(0, r - by) });
+function onTop(points, z, projection, closed = false) {
+    return pathOf(points.map(([x, y]) => iso([x, y, z], projection)), closed);
+}
+const planOutline = (plan, z, projection, steps = 8) => onTop(ringOf(plan, steps), z, projection, true);
+const lineOnTop = (from, to, z, projection) => onTop([from, to], z, projection);
+const segment = (from, to, projection) => pathOf([iso(from, projection), iso(to, projection)]);
+const rise = (at, from, to, projection) => segment([at[0], at[1], from], [at[0], at[1], to], projection);
+const ring = (cx, cy, radius, z, projection, steps = 40) => onTop(circleRing(cx, cy, radius, steps), z, projection, true);
+const pointsAt = (points, projection) => points.map((point) => iso(point, projection));
+function dotGrid(x, y, columns, rows, gap, z, projection) {
+    const dots = [];
+    for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columns; column++)
+            dots.push(iso([x + column * gap, y + row * gap, z], projection));
+    }
+    return dots;
+}
+function corners({ x, y, w, d }, inset = 0) {
+    return [
+        [x + inset, y + inset],
+        [x + w - inset, y + inset],
+        [x + inset, y + d - inset],
+        [x + w - inset, y + d - inset],
+    ];
+}
+function boxCorners({ x, y, w, d }, z0, z1) {
+    const out = [];
+    for (const px of [x, x + w])
+        for (const py of [y, y + d])
+            for (const z of [z0, z1])
+                out.push([px, py, z]);
+    return out;
+}
+function knurl(cx, cy, radius, z0, z1, count, projection, inset = 0.4) {
+    const [vx, vy] = towardViewer(projection);
+    const lines = [];
+    for (let index = 0; index < count; index++) {
+        const angle = (index / count) * Math.PI * 2;
+        const nx = Math.cos(angle);
+        const ny = Math.sin(angle);
+        if (nx * vx + ny * vy < 0.15)
+            continue;
+        lines.push(segment([cx + radius * nx, cy + radius * ny, z0 + inset], [cx + radius * nx, cy + radius * ny, z1 - inset], projection));
+    }
+    return lines.join("");
+}
+function sideArc(cx, cy, radius, z, projection, steps = 24) {
+    const [vx, vy] = towardViewer(projection);
+    const facing = Math.atan2(vy, vx);
+    const points = [];
+    for (let step = 0; step <= steps; step++) {
+        const angle = facing - Math.PI / 2 + (step / steps) * Math.PI;
+        points.push(iso([cx + radius * Math.cos(angle), cy + radius * Math.sin(angle), z], projection));
+    }
+    return pathOf(points);
+}
+function ringSeam(ring, z, projection) {
+    const count = ring.length;
+    const counter = signedArea(ring) > 0;
+    const [vx, vy] = towardViewer(projection);
+    const facing = ring.map(([ax, ay], index) => {
+        const [bx, by] = ring[(index + 1) % count];
+        const dx = bx - ax;
+        const dy = by - ay;
+        const [nx, ny] = counter ? [dy, -dx] : [-dy, dx];
+        return nx * vx + ny * vy > 1e-9;
+    });
+    return runsOf(facing, true).map((run) => pathOf(run.map((index) => iso([ring[index][0], ring[index][1], z], projection)))).join("");
+}
+const sideSeam = (plan, z, projection, steps = 8) => ringSeam(ringOf(plan, steps), z, projection);
+function sideRing(center, radius, axis, projection, steps = 20) {
+    const [px, py, pz] = center;
+    const points = [];
+    for (let step = 0; step < steps; step++) {
+        const angle = (step / steps) * Math.PI * 2;
+        const u = radius * Math.cos(angle);
+        const v = radius * Math.sin(angle);
+        points.push(iso(axis === "x" ? [px, py + u, pz + v] : [px + u, py, pz + v], projection));
+    }
+    return pathOf(points, true);
+}
+function coil(from, to, center, radius, turns, axis, projection, perTurn = 16) {
+    const count = Math.max(1, Math.round(turns * perTurn));
+    const back = [];
+    const front = [];
+    let run = [];
+    let near = null;
+    for (let index = 0; index <= count; index++) {
+        const share = index / count;
+        const angle = share * turns * Math.PI * 2;
+        const u = radius * Math.cos(angle);
+        const v = radius * Math.sin(angle);
+        const along = from + (to - from) * share;
+        const point = axis === "x" ? [along, center[0] + u, center[1] + v] : [center[0] + u, along, center[1] + v];
+        const normal = axis === "x" ? [0, Math.cos(angle), Math.sin(angle)] : [Math.cos(angle), 0, Math.sin(angle)];
+        const facing = depthOf(normal, projection) > 0;
+        const flat = iso(point, projection);
+        if (near === null)
+            near = facing;
+        if (facing !== near) {
+            run.push(flat);
+            (near ? front : back).push(pathOf(run));
+            run = [flat];
+            near = facing;
+            continue;
+        }
+        run.push(flat);
+    }
+    if (run.length > 1)
+        (near ? front : back).push(pathOf(run));
+    return { back: back.join(""), front: front.join("") };
+}
+function topTicks(from, to, step, every, edge, z, lengths, projection, axis = "x") {
+    const minor = [];
+    const major = [];
+    const first = Math.ceil(from / step) * step;
+    for (let at = first, index = Math.round(first / step); at <= to + 1e-9; at += step, index++) {
+        const big = index % every === 0;
+        const length = big ? lengths[1] : lengths[0];
+        const a = axis === "x" ? [at, edge] : [edge, at];
+        const b = axis === "x" ? [at, edge + length] : [edge + length, at];
+        (big ? major : minor).push(lineOnTop(a, b, z, projection));
+    }
+    return { minor: minor.join(""), major: major.join("") };
+}
+function sideTicks(from, to, step, every, face, top, lengths, projection, axis = "x") {
+    const minor = [];
+    const major = [];
+    const first = Math.ceil(from / step) * step;
+    for (let at = first, index = Math.round(first / step); at <= to + 1e-9; at += step, index++) {
+        const big = index % every === 0;
+        const length = big ? lengths[1] : lengths[0];
+        const a = axis === "x" ? [at, face, top] : [face, at, top];
+        const b = axis === "x" ? [at, face, top - length] : [face, at, top - length];
+        (big ? major : minor).push(segment(a, b, projection));
+    }
+    return { minor: minor.join(""), major: major.join("") };
+}
+function radialTicks(cx, cy, radius, count, every, z, lengths, projection, from = 0, span = Math.PI * 2) {
+    const minor = [];
+    const major = [];
+    const closed = Math.abs(span - Math.PI * 2) < 1e-9;
+    const steps = closed ? count : count + 1;
+    for (let index = 0; index < steps; index++) {
+        const angle = from + (index / count) * span;
+        const big = index % every === 0;
+        const inner = radius - (big ? lengths[1] : lengths[0]);
+        const sx = Math.sin(angle);
+        const sy = -Math.cos(angle);
+        (big ? major : minor).push(lineOnTop([cx + sx * inner, cy + sy * inner], [cx + sx * radius, cy + sy * radius], z, projection));
+    }
+    return { minor: minor.join(""), major: major.join("") };
+}
+const haloOf = (plan, z, height, projection) => slabOf(plan, z, height, projection).fill;
+function axisVector(projection, [dx, dy, dz]) {
+    const origin = iso([0, 0, 0], projection);
+    const moved = iso([dx, dy, dz], projection);
+    return [moved[0] - origin[0], moved[1] - origin[1]];
+}
+const fine = (value) => Math.round(value * 100) / 100;
+function translateAlong(projection, by) {
+    const [x, y] = axisVector(projection, by);
+    return `translate(${fine(x)} ${fine(y)})`;
+}
+const thousandth = (value) => Math.round(value * 1000) / 1000;
+function axesAt(at, z, projection) {
+    const origin = iso([at[0], at[1], z], projection);
+    const along = (point) => {
+        const [px, py] = iso(point, projection);
+        return [px - origin[0], py - origin[1]];
+    };
+    return { origin, x: along([at[0] + 1, at[1], z]), y: along([at[0], at[1] + 1, z]), z: along([at[0], at[1], z + 1]) };
+}
+const matrixOf = (u, v, origin) => `matrix(${thousandth(u[0])} ${thousandth(u[1])} ${thousandth(v[0])} ${thousandth(v[1])} ${thousandth(origin[0])} ${thousandth(origin[1])})`;
+function holdStill(element, [dx, dy]) {
+    const text = dx || dy ? `translate(${-dx} ${-dy})` : "";
+    element.querySelectorAll("[data-hold]").forEach((node) => (text ? node.setAttribute("transform", text) : node.removeAttribute("transform")));
+}
+function topMatrix(at, z, projection, along = "x") {
+    const { origin, x, y } = axesAt(at, z, projection);
+    return along === "x" ? matrixOf(x, y, origin) : matrixOf([-y[0], -y[1]], x, origin);
+}
+function sideMatrix(at, z, projection, face) {
+    const { origin, x, y, z: up } = axesAt(at, z, projection);
+    const down = [-up[0], -up[1]];
+    return face === "left" ? matrixOf(x, down, origin) : matrixOf([-y[0], -y[1]], down, origin);
+}
+function screenRise(height, projection) {
+    const { cosE, k } = cameraOf(projection);
+    return height * cosE * k;
+}
+function fitProjection(points, width, height, { pad = 24, headroom = 0, azimuth = AZIMUTH, elevation = ELEVATION } = {}) {
+    const unit = { origin: [0, 0], scale: 1, azimuth, elevation };
+    const flat = points.map((point) => iso(point, unit));
+    const xs = flat.map(([x]) => x);
+    const ys = flat.map(([, y]) => y);
+    const left = Math.min(...xs);
+    const right = Math.max(...xs);
+    const up = Math.min(...ys);
+    const down = Math.max(...ys);
+    const scale = Math.min((width - pad * 2) / (right - left), (height - pad * 2 - headroom) / (down - up));
+    return {
+        origin: [width / 2 - ((left + right) / 2) * scale, headroom + (height - headroom) / 2 - ((up + down) / 2) * scale],
+        scale,
+        azimuth,
+        elevation,
+    };
+}
+const escape = (text) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const attrs = (pairs) => Object.entries(pairs)
+    .filter(([, value]) => value !== undefined && value !== false)
+    .map(([key, value]) => ` ${key}="${escape(String(value))}"`)
+    .join("");
+function solidSvg(paths, { tone = "hi", crease = "faint", halo = false, lit = false, flat = false, className, inner = "" } = {}) {
+    const parts = [];
+    if (halo)
+        parts.push(`<path class="iso-halo" d="${paths.fill}"/>`);
+    parts.push(`<path class="iso-fill" d="${paths.fill}"/>`);
+    if (!flat) {
+        paths.shades.forEach((d, shade) => {
+            if (d)
+                parts.push(`<path class="iso-shade" data-shade="${shade}" d="${d}"/>`);
+        });
+        parts.push(`<path class="iso-top" d="${paths.top}"/>`);
+    }
+    if (crease !== "none" && paths.crease)
+        parts.push(`<path class="iso-line iso-crease" data-tone="${crease}" d="${paths.crease}"/>`);
+    if (crease !== "none" && paths.bevel)
+        parts.push(`<path class="iso-line iso-bevel" data-tone="${crease}" d="${paths.bevel}"/>`);
+    if (inner)
+        parts.push(inner);
+    parts.push(`<path class="iso-line iso-edge" data-tone="${tone}" d="${paths.outline}"/>`);
+    return `<g${attrs({ class: className ? `iso-solid ${className}` : "iso-solid", "data-lit": lit ? "" : undefined, "data-seamless": paths.seamless ? "" : undefined })}>${parts.join("")}</g>`;
+}
+function lineSvg(d, { tone = "lo", dotted = false, dashed = false, flow = false, className, free } = {}) {
+    if (!d)
+        return "";
+    return `<path${attrs({
+        class: className ? `iso-line ${className}` : "iso-line",
+        "data-tone": tone,
+        "data-free": free === true ? "" : free || undefined,
+        "data-dotted": dotted ? "" : undefined,
+        "data-dashed": dashed ? "" : undefined,
+        "data-flow": flow ? "" : undefined,
+        d,
+    })}/>`;
+}
+function dotsSvg(points, { size = 0.5, tone = "mid", pulse = false } = {}) {
+    const dots = points
+        .map(([x, y, alpha], index) => `<circle cx="${tenth(x)}" cy="${tenth(y)}" r="${size}"${alpha !== undefined && alpha < 1 ? ` fill-opacity="${Math.max(0, alpha).toFixed(2)}"` : ""}${pulse ? ` data-pulse="" style="--pulse-at:${(index * 137) % 1600}ms"` : ""}/>`)
+        .join("");
+    return `<g class="iso-dots" data-tone="${tone}">${dots}</g>`;
+}
+function fadedSvg(list, style = {}) {
+    const groups = new Map();
+    for (const entry of list) {
+        const [d, alpha] = Array.isArray(entry) ? entry : [entry.d, entry.alpha];
+        if (!d || !(alpha > 0.02))
+            continue;
+        const level = Math.min(1, Math.round(alpha * 20) / 20);
+        groups.set(level, (groups.get(level) ?? "") + d);
+    }
+    return [...groups].map(([alpha, d]) => (alpha >= 1 ? lineSvg(d, style) : `<g opacity="${alpha.toFixed(2)}">${lineSvg(d, style)}</g>`)).join("");
+}
+function fadeLineSvg(points, { fade = [0, 0], tone = "lo", className, stops = 6 } = {}) {
+    if (points.length < 2)
+        return "";
+    const ease = (t) => t * t * (3 - 2 * t);
+    const hashOf = (text) => {
+        let hash = 2166136261;
+        for (let index = 0; index < text.length; index++)
+            hash = Math.imul(hash ^ text.charCodeAt(index), 16777619);
+        return (hash >>> 0).toString(36);
+    };
+    const lengths = [0];
+    for (let index = 1; index < points.length; index++)
+        lengths.push(lengths[index - 1] + Math.hypot(points[index][0] - points[index - 1][0], points[index][1] - points[index - 1][1]));
+    const at = (length) => {
+        let index = 1;
+        while (index < points.length - 1 && lengths[index] < length)
+            index++;
+        const span = lengths[index] - lengths[index - 1] || 1;
+        const t = Math.max(0, Math.min(1, (length - lengths[index - 1]) / span));
+        return [points[index - 1][0] + (points[index][0] - points[index - 1][0]) * t, points[index - 1][1] + (points[index][1] - points[index - 1][1]) * t];
+    };
+    const pieceOf = (from, to) => [at(from), ...points.filter((_, index) => lengths[index] > from + 1e-6 && lengths[index] < to - 1e-6), at(to)];
+    const total = lengths[lengths.length - 1];
+    if (total < 1e-6)
+        return "";
+    let [start, end] = Array.isArray(fade) ? fade : [fade, fade];
+    if (start + end > total) {
+        const share = total / (start + end);
+        start *= share;
+        end *= share;
+    }
+    const paint = `var(--anatomy-${tone})`;
+    const ramp = (piece, rising) => {
+        const d = pathOf(piece);
+        const [x1, y1] = piece[0];
+        const [x2, y2] = piece[piece.length - 1];
+        const id = `iso-fade-${hashOf(`${d}|${tone}|${rising}`)}`;
+        const marks = Array.from({ length: stops + 1 }, (_, index) => {
+            const t = index / stops;
+            const alpha = ease(rising ? t : 1 - t);
+            return `<stop offset="${t.toFixed(3)}" stop-opacity="${alpha.toFixed(3)}" style="stop-color:${paint}"/>`;
+        }).join("");
+        const gradient = `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${tenth(x1)}" y1="${tenth(y1)}" x2="${tenth(x2)}" y2="${tenth(y2)}">${marks}</linearGradient>`;
+        return `<defs>${gradient}</defs><path${attrs({ class: className ? `iso-line ${className}` : "iso-line", "data-tone": tone, "data-free": rising ? "start" : "end", d, style: `stroke:url(#${id})` })}/>`;
+    };
+    const parts = [];
+    if (start > 0.05)
+        parts.push(ramp(pieceOf(0, start), true));
+    if (total - end - start > 0.05)
+        parts.push(lineSvg(pathOf(pieceOf(start, total - end)), { tone, className }));
+    if (end > 0.05)
+        parts.push(ramp(pieceOf(total - end, total), false));
+    return `<g class="iso-fade">${parts.join("")}</g>`;
+}
+function wireSvg(from, to, { via = [], tone = "lo", dotted = false, dashed = false, flow = false, ends = "both", size = 1.2 } = {}) {
+    const d = pathOf([from, ...via, to]);
+    const end = ([x, y]) => `<circle class="iso-wire-end" cx="${tenth(x)}" cy="${tenth(y)}" r="${size}"/>`;
+    return `<g class="iso-wire" data-tone="${tone}">${lineSvg(d, { tone, dotted, dashed, flow })}${ends === "both" || ends === "from" ? end(from) : ""}${ends === "both" || ends === "to" ? end(to) : ""}</g>`;
+}
+function faceTextSvg(transform, text, { size = 3, tone = "mid", anchor = "start" } = {}) {
+    return `<text class="iso-face-text" data-tone="${tone}" transform="${transform}" font-size="${size}" text-anchor="${anchor}">${escape(text)}</text>`;
+}
+function groupSvg(children, extra = {}) {
+    return `<g${attrs(extra)}>${Array.isArray(children) ? children.join("") : children}</g>`;
+}
+function figureSvg({ width, height, label, body, standalone = false, className }) {
+    const style = standalone ? `<style>${ISO_CSS}</style>` : "";
+    return `<svg${attrs({
+        xmlns: "http://www.w3.org/2000/svg",
+        class: `iso-svg${standalone ? " iso" : ""}${className ? ` ${className}` : ""}`,
+        "data-theme": standalone || undefined,
+        viewBox: `0 0 ${width} ${height}`,
+        role: "img",
+        "aria-label": label,
+    })}>${style}${Array.isArray(body) ? body.join("") : body}</svg>`;
+}
+function swatchSvg(mark) {
+    if (mark === "raised" || mark === "flat" || mark === "lit") {
+        const body = mark === "flat" ? "M2 6.5 8 3.5 14 6.5 8 9.5Z" : "M2 4.5 8 1.5 14 4.5 14 6 8 9 2 6Z";
+        const crease = mark === "flat" ? "" : `<path class="iso-swatch-crease" d="M2 4.5 8 7.5 14 4.5"/>`;
+        return `<svg class="iso-swatch" data-mark="${mark}" viewBox="0 0 16 10" aria-hidden="true"><path d="${body}"/>${crease}</svg>`;
+    }
+    return `<svg class="iso-swatch" data-mark="${mark}" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>`;
+}
+function plateHtml({ fig, title, hint, readout = "", keys = [], caption, body }) {
+    const corner = (name, text, extra = "") => `<span class="iso-plate-corner" data-corner="${name}"${extra}>${escape(text)}</span>`;
+    const legend = keys.length || caption
+        ? `<figcaption class="iso-legend">${keys.length ? `<span class="iso-keys">${keys.map((key) => `<span class="iso-key">${swatchSvg(key.mark)}${escape(key.label)}</span>`).join("")}</span>` : ""}${caption ? `<span class="iso-caption">${escape(caption)}</span>` : ""}</figcaption>`
+        : "";
+    return `<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true">${corner("fig", fig)}${title ? corner("title", title) : ""}${hint ? corner("hint", hint) : ""}${corner("readout", readout, " data-readout")}</div>${body}</div>${legend}</figure>`;
+}
+function pageHtml({ title, theme = "dark", body, script = "", width = 650 }) {
+    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escape(title)}</title><style>${ISO_CSS}${PAGE_CSS.replace("__WIDTH__", String(width))}</style></head><body class="iso" data-theme="${theme}"><main class="iso-page">${body}</main>${script ? `<script type="module">${script.replace(/<\/(script)/gi, "<\\/$1")}<\/script>` : ""}</body></html>`;
+}
+const PAGE_CSS = `
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(__WIDTH__px,100% - 32px);margin:64px auto 96px}
+`;
+const ISO_CSS = `
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+`;
+
+{
+const P = {"origin":[320.27460600802107,183.7243879043142],"scale":1.466577055826293,"azimuth":42,"elevation":30};
+const O = {"x":-104,"y":-38}, PER_YEAR = 16, PER_UTIL = 72, MAX_YEARS = 10;
+const DIAL = [124,-52], DIAL_R = 18, DIAL_TOP = 30;
+const stage = document.querySelector('[data-figure="area"] .iso-stage');
+const svg = stage.querySelector("svg");
+const sheet = svg.querySelector('[data-part="sheet"]');
+const cx = svg.querySelector('[data-part="cx"]');
+const cy = svg.querySelector('[data-part="cy"]');
+const needle = svg.querySelector('[data-part="needle"]');
+const readout = document.querySelector('[data-figure="area"] [data-readout]');
+const still = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+const sheetSvg = (years, utility) => solidSvg(slabOf({ x: O.x, y: O.y, w: Math.max(0.6, years * PER_YEAR), d: Math.max(0.6, utility * PER_UTIL), r: 0.6 }, 0, 0.9, P, 2, 0.2), { tone: "hi", lit: true, crease: "lo", className: "qaly-sheet" });
+const needleAt = (qaly) => { const a = (qaly / MAX_YEARS) * Math.PI * 2; const [x, y] = DIAL; return lineOnTop([x - Math.sin(a) * 3.4, y + Math.cos(a) * 3.4], [x + Math.sin(a) * (DIAL_R - 4), y - Math.cos(a) * (DIAL_R - 4)], DIAL_TOP + 0.2, P); };
+const TOUR = [[2, 0.4], [1, 0.9], [5, 0.7], [10, 1.0], [3, 0.2], [2, 0.4]];
+let years = 2, utility = 0.4, tYears = 2, tUtility = 0.4;
+let frame = 0, last = 0, clock = 0, touring = true, visible = false, idleTimer = 0;
+const listeners = [];
+function draw() {
+  sheet.innerHTML = sheetSvg(years, utility);
+  cx.setAttribute("transform", translateAlong(P, [O.x + years * PER_YEAR, 0, 0]));
+  cy.setAttribute("transform", translateAlong(P, [0, O.y + utility * PER_UTIL, 0]));
+  const q = years * utility;
+  needle.setAttribute("d", needleAt(q));
+  const text = years.toFixed(1) + " 年 × " + utility.toFixed(2) + " = " + q.toFixed(2) + " QALY";
+  if (readout.textContent !== text) readout.textContent = text;
+  stage.setAttribute("aria-valuenow", q.toFixed(2)); stage.setAttribute("aria-valuetext", text);
+  for (const fn of listeners) fn({ years, utility, qaly: q });
+}
+function tick(now) {
+  const dt = last ? Math.min((now - last) / 1000, 1 / 30) : 1 / 60; last = now;
+  const calm = still.matches;
+  if (touring) { clock += dt; const i = Math.floor(clock / 2.4) % TOUR.length; [tYears, tUtility] = TOUR[i]; }
+  const ease = calm ? 1 : 1 - Math.exp(-dt / 0.3);
+  years += (tYears - years) * ease; utility += (tUtility - utility) * ease;
+  if (Math.abs(tYears - years) < 0.002) years = tYears;
+  if (Math.abs(tUtility - utility) < 0.0005) utility = tUtility;
+  draw();
+  const settled = !touring && years === tYears && utility === tUtility;
+  frame = visible && !settled ? requestAnimationFrame(tick) : 0;
+}
+const run = () => { if (!frame && visible) { last = 0; frame = requestAnimationFrame(tick); } };
+function steer(y, u, { hold = 3600 } = {}) {
+  touring = false; tYears = clamp(Math.round(y * 2) / 2, 0.5, MAX_YEARS); tUtility = clamp(Math.round(u * 20) / 20, 0, 1);
+  clearTimeout(idleTimer); if (hold) idleTimer = setTimeout(() => { touring = !still.matches; clock = 0; run(); }, hold); run();
+}
+new IntersectionObserver((es) => { visible = es[es.length - 1].isIntersecting; if (visible) run(); }, { rootMargin: "120px 0px" }).observe(stage);
+if (still.matches) touring = false;
+stage.addEventListener("pointermove", (e) => {
+  const box = svg.getBoundingClientRect();
+  const sx = clamp(((e.clientX - box.left) / box.width - 0.18) / 0.64, 0, 1);
+  const sy = clamp((0.78 - (e.clientY - box.top) / box.height) / 0.56, 0, 1);
+  steer(0.5 + sx * (MAX_YEARS - 0.5), sy);
+});
+stage.addEventListener("keydown", (e) => {
+  let y = tYears, u = tUtility;
+  if (e.key === "ArrowRight") y += 0.5; else if (e.key === "ArrowLeft") y -= 0.5; else if (e.key === "ArrowUp") u += 0.05; else if (e.key === "ArrowDown") u -= 0.05; else return;
+  e.preventDefault(); steer(y, u);
+});
+window.qalyArea = { set: (y, u) => steer(y, u, { hold: 0 }), on: (fn) => listeners.push(fn), get: () => ({ years, utility }) };
+draw();
+}
+
+{
+// model.mjs — QALY と費用対効果の計器を動かす純粋関数（教材の数字はすべてここから）
+// 出典: output/research/2026-11-05_cea-qaly-reading-guide/README.md（Weinstein 1977 / Neumann 2014 / Shiroiwa 2010, 2016）と、README「前提・限界」の一次資料（2026-11-09 確認）
+// 検証: node --test model.test.mjs
+
+const YEN = (n) => Math.round(n).toLocaleString("ja-JP");
+const MAN = (yen) => `${(yen / 1e4).toLocaleString("ja-JP", { maximumFractionDigits: 0 })} 万円`;
+
+// --- 1. QALY = 生存年 × 効用（効用は 0〜1、死 = 0、死より悪い状態は負もある）
+function qaly(years, utility) {
+  if (!(years >= 0)) throw new RangeError("years must be >= 0");
+  if (utility > 1) throw new RangeError("utility must be <= 1");
+  return years * utility;
+}
+// 複数の状態を順に過ごす場合（例: 2 年を 0.8、その後 3 年を 0.5）
+const qalySum = (segments) => segments.reduce((acc, [y, u]) => acc + qaly(y, u), 0);
+
+// 0 章の二人の患者
+const PATIENTS = {
+  A: { label: "治療 A", years: 2, utility: 0.4, note: "2 年延びるが、強い副作用で生活の質は 0.4" },
+  B: { label: "治療 B", years: 1, utility: 0.9, note: "1 年しか延びないが、ほぼ元気に過ごせる 0.9" },
+};
+
+// --- 2. 効用の測り方
+// 標準的賭け: 「確率 p で完全健康、1−p で死」の賭けと「いまの状態で確実」が無差別になる p が効用
+const sgUtility = (p) => Math.min(1, Math.max(0, p));
+// 時間得失法: 「いまの状態で t 年」と「完全健康で x 年」が無差別なら効用 = x / t
+const ttoUtility = (xFull, tState) => (tState > 0 ? Math.min(1, Math.max(-1, xFull / tState)) : NaN);
+// EQ-5D-5L の 5 項目（移動・身の回り・ふだんの活動・痛み/不快・不安/ふさぎ込み）各 1〜5。
+// ※ 模式値: 日本の価値づけ（Shiroiwa 2016）の形だけ写した教材用の係数で、実際の係数ではない
+const EQ5D_DIMS = ["移動の程度", "身の回りの管理", "ふだんの活動", "痛み・不快感", "不安・ふさぎ込み"];
+const EQ5D_DECREMENT_MODEL = [0.0, 0.05, 0.10, 0.17, 0.26]; // レベル 1〜5 の減点（模式）
+function eq5dUtilityModel(levels) {
+  if (levels.length !== 5 || levels.some((l) => l < 1 || l > 5)) throw new RangeError("5 levels of 1..5");
+  const dec = levels.reduce((acc, l) => acc + EQ5D_DECREMENT_MODEL[l - 1], 0);
+  const worst = levels.some((l) => l === 5) ? 0.05 : 0; // どれか 1 つでも「極度」なら追加の減点（模式）
+  return Math.round((1 - dec - worst) * 1000) / 1000;
+}
+
+// --- 3. ICER = 追加費用 ÷ 追加 QALY。比較対照との差で決まる
+function icer(deltaCost, deltaQaly) {
+  if (deltaQaly === 0 && deltaCost === 0) return { kind: "same", value: NaN, text: "同じ（差がない）" };
+  if (deltaCost <= 0 && deltaQaly >= 0) return { kind: "dominant", value: NaN, text: "支配（安くて効く）: ICER は計算しない" };
+  if (deltaCost >= 0 && deltaQaly <= 0) return { kind: "dominated", value: NaN, text: "支配される（高くて効かない）: ICER は計算しない" };
+  const value = deltaCost / deltaQaly;
+  return { kind: value > 0 ? "icer" : "icer", value, text: `${MAN(value)} / QALY` };
+}
+
+// --- 4. 日本の価格調整の ICER 区分点と調整率（確認日 2026-11-09）
+// 出典: 厚労省「薬価算定の基準について」令和 8 年 2 月 13 日 保発 0213 第 3 号 別表 12（β・γ・θ の係数）
+//   区分点: 通常 500 / 750 / 1,000 万円/QALY、総合的評価で配慮が必要とされた品目（抗がん剤等）750 / 1,125 / 1,500 万円/QALY
+//   β（有用性系加算部分）: 1.0 / 0.7 / 0.4 / 0.1 ＝ 各区分で 0 / 30 / 60 / 90% 引き下げ
+//   θ（営業利益部分）    : 1.0 / 0.83 / 0.67 / 0.5 ＝ 各区分で 0 / 17 / 33 / 50% 引き下げ
+//   ※ ICER 200 万円/QALY 未満は条件つきで引き上げ（β 1.25）の規定もある（ここでは扱わない）
+const THRESHOLDS = {
+  JP: { label: "日本（中医協）", value: 500e4, unit: "円", note: "価格調整の区分点（償還の可否ではない）。支払意思額調査（Shiroiwa 2010）は根拠の一つ" },
+  UK: { label: "英国（NICE）", value: 25000, unit: "£", note: "£25,000〜35,000 / QALY（2026 年 4 月から適用と NICE が発表。従来は £20,000〜30,000）" },
+  US: { label: "米国（慣習）", value: 50000, unit: "$", note: "5 万ドルは慣習。1970〜80 年代の透析の給付に由来すると語られる。近年は $100,000〜150,000 も" },
+};
+const JP_BANDS = {
+  normal: { label: "通常", cuts: [500e4, 750e4, 1000e4] },
+  cancer: { label: "配慮が必要とされた品目（抗がん剤等）", cuts: [750e4, 1125e4, 1500e4] },
+};
+// 帯ごとの引き下げ率（有用性系加算部分 / 営業利益部分）
+const BAND_RATES = [
+  { useful: 0, profit: 0 },
+  { useful: 0.3, profit: 0.17 },
+  { useful: 0.6, profit: 0.33 },
+  { useful: 0.9, profit: 0.5 },
+];
+const pct = (x) => Math.round(x * 100);
+function jpBand(icerYen, type = "normal") {
+  const { cuts } = JP_BANDS[type];
+  const idx = cuts.filter((c) => icerYen >= c).length; // 0..3
+  const r = BAND_RATES[idx];
+  const text = idx ? `加算部分 −${pct(r.useful)}%／営業利益部分 −${pct(r.profit)}%` : "価格維持";
+  return { index: idx, ...r, text, lower: idx ? cuts[idx - 1] : 0, upper: cuts[idx] ?? Infinity };
+}
+// どの部分が調整されるかは「価格の成り立ち」で決まる（別表 12 の 1 と 2）。加算も営業利益もどちらも同時に引き下げるのは「both」だけ
+const PRICE_KINDS = {
+  kasan: { label: "類似薬効比較方式で有用性系加算あり", useful: true, profit: false },
+  profit: { label: "原価計算方式で開示度 50% 未満", useful: false, profit: true },
+  both: { label: "原価計算方式・開示度が低い・2022 年 3 月以前収載で加算あり", useful: true, profit: true },
+  none: { label: "類似薬効比較方式で加算なし", useful: false, profit: false },
+};
+function jpAdjust(icerYen, type = "normal", kind = "kasan") {
+  const b = jpBand(icerYen, type), k = PRICE_KINDS[kind];
+  const parts = [];
+  if (k.useful && b.useful > 0) parts.push(`加算部分 −${pct(b.useful)}%`);
+  if (k.profit && b.profit > 0) parts.push(`営業利益部分 −${pct(b.profit)}%`);
+  const text = !k.useful && !k.profit ? "調整される部分がない" : parts.length ? parts.join("・") : "価格維持";
+  return { ...b, kind, parts, text };
+}
+
+// --- 5. 割引: t 年後の 1 の現在価値 = 1 / (1 + r)^t（日本は費用・効果とも年 2%、感度分析 0〜4%）
+const discountFactor = (rate, t) => 1 / Math.pow(1 + rate, t);
+// 年ごとの流れ（t = 0, 1, 2, …）の割引後合計
+const presentValue = (stream, rate) => stream.reduce((acc, v, t) => acc + v * discountFactor(rate, t), 0);
+// 予防の例（例示用の仮の数字。実在の事例ではない）: いま費用 C0 を払い、from 年後から to 年後まで毎年 g QALY を得る
+function preventionIcer({ cost, gainPerYear, from, to, rate }) {
+  const stream = Array.from({ length: to + 1 }, (_, t) => (t >= from && t <= to ? gainPerYear : 0));
+  const q = presentValue(stream, rate);
+  return { qaly: q, icer: q > 0 ? cost / q : Infinity };
+}
+
+// --- 6. 不確実性: 確率的感度分析（モンテカルロ）と CEAC
+// 乱数は再現できるように種つき（mulberry32）。※ ノイマンの平方採中法は退化するので使わない
+function rng(seed = 1) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+// Box–Muller の正規乱数
+function normal(random, mean, sd) {
+  const u = 1 - random(), v = random();
+  return mean + sd * Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+function psa({ n = 1000, cost, costSd, qaly: q, qalySd, seed = 1 }) {
+  const random = rng(seed);
+  const samples = [];
+  for (let i = 0; i < n; i++) samples.push({ dc: normal(random, cost, costSd), de: normal(random, q, qalySd) });
+  return samples;
+}
+// CEAC: 閾値 λ ごとに「λ·ΔE − ΔC > 0（費用対効果あり）」の割合
+const ceac = (samples, thresholds) => thresholds.map((l) => ({ threshold: l, p: samples.filter((s) => l * s.de - s.dc > 0).length / samples.length }));
+// トルネード: 一つの入力だけを低・高に振ったときの ICER
+function tornado(base, params) {
+  return params.map(({ name, low, high, apply }) => {
+    const lo = icer(...apply(base, low)).value, hi = icer(...apply(base, high)).value;
+    return { name, low: lo, high: hi, swing: Math.abs(hi - lo) };
+  }).sort((a, b) => b.swing - a.swing);
+}
+
+// --- 7. 読む 6 問
+const SIX_QUESTIONS = [
+  ["立場", "公的医療の立場か、社会の立場か。休業（生産性損失）の費用は入っているか"],
+  ["比較対照", "いまの標準治療と比べているか。都合のいい古い相手ではないか"],
+  ["効用の出どころ", "どの国の、どの測り方（EQ-5D-5L・SG・TTO）か、何年の値か"],
+  ["ICER と閾値", "分子と分母は何と何の差か。閾値は誰がどう決めたか"],
+  ["不確実性", "トルネードと PSA → CEAC があるか。点推定だけではないか"],
+  ["資金源", "誰が資金を出したか。著者の利益相反は"],
+];
+
+const QUIZ = [{"q":"新薬の ICER は 450 万円/QALY と報告され、閾値 500 万円を下回っている。比較対照は 10 年前の標準治療だった。どう読む？","options":["閾値未満なので費用対効果あり","比較対照を今の標準治療に置き直すと ΔQALY が縮み、ICER は上がりうる。数字はまだ信用できない","ICER が小さいので支配的と言える"],"answer":1,"why":"6 問の「比較対照」。古い弱い治療と比べると ΔQALY が膨らみ、ICER は小さく見える。今の標準との差で読み直す。"},{"q":"ワクチンの費用対効果分析で、モデルは「接種した本人の感染だけ」を扱い、周りへの感染の減り（間接効果）は入れていない。ICER は閾値を上回った。どう読む？","options":["間接効果を入れない静的モデルはワクチンに不利に出る。動的モデルの結果も見たい","閾値を上回ったので費用対効果なし","本人の効果だけで評価するのが正しい"],"answer":0,"why":"モデルの構造の問い。集団免疫を扱わない静的モデルでは、ワクチンの効果の一部が落ちる。男性の HPV ワクチン接種の費用対効果分析（2026-07-22、第 35 回ワクチン評価小委員会）は、男性本人の効果をマルコフモデルで、女性への間接効果は別の女性接種モデルで推計する形で、感染の伝播を組み込んだダイナミックモデルは国内データの整備待ちとされた（<a href=\"https://www.mhlw.go.jp/content/10900000/001726448.pdf\" target=\"_blank\" rel=\"noopener\">資料 3-1</a>）。審議で「静的モデルそのもの」が争点になったとまでは確認できていない。"},{"q":"製薬企業が資金を出した費用対効果分析で、ICER は 480 万円/QALY、CEAC は示されていない。どう読む？","options":["企業資金でも査読を通っていれば問題ない","資金源の偏り（閾値未満を報告しやすい）と、不確実性が示されていない二重の弱さ。点推定だけで判断しない","480 万円は閾値未満なので採用してよい"],"answer":1,"why":"6 問の「不確実性」と「資金源」。Bell ら 2006 の系統的レビューは、企業資金の分析が閾値未満の結果を報告しやすいことを示した。CEAC が無い点推定は弱い。"}];
+// instruments.js — 計器 0・2〜7 とページの振る舞い（build.mjs が model.mjs と一緒に 1 つのブロックに inline する）
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => [...document.querySelectorAll(s)];
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, text) => { const e = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (text != null) e.textContent = text; return e; };
+const man = (yen) => (yen / 1e4).toLocaleString("ja-JP", { maximumFractionDigits: 0 }) + " 万円";
+const bindRange = (id, fn) => { const r = $("#" + id), o = $("#" + id + "-out"); const unit = o.textContent.replace(/^[-\d.,]+/, ""); const go = () => { o.textContent = r.value + unit; fn(parseFloat(r.value)); }; r.addEventListener("input", go); return { go, set: (v) => { r.value = v; go(); } }; };
+
+// ---- HUD: 進み具合と現在の章
+{
+  const bar = $(".progress i");
+  const links = $$(".hud nav a");
+  const onScroll = () => { const h = document.documentElement; bar.style.width = (100 * h.scrollTop / (h.scrollHeight - h.clientHeight)).toFixed(1) + "%"; };
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) links.forEach((a) => a.setAttribute("aria-current", a.getAttribute("href") === "#" + e.target.id ? "true" : "false")); }, { rootMargin: "-40% 0px -55% 0px" });
+  $$(".chapter").forEach((c) => io.observe(c));
+}
+
+// ---- 計器 0: 二人の患者
+{
+  let pick = null;
+  const cards = $$("[data-pick]"), calc = $("#b0-calc"), rev = $("#rev0"), r = $("#r0");
+  cards.forEach((c) => c.addEventListener("click", () => { pick = c.dataset.pick; cards.forEach((x) => x.setAttribute("aria-pressed", String(x === c))); calc.disabled = false; r.textContent = "直感: 治療 " + pick; rev.hidden = true; }));
+  calc.addEventListener("click", () => {
+    const A = PATIENTS.A, B = PATIENTS.B, qa = qaly(A.years, A.utility), qb = qaly(B.years, B.utility);
+    const better = qa > qb ? "A" : "B";
+    rev.innerHTML = `<div>治療 A: ${A.years} 年 × ${A.utility} ＝ <span class="big">${qa.toFixed(2)} QALY</span></div><div>治療 B: ${B.years} 年 × ${B.utility} ＝ <span class="big">${qb.toFixed(2)} QALY</span></div>` +
+      `<div class="verdict ${pick === better ? "ok" : "warn"}">${pick === better ? "直感と QALY が一致しました。" : "直感（" + pick + "）と QALY（" + better + "）が逆転しました。"}長さだけでも質だけでもなく、掛け算で比べると差は 0.1 QALY。これが「単位」の仕事です。</div>` +
+      `<div class="btnrow"><a class="btn" href="#c1" id="b0-go">計器 1 でこの二つを見る</a></div>`;
+    rev.hidden = false; r.textContent = `A ${qa.toFixed(2)} / B ${qb.toFixed(2)} QALY`;
+    $("#b0-go").addEventListener("click", () => setTimeout(() => window.qalyArea && window.qalyArea.set(pick === "A" ? 2 : 1, pick === "A" ? 0.4 : 0.9), 400));
+  });
+  $("#b0-reset").addEventListener("click", () => { pick = null; cards.forEach((x) => x.setAttribute("aria-pressed", "false")); calc.disabled = true; rev.hidden = true; r.textContent = ""; });
+}
+
+// ---- 計器 1: つまみと機械を結ぶ
+{
+  const r = $("#r1");
+  let quiet = false;
+  const years = bindRange("s1-years", (v) => { if (!quiet && window.qalyArea) window.qalyArea.set(v, parseFloat($("#s1-util").value)); });
+  const util = bindRange("s1-util", (v) => { if (!quiet && window.qalyArea) window.qalyArea.set(parseFloat($("#s1-years").value), v); });
+  const sync = (s) => { quiet = true; $("#s1-years").value = s.years.toFixed(1); $("#s1-years-out").textContent = s.years.toFixed(1) + " 年"; $("#s1-util").value = s.utility.toFixed(2); $("#s1-util-out").textContent = s.utility.toFixed(2); r.textContent = s.qaly.toFixed(2) + " QALY"; quiet = false; };
+  if (window.qalyArea) { window.qalyArea.on(sync); const g = window.qalyArea.get(); sync({ ...g, qaly: g.years * g.utility }); }
+  $$("[data-set]").forEach((b) => b.addEventListener("click", () => { const [y, u] = b.dataset.set.split(",").map(Number); window.qalyArea && window.qalyArea.set(y, u); }));
+}
+
+// ---- 計器 2: 標準的賭け と EQ-5D-5L（模式）
+{
+  let lo = 0, hi = 1, p = 0.5, n = 0; const MAX = 6;
+  const pEl = $("#sg-p"), log = $("#sg-log"), r = $("#r2");
+  const show = () => { pEl.textContent = Math.round(p * 100) + "%"; };
+  const answer = (gamble) => {
+    if (n >= MAX) return;
+    log.textContent += (n ? " → " : "") + Math.round(p * 100) + "% で" + (gamble ? "賭けた" : "確実");
+    if (gamble) hi = p; else lo = p; // 賭けたなら、もっと低い確率でも賭けるか試す
+    p = (lo + hi) / 2; n++; show();
+    if (n >= MAX) { const u = sgUtility(p); r.textContent = "効用 ≈ " + u.toFixed(2); pEl.textContent = Math.round(p * 100) + "%（止まった点）"; log.textContent += ` ⇒ この状態の効用 ≈ ${u.toFixed(2)}。「この状態の 10 年は、完全健康の ${(u * 10).toFixed(1)} 年ぶん」`; $("#sg-gamble").disabled = $("#sg-sure").disabled = true; }
+  };
+  $("#sg-gamble").addEventListener("click", () => answer(true));
+  $("#sg-sure").addEventListener("click", () => answer(false));
+  $("#sg-reset").addEventListener("click", () => { lo = 0; hi = 1; p = 0.5; n = 0; log.textContent = ""; r.textContent = ""; $("#sg-gamble").disabled = $("#sg-sure").disabled = false; show(); });
+  show();
+  const LV = ["1 問題ない", "2 少し", "3 中程度", "4 かなり", "5 極度・できない"];
+  const box = $("#eq5d");
+  EQ5D_DIMS.forEach((d, i) => { const l = document.createElement("label"); l.className = "ctl"; l.innerHTML = `<span class="lab"><span>${d}</span></span><select data-dim="${i}">${LV.map((t, j) => `<option value="${j + 1}">${t}</option>`).join("")}</select>`; box.appendChild(l); });
+  const eqOut = $("#eq5d-out");
+  const eqCalc = () => { const lv = $$("#eq5d select").map((s) => parseInt(s.value, 10)); const u = eq5dUtilityModel(lv); eqOut.innerHTML = `5 項目 ${lv.join("")} → 効用 <b>${u.toFixed(2)}</b>（模式値。実際は日本の価値づけ表で換算）`; };
+  box.addEventListener("change", eqCalc); eqCalc();
+}
+
+// ---- 図の共通: 描画幅 = 画面の CSS 幅（viewBox を実寸にして、文字をいつも 12px に保つ）
+const widthOf = (svg) => Math.max(280, Math.round(svg.getBoundingClientRect().width || svg.parentElement.clientWidth || 320));
+const setBox = (svg, W, H) => { svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("width", W); svg.removeAttribute("height"); svg.style.height = "auto"; };
+const onWidth = (svg, fn) => { let last = 0; const go = () => { const w = widthOf(svg); if (Math.abs(w - last) > 1) { last = w; fn(); } }; if (window.ResizeObserver) new ResizeObserver(go).observe(svg); else addEventListener("resize", go); };
+const TXT = 12;
+
+// ---- 平面の座標（計器 3・6 で共用）。幅から毎回つくる
+function mkPlane(svg) {
+  const W = widthOf(svg), narrow = W < 480;
+  const H = Math.round(Math.max(300, Math.min(400, W * 0.66)));
+  const P = { W, H, L: 10, R: W - 10, T: 26, B: H - 22, qMax: 1, cMax: 1000e4 };
+  P.px = (dq) => P.L + ((dq + P.qMax) / (2 * P.qMax)) * (P.R - P.L);
+  P.py = (dc) => P.T + ((P.cMax - dc) / (2 * P.cMax)) * (P.B - P.T);
+  P.narrow = narrow;
+  setBox(svg, W, H);
+  return P;
+}
+function planeFrame(svg, P, { thresholds = [500e4, 750e4, 1000e4] } = {}) {
+  svg.innerHTML = "";
+  const { px, py } = P;
+  const g = el("g"); svg.appendChild(g);
+  for (const v of [-0.5, 0.5]) g.appendChild(el("line", { class: "grid", x1: px(v), x2: px(v), y1: P.T, y2: P.B }));
+  for (const v of [-500e4, 500e4]) g.appendChild(el("line", { class: "grid", x1: P.L, x2: P.R, y1: py(v), y2: py(v) }));
+  g.appendChild(el("line", { class: "axis", x1: px(0), x2: px(0), y1: P.T, y2: P.B }));
+  g.appendChild(el("line", { class: "axis", x1: P.L, x2: P.R, y1: py(0), y2: py(0) }));
+  // 区分点の線。ラベルは線の右端のすぐ上（線から離れる向き）に置く
+  thresholds.forEach((l, i) => {
+    const a = Math.max(-1, -P.cMax / l), b = Math.min(1, P.cMax / l);
+    g.appendChild(el("line", { class: i ? "thr2" : "thr", x1: px(a), y1: py(a * l), x2: px(b), y2: py(b * l) }));
+    g.appendChild(el("text", { x: P.R - 2, y: py(b * l) - 6, "text-anchor": "end", class: "q" }, (l / 1e4).toLocaleString("ja-JP") + " 万円/QALY"));
+  });
+  // 軸の目盛りと名前
+  g.appendChild(el("text", { x: P.R - 2, y: py(0) + 16, "text-anchor": "end" }, "ΔQALY →"));
+  g.appendChild(el("text", { x: px(0) - 6, y: P.T + 4, "text-anchor": "end" }, "Δ費用 ↑"));
+  g.appendChild(el("text", { x: px(0) - 6, y: P.B - 4, "text-anchor": "end", class: "q" }, "−1,000 万円"));
+  g.appendChild(el("text", { x: P.L + 2, y: py(0) + 16, class: "q" }, "−1"));
+  g.appendChild(el("text", { x: px(0) - 6, y: P.T + 20, "text-anchor": "end", class: "q" }, "+1,000 万円"));
+  // 象限の名前（短く）。区分点の線と交わらない場所に置く
+  g.appendChild(el("text", { x: P.R - 2, y: P.B - 6, "text-anchor": "end", class: "q" }, "支配 → 採用"));
+  g.appendChild(el("text", { x: P.L + 2, y: py(550e4), class: "q" }, "被支配 → 却下"));
+  return g;
+}
+
+// ---- 計器 3: 費用効果平面
+{
+  const svg = $("#ce-plane"), v3 = $("#v3"), r = $("#r3");
+  let dq = 0.5, dc = 300e4, mode = "std", P = mkPlane(svg);
+  const STD = { dq: 0.5, dc: 300e4 }, OLD = { dq: 0.9, dc: 350e4 };
+  let pt, ghost;
+  const draw = () => {
+    planeFrame(svg, P);
+    if (mode === "old") { ghost = el("circle", { class: "pt ref", r: 6, cx: P.px(STD.dq), cy: P.py(STD.dc) }); svg.appendChild(ghost); svg.appendChild(el("text", { x: P.px(STD.dq) - 10, y: P.py(STD.dc) + 18, "text-anchor": "end", class: "q" }, "標準治療と比べた位置")); }
+    pt = el("circle", { class: "pt", r: 9, cx: P.px(dq), cy: P.py(dc) }); svg.appendChild(pt);
+    const res = icer(dc, dq);
+    const band = res.kind === "icer" && res.value > 0 ? jpBand(res.value, "normal") : null;
+    r.textContent = res.kind === "icer" ? man(res.value) + "/QALY" : res.text;
+    v3.className = "verdict " + (res.kind === "dominant" ? "ok" : res.kind === "dominated" ? "ng" : band && band.index >= 1 ? "warn" : "");
+    v3.innerHTML = `ΔQALY ${dq.toFixed(2)}、Δ費用 ${man(dc)} → <b>${res.text}</b>` + (band ? `。日本の通常の区分点では ${band.index === 0 ? "価格維持" : "ICER " + man(band.lower) + "〜の区分（" + band.text + "。どちらが下がるかは価格の成り立ち次第）"}` : "") + (mode === "old" ? `<br>同じ薬なのに、比較対照を古い治療にすり替えると ΔQALY が ${STD.dq} → ${OLD.dq} に膨らみ、ICER は ${man(STD.dc / STD.dq)} → ${man(OLD.dc / OLD.dq)} に見える。` : "");
+  };
+  const q = bindRange("s3-dq", (v) => { dq = v; draw(); }), c = bindRange("s3-dc", (v) => { dc = v * 1e4; draw(); });
+  let dragging = false;
+  const toWorld = (e) => { const m = svg.getScreenCTM().inverse(); const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(m); return { dq: Math.max(-1, Math.min(1, ((p.x - P.L) / (P.R - P.L)) * 2 - 1)), dc: Math.max(-P.cMax, Math.min(P.cMax, P.cMax - ((p.y - P.T) / (P.B - P.T)) * 2 * P.cMax)) }; };
+  svg.style.touchAction = "none";
+  const move = (e) => { const w = toWorld(e); q.set(Math.round(w.dq * 20) / 20); c.set(Math.round(w.dc / 1e5) * 10); };
+  svg.addEventListener("pointerdown", (e) => { dragging = true; svg.setPointerCapture(e.pointerId); move(e); });
+  svg.addEventListener("pointermove", (e) => { if (dragging) move(e); });
+  svg.addEventListener("pointerup", () => { dragging = false; }); svg.addEventListener("pointercancel", () => { dragging = false; });
+  $("#b3-cmp").addEventListener("click", () => { mode = "old"; q.set(OLD.dq); c.set(OLD.dc / 1e4); });
+  $("#b3-std").addEventListener("click", () => { mode = "std"; q.set(STD.dq); c.set(STD.dc / 1e4); });
+  draw();
+  onWidth(svg, () => { P = mkPlane(svg); draw(); });
+}
+
+// ---- 計器 4: 区分点のものさし（広い画面は横、狭い画面は縦）
+{
+  const svg = $("#band-ruler"), v4 = $("#v4"), r = $("#r4");
+  const MAX = 1600e4;
+  let icerYen = 600e4, type = "normal", kind = "kasan";
+  const bandLines = (i) => { const k = PRICE_KINDS[kind]; if (!k.useful && !k.profit) return ["調整なし"]; if (i === 0) return ["維持"]; const u = jpBand(JP_BANDS[type].cuts[i - 1], type); const out = []; if (k.useful) out.push("加算 −" + Math.round(u.useful * 100) + "%"); if (k.profit) out.push("利益 −" + Math.round(u.profit * 100) + "%"); return out; };
+  const putLines = (x, yMid, lines, attrs) => lines.forEach((t, j) => svg.appendChild(el("text", { ...attrs, x, y: yMid + 4 + (j - (lines.length - 1) / 2) * 16 }, t)));
+  const draw = () => {
+    svg.innerHTML = "";
+    const W = widthOf(svg), vertical = W < 560;
+    const cuts = [0, ...JP_BANDS[type].cuts, MAX];
+    if (!vertical) {
+      const H = 124, L = 16, R = W - 16, x = (yen) => L + (yen / MAX) * (R - L); setBox(svg, W, H);
+      for (let i = 0; i < 4; i++) { svg.appendChild(el("rect", { class: "band" + i, x: x(cuts[i]), y: 34, width: x(cuts[i + 1]) - x(cuts[i]), height: 48 })); putLines((x(cuts[i]) + x(cuts[i + 1])) / 2, 58, bandLines(i), { "text-anchor": "middle", class: "bandtxt", style: "fill:var(--nf-void)" }); }
+      for (const c of JP_BANDS[type].cuts) { svg.appendChild(el("line", { class: "axis", x1: x(c), x2: x(c), y1: 30, y2: 86 })); svg.appendChild(el("text", { x: x(c), y: 102, "text-anchor": "middle" }, (c / 1e4).toLocaleString("ja-JP"))); }
+      svg.appendChild(el("text", { x: L, y: 102 }, "0")); svg.appendChild(el("text", { x: R, y: 120, "text-anchor": "end" }, "万円/QALY"));
+      for (const [y1, y2] of [[18, 36], [80, 90]]) svg.appendChild(el("line", { class: "marker", x1: x(icerYen), x2: x(icerYen), y1, y2 }));
+      const tx = Math.min(R - 60, Math.max(L + 60, x(icerYen)));
+      svg.appendChild(el("text", { x: tx, y: 14, "text-anchor": "middle", style: "fill:var(--nf-iris);font-weight:700" }, "ICER " + man(icerYen)));
+    } else {
+      const H = 340, T = 14, B = H - 14, y = (yen) => T + (yen / MAX) * (B - T), BX = 74, BW = 34; setBox(svg, W, H);
+      for (let i = 0; i < 4; i++) { svg.appendChild(el("rect", { class: "band" + i, x: BX, y: y(cuts[i]), width: BW, height: y(cuts[i + 1]) - y(cuts[i]) })); putLines(BX + BW + 8, (y(cuts[i]) + y(cuts[i + 1])) / 2, bandLines(i), { style: "fill:var(--nf-void)" }); }
+      for (const c of JP_BANDS[type].cuts) { svg.appendChild(el("line", { class: "axis", x1: BX - 6, x2: BX + BW, y1: y(c), y2: y(c) })); svg.appendChild(el("text", { x: BX - 10, y: y(c) + 4, "text-anchor": "end" }, (c / 1e4).toLocaleString("ja-JP"))); }
+      svg.appendChild(el("text", { x: BX - 10, y: T + 4, "text-anchor": "end" }, "0")); svg.appendChild(el("text", { x: 4, y: B + 2 }, "万円/QALY"));
+      svg.appendChild(el("line", { class: "marker", x1: BX - 8, x2: BX + BW + 6, y1: y(icerYen), y2: y(icerYen) }));
+      svg.appendChild(el("text", { x: W - 4, y: Math.max(T + 12, y(icerYen) - 6), "text-anchor": "end", style: "fill:var(--nf-iris);font-weight:700" }, "ICER " + man(icerYen)));
+    }
+    const a = jpAdjust(icerYen, type, kind), b = a;
+    r.textContent = a.text;
+    v4.className = "verdict " + (b.index === 0 || PRICE_KINDS[kind].useful + PRICE_KINDS[kind].profit === 0 ? "ok" : b.index === 3 ? "ng" : "warn");
+    v4.innerHTML = `${JP_BANDS[type].label}の区分点で、ICER ${man(icerYen)}/QALY は ${b.lower ? man(b.lower) : "0"}〜${isFinite(b.upper) ? man(b.upper) : "上限なし"} の区分。「${PRICE_KINDS[kind].label}」の品目では <b>${a.text}</b>。保険適用は続き、価格のうち決まった部分だけが下がる。`;
+  };
+  bindRange("s4-icer", (v) => { icerYen = v * 1e4; draw(); });
+  $("#s4-type").addEventListener("change", (e) => { type = e.target.value; draw(); });
+  $("#s4-kind").addEventListener("change", (e) => { kind = e.target.value; draw(); });
+  draw();
+  onWidth(svg, draw);
+}
+
+// ---- 計器 5: 割引
+{
+  const svg = $("#disc-chart"), v5 = $("#v5"), r = $("#r5");
+  let rate = 0.02;
+  const draw = () => {
+    svg.innerHTML = "";
+    const W = widthOf(svg), H = 220, L = 34, R = W - 8, T = 24, B = 190, N = 31; setBox(svg, W, H);
+    svg.appendChild(el("line", { class: "axis", x1: L, x2: R, y1: B, y2: B }));
+    for (const v of [0.5, 1]) { svg.appendChild(el("line", { class: "grid", x1: L, x2: R, y1: B - v * (B - T), y2: B - v * (B - T) })); svg.appendChild(el("text", { x: L - 4, y: B - v * (B - T) + 4, "text-anchor": "end" }, v.toFixed(1))); }
+    const bw = (R - L) / N;
+    for (let t = 0; t < N; t++) { const df = discountFactor(rate, t); svg.appendChild(el("rect", { class: "bar" + (t === 10 || t === 30 ? " hi" : ""), x: L + t * bw + 1, y: B - df * (B - T), width: Math.max(1, bw - 2), height: df * (B - T) })); if (t % 5 === 0) svg.appendChild(el("text", { x: Math.min(R - 12, Math.max(L + 4, L + t * bw + bw / 2)), y: B + 16, "text-anchor": "middle" }, t + "年")); }
+    for (const t of [10, 30]) svg.appendChild(el("text", { x: Math.min(R - 14, L + t * bw + bw / 2), y: B - discountFactor(rate, t) * (B - T) - 6, "text-anchor": "middle", style: "fill:var(--nf-iris);font-weight:700" }, discountFactor(rate, t).toFixed(2)));
+    const ex = preventionIcer({ cost: 5e4, gainPerYear: 0.002, from: 10, to: 40, rate });
+    const ex0 = preventionIcer({ cost: 5e4, gainPerYear: 0.002, from: 10, to: 40, rate: 0 });
+    r.textContent = `10 年後の 1 QALY = ${discountFactor(rate, 10).toFixed(2)}`;
+    v5.innerHTML = `予防の例（<b>例示用の仮の数字</b>で、実在の事例ではない）: いま 5 万円を払い、10〜40 年後に毎年 0.002 QALY を得る。割引 ${(rate * 100).toFixed(1)}% で合計 <b>${ex.qaly.toFixed(3)} QALY</b>、ICER <b>${man(ex.icer)}/QALY</b>（割引なしなら ${ex0.qaly.toFixed(3)} QALY、${man(ex0.icer)}/QALY）。効果は同じでも、割引率だけで ICER が動く。`;
+  };
+  bindRange("s5-rate", (v) => { rate = v / 100; draw(); });
+  draw();
+  onWidth(svg, draw);
+}
+
+// ---- 計器 6: PSA・CEAC・トルネード
+{
+  const plane = $("#psa-plane"), ceacSvg = $("#ceac"), torSvg = $("#tornado"), v6 = $("#v6"), r = $("#r6");
+  const BASE = { cost: 300e4, qaly: 0.5 };
+  let qsd = 0.2, csd = 100e4, seed = 1, samples = null, P = mkPlane(plane);
+  const drawPlane = () => {
+    planeFrame(plane, P);
+    if (samples) {
+      const cloud = el("g"); plane.appendChild(cloud);
+      for (const s of samples) cloud.appendChild(el("circle", { class: "cloud", r: 2.2, cx: P.px(Math.max(-1, Math.min(1, s.de))), cy: P.py(Math.max(-P.cMax, Math.min(P.cMax, s.dc))) }));
+    }
+    plane.appendChild(el("circle", { class: "pt", r: 8, cx: P.px(BASE.qaly), cy: P.py(BASE.cost) }));
+  };
+  const drawCeac = () => {
+    ceacSvg.innerHTML = "";
+    const W = widthOf(ceacSvg), H = 220, L = 34, R = W - 10, T = 12, B = 176, MAXL = 2000e4; setBox(ceacSvg, W, H);
+    const X = (l) => L + (l / MAXL) * (R - L), Y = (p) => B - p * (B - T);
+    for (const v of [0.5, 1]) { ceacSvg.appendChild(el("line", { class: "grid", x1: L, x2: R, y1: Y(v), y2: Y(v) })); ceacSvg.appendChild(el("text", { x: L - 4, y: Y(v) + 4, "text-anchor": "end" }, v.toFixed(1))); }
+    for (const l of [500e4, 1000e4, 1500e4]) { ceacSvg.appendChild(el("line", { class: l === 500e4 ? "thr" : "grid", x1: X(l), x2: X(l), y1: T, y2: B })); ceacSvg.appendChild(el("text", { x: X(l), y: B + 16, "text-anchor": "middle" }, (l / 1e4).toLocaleString("ja-JP"))); }
+    ceacSvg.appendChild(el("line", { class: "axis", x1: L, x2: R, y1: B, y2: B })); ceacSvg.appendChild(el("line", { class: "axis", x1: L, x2: L, y1: T, y2: B }));
+    ceacSvg.appendChild(el("text", { x: R, y: H - 4, "text-anchor": "end" }, "閾値 λ（万円/QALY）→"));
+    if (!samples) {
+      // 押す前: 形のイメージ（薄い灰の破線）と、枠の中の案内
+      const pts = Array.from({ length: 41 }, (_, i) => { const l = (i * MAXL) / 40; return [X(l), Y(1 / (1 + Math.exp(-(l - 500e4) / 250e4)))]; });
+      ceacSvg.appendChild(el("path", { d: pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" "), fill: "none", stroke: "var(--nf-line-strong)", "stroke-width": 2, "stroke-dasharray": "5 4" }));
+      const cx = (L + R) / 2, msg = "押すと曲線が出ます（形のイメージ）", w = Math.min(R - L - 8, msg.length * 12 + 20);
+      ceacSvg.appendChild(el("rect", { x: cx - w / 2, y: T + 8, width: w, height: 26, rx: 13, fill: "#fff", stroke: "var(--nf-line-strong)" }));
+      ceacSvg.appendChild(el("text", { x: cx, y: T + 26, "text-anchor": "middle", style: "stroke:none" }, msg));
+      return;
+    }
+    const ths = Array.from({ length: 41 }, (_, i) => (i * MAXL) / 40);
+    const curve = ceac(samples, ths);
+    ceacSvg.appendChild(el("path", { class: "line", d: curve.map((c, i) => (i ? "L" : "M") + X(c.threshold).toFixed(1) + " " + Y(c.p).toFixed(1)).join(" ") }));
+    const at500 = ceac(samples, [500e4])[0].p;
+    ceacSvg.appendChild(el("circle", { class: "pt", r: 7, cx: X(500e4), cy: Y(at500) }));
+    return at500;
+  };
+  const drawTornado = () => {
+    torSvg.innerHTML = "";
+    const rows = tornado([BASE.cost, BASE.qaly], [
+      { name: "QALY の差（0.3〜0.7）", low: 0.3, high: 0.7, apply: (b, v) => [b[0], v] },
+      { name: "費用の差（200〜400 万円）", low: 200e4, high: 400e4, apply: (b, v) => [v, b[1]] },
+      { name: "効用の出どころ（×0.8〜×1.2）", low: 0.8, high: 1.2, apply: (b, v) => [b[0], b[1] * v] },
+    ]);
+    const W = widthOf(torSvg), RH = 46, H = 22 + rows.length * RH + 4; setBox(torSvg, W, H);
+    const L = 8, R = W - 8, MAXI = 1500e4, base = BASE.cost / BASE.qaly, x = (v) => L + (Math.min(MAXI, Math.max(0, v)) / MAXI) * (R - L);
+    torSvg.appendChild(el("text", { x: Math.min(R - 50, Math.max(L + 50, x(base))), y: 12, "text-anchor": "middle", style: "fill:var(--nf-iris)" }, "▼ 基準 " + man(base)));
+    rows.forEach((row, i) => {
+      const y = 22 + i * RH, a = Math.min(row.low, row.high), b = Math.max(row.low, row.high);
+      torSvg.appendChild(el("text", { x: L, y: y + 12 }, row.name));
+      torSvg.appendChild(el("text", { x: R, y: y + 12, "text-anchor": "end", class: "q" }, man(a) + "〜" + man(b)));
+      torSvg.appendChild(el("line", { class: "thr", x1: x(base), x2: x(base), y1: y + 17, y2: y + 38 }));
+      torSvg.appendChild(el("rect", { class: "bar" + (i === 0 ? " hi" : ""), x: x(a), y: y + 20, width: Math.max(2, x(b) - x(a)), height: 14 }));
+    });
+  };
+  const run = () => { samples = psa({ n: 1000, cost: BASE.cost, costSd: csd, qaly: BASE.qaly, qalySd: qsd, seed }); drawPlane(); const p = drawCeac(); drawTornado(); r.textContent = `500 万円で ${(p * 100).toFixed(0)}%`; v6.className = "verdict " + (p >= 0.8 ? "ok" : p >= 0.5 ? "warn" : "ng"); v6.innerHTML = `種 ${seed}・1,000 回。閾値 500 万円/QALY で費用対効果ありと言える確率は <b>${(p * 100).toFixed(0)}%</b>。点推定の ICER は ${man(BASE.cost / BASE.qaly)}/QALY で閾値を超えるが、雲は線の両側にまたがる。`; };
+  bindRange("s6-qsd", (v) => { qsd = v; if (samples) run(); });
+  bindRange("s6-csd", (v) => { csd = v * 1e4; if (samples) run(); });
+  $("#b6-run").addEventListener("click", run);
+  $("#b6-again").addEventListener("click", () => { seed = (seed % 97) + 1; run(); });
+  const all = () => { P = mkPlane(plane); drawPlane(); drawCeac(); drawTornado(); };
+  all();
+  onWidth(plane, all);
+}
+
+// ---- 計器 7: クイズ
+{
+  const box = $("#quiz"), r = $("#r7"); let score = 0, done = 0;
+  QUIZ.forEach((q, i) => {
+    const d = document.createElement("div"); d.className = "qitem";
+    d.innerHTML = `<div class="qn">Q${i + 1}</div><p>${q.q}</p>` + q.options.map((o, j) => `<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("") + `<div class="ans" hidden></div>`;
+    box.appendChild(d);
+    d.addEventListener("change", (e) => { const j = parseInt(e.target.value, 10); const ok = j === q.answer; const a = d.querySelector(".ans"); a.hidden = false; a.className = "ans verdict " + (ok ? "ok" : "ng"); a.innerHTML = (ok ? "正解。" : "惜しい。正解は「" + q.options[q.answer] + "」。") + " " + q.why; d.querySelectorAll("input").forEach((x) => (x.disabled = true)); done++; if (ok) score++; r.textContent = `${score} / ${done} 問`; });
+  });
+}
+
+// ---- 8 章: 印刷
+{ const b = $("#b8-print"); if (b) b.addEventListener("click", () => window.print()); }
+
+}
+</script>
+</body></html>

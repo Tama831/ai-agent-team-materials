@@ -1,0 +1,23 @@
+<svg width="1200" height="660" viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif">
+  <rect x="0" y="0" width="1200" height="660" fill="#FBF7EF"/>
+  <text x="600" y="48" text-anchor="middle" font-size="30" font-weight="bold" fill="#2E2E2E">「アクセスがいい」を3つに分解する（Boyle 2020）</text>
+
+  <circle cx="600" cy="250" r="155" fill="#4EB8A9" fill-opacity="0.32" stroke="#2E8E80" stroke-width="3"/>
+  <circle cx="510" cy="400" r="155" fill="#E8A84C" fill-opacity="0.32" stroke="#C07E16" stroke-width="3"/>
+  <circle cx="690" cy="400" r="155" fill="#D9876C" fill-opacity="0.32" stroke="#B25E40" stroke-width="3"/>
+
+  <text x="600" y="160" text-anchor="middle" font-size="23" font-weight="bold" fill="#1F6B5F">物理的アクセス</text>
+  <text x="600" y="188" text-anchor="middle" font-size="16" fill="#2E332C">たどり着けるか</text>
+
+  <text x="395" y="470" text-anchor="middle" font-size="23" font-weight="bold" fill="#8A5A0C">迅速性</text>
+  <text x="395" y="498" text-anchor="middle" font-size="16" fill="#2E332C">今日診てもらえるか</text>
+
+  <text x="805" y="470" text-anchor="middle" font-size="23" font-weight="bold" fill="#9A4F33">選択</text>
+  <text x="805" y="498" text-anchor="middle" font-size="16" fill="#2E332C">あの先生を選べるか</text>
+
+  <text x="600" y="348" text-anchor="middle" font-size="26" font-weight="bold" fill="#2E332C">アクセス</text>
+
+  <text x="600" y="582" text-anchor="middle" font-size="18" fill="#5A6B5C">3つは独立 — 「近いが予約が取れない」「すぐ診てもらえるが誰が来るか分からない」が併存する</text>
+  <line x1="50" y1="610" x2="1150" y2="610" stroke="#E4DFD3" stroke-width="1.5"/>
+  <text x="50" y="638" font-size="14" fill="#9A978D">概念図：Boyle のアクセス枠組み（Howells A, et al. BMC Primary Care 2025, PMID 40604407 経由）に基づき作成。論文の転載図ではない。</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg width="1200" height="660" viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif">
+  <rect x="0" y="0" width="1200" height="660" fill="#FBF7EF"/>
+  <text x="600" y="48" text-anchor="middle" font-size="30" font-weight="bold" fill="#2E2E2E">規模が大きくなるほど「両方」下がる</text>
+
+  <!-- gridlines -->
+  <line x1="150" y1="140" x2="1080" y2="140" stroke="#E4DFD3" stroke-width="2"/>
+  <line x1="150" y1="240" x2="1080" y2="240" stroke="#E4DFD3" stroke-width="2"/>
+  <line x1="150" y1="340" x2="1080" y2="340" stroke="#E4DFD3" stroke-width="2"/>
+  <line x1="150" y1="440" x2="1080" y2="440" stroke="#E4DFD3" stroke-width="2"/>
+
+  <!-- axes -->
+  <line x1="150" y1="120" x2="150" y2="480" stroke="#5A6B5C" stroke-width="3"/>
+  <line x1="150" y1="480" x2="1080" y2="480" stroke="#5A6B5C" stroke-width="3"/>
+
+  <!-- y axis title -->
+  <text x="70" y="300" text-anchor="middle" font-size="18" fill="#5A6B5C" transform="rotate(-90 70 300)">継続性・迅速性のスコア</text>
+  <text x="135" y="150" text-anchor="end" font-size="14" fill="#8A8F85">高</text>
+  <text x="135" y="470" text-anchor="end" font-size="14" fill="#8A8F85">低</text>
+
+  <!-- x axis labels -->
+  <text x="230" y="512" text-anchor="middle" font-size="16" fill="#5A6B5C">小規模診療所</text>
+  <text x="615" y="512" text-anchor="middle" font-size="16" fill="#5A6B5C">中規模</text>
+  <text x="1000" y="512" text-anchor="middle" font-size="16" fill="#5A6B5C">大規模・集約</text>
+  <text x="615" y="548" text-anchor="middle" font-size="18" font-weight="bold" fill="#2E332C">診療所・病院の規模 →</text>
+
+  <!-- relational line (terracotta) -->
+  <polyline points="230,165 460,205 700,300 1000,420" fill="none" stroke="#D9876C" stroke-width="5"/>
+  <circle cx="230" cy="165" r="8" fill="#D9876C"/>
+  <circle cx="460" cy="205" r="8" fill="#D9876C"/>
+  <circle cx="700" cy="300" r="8" fill="#D9876C"/>
+  <circle cx="1000" cy="420" r="8" fill="#D9876C"/>
+
+  <!-- timely line (sage) -->
+  <polyline points="230,210 460,265 700,345 1000,445" fill="none" stroke="#5E7E68" stroke-width="5" stroke-dasharray="2 0"/>
+  <circle cx="230" cy="210" r="8" fill="#5E7E68"/>
+  <circle cx="460" cy="265" r="8" fill="#5E7E68"/>
+  <circle cx="700" cy="345" r="8" fill="#5E7E68"/>
+  <circle cx="1000" cy="445" r="8" fill="#5E7E68"/>
+
+  <!-- legend -->
+  <rect x="760" y="135" width="26" height="14" rx="3" fill="#D9876C"/>
+  <text x="794" y="148" font-size="17" fill="#2E332C">関係継続性</text>
+  <rect x="930" y="135" width="26" height="14" rx="3" fill="#5E7E68"/>
+  <text x="964" y="148" font-size="17" fill="#2E332C">迅速性</text>
+
+  <!-- callout -->
+  <rect x="55" y="558" width="1090" height="0" fill="none"/>
+  <text x="600" y="583" text-anchor="middle" font-size="18" fill="#5A6B5C">効率化のための集約が「顔の見える医療」を壊す — 集約は <tspan font-weight="bold" fill="#B25E40">チーム制＋情報共有とセット</tspan> で</text>
+  <line x1="50" y1="602" x2="1150" y2="602" stroke="#E4DFD3" stroke-width="1.5"/>
+  <text x="50" y="626" font-size="15" font-weight="bold" fill="#B25E40">※ 模式図（概念イメージ）— 実測データのプロットではない</text>
+  <text x="50" y="648" font-size="13" fill="#9A978D">方向性の出典：Howells A, et al. BMC Primary Care 2025（PMID 40604407）「患者人口規模が増えるほど関係継続性・迅速性の満足度が両方低下」</text>
+</svg>

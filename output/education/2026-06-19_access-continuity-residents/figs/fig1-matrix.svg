@@ -1,0 +1,57 @@
+<svg width="1200" height="660" viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Sans','Noto Sans JP',sans-serif">
+  <rect x="0" y="0" width="1200" height="660" fill="#FBF7EF"/>
+  <text x="600" y="48" text-anchor="middle" font-size="30" font-weight="bold" fill="#2E2E2E">トレードオフが実在するのは「1組」だけ</text>
+
+  <!-- header row -->
+  <rect x="50" y="95" width="200" height="75" fill="#2E332C"/>
+  <text x="150" y="130" text-anchor="middle" font-size="16" fill="#FBF7EF">アクセス ＼ 継続性</text>
+  <rect x="250" y="95" width="300" height="75" fill="#3D4A3E"/>
+  <text x="400" y="128" text-anchor="middle" font-size="22" font-weight="bold" fill="#FBF7EF">関係継続性</text>
+  <text x="400" y="152" text-anchor="middle" font-size="15" fill="#C9D2C5">Relational</text>
+  <rect x="550" y="95" width="300" height="75" fill="#3D4A3E"/>
+  <text x="700" y="128" text-anchor="middle" font-size="22" font-weight="bold" fill="#FBF7EF">調整継続性</text>
+  <text x="700" y="152" text-anchor="middle" font-size="15" fill="#C9D2C5">Management</text>
+  <rect x="850" y="95" width="300" height="75" fill="#3D4A3E"/>
+  <text x="1000" y="128" text-anchor="middle" font-size="22" font-weight="bold" fill="#FBF7EF">情報継続性</text>
+  <text x="1000" y="152" text-anchor="middle" font-size="15" fill="#C9D2C5">Informational</text>
+
+  <!-- row headers -->
+  <rect x="50" y="170" width="200" height="125" fill="#3D4A3E"/>
+  <text x="150" y="225" text-anchor="middle" font-size="22" font-weight="bold" fill="#FBF7EF">物理</text>
+  <text x="150" y="250" text-anchor="middle" font-size="15" fill="#C9D2C5">Physical</text>
+  <rect x="50" y="295" width="200" height="125" fill="#3D4A3E"/>
+  <text x="150" y="350" text-anchor="middle" font-size="22" font-weight="bold" fill="#FBF7EF">迅速</text>
+  <text x="150" y="375" text-anchor="middle" font-size="15" fill="#C9D2C5">Timely</text>
+  <rect x="50" y="420" width="200" height="125" fill="#3D4A3E"/>
+  <text x="150" y="475" text-anchor="middle" font-size="22" font-weight="bold" fill="#FBF7EF">選択</text>
+  <text x="150" y="500" text-anchor="middle" font-size="15" fill="#C9D2C5">Choice</text>
+
+  <!-- Physical row: all preconditions -->
+  <rect x="250" y="170" width="300" height="125" fill="#EDEAE0" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="400" y="238" text-anchor="middle" font-size="19" fill="#8A8F85">前提条件</text>
+  <rect x="550" y="170" width="300" height="125" fill="#EDEAE0" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="700" y="238" text-anchor="middle" font-size="19" fill="#8A8F85">前提条件</text>
+  <rect x="850" y="170" width="300" height="125" fill="#EDEAE0" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="1000" y="238" text-anchor="middle" font-size="19" fill="#8A8F85">前提条件</text>
+
+  <!-- Timely row -->
+  <rect x="250" y="295" width="300" height="125" fill="#E05A47" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="400" y="345" text-anchor="middle" font-size="26" font-weight="bold" fill="#FFFFFF">⚡ 唯一の</text>
+  <text x="400" y="378" text-anchor="middle" font-size="26" font-weight="bold" fill="#FFFFFF">真のトレードオフ</text>
+  <rect x="550" y="295" width="300" height="125" fill="#F6F1E8" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="700" y="363" text-anchor="middle" font-size="19" fill="#8A8F85">中立</text>
+  <rect x="850" y="295" width="300" height="125" fill="#F6F1E8" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="1000" y="363" text-anchor="middle" font-size="19" fill="#8A8F85">中立</text>
+
+  <!-- Choice row -->
+  <rect x="250" y="420" width="300" height="125" fill="#8FB09E" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="400" y="478" text-anchor="middle" font-size="22" font-weight="bold" fill="#23332A">◎ 最強の enabler</text>
+  <rect x="550" y="420" width="300" height="125" fill="#DCE7DF" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="700" y="488" text-anchor="middle" font-size="19" fill="#4C5A52">促進</text>
+  <rect x="850" y="420" width="300" height="125" fill="#F6F1E8" stroke="#FBF7EF" stroke-width="3"/>
+  <text x="1000" y="488" text-anchor="middle" font-size="19" fill="#8A8F85">中立</text>
+
+  <text x="600" y="582" text-anchor="middle" font-size="18" fill="#5A6B5C">「ゼロサム」が成立するのは <tspan font-weight="bold" fill="#E05A47">迅速 × 関係</tspan> の1組だけ — あとは設計で両立できる</text>
+  <line x1="50" y1="610" x2="1150" y2="610" stroke="#E4DFD3" stroke-width="1.5"/>
+  <text x="50" y="638" font-size="14" fill="#9A978D">概念図：Howells A, et al. BMC Primary Care 2025（PMID 40604407）の枠組み・結論に基づき作成。論文の転載図ではない。</text>
+</svg>
