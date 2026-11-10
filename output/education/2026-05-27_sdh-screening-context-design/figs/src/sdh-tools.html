@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代表的なSDHスクリーニングツール</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #0F2238;
+      --color-muted: #4A5568;
+      --color-accent: #1B6FA6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>代表的なSDHスクリーニングツール</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sdhtools-title sdhtools-desc">
+        <title id="sdhtools-title">代表的なSDHスクリーニングツール</title>
+        <desc id="sdhtools-desc">PRAPARE、AHC Health-Related Social Needs、WE CARE、SEEKの4つのツールの項目数と特徴を並べ、標準プロトコルがなく実装にばらつきがあることを示す図。</desc>
+        <defs>
+          <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <rect x="40" y="40" width="510" height="160" rx="6" fill="#DCEBF5" stroke="#A9C6DB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="64" y="92" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">PRAPARE</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="64" y="136" font-size="26" font-weight="500" fill="#0F2238" text-anchor="start">約20項目・多領域</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="64" y="174" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">米国の地域保健センターで広く使用</text>
+        <rect x="570" y="40" width="510" height="160" rx="6" fill="#DCEBF5" stroke="#A9C6DB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="594" y="92" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">AHC</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="690" y="92" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">Health-Related Social Needs</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="594" y="136" font-size="26" font-weight="500" fill="#0F2238" text-anchor="start">コア10項目</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="594" y="174" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">CMSが開発・推奨</text>
+        <rect x="40" y="216" width="510" height="160" rx="6" fill="#DCEBF5" stroke="#A9C6DB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="64" y="268" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">WE CARE</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="64" y="312" font-size="26" font-weight="500" fill="#0F2238" text-anchor="start">小児/家族向け（12項目）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="64" y="350" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">小児外来向き</text>
+        <rect x="570" y="216" width="510" height="160" rx="6" fill="#DCEBF5" stroke="#A9C6DB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="594" y="268" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">SEEK</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="594" y="312" font-size="26" font-weight="500" fill="#0F2238" text-anchor="start">小児</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="594" y="350" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">家庭のリスクを広く確認する質問票</text>
+        <rect x="40" y="404" width="1040" height="72" rx="6" fill="#FBF6EA" stroke="#1B6FA6" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="452" font-size="32" font-weight="600" fill="#1B6FA6" text-anchor="middle">標準プロトコルが存在しない → 実装にばらつき</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

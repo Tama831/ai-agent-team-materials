@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>利用者さんを囲むチーム</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F7F3EC;
+      --color-ink: #3A3D3A;
+      --color-muted: #696E69;
+      --color-accent: #B88A7A;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pall-team-title pall-team-desc">
+        <title id="pall-team-title">利用者さんを囲むチーム</title>
+        <desc id="pall-team-desc">利用者さんとご家族を中心に、介護、看護、医師、リハ、栄養、相談員、事務その他の職種が囲み、全員の気づきが集まってその人らしいケアが実現することを示す図。</desc>
+        <defs>
+          <marker id="pall-team-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#826056" stroke-width="1.8"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#F7F3EC"/>
+        <ellipse cx="560" cy="205" rx="330" ry="118" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <ellipse cx="560" cy="205" rx="195" ry="62" fill="#F1E4DE" stroke="#B88A7A" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="207" font-size="32" font-weight="600" fill="#3A3D3A" text-anchor="middle">利用者さん・ご家族</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="241" font-size="24" font-weight="500" fill="#826056" text-anchor="middle">を囲むチーム</text>
+        <rect x="450" y="61" width="220" height="52" rx="6" fill="#F7F3EC" stroke="#B88A7A" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="98" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">介護</text>
+        <rect x="708" y="105" width="220" height="52" rx="6" fill="#F7F3EC" stroke="#5E6A63" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="818" y="142" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">看護</text>
+        <rect x="772" y="205" width="220" height="52" rx="6" fill="#F7F3EC" stroke="#5E6A63" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="882" y="242" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">医師</text>
+        <rect x="593" y="285" width="220" height="52" rx="6" fill="#F7F3EC" stroke="#5E6A63" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="703" y="322" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">リハ</text>
+        <rect x="307" y="285" width="220" height="52" rx="6" fill="#F7F3EC" stroke="#5E6A63" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="417" y="322" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">栄養</text>
+        <rect x="128" y="205" width="220" height="52" rx="6" fill="#F7F3EC" stroke="#5E6A63" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="238" y="242" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">相談員</text>
+        <rect x="192" y="105" width="220" height="52" rx="6" fill="#F7F3EC" stroke="#5E6A63" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="302" y="142" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">事務・その他</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="392" font-size="26" font-weight="600" fill="#826056" text-anchor="middle">全員の「気づき」が集まって、はじめて「その人らしいケア」が実現する。</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="432" font-size="24" font-weight="500" fill="#3A3D3A" text-anchor="middle">介護職の「気づき」は、医師や看護師には見えないものを含んでいます。</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="466" font-size="24" font-weight="500" fill="#3A3D3A" text-anchor="middle">あなたの目は、かけがえのないものです。</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

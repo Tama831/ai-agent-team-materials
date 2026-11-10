@@ -38,6 +38,12 @@
 
 ---
 
+## 速い脳と遅い脳
+
+![速い脳は直感モードでパッと判断し普段は大活躍、遅い脳はじっくりモードでよく考えて判断するが時間とエネルギーが必要。速い脳には思い込みのクセ（認知バイアス）がある](figs/two-brains-allstaff.png)
+
+---
+
 ### スライド4: 利用可能性バイアスってなに？
 
 **ひとことで言うと**: 「最近見たもの・印象に残ったもの」を、実際よりも多いと思い込むこと
@@ -52,7 +58,7 @@
 
 ---
 
-### スライド5: 最新研究が示した衝撃の結果
+### スライド5: 最新研究が示した結果
 
 **BMJ Quality & Safety（2026年2月）の研究**
 - **対象**: 世界の医師1015名
@@ -61,10 +67,10 @@
 | 発見 | 意味 |
 |------|------|
 | 直近7日以内に同じ病気の患者を診た医師は誤診率が**有意に上昇** | 最近の経験が判断を歪める |
-| ベテランでも新人でも同じ傾向 | **経験年数だけでは防げない** |
-| 「構造化されたフィードバック」を受けている医師はバイアスが少ない | 振り返りの習慣が大事 |
+| 経験年数の影響は一様ではない（専門医では10年以上で誤診が少なかった） | **経験の年数だけでなく、専門性やフィードバックが関わる** |
+| 著者らは「構造化されフィードバックの豊富な経験」が重要と考察（本研究で直接測定した結果ではない） | 振り返りの習慣が大事かもしれない |
 
-> ポイント: 「たくさん経験していれば大丈夫」ではない！
+> ポイント: 「たくさん経験していれば大丈夫」とは限らない
 
 **[ガニェ事象4,5: 新しい内容を提示する・学習の指針を与える]**
 
@@ -127,7 +133,7 @@
 
 **今日のポイント**:
 - 「利用可能性バイアス」＝ 最近の経験が判断を歪めること
-- 経験年数ではなく、**振り返りとフィードバックの習慣**が防御策
+- 経験の年数に加えて、**振り返りとフィードバックの習慣**が防御策になりうる
 - 一人で頑張るのではなく、**チームで声をかけ合う文化**が大事
 
 **確認**: 隣の人に「利用可能性バイアスって何？」を30秒で説明してみましょう
@@ -138,8 +144,8 @@
 
 ### 参考文献
 
-- Moura EC et al. (2026) "Availability Bias in Diagnostic Reasoning Following Real Clinical Encounters." BMJ Quality & Safety. DOI: 10.1136/bmjqs-2025-019520
-- American Journal of Medicine (2025) "Over-investigation and cognitive bias." DOI: 10.1016/j.amjmed.2025.10.013
+- Moura EC et al. (2026) "Evidence of availability bias in diagnostic reasoning following real clinical encounters: a cross-sectional survey of physicians." BMJ Quality & Safety. DOI: 10.1136/bmjqs-2025-019520
+- Chatterjee et al. "When caution becomes harm: Understanding the psychology of over-investigation." The American Journal of Medicine. 2026;139(2):154-160. DOI: 10.1016/j.amjmed.2025.10.013
 - Kahneman D. (2011) "Thinking, Fast and Slow"（邦訳: ファスト&スロー）
 
 ---

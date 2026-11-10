@@ -13,12 +13,12 @@
 
 ## スライド1: 注意喚起 [ガニェ事象1: 学習者の注意を獲得する]
 
-### 「完全に確信がある」医師の40%が間違っていた
+### 「完全に確信がある」診断でも、約4割で剖検の所見が食い違っていた
 
 ICU（集中治療室）での研究:
-- 臨床診断に**「完全に確信がある」**と回答した医師の判断
+- 臨床診断の確信度が**「完全に確信がある」**と評価された症例
 - 剖検（亡くなった後の病理解剖）で検証
-- **40%が誤診だった**
+- **約4割で剖検所見が臨床診断と食い違い**、治療を変えうる見逃しは約9%（Podbregar 2001、単施設ICU・剖検を行えた126例）。確信度は剖検所見を予測できなかった
 
 > **問いかけ**: あなたが「間違いない」と感じたとき、それは本当に正しいのか?
 
@@ -50,11 +50,11 @@ ICU（集中治療室）での研究:
 | **強み** | 経験に基づく効率的判断 | 論理的・確率的推論 |
 | **弱み** | **認知バイアスの温床** | 認知負荷が高く疲労で機能低下 |
 
-- 臨床推論の2,500以上の論文がこのモデルを採用
+- 臨床推論の研究でこのモデルは広く用いられている（Croskerry 2009）
 - System 1は疾患スクリプト（illness scripts）に基づくパターン認識
 - **問題**: System 1が生成した仮説を、System 2が十分にチェックしないとき、バイアスが発動する
 
-> **Enkeの知見（2023）**: 命がかかっている場面（高ステーク）でもバイアスは縮小するが**完全には消えない**
+> **Enkeらの知見（2023）**: 報酬を大きくしても（ナイロビの大学生1,236人の実験）バイアスはほとんど減らなかった。ただし医療者を対象にした研究ではない
 
 ---
 
@@ -77,6 +77,13 @@ ICU（集中治療室）での研究:
 
 ---
 
+## 確認バイアスの連鎖
+### 胸痛の症例で見る
+
+![不安障害の既往のある32歳女性の胸痛で、バイアス発動、確認的情報収集、矛盾情報の軽視を経て、肺塞栓症の見逃しに至る4段階](figs/confirmation-chain.png)
+
+---
+
 ## スライド5: アンカリング [ガニェ事象4: 新しい内容を提示する（続き）]
 
 ### Anchoring — 「最初の情報に引きずられる」
@@ -93,7 +100,7 @@ ICU（集中治療室）での研究:
 
 **なぜ強力か**: 紹介状という「権威ある情報源」がアンカーの強度を増幅。先行医師の判断に対する暗黙の信頼が調整を妨げる。
 
-> 年間約27,000件の入院と150,000件以上の患者被害が診断エラーに起因（米国データ）
+> 米国では、危険な疾患の誤診により年間約79.5万人が永久的な障害または死亡に至ると推計されている（Newman-Toker 2024、推計の幅は59.8万〜102.3万人）
 
 ---
 
@@ -137,7 +144,7 @@ ICU（集中治療室）での研究:
 | 中間期 | **急落** | 上昇中 | 複雑さに気づく |
 | 熟達期 | **適切** | 高い | 自信と謙虚さのバランス |
 
-**逆転現象**: レジデントは指導医より**自信が高いのに正確性が低い**
+**逆転が起こりうる**: 経験の浅い段階では、自信が正確性を上回ることがある（3段階は教育上の整理で、研修医での実証は限られる。Rahmani 2020）
 
 > System 1の成功体験が蓄積されるほど、System 2によるチェックを省略する傾向が強まる
 
@@ -165,7 +172,7 @@ ICU（集中治療室）での研究:
 - 最初の仮説は何で、いつ形成されたか?
 - **別の医師が同じ患者を見たら、異なる結論に至るか?**
 
-> **エビデンス**: Ludolph & Schulz（2018）の系統的レビューで、「診断仮説に対する省察」が診断意思決定において成功が確認された唯一の介入
+> **エビデンス**: Ludolph & Schulz（2018）の系統的レビュー（87研究）では、デバイアス介入の多く（60研究）が少なくとも部分的に有効だった。ただし医療者を対象にした研究は13件にとどまる。診断場面では、反省的に見直す介入が利用可能性バイアスの影響を減らした報告がある（Mamede 2010, JAMA）
 
 ---
 
@@ -219,7 +226,7 @@ ICU（集中治療室）での研究:
 
 ### 理論的基盤
 - Kahneman, D. (2011). *Thinking, Fast and Slow*. Farrar, Straus and Giroux.
-- Enke, B. (2023). Cognitive Biases: Mistakes or Missing Stakes? [PDF](https://benjamin-enke.com/pdf/Biases_stakes.pdf)
+- Enke, B. et al. (2023). Cognitive Biases: Mistakes or Missing Stakes? *Review of Economics and Statistics*, 105(4), 818-832. doi:10.1162/rest_a_01093
 - Ezenwaka, O. et al. (2025). The Role of Behavioral Economics and Cognitive Bias in Shaping the Accuracy of Foresight and Intelligence Analysis. *WJARR*. [Link](https://wjarr.com/content/role-behavioral-economics-and-cognitive-bias-shaping-accuracy-foresight-and-intelligence)
 
 ### 認知バイアスと診断推論
@@ -227,14 +234,17 @@ ICU（集中治療室）での研究:
 - Croskerry, P. (2003). Cognitive forcing strategies in clinical decisionmaking. *Annals of Emergency Medicine*, 41(1), 110-120. [Link](https://www.annemergmed.com/article/S0196-0644(02)84945-9/fulltext)
 
 ### 除偏介入
+- Podbregar, M. et al. (2001). Should we confirm our clinical diagnostic certainty by autopsies? *Intensive Care Medicine*, 27, 1750-1755. PMID 11810118
+- Newman-Toker, D.E. et al. (2024). Burden of serious harms from diagnostic error in the USA. *BMJ Quality & Safety*, 33, 109-120. PMID 37460118
+- Mamede, S. et al. (2010). Effect of availability bias and reflective reasoning on diagnostic accuracy among internal medicine residents. *JAMA*, 304(11), 1198-1203. PMID 20841533
 - Ludolph, R. & Schulz, P.J. (2018). Debiasing Health-Related Judgments and Decision Making: A Systematic Review. *Medical Decision Making*, 38(1), 3-13. [Link](https://journals.sagepub.com/doi/full/10.1177/0272989X17716672)
 
 ### 過信とDunning-Kruger効果
-- Podbregar, M. et al. Diagnostic error, overconfidence and self-knowledge. *Humanities and Social Sciences Communications*, 4, 17025. [Link](https://www.nature.com/articles/palcomms201725)
-- Friedman, K.A. et al. (2020). Medical Trainees and the Dunning-Kruger Effect. *Journal of Graduate Medical Education*, 12(5), 524-525. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC7594774/)
+- Cassam, Q. (2017). Diagnostic error, overconfidence and self-knowledge. *Palgrave Communications*, 3, 17025. [Link](https://www.nature.com/articles/palcomms201725)
+- Rahmani, M. (2020). Medical Trainees and the Dunning-Kruger Effect: When They Don't Know What They Don't Know. *Journal of Graduate Medical Education*, 12(5), 532-534. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC7594774/)
 
 ### AI×認知バイアス
-- Cabrera-Barona, P.F. et al. (2024). Mitigating Cognitive Biases in Clinical Decision-Making Through Multi-Agent Conversations Using Large Language Models. *JMIR*, 26, e59439. [Link](https://www.jmir.org/2024/1/e59439)
+- Ke, Y. et al. (2024). Mitigating Cognitive Biases in Clinical Decision-Making Through Multi-Agent Conversations Using Large Language Models. *JMIR*, 26, e59439. [Link](https://www.jmir.org/2024/1/e59439)
 
 ---
 

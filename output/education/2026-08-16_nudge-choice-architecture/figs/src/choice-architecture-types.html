@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>選択アーキテクチャの4類型</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F6EED9;
+      --color-ink: #142E73;
+      --color-muted: #4064A3;
+      --color-accent: #2657C7;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>選択アーキテクチャの4類型</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="nudge-types-title nudge-types-desc">
+        <title id="nudge-types-title">選択アーキテクチャの4類型</title>
+        <desc id="nudge-types-desc">選択アーキテクチャの4類型を4つの面で示す図。デフォルト効果は処方セットの初期値、フレーミングは生存率90%と死亡率10%、社会規範は同科医師の平均処方率の提示、実装インテンションは次回受診日をその場で確定すること。</desc>
+        <rect width="100%" height="100%" fill="#F6EED9"/>
+        <rect x="40" y="40" width="508" height="210" rx="6" fill="#FFFFFF" stroke="#2657C7" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="68" y="106" font-size="34" font-weight="600" fill="#142E73" text-anchor="start">デフォルト効果</text>
+        <rect x="68" y="152" width="452" height="68" rx="6" fill="#EDE5CB" stroke="#C6C4BB" stroke-width="2"/>
+        <rect x="88" y="172" width="28" height="28" rx="4" fill="#FFFFFF" stroke="#2657C7" stroke-width="3"/>
+        <path d="M94 187 L100 194 L111 179" fill="none" stroke="#2657C7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="132" y="197" font-size="28" font-weight="500" fill="#142E73" text-anchor="start">処方セットの初期値</text>
+        <rect x="572" y="40" width="508" height="210" rx="6" fill="#EDE5CB" stroke="#C6C4BB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="600" y="106" font-size="34" font-weight="600" fill="#142E73" text-anchor="start">フレーミング</text>
+        <rect x="600" y="152" width="216" height="68" rx="6" fill="#F6EED9" stroke="#C6C4BB" stroke-width="2"/>
+        <rect x="836" y="152" width="216" height="68" rx="6" fill="#F6EED9" stroke="#C6C4BB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="708" y="197" font-size="28" font-weight="500" fill="#142E73" text-anchor="middle">「生存率90%」</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="944" y="197" font-size="28" font-weight="500" fill="#142E73" text-anchor="middle">「死亡率10%」</text>
+        <rect x="40" y="270" width="508" height="210" rx="6" fill="#EDE5CB" stroke="#C6C4BB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="68" y="336" font-size="34" font-weight="600" fill="#142E73" text-anchor="start">社会規範</text>
+        <rect x="68" y="382" width="452" height="68" rx="6" fill="#F6EED9" stroke="#C6C4BB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="88" y="427" font-size="28" font-weight="500" fill="#142E73" text-anchor="start">「同科医師の平均処方率」提示</text>
+        <rect x="572" y="270" width="508" height="210" rx="6" fill="#EDE5CB" stroke="#C6C4BB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="600" y="336" font-size="34" font-weight="600" fill="#142E73" text-anchor="start">実装インテンション</text>
+        <rect x="600" y="382" width="452" height="68" rx="6" fill="#F6EED9" stroke="#C6C4BB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="620" y="427" font-size="28" font-weight="500" fill="#142E73" text-anchor="start">次回受診日をその場で確定</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

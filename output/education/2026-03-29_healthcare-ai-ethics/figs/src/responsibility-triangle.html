@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>責任の三角形</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FFFFFF;
+      --color-ink: #030712;
+      --color-muted: #4A5568;
+      --color-accent: #1E5BE6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>責任の三角形</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="resp-triangle-title resp-triangle-desc">
+        <title id="resp-triangle-title">責任の三角形</title>
+        <desc id="resp-triangle-desc">AIの判断エラーで患者に害が生じたとき、開発企業はアルゴリズムの設計、医師は最終判断、医療機関は導入の決定を担い、日本では医師の最終判断責任が原則であることを示す図。</desc>
+        <rect width="100%" height="100%" fill="#FFFFFF"/>
+
+        <!-- 三角形（面） -->
+        <polygon points="560,88 200,428 920,428" fill="#F5F8FC" stroke="#C7D2E3" stroke-width="2"/>
+
+        <!-- 中央の問い -->
+        <g font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" text-anchor="middle">
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="262" font-size="28" font-weight="500" fill="#1F2937">AIの判断エラーで</text>
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="300" font-size="28" font-weight="500" fill="#1F2937">患者に害が生じたら</text>
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="348" font-size="32" font-weight="600" fill="#1E5BE6">責任は誰が負うか？</text>
+        </g>
+
+        <!-- 医師（焦点） -->
+        <rect x="440" y="40" width="240" height="96" rx="6" fill="#EEF3FD" stroke="#1E5BE6" stroke-width="2.5"/>
+        <g font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" text-anchor="middle">
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="82" font-size="34" font-weight="600" fill="#030712">医師</text>
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="118" font-size="26" font-weight="500" fill="#1F2937">最終判断</text>
+        </g>
+        <g font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" text-anchor="start">
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="704" y="78" font-size="24" font-weight="500" fill="#1E5BE6">日本では医師の</text>
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="704" y="110" font-size="24" font-weight="500" fill="#1E5BE6">最終判断責任が原則</text>
+        </g>
+
+        <!-- 開発企業 -->
+        <rect x="60" y="380" width="280" height="96" rx="6" fill="#FFFFFF" stroke="#030712" stroke-width="2"/>
+        <!-- 医療機関 -->
+        <rect x="780" y="380" width="280" height="96" rx="6" fill="#FFFFFF" stroke="#030712" stroke-width="2"/>
+        <g font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" text-anchor="middle">
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="200" y="422" font-size="34" font-weight="600" fill="#030712">開発企業</text>
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="200" y="458" font-size="26" font-weight="500" fill="#1F2937">アルゴリズムの設計</text>
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="920" y="422" font-size="34" font-weight="600" fill="#030712">医療機関</text>
+          <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="920" y="458" font-size="26" font-weight="500" fill="#1F2937">導入の決定</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

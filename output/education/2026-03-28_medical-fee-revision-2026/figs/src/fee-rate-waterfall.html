@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>改定率の内訳</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #030712;
+      --color-muted: #4A5568;
+      --color-accent: #1E5BE6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>改定率の内訳</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fee-rate-waterfall-title fee-rate-waterfall-desc">
+        <title id="fee-rate-waterfall-title">改定率の内訳</title>
+        <desc id="fee-rate-waterfall-desc">2026年度診療報酬改定の本体改定率の内訳。賃上げ対応+1.70%、物価対応+0.76%、食費・光熱水費+0.09%、経営環境悪化への緊急対応+0.44%、効率化▲0.15%、その他+0.25%を積み上げて合計+3.09%になる滝グラフ。</desc>
+        <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="#1B6FA6"/></marker></defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="66" font-size="26" font-weight="600" fill="#1B6FA6" text-anchor="start">賃上げ分（+1.70%）は本体改定率の約55%を占める</text>
+        <rect x="64" y="231.0" width="100" height="119.0" rx="6" fill="#E0E6E2" stroke="#1B6FA6" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="114" y="217.0" font-size="30" font-weight="600" fill="#1B6FA6" text-anchor="middle">+1.70%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="114" y="382" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">賃上げ対応</text>
+        <line x1="164" y1="231.0" x2="212" y2="231.0" stroke="#4A5568" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <rect x="212" y="177.8" width="100" height="53.19999999999999" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="262" y="163.8" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">+0.76%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="262" y="382" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">物価対応</text>
+        <line x1="312" y1="177.8" x2="360" y2="177.8" stroke="#4A5568" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <rect x="360" y="171.5" width="100" height="6.300000000000011" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="410" y="157.5" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">+0.09%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="410" y="382" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">食費・</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="410" y="410" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">光熱水費</text>
+        <line x1="460" y1="171.5" x2="508" y2="171.5" stroke="#4A5568" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <rect x="508" y="140.70000000000002" width="100" height="30.799999999999983" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="558" y="126.70000000000002" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">+0.44%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="558" y="382" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">経営環境</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="558" y="410" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">悪化への</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="558" y="438" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">緊急対応</text>
+        <line x1="608" y1="140.70000000000002" x2="656" y2="140.70000000000002" stroke="#4A5568" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <rect x="656" y="140.70000000000002" width="100" height="10.5" rx="6" fill="#E8C27A" stroke="#7E6942" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="706" y="126.70000000000002" font-size="30" font-weight="600" fill="#7E6942" text-anchor="middle">▲0.15%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="706" y="382" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">効率化</text>
+        <line x1="756" y1="151.20000000000002" x2="804" y2="151.20000000000002" stroke="#4A5568" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <rect x="804" y="133.70000000000002" width="100" height="17.5" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="854" y="119.70000000000002" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">+0.25%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="854" y="382" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">その他</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="854" y="410" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">（各科</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="854" y="438" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">改定率）</text>
+        <line x1="904" y1="133.70000000000002" x2="952" y2="133.70000000000002" stroke="#4A5568" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <rect x="952" y="133.70000000000002" width="100" height="216.29999999999998" rx="6" fill="#1B6FA6" stroke="#1B6FA6" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1002" y="119.70000000000002" font-size="36" font-weight="600" fill="#1B6FA6" text-anchor="middle">+3.09%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1002" y="382" font-size="24" font-weight="600" fill="#0F2238" text-anchor="middle">合計</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1002" y="410" font-size="24" font-weight="600" fill="#0F2238" text-anchor="middle">（本体）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1002" y="438" font-size="22" font-weight="500" fill="#4A5568" text-anchor="middle">薬価等▲0.87%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="478" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">改定率は令和8・9年度の2年度平均。出典: 厚生労働省 予算大臣折衝（令和7年12月24日）</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

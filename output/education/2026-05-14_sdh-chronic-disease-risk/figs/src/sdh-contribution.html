@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健康アウトカムへの寄与の配分</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #0F2238;
+      --color-muted: #4A5568;
+      --color-accent: #1B6FA6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>健康アウトカムへの寄与の配分</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sdhcontrib-title sdhcontrib-desc">
+        <title id="sdhcontrib-title">健康アウトカムへの寄与の配分</title>
+        <desc id="sdhcontrib-desc">健康アウトカムへの寄与は、臨床ケア20%、健康行動30%、社会的・経済的要因40%、物理的環境10%という名目上の重みで示される。実測の寄与率ではない。</desc>
+        <defs>
+          <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="64" font-size="26" font-weight="500" fill="#4A5568" text-anchor="start">アウトカムへの寄与（名目上の重み）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="144.0" y="160" font-size="56" font-weight="600" fill="#0F2238" text-anchor="middle">20%</text>
+        <rect x="40" y="180" width="208.0" height="96" rx="0" fill="#DCEBF5" stroke="#FBF6EA" stroke-width="4"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="144.0" y="326" font-size="26" font-weight="500" fill="#0F2238" text-anchor="middle">臨床ケア（医療）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="404.0" y="160" font-size="56" font-weight="600" fill="#0F2238" text-anchor="middle">30%</text>
+        <rect x="248.0" y="180" width="312.0" height="96" rx="0" fill="#DCEBF5" stroke="#FBF6EA" stroke-width="4"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="404.0" y="326" font-size="26" font-weight="500" fill="#0F2238" text-anchor="middle">健康行動</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768.0" y="160" font-size="56" font-weight="600" fill="#1B6FA6" text-anchor="middle">40%</text>
+        <rect x="560.0" y="180" width="416.0" height="96" rx="0" fill="#1B6FA6" stroke="#FBF6EA" stroke-width="4"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768.0" y="326" font-size="26" font-weight="600" fill="#0F2238" text-anchor="middle">社会的・経済的要因</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1070.0" y="160" font-size="56" font-weight="600" fill="#0F2238" text-anchor="end">10%</text>
+        <rect x="976.0" y="180" width="104.0" height="96" rx="0" fill="#DCEBF5" stroke="#FBF6EA" stroke-width="4"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1080" y="326" font-size="26" font-weight="500" fill="#0F2238" text-anchor="end">物理的環境</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="396" font-size="34" font-weight="600" fill="#0F2238" text-anchor="middle">「診察室の中」だけでは限界がある</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="446" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">出典: County Health Rankings 旧モデル（2025年に新モデルへ更新）の名目上の重み。</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="472" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">実際の寄与率を測った値ではない</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

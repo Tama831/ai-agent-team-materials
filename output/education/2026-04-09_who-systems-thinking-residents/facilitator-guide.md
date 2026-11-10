@@ -25,7 +25,7 @@ source_briefing: data/briefings/2026-04-08.json#item-001
 | 0:00-2:00 | 導入 + 持ち帰り3つの予告 | 「今日のゴールは、明日の外来で1問試せるようになることです。後半に進むにつれて視野が広がっていきますが、置いていきません」 |
 | 2:00-6:00 | 症例 + 「次の一手は?」隣と30秒 | 「30秒、隣の人と相談してください。診断ではなく、自分なら次に何を聞くか/するか、で結構です」 |
 | 6:00-9:00 | 「繋がりの見方」種明かし | 「カルテに書かれていない情報をスライドに出します。これがあったら、皆さんの一手は変わりましたか?」 |
-| 9:00-13:00 | 3つのフレーム転換 + 表 | 「左が今までのやり方、右がWHOの提言です。左が悪いわけではありません。両方を持ち替えできるようになるのが目標です」 |
+| 9:00-13:00 | 3つのフレーム転換 + 表 | 「左が今までのやり方、右がWHO/AHPSRが整理した見方です。左が悪いわけではありません。両方を持ち替えできるようになるのが目標です」 |
 | 13:00-16:00 | 明日の1問 + ふりかえりの型 | 「明日の外来の1人目で1回だけ試してみてください。失敗してもOKです」 |
 | 16:00-19:00 | 半径を広げる(チーム→外来導線→自院→世界) | 「ここからは、すぐにはできないけど "知っておくと外来の見え方が変わる" 話をします」 |
 | 19:00-20:00 | まとめ + 任意の宿題 | 「次回、試してみた話を1人1分で共有します」 |
@@ -57,7 +57,7 @@ source_briefing: data/briefings/2026-04-08.json#item-001
 
 ### 学習目標(ブルーム分類法)
 
-- **理解レベル**: WHO/NHS の3つのフレーム転換を自分の言葉で説明できる
+- **理解レベル**: WHO/AHPSR の3つのフレーム転換を自分の言葉で説明できる
 - **適用レベル**: 1人の患者で「繋がりを意識した1問」を実施できる
 - **分析レベル**: 自分の診療の中に "見落とされた繋がり" を特定できる
 - **(発展)創造レベル**: 自院の外来導線・チーム運営のどこにシステム的な詰まりがあるかを言語化できる
@@ -87,12 +87,14 @@ source_briefing: data/briefings/2026-04-08.json#item-001
   <https://www.who.int/news-room/events/detail/2026/01/27/default-calendar/embracing-complexity--systems-thinking-for-health-workforce-strengthening>
 
 ### 背景文献
+- WHO. *Health workforce*(2030年に1,100万人不足の推計). <https://www.who.int/health-topics/health-workforce>
+- KDIGO 2022 Clinical Practice Guideline for Diabetes Management in CKD. *Kidney Int* 2022;102(5S):S1-S127
 - ドネラ・H・メドウズ『世界はシステムで動く — いま起きていることの本質をつかむ考え方』英治出版
   <https://www.amazon.co.jp/s?k=世界はシステムで動く+メドウズ+英治出版>
 - ピーター・M・センゲ『学習する組織 — システム思考で未来を創造する』英治出版
   <https://www.amazon.co.jp/s?k=学習する組織+センゲ+英治出版>
-- *Friday Night at the ER* (システム思考教育用シミュレーションゲーム)
-  <https://www.amazon.co.jp/s?k=Friday+Night+at+the+ER+game>
+- *Friday Night at the ER* (Bette Gardner が1992年に作った、システム思考を学ぶ病院運営シミュレーションゲーム)
+  <https://www.fridaynightattheer.com>
 
 ### 関連する既存教材
 - `output/education/2026-04-01_systems-thinking-health-workforce/` — 全職員向け版(本教材は研修医個人の臨床判断起点で再構成)

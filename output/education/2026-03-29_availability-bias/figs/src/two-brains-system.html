@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>速い思考と遅い思考（System 1 と System 2）</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F6F9FB;
+      --color-ink: #2A3640;
+      --color-muted: #4A5568;
+      --color-accent: #7BA7BC;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>速い思考と遅い思考（System 1 と System 2）</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="two-brains-system-title two-brains-system-desc">
+        <title id="two-brains-system-title">速い思考と遅い思考（System 1 と System 2）</title>
+        <desc id="two-brains-system-desc">System 1は直感的・自動的・省エネで臨床のほとんどの判断を担い、System 2は分析的・意識的・高負荷で複雑な鑑別診断を担う二重過程の対比を、認知バイアスがSystem 1のショートカットから生じることとあわせて示した図。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7BA7BC"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#F6F9FB"/>
+                <path d="M68,124 H512" fill="none" stroke="#C3D1DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M608,124 H1052" fill="none" stroke="#C3D1DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="40" y="40" width="500" height="340" rx="6" fill="#F6F9FB" stroke="#C3D1DA" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="68" y="100" font-size="38" font-weight="600" fill="#8A695C" text-anchor="start">System 1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="512" y="100" font-size="28" font-weight="600" fill="#8A695C" text-anchor="end">速い思考</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="68" y="172" font-size="30" font-weight="500" fill="#2A3640" text-anchor="start">直感的</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="68" y="224" font-size="30" font-weight="500" fill="#2A3640" text-anchor="start">自動的</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="68" y="276" font-size="30" font-weight="500" fill="#2A3640" text-anchor="start">省エネ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="68" y="340" font-size="30" font-weight="600" fill="#2A3640" text-anchor="start">→ 臨床のほとんどの判断</text>
+        <rect x="580" y="40" width="500" height="340" rx="6" fill="#F6F9FB" stroke="#C3D1DA" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="608" y="100" font-size="38" font-weight="600" fill="#567585" text-anchor="start">System 2</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1052" y="100" font-size="28" font-weight="600" fill="#567585" text-anchor="end">遅い思考</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="608" y="172" font-size="30" font-weight="500" fill="#2A3640" text-anchor="start">分析的</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="608" y="224" font-size="30" font-weight="500" fill="#2A3640" text-anchor="start">意識的</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="608" y="276" font-size="30" font-weight="500" fill="#2A3640" text-anchor="start">高負荷</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="608" y="340" font-size="30" font-weight="600" fill="#2A3640" text-anchor="start">→ 複雑な鑑別診断</text>
+        <rect x="40" y="410" width="1040" height="76" rx="6" fill="#E4EDF2" stroke="#7BA7BC" stroke-width="2.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="457" font-size="26" font-weight="600" fill="#2A3640" text-anchor="middle">認知バイアスは System 1 のショートカット（ヒューリスティクス）から生じる</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

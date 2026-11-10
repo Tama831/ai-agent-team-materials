@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRMAの数の変化と3%</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FFFFFF;
+      --color-ink: #030712;
+      --color-muted: #4A5568;
+      --color-accent: #1E5BE6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>SRMAの数の変化と3%</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ebm80-title ebm80-desc">
+        <title id="ebm80-title">SRMAの数の変化と3%</title>
+        <desc id="ebm80-desc">2019年の系統的レビューは1日約80本、うち方法論的に健全で臨床的に有益なのは約3%（1日2〜3本、概算）という見積もりを示す図。</desc>
+        <defs>
+          <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FFFFFF"/>
+        <rect x="40" y="40" width="430" height="250" rx="6" fill="#F5F8FC" stroke="#C7D2E3" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="255" y="88" font-size="26" font-weight="500" fill="#4A5568" text-anchor="middle">1日換算（PubMed収載のSRMA）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="255" y="178" font-size="92" font-weight="600" fill="#030712" text-anchor="middle">約80本</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="255" y="226" font-size="26" font-weight="500" fill="#1F2937" text-anchor="middle">2019年 約29,000本（推計）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="255" y="262" font-size="26" font-weight="500" fill="#1F2937" text-anchor="middle">2000年は約1,400本</text>
+        <line x1="488" y1="165" x2="572" y2="165" stroke="#4A5568" stroke-width="3" marker-end="url(#ah)"/>
+        <rect x="590" y="40" width="490" height="250" rx="6" fill="#EAF0FD" stroke="#1E5BE6" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="835" y="88" font-size="26" font-weight="500" fill="#4A5568" text-anchor="middle">方法論的に健全で臨床的に有益</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="835" y="178" font-size="92" font-weight="600" fill="#1E5BE6" text-anchor="middle">約3%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="835" y="226" font-size="26" font-weight="500" fill="#1F2937" text-anchor="middle">見積もり（Ioannidis 2016）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="835" y="262" font-size="26" font-weight="500" fill="#1F2937" text-anchor="middle">≒ 1日2〜3本（概算）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="336" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">系統的レビュー全体に対する約3%の幅（模式）</text>
+        <rect x="40" y="350" width="1040" height="40" rx="4" fill="#F5F8FC" stroke="#C7D2E3" stroke-width="2"/>
+        <rect x="40" y="350" width="31.2" height="40" rx="0" fill="#1E5BE6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="418" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">0</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1080" y="418" font-size="22" font-weight="500" fill="#4A5568" text-anchor="end">100%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="452" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">出典: Hoffmann 2021（本数）、Ioannidis 2016（3%）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="478" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">2026年の編集記事（Rattan 2026）も両者を引用</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

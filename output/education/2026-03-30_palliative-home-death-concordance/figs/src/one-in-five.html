@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5人に1人は方針と違う場所</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F7F3EC;
+      --color-ink: #3A3D3A;
+      --color-muted: #696E69;
+      --color-accent: #B88A7A;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="one-in-five-title one-in-five-desc">
+        <title id="one-in-five-title">5人に1人は方針と違う場所</title>
+        <desc id="one-in-five-desc">緩和ケア病棟を経由した患者の遺族調査359名で、5人に1人、約20パーセントが事前の方針と異なる場所で亡くなっていたことを、5つの人型の1つを強調して示す図。</desc>
+        <defs>
+          <marker id="one-in-five-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#826056" stroke-width="1.8"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#F7F3EC"/>
+        <circle cx="85" cy="120" r="30" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <path d="M40 250 L40 200 Q40 162 70 162 L100 162 Q130 162 130 200 L130 250 Z" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <circle cx="201" cy="120" r="30" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <path d="M156 250 L156 200 Q156 162 186 162 L216 162 Q246 162 246 200 L246 250 Z" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <circle cx="317" cy="120" r="30" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <path d="M272 250 L272 200 Q272 162 302 162 L332 162 Q362 162 362 200 L362 250 Z" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <circle cx="433" cy="120" r="30" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <path d="M388 250 L388 200 Q388 162 418 162 L448 162 Q478 162 478 200 L478 250 Z" fill="#EFEAE0" stroke="#9FB5A8" stroke-width="3"/>
+        <circle cx="549" cy="120" r="30" fill="#F1E4DE" stroke="#B88A7A" stroke-width="3"/>
+        <path d="M504 250 L504 200 Q504 162 534 162 L564 162 Q594 162 594 200 L594 250 Z" fill="#F1E4DE" stroke="#B88A7A" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="320" font-size="26" font-weight="500" fill="#3A3D3A" text-anchor="start">緩和ケア病棟を経由した患者の遺族調査（359名）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="362" font-size="26" font-weight="500" fill="#3A3D3A" text-anchor="start">専門的な支援を受けた集団においても、</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="402" font-size="26" font-weight="500" fill="#3A3D3A" text-anchor="start">事前の方針と違う場所で亡くなっている。</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1080" y="230" font-size="140" font-weight="600" fill="#826056" text-anchor="end">20%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1080" y="290" font-size="40" font-weight="600" fill="#3A3D3A" text-anchor="end">5人に1人</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="470" font-size="22" font-weight="500" fill="#696E69" text-anchor="start">佐藤桃香ほか, Palliat Care Res 2026;21(1):31-39</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

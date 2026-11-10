@@ -22,7 +22,7 @@
 |------|---------|---------|-------------|
 | 0:00-2:00 | 1-2 | 問いかけ + 目標 | 「皆さんの患者さん、いくつ問題を同時に抱えていますか？今日はそれを"システム"として見る目を鍛えます」 |
 | 2:00-4:00 | 3 | 既知の確認 | 「多職種連携やBPSモデルは聞いたことありますよね。今日はそこに"循環"の視点を足します」 |
-| 4:00-7:00 | 4-5 | WHO提言 + 3概念 | 「WHOが2026年に出したメッセージ、ポイントは3つ。フィードバックループ、創発、レバレッジポイントです」 |
+| 4:00-7:00 | 4-5 | WHO提言 + 3概念 | 「WHOの2026年のウェビナーは、保健人材をエコシステムとして見ようと呼びかけています。それを考えるための定番の道具が3つ。フィードバックループ、創発、レバレッジポイントです」 |
 | 7:00-12:00 | 6-7 | ペアワーク + 共有 | 「2人で1枚、退院調整ケースの"システム図"を描いてみましょう。5分で。まず関わる人を全部書き出して、次に矢印で繋いで」 |
 | 12:00-15:00 | 8-9 | 振り返り + 持ち帰り | 「明日のカンファレンスで1つだけ試すとしたら？...そう、症例プレゼンに"システム図"を1枚入れてみてください」 |
 
@@ -57,7 +57,7 @@
 | 1 | 注意喚起 | 多疾患併存患者の複雑さを提示 | 「みんな頑張ってるのに回らない」あるある場面 |
 | 2 | 目標提示 | 3つの動詞（説明・分析・設計） | 3つの動詞（説明・使う・振り返る） |
 | 3 | 前提想起 | IPW、BPSモデル、PDCAとの接続 | 日常業務の経験から |
-| 4 | 新内容提示 | WHO提言 + 3パラダイムシフト | 「木を見て森も見る」+ 3キーワード |
+| 4 | 新内容提示 | WHOウェビナーの視点 + 3つの概念 | 「木を見て森も見る」+ 3キーワード |
 | 5 | 学習指針 | フィードバックループ・創発・レバレッジポイントの理論的説明 | 身近な例での3概念の具体化 |
 | 6 | 練習 | 因果ループ図を描くペアワーク | 悪循環を見つけるグループ対話 |
 | 7 | フィードバック | よくある発見パターンの共有 | グループ対話の全体シェア |
@@ -88,7 +88,7 @@
 
 ## 一次ソース
 
-1. WHO — Embracing Complexity: Systems Thinking for Health Workforce Strengthening (2026-01-27)
+1. WHO — Embracing Complexity: Systems Thinking for Health Workforce Strengthening（2026-01-27 開催、イベント案内ページ。講演の逐語記録ではない）
    https://www.who.int/news-room/events/detail/2026/01/27/default-calendar/embracing-complexity--systems-thinking-for-health-workforce-strengthening
 
 2. AHPSR — Systems thinking for health systems strengthening: changing the frame (2026-02-02)
@@ -96,15 +96,10 @@
 
 ## 背景文献
 
-3. de Savigny, D. & Adam, T. (Eds.) (2009). Systems thinking for health systems strengthening. WHO/AHPSR. — WHOの10ステップフレームワーク原典、1,500以上引用
+3. de Savigny, D. & Adam, T. (Eds.) (2009). Systems thinking for health systems strengthening. WHO/AHPSR. — WHO/AHPSR の旗艦報告書。10ステップを示し、AHPSR の記事（2026-02-02）によれば2024年までの累積被引用は1,500件超
 
-4. Meadows, D. H. (2008). Thinking in Systems: A Primer. Chelsea Green Publishing. — レバレッジポイントの原典
+4. Meadows, D. H. (2008). Thinking in Systems: A Primer. Chelsea Green Publishing. — システム思考の入門書（レバレッジポイントの論考は Meadows 1999 "Leverage Points: Places to Intervene in a System" が初出）
 
 5. Senge, P. M. (1990). The Fifth Discipline: The Art & Practice of the Learning Organization. Doubleday. — 学習する組織
 
 6. Plsek, P. E. & Greenhalgh, T. (2001). Complexity science: The challenge of complexity in health care. BMJ, 323(7313), 625-628. — 医療における複雑適応系の古典的論文
-
-## 関連ブリーフィングアイテム
-
-- 2026-04-01 item-002: 本教材の元トピック
-- 関連: item-001（医学教育AI統合）× item-002 の異分野クロスオーバー — 「教育をデザインする」視点での接続

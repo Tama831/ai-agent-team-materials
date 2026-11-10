@@ -45,7 +45,7 @@
 
   <!-- callout -->
   <rect x="55" y="558" width="1090" height="0" fill="none"/>
-  <text x="600" y="583" text-anchor="middle" font-size="18" fill="#5A6B5C">効率化のための集約が「顔の見える医療」を壊す — 集約は <tspan font-weight="bold" fill="#B25E40">チーム制＋情報共有とセット</tspan> で</text>
+  <text x="600" y="583" text-anchor="middle" font-size="18" fill="#5A6B5C">効率化のための集約が「顔の見える医療」を壊す — 集約は必ず<tspan font-weight="bold" fill="#B25E40">チーム制＋情報共有とセット</tspan>で——でないと両方が消える</text>
   <line x1="50" y1="602" x2="1150" y2="602" stroke="#E4DFD3" stroke-width="1.5"/>
   <text x="50" y="626" font-size="15" font-weight="bold" fill="#B25E40">※ 模式図（概念イメージ）— 実測データのプロットではない</text>
   <text x="50" y="648" font-size="13" fill="#9A978D">方向性の出典：Howells A, et al. BMC Primary Care 2025（PMID 40604407）「患者人口規模が増えるほど関係継続性・迅速性の満足度が両方低下」</text>

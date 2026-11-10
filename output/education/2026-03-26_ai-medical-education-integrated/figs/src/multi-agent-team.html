@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マルチエージェントのチーム構成</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FFFFFF;
+      --color-ink: #030712;
+      --color-muted: #4A5568;
+      --color-accent: #1E5BE6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>マルチエージェントのチーム構成</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="multi-agent-team-title multi-agent-team-desc">
+        <title id="multi-agent-team-title">マルチエージェントのチーム構成</title>
+        <desc id="multi-agent-team-desc">AIのマルチエージェントを、総合医にあたる Supervisor が束ね、検査データ・画像診断・薬剤相互作用・ガイドライン照合のそれぞれに専門の専門AIが付くチーム医療の形として描いた図。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1E5BE6"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FFFFFF"/>
+                <path d="M340,260 H430" fill="none" stroke="#1E5BE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M430,260 V105 Q430,89 446,89 H514" fill="none" stroke="#1E5BE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-accent)"/>
+        <path d="M430,260 V415 Q430,431 446,431 H514" fill="none" stroke="#1E5BE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-accent)"/>
+        <path d="M430,203 H514" fill="none" stroke="#1E5BE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-accent)"/>
+        <path d="M430,317 H514" fill="none" stroke="#1E5BE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-accent)"/>
+                <rect x="40" y="200" width="300" height="120" rx="6" fill="#EEF3FD" stroke="#1E5BE6" stroke-width="2.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="190" y="250" font-size="34" font-weight="600" fill="#030712" text-anchor="middle">Supervisor</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="190" y="296" font-size="30" font-weight="500" fill="#1F2937" text-anchor="middle">総合医</text>
+        <rect x="520" y="44" width="540" height="90" rx="6" fill="#FFFFFF" stroke="#030712" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="548" y="98" font-size="26" font-weight="500" fill="#69737F" text-anchor="start">専門AI</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="672" y="100" font-size="32" font-weight="600" fill="#030712" text-anchor="start">検査データ専門</text>
+        <rect x="520" y="158" width="540" height="90" rx="6" fill="#FFFFFF" stroke="#030712" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="548" y="212" font-size="26" font-weight="500" fill="#69737F" text-anchor="start">専門AI</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="672" y="214" font-size="32" font-weight="600" fill="#030712" text-anchor="start">画像診断専門</text>
+        <rect x="520" y="272" width="540" height="90" rx="6" fill="#FFFFFF" stroke="#030712" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="548" y="326" font-size="26" font-weight="500" fill="#69737F" text-anchor="start">専門AI</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="672" y="328" font-size="32" font-weight="600" fill="#030712" text-anchor="start">薬剤相互作用専門</text>
+        <rect x="520" y="386" width="540" height="90" rx="6" fill="#FFFFFF" stroke="#030712" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="548" y="440" font-size="26" font-weight="500" fill="#69737F" text-anchor="start">専門AI</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="672" y="442" font-size="32" font-weight="600" fill="#030712" text-anchor="start">ガイドライン照合専門</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

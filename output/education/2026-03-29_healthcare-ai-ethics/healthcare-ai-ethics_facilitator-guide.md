@@ -53,7 +53,7 @@
 | 「結局AIは使わないほうがいいの？」 | 「"使わないことの倫理的責任"もあります。AIが見つけられたはずの異常を見逃すリスクと、AIに頼りすぎるリスク。バランスが大事です」 |
 | 時間が足りなくなった | ディスカッションを短縮（1分に）し、まとめスライドに直行。持ち帰りの問いだけは必ず伝える |
 | 技術的な質問が来た（XAIとは？等） | 「技術的な詳細はスライドの参考文献にまとめています。ここでは"なぜそう判断したかAIに聞けるかどうか"という視点だけ覚えてください」 |
-| 法律の詳細を聞かれた | 「日本ではまだソフトロー（ガイドライン）段階です。EUは2026年8月から厳しい法律が始まります。詳しくは参考文献をどうぞ」 |
+| 法律の詳細を聞かれた | 「日本ではまだソフトロー（ガイドライン）段階です。EUはAI法を定めており、高リスクAIの義務の適用は2026年7月の改正で延期されました（医療機器に組み込まれるAIは2028年8月）。詳しくは参考文献をどうぞ」 |
 
 ---
 
@@ -101,7 +101,7 @@
 | バイアスの3層構造 | 研修医向けスライド6で詳述 |
 | Fairness Impossibility Theorem | 研修医向けスライド6で紹介（技術 vs 倫理の線引き） |
 | 責任の三角形（開発企業/医師/医療機関） | 研修医向けスライド7で図示 |
-| EU AI法 2026年8月適用 | 両バージョンで規制動向として言及 |
+| EU AI法（医療機器組み込みの高リスクAIは2028年8月適用） | 両バージョンで規制動向として言及 |
 | 「使わないことの倫理的責任」| ディスカッションの論点として設定 |
 | 皮膚科AIのバイアス具体例 | 全スタッフ向けスライド4で平易に解説 |
 
@@ -121,7 +121,7 @@
 
 ## 一次ソース
 
-- Wubineh BZ, Deriba FG, Gemeda FW. Ethical concerns and strategies for the implementation of AI in healthcare: a systematic review. *BMC Medical Ethics*. 2026;27:53.
+- Wubineh BZ, Deriba FG, Gemeda FW. Ethical concerns and strategies for implementing artificial intelligence in healthcare: a review of empirical studies. *BMC Medical Ethics*. 2026;27:53.
   - https://doi.org/10.1186/s12910-026-01404-8
 
 ## 二次ソース・関連文献
@@ -130,8 +130,10 @@
   - https://news.harvard.edu/gazette/story/2026/01/ai-is-speeding-into-healthcare-who-should-regulate-it/
 - WHO. Ethics and governance of artificial intelligence for health: guidance on large multi-modal models. 2024.
   - https://www.who.int/publications/i/item/9789240084759
-- EU AI Act: Guidelines for Medical Device Manufacturers (MDR 2026).
-  - https://quickbirdmedical.com/en/ai-act-medical-devices-mdr/
+- Regulation (EU) 2026/1744 (Digital Omnibus on AI). OJ L, 24.7.2026.
+  - https://eur-lex.europa.eu/eli/reg/2026/1744/oj
+- Regulation (EU) 2024/1689 (Artificial Intelligence Act).
+  - https://eur-lex.europa.eu/eli/reg/2024/1689/oj
 - JYI. Bias in Medical AI: Algorithmic Fairness and Ethics Challenges. 2026.
   - https://www.jyi.org/2026-january-1/2026/1/8/bias-in-medical-ai-algorithmic-fairness-and-ethics-challenges
 - Explainable AI in Clinical Decision Support Systems: A Meta-Analysis.
@@ -143,8 +145,9 @@
 
 ## 日本の規制関連
 
-- AI推進法（2025年成立）
-- 2026年度診療報酬改定: AI・ICT活用推進が基本方針に明記
+- AI推進法（2025年5月成立、同年9月全面施行）
+- 令和8年度診療報酬改定の基本方針（2025年12月9日）: AI・ICT等の利活用による業務効率化と医療DXの推進を明記
+  - https://www.mhlw.go.jp/content/10808000/001631275.pdf
 - 医療AIプラットフォーム技術研究組合: 生成AI利用ガイドライン第2版（2024年）
   - https://haip-cip.org/assets/documents/nr_20241002_02.pdf
 

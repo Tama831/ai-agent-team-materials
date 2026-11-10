@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>服薬不良のフィードバックループ（模式図）</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #0F2238;
+      --color-muted: #4A5568;
+      --color-accent: #1B6FA6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>服薬不良のフィードバックループ（模式図）</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="med-loop-title med-loop-desc">
+        <title id="med-loop-title">服薬不良のフィードバックループ（模式図）</title>
+        <desc id="med-loop-desc">独居高齢者で、服薬不良から症状悪化、外来再来回数の増加、通院負担の増加、服薬意欲の低下を経て、服薬不良へ戻る循環を示す模式図。訪問看護が入るとループ全体の流れが変わりうる。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <path d="M 705.1 90.9 A 360 176 0 0 1 862.5 156.6" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 918.2 234.7 A 360 176 0 0 1 854.4 353.3" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 626.5 425.0 A 360 176 0 0 1 497.6 425.3" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 271.7 357.4 A 360 176 0 0 1 201.0 238.7" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 252.4 160.6 A 360 176 0 0 1 410.9 91.8" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <rect x="420" y="44" width="280" height="64" rx="6" fill="#E3EEF2" stroke="#1B6FA6" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="86.8" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">服薬不良</text>
+        <rect x="762.38" y="165.613" width="280" height="64" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="902.38" y="208.413" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">症状悪化</text>
+        <rect x="631.603" y="362.387" width="280" height="64" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="771.603" y="405.187" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">外来再来回数 ↑</text>
+        <rect x="208.397" y="362.387" width="280" height="64" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="348.397" y="405.187" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">通院負担 ↑</text>
+        <rect x="77.6197" y="165.613" width="280" height="64" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="217.62" y="208.413" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">服薬意欲 ↓</text>
+        <rect x="380" y="184" width="360" height="160" rx="6" fill="#FFFFFF" stroke="#7E6942" stroke-width="2" stroke-dasharray="8 6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="222" font-size="26" font-weight="500" fill="#0F2238" text-anchor="middle">訪問看護が入ると、</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="256" font-size="26" font-weight="500" fill="#0F2238" text-anchor="middle">ループ全体の流れが</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="290" font-size="26" font-weight="500" fill="#0F2238" text-anchor="middle">変わりうる</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="324" font-size="22" font-weight="500" fill="#4A5568" text-anchor="middle">模式図: 効果を示す研究ではない</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="470" font-size="26" font-weight="600" fill="#1B6FA6" text-anchor="middle">「誰を増やす」ではなく「どこに介入点を作るか」</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

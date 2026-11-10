@@ -17,7 +17,7 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 ## このセッションで持ち帰ってもらう3つ
 
-1. WHOが2026年に提唱した **3つのフレーム転換** が言える
+1. WHO/AHPSR が整理した **3つのフレーム転換** が言える
 2. 目の前の1人の患者で **「部品の見方」と「繋がりの見方」** を切り替えられる
 3. 自分の診療を、半径を広げて(チーム→外来→地域)眺める **語彙** を持つ
 
@@ -28,10 +28,10 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 ## 0. なぜ今この話?
 
-- 2026年1月、**WHO** と **NHS England** が共催ウェビナーで「保健医療人材の強化にはシステム思考が必要」と公式提唱
-- 背景: WHO推計で **2030年までに世界で1,100万人** の保健医療人材が不足する見通し
-- 「人を増やす」だけでは解けない問題 → 認識のフレームそのものを変える必要がある、というのが今回の提言
-- 出典: WHO/AHPSR, *Systems thinking for health systems strengthening – changing the frame* (2026年2月)
+- 2026年1月27日、**WHO** と **NHS England** が共催ウェビナーを開催。開催案内は、保健人材を地域・教育・技術・財政・リーダーシップを含むエコシステムの中で捉え、システム思考で考えることを掲げている
+- 背景: WHOは **2030年までに世界で1,100万人** の保健医療人材が不足すると推計している(主に低・中低所得国。WHO Health workforce ページ、2026年11月確認)
+- 「人を増やす」だけでは解けない問題 → 認識のフレームそのものを見直す、という流れ
+- 出典: WHO/AHPSR, *Systems thinking for health systems strengthening – changing the frame* (2026年2月2日)。2009年の旗艦報告書を振り返る記事
 
 ---
 
@@ -39,7 +39,7 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 ---
 
-## 症例: 65歳男性、2型糖尿病、HbA1c 8.6%
+## 症例(架空): 65歳男性、2型糖尿病、HbA1c 8.6%
 
 - 既往: 高血圧、軽度CKD(eGFR 52)
 - 内服: メトホルミン1500mg/日、ARB
@@ -55,6 +55,7 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 ## ありがちな「部品の見方」
 
 - HbA1c が高い → 内服を強化する(SGLT2阻害薬を追加? GLP-1?)
+- (補足)CKD合併の2型糖尿病でSGLT2阻害薬は腎保護の面からも検討される(KDIGO 2022、日本糖尿病学会『糖尿病診療ガイドライン2024』)。薬剤選択そのものを否定する話ではなく、**薬を足す前に生活を聞いたか** がここでの問い
 - あるいは「服薬アドヒアランスが悪いのでは」と疑う
 - 食事指導の紙を渡し直す
 - 次回3か月後、また同じ会話
@@ -96,15 +97,15 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 ---
 
-## WHO/NHS England の3つのフレーム転換
+## WHO/AHPSR が整理した3つのフレーム転換(2009年の報告書)
 
 | | これまで(部品) | これから(繋がり) |
 |---|---|---|
 | **1. 何を見るか** | 部品 (parts) | 繋がり (connections) |
-| **2. どう介入するか** | 処方 (prescription) | 学習 (learning) |
-| **3. どう成果を測るか** | アウトカム測定 | 文脈理解 |
+| **2. どう介入するか** | 管理 (control) | 学習 (learning) |
+| **3. どう成果を測るか** | ブラックボックス的な評価(結果だけを見る) | 文脈と過程の説明 |
 
-出典: *Systems thinking for health systems strengthening – changing the frame*, WHO/AHPSR, 2026
+出典: *Systems thinking for health systems strengthening – changing the frame*, WHO/AHPSR, 2026年2月2日(2009年の報告書 de Savigny & Adam 編 の意義を3点で整理した記事)。表の日本語は本教材での言い換え
 
 ---
 
@@ -115,13 +116,13 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 > 「数値は嘘をつかないが、数値だけ見ていると患者を見失う」
 
-家庭医にとっては当たり前のことを、WHOが世界の保健医療システムに対して言い直してくれた、と捉えると分かりやすい。
+家庭医にとっては当たり前のことを、WHO/AHPSR が保健システム全体について言い直した、と捉えると分かりやすい。
 
 ---
 
-## 転換2: 処方から学習へ
+## 転換2: 管理から学習へ
 
-- **処方**: 「こうしなさい」と告げるモード。プロトコル通り、ガイドライン通り
+- **管理(処方に近い姿勢)**: 「こうしなさい」と告げるモード。プロトコル通り、ガイドライン通り
 - **学習**: 「やってみてどうだったか」を一緒に振り返るモード
 
 これは「ガイドラインを捨てよう」という話ではない。
@@ -131,10 +132,10 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 ---
 
-## 転換3: アウトカム測定から文脈理解へ
+## 転換3: 結果の評価から、文脈と過程の説明へ
 
 - **アウトカム測定**: HbA1c が下がったか、再入院率が減ったか
-- **文脈理解**: なぜ下がったのか / なぜ下がらなかったのか、その人の生活の中で何が起きているか
+- **文脈と過程の説明**: なぜ下がったのか / なぜ下がらなかったのか、その人の生活の中で何が起きているか
 
 アウトカム測定をやめるわけではない。
 **測定で「何が起きたか」、文脈理解で「なぜ起きたか」を補う。** どちらか一方では片手落ち。
@@ -146,7 +147,7 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 | 転換 | この症例での実装 |
 |---|---|
 | 部品→繋がり | HbA1c単独でなく、配偶者入院・社会的孤立・通院困難の連鎖を見る |
-| 処方→学習 | 「散歩を再開しましょう」ではなく「次回までに何が起きたか教えてください」 |
+| 管理→学習 | 「散歩を再開しましょう」ではなく「次回までに何が起きたか教えてください」 |
 | 測定→文脈 | 次回 HbA1c が下がっても上がっても、「なぜ?」を聞ける関係 |
 
 ---
@@ -178,7 +179,7 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 メモは要らない。考える習慣だけでいい。
 
-> これがWHOの言う「処方から学習へ」の、自分自身への適用。
+> これが「管理から学習へ」の、自分自身への適用。
 
 ---
 
@@ -222,22 +223,29 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
 
 ---
 
-## マクロ文脈: 2030年に1,100万人不足の世界
+## マクロ文脈: 2030年に1,100万人不足の見通し
 
-- WHOは「人を増やす」だけでは追いつかないと認めた
-- だからこそ、既存の人材が **繋がりを束ねる** 力を持つことが切実に必要
-- 家庭医療・総合診療という職種は、まさにこの文脈の最前線にいる
+- WHOの推計では、人材の不足は今後も続く(主に低・中低所得国)。人を増やす努力と並んで、既存の人材の力を生かす視点が要る
+- 既存の人材が **繋がりを束ねる** 力を持つことが、その一つの手がかり
+- 家庭医療・総合診療という職種は、まさにこの文脈に近い位置にいる
 
-> 「専門家から協働の促進者へ」というWHOの言葉は、
+> ウェビナーの開催案内は、リーダーに「専門家から協働の促進者へ」という視点の転換を問いかけている。
 > 家庭医にとっては新しいアイデンティティではなく、
-> **すでにやっていることに世界がやっと追いついてきた** という話。
+> **すでにやっていることに世界が目を向け始めた** という話。
+
+---
+
+## ズームアウト
+### 1人の患者から世界まで
+
+![1人の患者を中心に、チーム、外来導線、自院、地域、世界の順に半径が広がる入れ子の図](figs/zoom-out-rings.png)
 
 ---
 
 ## 今日のまとめ
 
-1. WHOは2026年に **3つのフレーム転換** を公式に打ち出した
-   (部品→繋がり / 処方→学習 / 測定→文脈)
+1. WHO/AHPSR は **3つのフレーム転換** を整理している(2009年報告書、2026年に再紹介)
+   (部品→繋がり / 管理→学習 / 結果だけの評価→文脈と過程の説明)
 2. それは **明日の外来の1問** から実装できる
    (「最近、生活で変わったことは?」)
 3. 半径を広げると、**チーム → 外来導線 → 自院 → 地域 → 世界** の話になる
@@ -261,6 +269,8 @@ primary_source: https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thin
   <https://ahpsr.who.int/newsroom/news/item/02-02-2026-systems-thinking-for-health-systems-strengthening-changing-the-frame>
 - **副出典**: WHO. *Embracing Complexity: Systems Thinking for Health Workforce Strengthening (Webinar)*. 2026年1月27日.
   <https://www.who.int/news-room/events/detail/2026/01/27/default-calendar/embracing-complexity--systems-thinking-for-health-workforce-strengthening>
+- WHO. *Health workforce*(推計: 2030年に1,100万人不足). <https://www.who.int/health-topics/health-workforce>
+- KDIGO 2022 Clinical Practice Guideline for Diabetes Management in CKD. *Kidney Int* 2022;102(5S):S1-S127
 - **背景文献**: ドネラ・メドウズ『世界はシステムで動く』, ピーター・センゲ『学習する組織』
 
 ---

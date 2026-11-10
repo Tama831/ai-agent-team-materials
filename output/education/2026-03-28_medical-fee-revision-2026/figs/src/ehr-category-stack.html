@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>区分の要件と点数</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #030712;
+      --color-muted: #4A5568;
+      --color-accent: #1E5BE6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>区分の要件と点数</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ehr-category-stack-title ehr-category-stack-desc">
+        <title id="ehr-category-stack-title">区分の要件と点数</title>
+        <desc id="ehr-category-stack-desc">電子的診療情報連携体制整備加算の3区分。区分3は基本要件のみで4点、区分2は基本要件に電子処方箋の体制または電子的な情報共有体制のいずれかを加えて9点、区分1は両方を加えて15点。区分1と区分3の差は初診時11点。</desc>
+        <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="#1B6FA6"/></marker></defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="60" font-size="24" font-weight="600" fill="#4A5568" text-anchor="start">初診時の点数</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1080" y="60" font-size="22" font-weight="500" fill="#4A5568" text-anchor="end">出典: 厚生労働省 個別改定項目（令和8年2月13日）</text>
+        <rect x="40" y="348" width="320" height="88" rx="6" fill="#EBEDE5" stroke="#1B6FA6" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="200" y="401" font-size="28" font-weight="600" fill="#1B6FA6" text-anchor="middle">基本要件</text>
+        <rect x="40" y="260" width="320" height="88" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="200" y="313" font-size="26" font-weight="500" fill="#0F2238" text-anchor="middle">電子処方箋の体制</text>
+        <rect x="40" y="172" width="320" height="88" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="200" y="208" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">電子カルテ情報等を</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="200" y="238" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">共有・活用する体制</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="192" y="150" font-size="64" font-weight="600" fill="#1B6FA6" text-anchor="end">15</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="196" y="150" font-size="30" font-weight="600" fill="#1B6FA6" text-anchor="start">点</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="200" y="474" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">区分1（両方）</text>
+        <rect x="380" y="348" width="320" height="88" rx="6" fill="#EBEDE5" stroke="#1B6FA6" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="540" y="401" font-size="28" font-weight="600" fill="#1B6FA6" text-anchor="middle">基本要件</text>
+        <rect x="380" y="260" width="320" height="88" rx="6" fill="#FBF6EA" stroke="#7E6942" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="540" y="296" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">電子処方箋の体制</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="540" y="326" font-size="24" font-weight="500" fill="#0F2238" text-anchor="middle">または電子的な情報共有体制</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="532" y="238" font-size="64" font-weight="600" fill="#0F2238" text-anchor="end">9</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="536" y="238" font-size="30" font-weight="600" fill="#0F2238" text-anchor="start">点</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="540" y="474" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">区分2（いずれか）</text>
+        <rect x="720" y="348" width="320" height="88" rx="6" fill="#EBEDE5" stroke="#1B6FA6" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="880" y="401" font-size="28" font-weight="600" fill="#1B6FA6" text-anchor="middle">基本要件</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="872" y="326" font-size="64" font-weight="600" fill="#0F2238" text-anchor="end">4</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="876" y="326" font-size="30" font-weight="600" fill="#0F2238" text-anchor="start">点</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="880" y="474" font-size="30" font-weight="600" fill="#0F2238" text-anchor="middle">区分3</text>
+        <line x1="360" y1="172" x2="1040" y2="172" stroke="#1B6FA6" stroke-width="2" stroke-dasharray="6 5"/>
+        <line x1="1010" y1="172" x2="1010" y2="346" stroke="#1B6FA6" stroke-width="3" marker-end="url(#ar)"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="990" y="214" font-size="28" font-weight="600" fill="#1B6FA6" text-anchor="end">差額 11点/回</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="990" y="248" font-size="22" font-weight="500" fill="#0F2238" text-anchor="end">（区分1 と 区分3、初診時）</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

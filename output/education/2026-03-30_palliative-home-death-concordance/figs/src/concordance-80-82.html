@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方針との一致率80%と82%</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F7F3EC;
+      --color-ink: #3A3D3A;
+      --color-muted: #696E69;
+      --color-accent: #B88A7A;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="concord-bars-title concord-bars-desc">
+        <title id="concord-bars-title">方針との一致率80%と82%</title>
+        <desc id="concord-bars-desc">自宅で亡くなった方では80パーセント、緩和ケア病棟で亡くなった方では82パーセントが事前の方針と一致し、残りは方針と異なる場所だったことを、帯グラフで示す図。</desc>
+        <defs>
+          <marker id="concord-bars-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#826056" stroke-width="1.8"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#F7F3EC"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="100" font-size="28" font-weight="600" fill="#3A3D3A" text-anchor="start">自宅で亡くなった方（202例）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="250" font-size="28" font-weight="600" fill="#3A3D3A" text-anchor="start">緩和ケア病棟で亡くなった方（157例）</text>
+        <rect x="40" y="116" width="688" height="64" rx="4" fill="#9FB5A8" stroke="#5E6A63" stroke-width="2"/>
+        <rect x="728" y="116" width="172" height="64" rx="4" fill="#F1E4DE" stroke="#B88A7A" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="162" font-size="26" font-weight="600" fill="#3A3D3A" text-anchor="start">事前の方針と一致</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="924" y="170" font-size="72" font-weight="600" fill="#5E6A63" text-anchor="start">80%</text>
+        <rect x="40" y="266" width="705" height="64" rx="4" fill="#9FB5A8" stroke="#5E6A63" stroke-width="2"/>
+        <rect x="745" y="266" width="155" height="64" rx="4" fill="#F1E4DE" stroke="#B88A7A" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="312" font-size="26" font-weight="600" fill="#3A3D3A" text-anchor="start">事前の方針と一致</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="924" y="320" font-size="72" font-weight="600" fill="#5E6A63" text-anchor="start">82%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="410" font-size="28" font-weight="600" fill="#826056" text-anchor="start">約5人に1人（100人のうち約20人）は、事前の方針と違う場所で亡くなっている</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="448" font-size="24" font-weight="500" fill="#3A3D3A" text-anchor="start">緩和ケア病棟を経験した患者の遺族での数値</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="486" font-size="22" font-weight="500" fill="#696E69" text-anchor="start">佐藤桃香ほか, Palliat Care Res 2026;21(1):31-39</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

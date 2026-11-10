@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3つの介入の横並び比較</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF7EF;
+      --color-ink: #2E2E2E;
+      --color-muted: #696E67;
+      --color-accent: #D9876C;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>3つの介入の横並び比較</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="three-interventions-title three-interventions-desc">
+        <title id="three-interventions-title">3つの介入の横並び比較</title>
+        <desc id="three-interventions-desc">ナッジ、インセンティブ、コミットメントデバイスの3つについて、しくみと特徴を横に並べて比べる図。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#696E67"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FBF7EF"/>
+        <rect x="40" y="40" width="330" height="440" rx="8" fill="#FFFFFF"/>
+        <path d="M 40 130 V 48 a 8 8 0 0 1 8 -8 H 362 a 8 8 0 0 1 8 8 V 130 Z" fill="#F2ECE0"/>
+        <line x1="40" y1="130" x2="370" y2="130" stroke="#D9CFBC" stroke-width="2"/>
+        <rect x="40" y="40" width="330" height="440" rx="8" fill="none" stroke="#D9CFBC" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="205" y="98" font-size="34" font-weight="600" fill="#2E2E2E" text-anchor="middle">ナッジ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="58" y="168" font-size="22" font-weight="600" fill="#9A5F4C" text-anchor="start">しくみ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="58" y="202" font-size="26" font-weight="500" fill="#2E2E2E" text-anchor="start">選択肢を変えずに、</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="58" y="236" font-size="26" font-weight="500" fill="#2E2E2E" text-anchor="start">選びやすさを変える</text>
+        <line x1="58" y1="304" x2="352" y2="304" stroke="#D9CFBC" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="58" y="336" font-size="22" font-weight="600" fill="#9A5F4C" text-anchor="start">特徴</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="58" y="370" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">コスト低い</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="58" y="400" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">抵抗感少ない</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="58" y="430" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">効果は穏やか〜中等度</text>
+        <rect x="395" y="40" width="330" height="440" rx="8" fill="#FFFFFF"/>
+        <path d="M 395 130 V 48 a 8 8 0 0 1 8 -8 H 717 a 8 8 0 0 1 8 8 V 130 Z" fill="#F2ECE0"/>
+        <line x1="395" y1="130" x2="725" y2="130" stroke="#D9CFBC" stroke-width="2"/>
+        <rect x="395" y="40" width="330" height="440" rx="8" fill="none" stroke="#D9CFBC" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="98" font-size="34" font-weight="600" fill="#2E2E2E" text-anchor="middle">インセンティブ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="168" font-size="22" font-weight="600" fill="#9A5F4C" text-anchor="start">しくみ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="202" font-size="26" font-weight="500" fill="#2E2E2E" text-anchor="start">行動した本人に</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="236" font-size="26" font-weight="500" fill="#2E2E2E" text-anchor="start">報酬を与える</text>
+        <line x1="413" y1="304" x2="707" y2="304" stroke="#D9CFBC" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="336" font-size="22" font-weight="600" fill="#9A5F4C" text-anchor="start">特徴</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="370" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">効果は強い</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="400" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">ただしコスト・倫理的</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="430" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">配慮・終了後の逆戻り</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="413" y="460" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">に注意</text>
+        <rect x="750" y="40" width="330" height="440" rx="8" fill="#FFFFFF"/>
+        <path d="M 750 130 V 48 a 8 8 0 0 1 8 -8 H 1072 a 8 8 0 0 1 8 8 V 130 Z" fill="#F2ECE0"/>
+        <line x1="750" y1="130" x2="1080" y2="130" stroke="#D9CFBC" stroke-width="2"/>
+        <rect x="750" y="40" width="330" height="440" rx="8" fill="none" stroke="#D9CFBC" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="915" y="78" font-size="32" font-weight="600" fill="#2E2E2E" text-anchor="middle">コミットメント</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="915" y="116" font-size="32" font-weight="600" fill="#2E2E2E" text-anchor="middle">デバイス</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="168" font-size="22" font-weight="600" fill="#9A5F4C" text-anchor="start">しくみ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="202" font-size="26" font-weight="500" fill="#2E2E2E" text-anchor="start">将来の自分の行動を</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="236" font-size="26" font-weight="500" fill="#2E2E2E" text-anchor="start">支える仕組みを、</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="270" font-size="26" font-weight="500" fill="#2E2E2E" text-anchor="start">現在の本人が自分で作る</text>
+        <line x1="768" y1="304" x2="1062" y2="304" stroke="#D9CFBC" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="336" font-size="22" font-weight="600" fill="#9A5F4C" text-anchor="start">特徴</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="370" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">本人の意志に基づくので</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="400" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">パターナリズムの問題が</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="430" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">比較的小さい</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="768" y="460" font-size="24" font-weight="500" fill="#2E2E2E" text-anchor="start">設計の手間がいる</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

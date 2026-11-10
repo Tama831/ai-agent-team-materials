@@ -40,9 +40,9 @@
 **ナラティブ・ケア** = 患者さんの物語に耳を傾け、ケアに活かすこと
 
 ### 最新の研究でわかったこと
-- 物語を聴くことで、**患者さんのストレスが軽減**する（定量データあり）
-- 聴く側（医療者）の**臨床判断の質も上がる**
-- ただの「優しさ」ではなく、**ケアの質を上げるスキル**
+- ナラティブ・メディスンは、医療者の**共感・コミュニケーション・専門職としてのあり方**を育てると報告されている（Frontiers in Medicine 2026 のレビュー）
+- ただし、効果を測る評価の枠組みはまだ整備の途上
+- ただの「優しさ」ではなく、**ケアに活かせるスキル**として学ばれている
 
 ---
 
@@ -69,18 +69,19 @@
 ## スライド4: みんなで考えよう（8-13分）
 ### 事象6: 練習の機会 / 事象7: フィードバック
 
-### 🗣️ グループワーク（3分）
-3-4人のグループで話し合ってみましょう：
+> 🗣️ グループワーク（3分）　3-4人のグループで話し合ってみましょう
+> 「最近、患者さんから聴いた"心に残った一言"はありますか？ それをチームにどう共有したら、ケアが良くなると思いますか？」
 
-> 「最近、患者さんから聴いた"心に残った一言"はありますか？
-> それをチームにどう共有したら、ケアが良くなると思いますか？」
+---
+
+## 話すヒントと全体共有
 
 **話すヒント:**
 - 大きなエピソードじゃなくてOK。ちょっとした一言でも
 - 「もっと聴きたかったけど時間がなかった」でもOK
 - 守秘義務の範囲で（個人が特定されない形で）
 
-### 全体共有（2分）
+**全体共有（2分）**
 - 各グループから1つずつ
 
 ---
@@ -109,4 +110,4 @@
 ## 参考文献
 1. JMIR (2026) — Digital Narrative Medicine: Translating Stories Into Medical Education and Better Patient Care. https://www.jmir.org/2026/1/e93037/
 2. Frontiers in Medicine (2026) — Reimagining Medical Education. https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2026.1761177/full
-3. BMC Medical Education (2025) — Narrative medicine combined with clinical thinking model. https://link.springer.com/article/10.1186/s12909-025-08492-x
+3. BMC Medical Education (2026) — Application of narrative medicine combined with clinical thinking model in neurology teaching. https://link.springer.com/article/10.1186/s12909-025-08492-x

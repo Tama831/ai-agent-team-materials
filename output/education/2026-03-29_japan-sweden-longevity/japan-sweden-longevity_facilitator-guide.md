@@ -44,9 +44,9 @@ type: facilitator-guide
 | 0:00-1:00 | 1 | 1 | クイズ | 「日本人が長生きな一番の理由、A〜Dどれだと思いますか? 手を挙げてください」 |
 | 1:00-1:30 | 2 | 2 | 学習目標 | 「今日は10分で、皆さんの仕事の価値を再発見します」 |
 | 1:30-3:00 | 3,4 | 3-4 | 研究結果 | 「スウェーデンの研究所が日本と比較した結果、驚きのデータが出ました」 |
-| 3:00-4:30 | 4 | 5-6 | 核心 | 「健康な期間は同じなのに、日本人が長生きなのは...ケアの力なんです」 |
-| 4:30-5:30 | 5 | 7 | 解説 | 「つまり、皆さんの仕事が日本の長寿を支えているということです」 |
-| 5:30-6:30 | 5 | 8 | 要因紹介 | 「なぜケアの力が寿命を延ばすのか、考えてみましょう」 |
+| 3:00-4:30 | 4 | 5-6 | 核心 | 「健康な期間は同じなのに、日本人が長生きなのは...ケアの力かもしれない、というのが今回の研究の読み方です」 |
+| 4:30-5:30 | 5 | 7 | 解説 | 「つまり、皆さんの仕事が日本の長寿を支えている可能性があるということです」 |
+| 5:30-6:30 | 5 | 8 | 要因紹介 | 「なぜケアの力が寿命を延ばしうるのか、考えてみましょう」 |
 | 6:30-8:30 | 6,7 | 9 | ペア対話 | 「隣の人と: 自分の仕事のどんな場面が、長寿を支えていると思いますか?」 |
 | 8:30-9:00 | 6,7 | 10 | 職種別アクション | 「各職種でできることを一つずつお伝えします」 |
 | 9:00-9:30 | 8 | 11 | まとめ | 「クイズの答え、Cでした! 今日の3つのポイントをおさらいします」 |
@@ -95,7 +95,7 @@ type: facilitator-guide
 
 | ブルームレベル | 学習目標 | 評価指標 |
 |--------------|---------|---------|
-| 理解（Understand） | 日本の長寿は「ケアの力」が主因であることをざっくり説明できる | クイズの正答 + 隣の人への説明 |
+| 理解（Understand） | 日本の長寿の優位は、主に介護を受けている層の低い死亡率から生じていることをざっくり説明できる | クイズの正答 + 隣の人への説明 |
 | 適用（Apply） | 自分の職種で長寿を支えている場面を一つ言葉にできる | ペア対話での発言内容 |
 | 評価（Evaluate） | 明日からのケアを「長寿を支える行為」として振り返れる | 職種別アクションへの納得度 |
 
@@ -105,7 +105,7 @@ type: facilitator-guide
 
 ### 一次ソース（原著論文）
 
-- Murata S, Modig K, et al. **Understanding Japan's mortality advantage: a comparison of mortality in independent and dependent older adults in Japan and Sweden.** BMC Medicine. 2026.
+- Murata S, Ebeling M, Ono R, Maeda M, Schmidt-Mende K, Fukuda H, Modig K. **Understanding Japan's mortality advantage: a comparison of mortality in independent and dependent older adults in Japan and Sweden.** BMC Medicine. 2026;24:160. doi:10.1186/s12916-026-04786-z
   - URL: https://link.springer.com/article/10.1186/s12916-026-04786-z
 
 ### 二次ソース（解説・報道）
@@ -119,8 +119,8 @@ type: facilitator-guide
 
 - OECD. **Health at a Glance 2025: Japan.** 2025.
   - URL: https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/japan_319bfc39-en.html
-- 内閣府. **令和6年版高齢社会白書.** 2024.
-  - URL: https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_2_2.html
+- 内閣府. **令和8年版高齢社会白書.** 2026.
+  - URL: https://www8.cao.go.jp/kourei/whitepaper/w-2026/html/zenbun/s1_2_2.html
 - Nippon.com. **Healthy Life Expectancy Gap Remains Constant in Japan.** 2024.
   - URL: https://www.nippon.com/en/japan-data/h02252/
 
@@ -133,5 +133,5 @@ type: facilitator-guide
 
 ## 補足: Key Message（全体を貫くメッセージ）
 
-> **日本の長寿は「健康な国民」ではなく「ケアの力」が支えている。
-> 在宅医療・介護・多職種連携の日々の実践が、国際比較データとして証明された。**
+> **日本の長寿の優位は、「健康な国民」だけでなく、介護を受けている層の低い死亡率から生じている。
+> 在宅医療・介護・多職種連携の日々の実践がその背景にある可能性が、国際比較データから示唆された（観察研究であり、因果までは確定していない）。**

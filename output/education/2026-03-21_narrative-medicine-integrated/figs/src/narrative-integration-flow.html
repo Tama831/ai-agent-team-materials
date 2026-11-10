@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>統合モデルの流れ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F7F3EC;
+      --color-ink: #3A3D3A;
+      --color-muted: #696E69;
+      --color-accent: #B88A7A;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="narr-flow-title narr-flow-desc">
+        <title id="narr-flow-title">統合モデルの流れ</title>
+        <desc id="narr-flow-desc">患者の物語を、注意深く聴く、物語の構造化、臨床思考モデルの適用、仮説生成とパターン認識、関係性の深化を経て、統合的臨床判断に至る流れを階段状に示す図。</desc>
+        <defs>
+          <marker id="narr-flow-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#826056" stroke-width="1.8"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#F7F3EC"/>
+        <rect x="40" y="40" width="430" height="68" rx="6" fill="#EFEAE0" stroke="#D3CABA" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="255" y="84" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">患者の物語（ナラティブ）</text>
+        <rect x="250" y="164" width="400" height="68" rx="6" fill="#EFEAE0" stroke="#D3CABA" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="450" y="194" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">物語の構造化</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="450" y="222" font-size="24" font-weight="500" fill="#5E6A63" text-anchor="middle">Representation</text>
+        <rect x="460" y="288" width="560" height="68" rx="6" fill="#EFEAE0" stroke="#D3CABA" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="610" y="332" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">仮説生成</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="910" y="332" font-size="30" font-weight="600" fill="#3A3D3A" text-anchor="middle">パターン認識</text>
+        <path d="M730 322 L788 322" fill="none" stroke="#826056" stroke-width="2.5" marker-start="url(#narr-flow-ah)" marker-end="url(#narr-flow-ah)"/>
+        <rect x="520" y="412" width="360" height="68" rx="6" fill="#F1E4DE" stroke="#B88A7A" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="700" y="456" font-size="32" font-weight="600" fill="#3A3D3A" text-anchor="middle">統合的臨床判断</text>
+        <path d="M300 108 L300 164" fill="none" stroke="#826056" stroke-width="2.5" marker-end="url(#narr-flow-ah)"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="322" y="144" font-size="24" font-weight="500" fill="#826056" text-anchor="start">Attention（注意深く聴く）</text>
+        <path d="M510 232 L510 288" fill="none" stroke="#826056" stroke-width="2.5" marker-end="url(#narr-flow-ah)"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="532" y="268" font-size="24" font-weight="500" fill="#826056" text-anchor="start">臨床思考モデル適用</text>
+        <path d="M700 356 L700 412" fill="none" stroke="#826056" stroke-width="2.5" marker-end="url(#narr-flow-ah)"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="722" y="392" font-size="24" font-weight="500" fill="#826056" text-anchor="start">Affiliation（関係性の深化）</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

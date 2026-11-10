@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPAの5段階</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #030712;
+      --color-muted: #4A5568;
+      --color-accent: #1E5BE6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>EPAの5段階</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="epa-levels-title epa-levels-desc">
+        <title id="epa-levels-title">EPAの5段階</title>
+        <desc id="epa-levels-desc">EPA（任せられる専門的活動）の5段階。Level 1 観察のみ、Level 2 直接指導下、Level 3 間接指導下、Level 4 自立実施、Level 5 他者を指導と、階段状に段階が上がる図。</desc>
+        <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1,1 L9,5 L1,9 Z" fill="#1B6FA6"/></marker></defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="78" font-size="28" font-weight="600" fill="#1B6FA6" text-anchor="start">「この研修医にこの行動を任せられるか？」</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="114" font-size="28" font-weight="500" fill="#0F2238" text-anchor="start">が評価の核心</text>
+        <rect x="40" y="370" width="200" height="60" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="140" y="410" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">Level 1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="140" y="268" font-size="32" font-weight="600" fill="#0F2238" text-anchor="middle">観察のみ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="140" y="302" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">見学している</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="140" y="336" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">段階</text>
+        <rect x="250" y="320" width="200" height="110" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="350" y="360" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">Level 2</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="350" y="218" font-size="32" font-weight="600" fill="#0F2238" text-anchor="middle">直接指導下</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="350" y="252" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">指導医が</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="350" y="286" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">横で見ている</text>
+        <rect x="460" y="270" width="200" height="160" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="310" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">Level 3</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="168" font-size="32" font-weight="600" fill="#0F2238" text-anchor="middle">間接指導下</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="202" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">一人でやって</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="236" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">後で確認</text>
+        <rect x="670" y="220" width="200" height="210" rx="6" fill="#EBEDE5" stroke="#1B6FA6" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="770" y="260" font-size="28" font-weight="600" fill="#1B6FA6" text-anchor="middle">Level 4</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="770" y="152" font-size="32" font-weight="600" fill="#1B6FA6" text-anchor="middle">自立実施</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="770" y="186" font-size="24" font-weight="500" fill="#1B6FA6" text-anchor="middle">任せられる！</text>
+        <rect x="880" y="170" width="200" height="260" rx="6" fill="#DCEBF5" stroke="#ADC7D2" stroke-width="1.5"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="980" y="210" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">Level 5</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="980" y="68" font-size="32" font-weight="600" fill="#0F2238" text-anchor="middle">他者を指導</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="980" y="102" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">教える側に</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="980" y="136" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">なる</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="478" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">EPA = Entrustable Professional Activity（任せられる専門的活動）</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

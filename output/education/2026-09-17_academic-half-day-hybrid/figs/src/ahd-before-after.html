@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AHD導入の前後の変化</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F0F4F8;
+      --color-ink: #1A1A2E;
+      --color-muted: #627181;
+      --color-accent: #00B4A6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>AHD導入の前後の変化</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ahd-before-after-title ahd-before-after-desc">
+        <title id="ahd-before-after-title">AHD導入の前後の変化</title>
+        <desc id="ahd-before-after-desc">学術半日ハイブリッド導入の前後比較。出席率は60.1%から66.0%、AHD週は97.5%。エンゲージメント2.46から4.46、深い学習2.39から4.46、ウェルネス1.92から4.39（5件法）。</desc>
+        <rect width="100%" height="100%" fill="#F0F4F8"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="60" font-size="26" font-weight="600" fill="#1A1A2E" text-anchor="start">出席率（直接観察）</text>
+        <rect x="48" y="229.73" width="96" height="162.27" rx="4" fill="#B0B9C2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="96" y="217.73" font-size="30" font-weight="600" fill="#1A1A2E" text-anchor="middle">60.1%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="96" y="426" font-size="24" font-weight="500" fill="#1A1A2E" text-anchor="middle">前</text>
+        <rect x="176" y="213.79999999999998" width="96" height="178.20000000000002" rx="4" fill="#7E8B99"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="224" y="201.79999999999998" font-size="30" font-weight="600" fill="#1A1A2E" text-anchor="middle">66.0%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="224" y="426" font-size="24" font-weight="500" fill="#1A1A2E" text-anchor="middle">後</text>
+        <rect x="304" y="128.75" width="96" height="263.25" rx="4" fill="#00B4A6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="352" y="116.75" font-size="30" font-weight="600" fill="#00736A" text-anchor="middle">97.5%</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="352" y="426" font-size="24" font-weight="500" fill="#1A1A2E" text-anchor="middle">AHD週</text>
+        <line x1="40" y1="392" x2="432" y2="392" stroke="#1A1A2E" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="480" y="60" font-size="26" font-weight="600" fill="#1A1A2E" text-anchor="start">5件法の自己申告（1〜5）</text>
+        <circle cx="920" cy="50" r="9" fill="#F0F4F8" stroke="#627181" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="938" y="59" font-size="24" font-weight="500" fill="#1A1A2E" text-anchor="start">前</text>
+        <circle cx="1000" cy="50" r="10" fill="#00B4A6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1018" y="59" font-size="24" font-weight="500" fill="#1A1A2E" text-anchor="start">後</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="480" y="118" font-size="26" font-weight="500" fill="#1A1A2E" text-anchor="start">エンゲージメント</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1040" y="118" font-size="24" font-weight="600" fill="#00736A" text-anchor="end">d = 1.0</text>
+        <line x1="500" y1="150" x2="1040" y2="150" stroke="#BDC5C8" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="488" y="158" font-size="22" font-weight="500" fill="#627181" text-anchor="end">1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1052" y="158" font-size="22" font-weight="500" fill="#627181" text-anchor="start">5</text>
+        <line x1="697.1" y1="150" x2="967.1" y2="150" stroke="#00B4A6" stroke-width="5"/>
+        <circle cx="697.1" cy="150" r="11" fill="#F0F4F8" stroke="#627181" stroke-width="4"/>
+        <circle cx="967.1" cy="150" r="12" fill="#00B4A6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="697.1" y="194" font-size="28" font-weight="600" fill="#627181" text-anchor="middle">2.46</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="967.1" y="194" font-size="28" font-weight="600" fill="#00736A" text-anchor="middle">4.46</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="480" y="238" font-size="26" font-weight="500" fill="#1A1A2E" text-anchor="start">深い学習</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1040" y="238" font-size="24" font-weight="600" fill="#00736A" text-anchor="end">d = 1.1</text>
+        <line x1="500" y1="270" x2="1040" y2="270" stroke="#BDC5C8" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="488" y="278" font-size="22" font-weight="500" fill="#627181" text-anchor="end">1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1052" y="278" font-size="22" font-weight="500" fill="#627181" text-anchor="start">5</text>
+        <line x1="687.65" y1="270" x2="967.1" y2="270" stroke="#00B4A6" stroke-width="5"/>
+        <circle cx="687.65" cy="270" r="11" fill="#F0F4F8" stroke="#627181" stroke-width="4"/>
+        <circle cx="967.1" cy="270" r="12" fill="#00B4A6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="687.65" y="314" font-size="28" font-weight="600" fill="#627181" text-anchor="middle">2.39</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="967.1" y="314" font-size="28" font-weight="600" fill="#00736A" text-anchor="middle">4.46</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="480" y="358" font-size="26" font-weight="500" fill="#1A1A2E" text-anchor="start">ウェルネス</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1040" y="358" font-size="24" font-weight="600" fill="#00736A" text-anchor="end">d = 1.3</text>
+        <line x1="500" y1="390" x2="1040" y2="390" stroke="#BDC5C8" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="488" y="398" font-size="22" font-weight="500" fill="#627181" text-anchor="end">1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1052" y="398" font-size="22" font-weight="500" fill="#627181" text-anchor="start">5</text>
+        <line x1="624.2" y1="390" x2="957.65" y2="390" stroke="#00B4A6" stroke-width="5"/>
+        <circle cx="624.2" cy="390" r="11" fill="#F0F4F8" stroke="#627181" stroke-width="4"/>
+        <circle cx="957.65" cy="390" r="12" fill="#00B4A6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="624.2" y="434" font-size="28" font-weight="600" fill="#627181" text-anchor="middle">1.92</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="957.65" y="434" font-size="28" font-weight="600" fill="#00736A" text-anchor="middle">4.39</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="460" font-size="22" font-weight="500" fill="#627181" text-anchor="start">完全回答13名の自己申告・後ろ向き比較・対照群なし</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="486" font-size="22" font-weight="500" fill="#627181" text-anchor="start">出典: DiPaolo LH ほか, Fam Med 2026;58(3):215–219</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

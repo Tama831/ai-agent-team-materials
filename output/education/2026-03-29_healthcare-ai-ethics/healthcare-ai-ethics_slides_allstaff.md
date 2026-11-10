@@ -67,6 +67,12 @@ AIが入院患者の状態を自動分析し、「急変リスク: 高」とア�
 
 ---
 
+## 6つのチェックポイントの全体像
+
+![世界の研究22件から見えてきた6つのチェックポイント。透明性と信頼、偏りと公平性、プライバシー、責任の所在、道徳的な問題、法律とルール](figs/six-checkpoints.png)
+
+---
+
 ## スライド 4: 具体例で理解しよう
 ### 「偏り（バイアス）」って何？
 
@@ -110,14 +116,14 @@ AIが入院患者の状態を自動分析し、「急変リスク: 高」とア�
 ### ルールはどう変わっていくか
 
 **EU（ヨーロッパ）**:
-- EU AI法が2026年8月に適用開始
-- 医療AIは「高リスクAI」に分類 → 技術文書・人間の監視が義務化
-- スタッフのAIリテラシー教育も義務（2025年2月から）
+- EU AI法は2024年に発効し、高リスクAIの義務の適用は延期された（2026年7月の改正で、医療機器に組み込まれるAIは2028年8月、それ以外の分野別の高リスクAIは2027年12月から）
+- 医療機器に組み込まれるAIは「高リスクAI」に分類 → 技術文書・人間の監視などが義務化
+- スタッフのAIリテラシーを高める措置を取る義務は2025年2月から（2026年7月の改正で、一定水準の保証までは求めない形に）
 
 **日本**:
-- AI推進法が2025年に成立
-- 厚労省が医療データのAI利活用ガイドラインを運用中
-- 2026年度診療報酬改定でAI・ICT（Information and Communications Technology / 情報通信技術）活用推進が基本方針に
+- AI推進法（人工知能関連技術の研究開発及び活用の推進に関する法律）が2025年5月に成立し、同年9月に全面施行
+- 厚労省「医療デジタルデータのAI研究開発等への利活用に係るガイドライン」が公表されている
+- 令和8年度診療報酬改定の基本方針（2025年12月）に、AI・ICT（Information and Communications Technology / 情報通信技術）等の利活用による業務効率化と医療DXの推進が盛り込まれた
 
 **ポイント**: 「AIを使えること」だけでなく「AIを安全に使えること」が求められる時代へ
 
@@ -149,7 +155,7 @@ AIが入院患者の状態を自動分析し、「急変リスク: 高」とア�
 
 ## 参考文献
 
-- Wubineh BZ, Deriba FG, Gemeda FW. 医療AIの倫理的懸念と実装戦略：システマティックレビュー. *BMC Medical Ethics*. 2026;27:53. https://doi.org/10.1186/s12910-026-01404-8
+- Wubineh BZ, Deriba FG, Gemeda FW. Ethical concerns and strategies for implementing artificial intelligence in healthcare: a review of empirical studies. *BMC Medical Ethics*. 2026;27(1):53. https://doi.org/10.1186/s12910-026-01404-8
 - Harvard Gazette. AI is speeding into healthcare — who should regulate it? 2026. https://news.harvard.edu/gazette/story/2026/01/ai-is-speeding-into-healthcare-who-should-regulate-it/
 - WHO. AIの倫理とガバナンス：大規模マルチモーダルモデルに関するガイダンス. 2024. https://www.who.int/publications/i/item/9789240084759
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ゲームデザインの3原則</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FFFFFF;
+      --color-ink: #030712;
+      --color-muted: #69737F;
+      --color-accent: #1E5BE6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>ゲームデザインの3原則</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="game-three-title game-three-desc">
+        <title id="game-three-title">ゲームデザインの3原則</title>
+        <desc id="game-three-desc">学びを設計する3原則。チャレンジは少し難しいを設計する、安全な失敗は誤りをデータに変える、フィードバックループは行動、結果、次の行動。外来での使い方を添えた図。</desc>
+        <rect width="100%" height="100%" fill="#FFFFFF"/>
+        <rect x="40" y="40" width="336" height="372" rx="6" fill="#F5F8FC" stroke="#D3D6DB" stroke-width="2"/>
+        <rect x="40" y="40" width="336" height="8" rx="4" fill="#1E5BE6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="92" font-size="22" font-weight="500" fill="#69737F" text-anchor="start">原則 1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="138" font-size="30" font-weight="600" fill="#030712" text-anchor="start">チャレンジ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="188" font-size="26" font-weight="500" fill="#030712" text-anchor="start">「少し難しい」を</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="224" font-size="26" font-weight="500" fill="#030712" text-anchor="start">設計する</text>
+        <line x1="56" y1="248" x2="360" y2="248" stroke="#D3D6DB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="282" font-size="22" font-weight="600" fill="#1E5BE6" text-anchor="start">外来では</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="320" font-size="24" font-weight="500" fill="#030712" text-anchor="start">慣れた主訴に</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="56" y="352" font-size="24" font-weight="500" fill="#030712" text-anchor="start">1つだけ縛りを足す</text>
+        <rect x="392" y="40" width="336" height="372" rx="6" fill="#F5F8FC" stroke="#D3D6DB" stroke-width="2"/>
+        <rect x="392" y="40" width="336" height="8" rx="4" fill="#1E5BE6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="92" font-size="22" font-weight="500" fill="#69737F" text-anchor="start">原則 2</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="138" font-size="30" font-weight="600" fill="#030712" text-anchor="start">安全な失敗</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="188" font-size="26" font-weight="500" fill="#030712" text-anchor="start">誤りを「データ」に</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="224" font-size="26" font-weight="500" fill="#030712" text-anchor="start">変える</text>
+        <line x1="408" y1="248" x2="712" y2="248" stroke="#D3D6DB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="282" font-size="22" font-weight="600" fill="#1E5BE6" text-anchor="start">外来では</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="320" font-size="24" font-weight="500" fill="#030712" text-anchor="start">「見逃し」を語る枠を</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="352" font-size="24" font-weight="500" fill="#030712" text-anchor="start">先に用意し、</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="408" y="384" font-size="24" font-weight="500" fill="#030712" text-anchor="start">責めない運用にする</text>
+        <rect x="744" y="40" width="336" height="372" rx="6" fill="#F5F8FC" stroke="#D3D6DB" stroke-width="2"/>
+        <rect x="744" y="40" width="336" height="8" rx="4" fill="#1E5BE6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="760" y="92" font-size="22" font-weight="500" fill="#69737F" text-anchor="start">原則 3</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="760" y="138" font-size="30" font-weight="600" fill="#030712" text-anchor="start">フィードバックループ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="760" y="188" font-size="26" font-weight="500" fill="#030712" text-anchor="start">行動 → 結果 →</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="760" y="224" font-size="26" font-weight="500" fill="#030712" text-anchor="start">次の行動</text>
+        <line x1="760" y1="248" x2="1064" y2="248" stroke="#D3D6DB" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="760" y="282" font-size="22" font-weight="600" fill="#1E5BE6" text-anchor="start">外来では</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="760" y="320" font-size="24" font-weight="500" fill="#030712" text-anchor="start">担当患者の転帰を</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="760" y="352" font-size="24" font-weight="500" fill="#030712" text-anchor="start">自分で追って記録する</text>
+        <rect x="40" y="428" width="1040" height="52" rx="6" fill="#FFFFFF" stroke="#1E5BE6" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="464" font-size="28" font-weight="600" fill="#030712" text-anchor="middle">効くのは「配る報酬」でなく「学びの構造」</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>つながりの輪: 悪い輪と良い輪（模式図）</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #0F2238;
+      --color-muted: #4A5568;
+      --color-accent: #1B6FA6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>つながりの輪: 悪い輪と良い輪（模式図）</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="two-loops-title two-loops-desc">
+        <title id="two-loops-title">つながりの輪: 悪い輪と良い輪（模式図）</title>
+        <desc id="two-loops-desc">忙しい、ミスが増える、確認作業が増える、もっと忙しい、と巡る悪い輪と、声かけ、安心、余裕、もっと声かけ、と巡る良い輪を並べた模式図。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <path d="M 345.5 155.0 A 130 150 0 0 1 384.3 219.0" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 385.4 317.0 A 130 150 0 0 1 359.0 369.8" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 169.0 374.8 A 130 150 0 0 1 139.7 321.0" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 138.6 223.0 A 130 150 0 0 1 174.5 159.0" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <rect x="174" y="90" width="176" height="60" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="262" y="130.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">忙しい</text>
+        <rect x="304" y="228" width="176" height="84" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="392" y="263.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">ミスが</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="392" y="297.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">増える</text>
+        <rect x="174" y="378" width="176" height="84" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="262" y="413.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">確認作業が</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="262" y="447.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">増える</text>
+        <rect x="44" y="228" width="176" height="84" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="132" y="263.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">もっと</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="132" y="297.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">忙しい</text>
+        <path d="M 941.5 155.0 A 130 150 0 0 1 983.5 230.9" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 984.4 305.1 A 130 150 0 0 1 945.5 381.0" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 774.5 385.0 A 130 150 0 0 1 735.7 321.0" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <path d="M 734.6 223.0 A 130 150 0 0 1 770.5 159.0" fill="none" stroke="#4A5568" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <rect x="770" y="90" width="176" height="60" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="858" y="130.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">声かけ</text>
+        <rect x="900" y="240" width="176" height="60" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="988" y="280.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">安心</text>
+        <rect x="770" y="390" width="176" height="60" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="858" y="430.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">余裕</text>
+        <rect x="640" y="228" width="176" height="84" rx="6" fill="#FFFFFF" stroke="#0F2238" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="728" y="263.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">もっと</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="728" y="297.08" font-size="28" font-weight="600" fill="#0F2238" text-anchor="middle">声かけ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="262" y="64" font-size="34" font-weight="600" fill="#7E6942" text-anchor="middle">悪い輪</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="858" y="64" font-size="34" font-weight="600" fill="#1B6FA6" text-anchor="middle">良い輪</text>
+        <line x1="560" y1="90" x2="560" y2="440" stroke="#B5CEE0" stroke-width="2" stroke-dasharray="4 6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="486" font-size="22" font-weight="500" fill="#4A5568" text-anchor="middle">模式図（例）</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

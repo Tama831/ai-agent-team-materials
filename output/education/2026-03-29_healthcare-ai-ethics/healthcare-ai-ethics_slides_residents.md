@@ -18,7 +18,7 @@
 
 **シナリオ**:
 深夜の救急外来。38.5度の発熱と頻脈で搬送された72歳女性。
-AIシステムが「敗血症リスク: 高（92%）」とアラート。
+AIシステムが「敗血症リスク: 高（92%）」とアラート（数字は議論のための架空の設定で、実在の製品の性能ではない）。
 
 しかし、あなたの臨床的印象は「単純性尿路感染症」。
 
@@ -58,20 +58,7 @@ AIシステムが「敗血症リスク: 高（92%）」とアラート。
 ## スライド 4: 6つの倫理的懸念カテゴリ
 ### システマティックレビューが体系化した全体像
 
-<!-- ガニェ事象4: 新しい内容を提示する -->
-
-Wubineh et al.（2026）は22件の実証研究から**6カテゴリ**を抽出:
-
-| # | カテゴリ | 核心的な問い |
-|---|---------|-------------|
-| 1 | **透明性と信頼** | AIの判断過程を理解できるか？ |
-| 2 | **バイアスと公正性** | 全ての患者集団に公平に機能するか？ |
-| 3 | **プライバシー** | 患者データは適切に保護されるか？ |
-| 4 | **説明責任** | AIのエラーの責任は誰が負うか？ |
-| 5 | **倫理と道徳** | 自律的AI判断は道徳的に許容されるか？ |
-| 6 | **規制と法律** | 既存の法制度はAIに対応できているか？ |
-
-> 方法: 2019–2025年の243件をスクリーニング → 22件の実証研究を選定
+![2019〜2025年の243件から22件の実証研究を選び、透明性と信頼・バイアスと公正性・プライバシー・説明責任・倫理と道徳・規制と法律の6カテゴリを抽出した](figs/six-concerns.png)
 
 ---
 
@@ -111,20 +98,15 @@ Wubineh et al.（2026）は22件の実証研究から**6カテゴリ**を抽出:
 ## スライド 7: カテゴリ深掘り (3) 説明責任と規制
 ### 責任の三角形
 
-**AIの判断エラーで患者に害が生じた場合、責任は誰が負うか？**
+![責任の三角形: 開発企業はアルゴリズムの設計、医師は最終判断、医療機関は導入の決定を担う](figs/responsibility-triangle.png)
 
-```
-       開発企業
-      （アルゴリズム設計）
-       /          \
-      /            \
-   医師            医療機関
- （最終判断）     （導入決定）
-```
+---
+
+## 説明責任と規制 — 現状と課題
 
 - 現状: 日本では医師の最終判断責任が原則
 - 課題: AIが「推奨」し医師が「承認」するだけの運用になった場合は？
-- EU AI法（2026年8月適用開始）: 高リスクAIに技術文書・人間の監視を義務化
+- EU AI法: 医療機器に組み込まれる高リスクAIに技術文書・人間の監視などを義務化（2026年7月の改正で適用は2028年8月に延期）
 
 ---
 
@@ -191,10 +173,11 @@ Wubineh et al.の提言:
 
 ## 参考文献
 
-- Wubineh BZ, Deriba FG, Gemeda FW. Ethical concerns and strategies for the implementation of AI in healthcare: a systematic review. *BMC Medical Ethics*. 2026;27:53. https://doi.org/10.1186/s12910-026-01404-8
+- Wubineh BZ, Deriba FG, Gemeda FW. Ethical concerns and strategies for implementing artificial intelligence in healthcare: a review of empirical studies. *BMC Medical Ethics*. 2026;27:53. https://doi.org/10.1186/s12910-026-01404-8
 - Harvard Gazette. AI is speeding into healthcare — who should regulate it? 2026. https://news.harvard.edu/gazette/story/2026/01/ai-is-speeding-into-healthcare-who-should-regulate-it/
 - WHO. Ethics and governance of artificial intelligence for health: guidance on large multi-modal models. 2024. https://www.who.int/publications/i/item/9789240084759
-- EU AI Act: Guidelines for Medical Device Manufacturers. https://quickbirdmedical.com/en/ai-act-medical-devices-mdr/
+- Regulation (EU) 2026/1744 (Digital Omnibus on AI), OJ L, 24.7.2026. https://eur-lex.europa.eu/eli/reg/2026/1744/oj
+- Regulation (EU) 2024/1689 (Artificial Intelligence Act). https://eur-lex.europa.eu/eli/reg/2024/1689/oj
 - JYI. Bias in Medical AI: Algorithmic Fairness and Ethics Challenges. 2026. https://www.jyi.org/2026-january-1/2026/1/8/bias-in-medical-ai-algorithmic-fairness-and-ethics-challenges
 
 ---

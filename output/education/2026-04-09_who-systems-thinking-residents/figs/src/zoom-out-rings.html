@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ズームアウト: 1人の患者から世界まで（入れ子の図）</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #0F2238;
+      --color-muted: #4A5568;
+      --color-accent: #1B6FA6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>ズームアウト: 1人の患者から世界まで（入れ子の図）</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="zoom-out-title zoom-out-desc">
+        <title id="zoom-out-title">ズームアウト: 1人の患者から世界まで（入れ子の図）</title>
+        <desc id="zoom-out-desc">1人の患者を中心に、チーム、外来導線、自院、地域、世界の順に半径が広がる入れ子の図。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <rect x="40" y="40" width="1040" height="400" rx="8" fill="#FFFFFF" stroke="#B5CEE0" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="64" y="76" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">世界</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="152" y="76" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">2030年に1,100万人の保健医療人材が不足する推計</text>
+        <rect x="110" y="90" width="900" height="342" rx="8" fill="#DCEBF5" stroke="#B5CEE0" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="134" y="126" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">地域</text>
+        <rect x="180" y="140" width="760" height="284" rx="8" fill="#FFFFFF" stroke="#B5CEE0" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="204" y="176" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">自院</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="292" y="176" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">個人の努力不足ではなく、システムの構造</text>
+        <rect x="250" y="190" width="620" height="226" rx="8" fill="#DCEBF5" stroke="#B5CEE0" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="274" y="226" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">外来導線</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="426" y="226" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">学習ループに変える小さな仕掛け</text>
+        <rect x="320" y="240" width="480" height="168" rx="8" fill="#FFFFFF" stroke="#B5CEE0" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="344" y="276" font-size="32" font-weight="600" fill="#0F2238" text-anchor="start">チーム</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="464" y="276" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">繋がりを束ねる装置</text>
+        <rect x="390" y="290" width="340" height="110" rx="8" fill="#E3EEF2" stroke="#1B6FA6" stroke-width="3"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="340" font-size="34" font-weight="600" fill="#0F2238" text-anchor="middle">1人の患者</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="560" y="378" font-size="24" font-weight="500" fill="#4A5568" text-anchor="middle">部品から繋がりへ</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="482" font-size="22" font-weight="500" fill="#4A5568" text-anchor="start">出典: WHO Health workforce ページ（2026年11月確認）</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

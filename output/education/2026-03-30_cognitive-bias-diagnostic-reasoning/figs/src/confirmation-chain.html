@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>確認バイアスの連鎖（胸痛の症例）</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #F6F9FB;
+      --color-ink: #2A3640;
+      --color-muted: #4A5568;
+      --color-accent: #7BA7BC;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>確認バイアスの連鎖（胸痛の症例）</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="confirmation-chain-title confirmation-chain-desc">
+        <title id="confirmation-chain-title">確認バイアスの連鎖（胸痛の症例）</title>
+        <desc id="confirmation-chain-desc">32歳女性、不安障害の既往、胸痛の症例で、バイアス発動、確認的情報収集、矛盾情報の軽視を経て肺塞栓症の見逃しに至る4段階の流れを示した図。</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4A5568"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#7BA7BC"/></marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#F6F9FB"/>
+                <path d="M72,186 V232" fill="none" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+        <path d="M72,280 V326" fill="none" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+        <path d="M72,374 V420" fill="none" stroke="#4A5568" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+                <rect x="40" y="36" width="1040" height="56" rx="6" fill="#EEF2F5" stroke="#C3D1DA" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="60" y="74" font-size="28" font-weight="600" fill="#2A3640" text-anchor="start">32歳女性。不安障害の既往あり。胸痛を主訴に来院。</text>
+        <rect x="120" y="120" width="960" height="84" rx="6" fill="#F6F9FB" stroke="#2A3640" stroke-width="2"/>
+        <circle cx="72" cy="162" r="24" fill="#3A5468"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="72" y="172" font-size="30" font-weight="600" fill="#F6F9FB" text-anchor="middle">1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="144" y="172" font-size="30" font-weight="600" fill="#2A3640" text-anchor="start">バイアス発動</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="448" y="157" font-size="26" font-weight="500" fill="#2A3640" text-anchor="start">「不安障害の既往」→ System 1が</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="448" y="188" font-size="26" font-weight="500" fill="#2A3640" text-anchor="start">「パニック発作」の仮説を生成</text>
+        <rect x="120" y="214" width="960" height="84" rx="6" fill="#F6F9FB" stroke="#2A3640" stroke-width="2"/>
+        <circle cx="72" cy="256" r="24" fill="#3A5468"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="72" y="266" font-size="30" font-weight="600" fill="#F6F9FB" text-anchor="middle">2</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="144" y="266" font-size="30" font-weight="600" fill="#2A3640" text-anchor="start">確認的情報収集</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="448" y="251" font-size="26" font-weight="500" fill="#2A3640" text-anchor="start">「最近ストレスは?」「動悸は?」</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="448" y="282" font-size="26" font-weight="500" fill="#2A3640" text-anchor="start">パニック発作を支持する質問が優先される</text>
+        <rect x="120" y="308" width="960" height="84" rx="6" fill="#F6F9FB" stroke="#2A3640" stroke-width="2"/>
+        <circle cx="72" cy="350" r="24" fill="#3A5468"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="72" y="360" font-size="30" font-weight="600" fill="#F6F9FB" text-anchor="middle">3</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="144" y="360" font-size="30" font-weight="600" fill="#2A3640" text-anchor="start">矛盾情報の軽視</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="448" y="345" font-size="26" font-weight="500" fill="#2A3640" text-anchor="start">軽度の頻脈、SpO2 96%（やや低め）を</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="448" y="376" font-size="26" font-weight="500" fill="#2A3640" text-anchor="start">「不安による」と解釈</text>
+        <rect x="120" y="402" width="960" height="84" rx="6" fill="#E4EDF2" stroke="#7BA7BC" stroke-width="2.5"/>
+        <circle cx="72" cy="444" r="24" fill="#3A5468"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="72" y="454" font-size="30" font-weight="600" fill="#F6F9FB" text-anchor="middle">4</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="144" y="454" font-size="30" font-weight="600" fill="#2A3640" text-anchor="start">結果</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="448" y="456" font-size="34" font-weight="600" fill="#2A3640" text-anchor="start">肺塞栓症の見逃し</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
