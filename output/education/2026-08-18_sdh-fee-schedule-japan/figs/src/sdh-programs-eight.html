@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>診療報酬8プログラムとSDH要素</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #FBF6EA;
+      --color-ink: #0F2238;
+      --color-muted: #4A5568;
+      --color-accent: #1B6FA6;
+      --font-sans: 'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif JP', serif;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .frame { max-width: 1200px; width: 100%; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; margin-bottom: 1.5rem; }
+    svg { width: 100%; min-width: 1120px; display: block; }
+    @media print { .diagram-container { overflow-x: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <h1>診療報酬8プログラムとSDH要素</h1>
+    <div class="diagram-container">
+      <svg viewBox="0 0 1120 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="sdh-eight-title sdh-eight-desc">
+        <title id="sdh-eight-title">診療報酬8プログラムとSDH要素</title>
+        <desc id="sdh-eight-desc">論文が見た診療報酬8プログラムを、SDH要素を明確に含む2つ（入退院支援加算・こころの連携指導料（Ⅰ））、含みうる5つ、含まない1つ（特定疾患療養管理料）に分けた一覧図。</desc>
+        <rect width="100%" height="100%" fill="#FBF6EA"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="98" font-size="64" font-weight="600" fill="#1B6FA6" text-anchor="start">2</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="80" y="98" font-size="28" font-weight="500" fill="#4A5568" text-anchor="start">/8</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="126" y="86" font-size="26" font-weight="600" fill="#1B6FA6" text-anchor="start">明確に含む</text>
+        <rect x="282" y="40" width="314" height="68" rx="6" fill="#1B6FA6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="298" y="85" font-size="30" font-weight="600" fill="#FFFFFF" text-anchor="start">入退院支援加算</text>
+        <rect x="520" y="57" width="60" height="34" rx="4" fill="#FBF6EA"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="550" y="82" font-size="22" font-weight="600" fill="#1B6FA6" text-anchor="middle">入院</text>
+        <rect x="608" y="40" width="464" height="68" rx="6" fill="#1B6FA6"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="624" y="85" font-size="30" font-weight="600" fill="#FFFFFF" text-anchor="start">こころの連携指導料（Ⅰ）</text>
+        <rect x="996" y="57" width="60" height="34" rx="4" fill="#FBF6EA"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="1026" y="82" font-size="22" font-weight="600" fill="#1B6FA6" text-anchor="middle">外来</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="224" font-size="56" font-weight="600" fill="#0F2238" text-anchor="start">5</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="126" y="214" font-size="26" font-weight="600" fill="#0F2238" text-anchor="start">含みうる</text>
+        <rect x="282" y="136" width="256" height="60" rx="6" fill="#FFFFFF" stroke="#9DB3C7" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="298" y="176" font-size="28" font-weight="500" fill="#0F2238" text-anchor="start">総合機能評価加算</text>
+        <rect x="550" y="136" width="256" height="60" rx="6" fill="#FFFFFF" stroke="#9DB3C7" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="566" y="176" font-size="28" font-weight="500" fill="#0F2238" text-anchor="start">退院前訪問指導料</text>
+        <rect x="818" y="136" width="256" height="60" rx="6" fill="#FFFFFF" stroke="#9DB3C7" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="834" y="176" font-size="28" font-weight="500" fill="#0F2238" text-anchor="start">退院後訪問指導料</text>
+        <rect x="282" y="208" width="318" height="60" rx="6" fill="#FFFFFF" stroke="#9DB3C7" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="298" y="248" font-size="28" font-weight="500" fill="#0F2238" text-anchor="start">退院時共同指導料1・2</text>
+        <rect x="612" y="208" width="312" height="60" rx="6" fill="#FFFFFF" stroke="#9DB3C7" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="628" y="248" font-size="28" font-weight="500" fill="#0F2238" text-anchor="start">介護支援等連携指導料</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="348" font-size="56" font-weight="600" fill="#4A5568" text-anchor="start">1</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="126" y="338" font-size="26" font-weight="600" fill="#4A5568" text-anchor="start">含まない</text>
+        <rect x="282" y="296" width="356" height="60" rx="6" fill="#EFEEE8" stroke="#B8BCC2" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="298" y="336" font-size="28" font-weight="500" fill="#4A5568" text-anchor="start">特定疾患療養管理料</text>
+        <rect x="562" y="309" width="60" height="34" rx="4" fill="#FFFFFF"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="592" y="334" font-size="22" font-weight="600" fill="#4A5568" text-anchor="middle">外来</text>
+        <line x1="40" y1="392" x2="1080" y2="392" stroke="#B7C7D3" stroke-width="2"/>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="434" font-size="28" font-weight="500" fill="#4A5568" text-anchor="start">いずれも論文の評価時点（2022年改定）の要件</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="474" font-size="28" font-weight="500" fill="#4A5568" text-anchor="start">2026年6月施行の改定で入退院支援加算は見直し（論文には未反映）</text>
+        <text font-family="'Geist', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif" x="40" y="512" font-size="24" font-weight="500" fill="#4A5568" text-anchor="start">出典: Sakurai H ほか, JMA Journal 2026;9(1) 表1・表2</text>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
